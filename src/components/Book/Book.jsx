@@ -38,7 +38,7 @@ export default class Book extends Component {
   render() {
     // let image = 
     return (
-      <div>
+      <div >
         <img src={this.state.image} alt='book cover'/>
         <h1>{this.state.title}</h1>
         {/* <h2>{this.state.rating}</h2> */}
