@@ -22,7 +22,7 @@ export default class Browse extends Component {
         this.setState({
           fictionList: res.data.results.books
         })
-        console.log(res.data.results.books);
+        // console.log(res.data.results.books);
 
       });
       axios
@@ -33,7 +33,7 @@ export default class Browse extends Component {
         this.setState({
           nonFictionList: res.data.results.books
         })
-        console.log(res.data.results.books);
+        // console.log(res.data.results.books);
 
       });
       axios
@@ -44,7 +44,7 @@ export default class Browse extends Component {
         this.setState({
           adviceHowToList: res.data.results.books
         })
-        console.log(res.data.results.books);
+        // console.log(res.data.results.books);
 
       });
       axios
@@ -55,7 +55,7 @@ export default class Browse extends Component {
         this.setState({
           youngAdultList: res.data.results.books
         })
-        console.log(res.data.results.books);
+        // console.log(res.data.results.books);
 
       });
 
@@ -68,7 +68,7 @@ export default class Browse extends Component {
   render() {
     let fictionDisplay = this.state.fictionList.map((book, i) => {
       return (
-        <div >
+        <div key={i}>
           <Link to={`/book/${book.primary_isbn13}`}>
             <img src={book.book_image} alt='book cover' className='br-book-cover' />
           </Link>
@@ -78,17 +78,18 @@ export default class Browse extends Component {
 
     let nonFictionDisplay = this.state.nonFictionList.map((book, i) => {
       return (
-        <div >
+        <div key={i} >
           <Link to={`/book/${book.primary_isbn13}`}>
             <img src={book.book_image} alt='book cover' className='br-book-cover' />
           </Link>
+            {/* <img src={book.book_image} alt='book cover' className='br-book-cover' /> */}
         </div>
       )
     })
 
     let adviceHowToDisplay = this.state.adviceHowToList.map((book, i) => {
       return (
-        <div >
+        <div key={i}>
           <Link to={`/book/${book.primary_isbn13}`}>
             <img src={book.book_image} alt='book cover' className='br-book-cover' />
           </Link>
@@ -97,7 +98,7 @@ export default class Browse extends Component {
     })
     let youngAdultDisplay = this.state.youngAdultList.map((book, i) => {
       return (
-        <div >
+        <div key={i}>
           <Link to={`/book/${book.primary_isbn13}`}>
             <img src={book.book_image} alt='book cover' className='br-book-cover' />
           </Link>
