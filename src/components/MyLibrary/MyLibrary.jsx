@@ -3,7 +3,7 @@ import axios from 'axios'
 import Book from '../Book/Book'
 import './MyLibrary.scss'
 
-export default class Setting extends Component {
+export default class MyLibrary extends Component {
   render() {
     return (
       <div>
