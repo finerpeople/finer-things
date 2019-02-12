@@ -15,7 +15,7 @@ export default (
     <Switch>
         <Route exact path='/' component={Auth}/>
         <Route path='/my-library' component={MyLibrary} />
-        <Route path='/book' component={Book} />
+        <Route path='/book/:isbn' component={Book} />
         <Route path='/browse' component={Browse} />
         <Route path='/chat' component={Chat} />
         <Route path='/club' component={Club} />
