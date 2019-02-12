@@ -38,7 +38,7 @@ export default class Browse extends Component {
       // />
       return (
         <Link to={`book/${book.primary_isbn13}` }>
-          <img src={book.book_image} alt='book cover'  />
+          <img src={book.book_image} alt='book cover' className='' />
         </Link>
       )
     })
