@@ -106,23 +106,33 @@ export default class Browse extends Component {
     })
 
     return (
-      <div className='br-container '>
-        {/* <h1>Here is the Browser</h1> */}
-        <p className='br-list-title'>Fiction Best Sellers</p>
-        <div className='book-carousel'>
+      <div className='br-main'>
+        <div className='br-container'>
+        <div className='br-list-title'>Fiction Best Sellers</div>
+        <div className='book-carousel br-top-list'>
           {fictionDisplay}
         </div>
+        </div>
+
+        <div className='br-container'>
         <p className='br-list-title'>Non-Fiction Best Sellers</p>
         <div className='book-carousel'>
           {nonFictionDisplay}
         </div>
+        </div>
+
+        <div className='br-container '>
         <p className='br-list-title'>Advice, How-To & Miscellaneous Best Sellers</p>
         <div className='book-carousel'>
           {adviceHowToDisplay}
         </div>
+        </div>
+
+        <div className='br-container'>
         <p className='br-list-title'>Young Adult Best Sellers</p>
         <div className='book-carousel'>
           {youngAdultDisplay}
+        </div>
         </div>
 
       </div>

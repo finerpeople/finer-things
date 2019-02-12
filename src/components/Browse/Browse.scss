@@ -5,7 +5,9 @@
     font-size: $titleFontSize;
     position: absolute;
     left: 2rem;
+    top: -4rem;
     margin: 1rem;
+    margin-left: 3.5rem;
 }
 
 .br-book-cover {
@@ -16,6 +18,22 @@
 }
 
 .book-carousel {
+    overflow: scroll;
     margin-top: 4rem;
+    margin-left: 5rem;
+    margin-right: 2rem;
     display: flex;
+}
+
+.br-top-list {
+    margin-top: 10rem;
+}
+
+.br-container {
+    position: relative;
+    height: 45vh;
+}
+
+.br-main {
+    width: 100vw;
 }
