@@ -2,8 +2,8 @@
   "name": "finer-things",
   "version": "0.1.0",
   "private": true,
-  "proxy":"http://localhost:4000",
-  "main":"server/server.js",
+  "proxy": "http://localhost:4000",
+  "main": "server/server.js",
   "dependencies": {
     "axios": "^0.18.0",
     "bcryptjs": "^2.4.3",
@@ -19,6 +19,7 @@
     "react-redux": "^6.0.0",
     "react-router-dom": "^4.3.1",
     "react-scripts": "^2.1.5",
+    "react-star-rating-component": "^1.4.1",
     "redux": "^4.0.1",
     "socket.io": "^2.2.0",
     "xml-parse": "^0.3.1"
