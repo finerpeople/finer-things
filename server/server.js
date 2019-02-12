@@ -6,7 +6,7 @@ const bcrypt = require('bcryptjs')
 
 
 const app = express()
-const {SERVER_PORT, CONNECTION_STRING, SESSION_SECRET} = process.env
+const {SERVER_PORT, SERVER_CONNECTION, SESSION_SECRET} = process.env
 
 app.use(express.json())
 app.use(session({
@@ -17,8 +17,7 @@ app.use(session({
 
 
 
-
-massive(CONNECTION_STRING)
+massive(SERVER_CONNECTION)
 	.then(connection => {
 		app.set('db', connection)
 		app.listen(SERVER_PORT, () => console.log(`listening on port ${SERVER_PORT}`))
