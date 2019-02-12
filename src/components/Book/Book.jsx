@@ -47,10 +47,7 @@ export default class Book extends Component {
           editing={false}
           // renderStarIcon={() => <span></span>}
           starCount={5}
-<<<<<<< HEAD
-=======
           emptyStarColor={'#5d5c61'} 
->>>>>>> e85b0e7504d0a477088361fbd6efab03528c8e1d
           value={this.state.rating}
         />
         <h2>{this.state.author}</h2>
