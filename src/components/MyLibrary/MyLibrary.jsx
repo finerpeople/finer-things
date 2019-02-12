@@ -7,7 +7,7 @@ export default class MyLibrary extends Component {
   render() {
     return (
       <div>
-        <Book />
+        {/* <Book /> */}
       </div>
     )
   }

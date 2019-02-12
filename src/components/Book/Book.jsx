@@ -19,10 +19,10 @@ export default class Book extends Component {
   componentDidMount() {
     window.scrollTo(0, 0)
     let {isbn} = this.props.match.params;
-    console.log(isbn)
+    // console.log(isbn)
     axios.get(`https://www.googleapis.com/books/v1/volumes?q=isbn:${isbn}&fields=items(id, volumeInfo/title, volumeInfo/authors, volumeInfo/description, volumeInfo/industryIdentifiers, volumeInfo/categories, volumeInfo/averageRating, volumeInfo/imageLinks, volumeInfo/previewLink)`)
       .then(res => {
-        console.log(res.data)
+        // console.log(res.data)
         this.setState( {
           image: res.data.items[0].volumeInfo.imageLinks.thumbnail,
           isbn: isbn,
