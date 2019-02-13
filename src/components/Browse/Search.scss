@@ -1,0 +1,104 @@
+@import '../../style.scss';
+
+.search {
+    height: 4rem;
+    width: 15rem;
+    position: absolute;
+    right: 2rem;
+    top: 6.5rem;
+}
+
+.br-search-icon {
+    position: absolute;
+    right: 2.3rem;
+    top: 0.7rem;
+    cursor: pointer;
+}
+
+.search-input {
+    height: 2rem;
+    width: 13rem;
+    font-size: $bodyFontSize;
+}
+
+
+.searched-books {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 10rem;
+    margin-left: 3.5rem;
+    position: relative;
+}
+
+.searched-single-book {
+    height: 13rem;
+    width: 8.5rem;
+    padding: 0.3rem;
+    position: relative;
+}
+
+.searched-book-cover {
+    //extends .default-cover
+    border-radius: 10px;
+}
+
+.default-cover {
+    @extend .searched-book-cover;
+    height: 12rem;
+    width: 7.5rem;
+    background-color: $darkBlue;
+    color: $lighterGrey;
+    font-family: $titleFontFamily;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 0.3rem;
+    box-sizing: border-box;
+}
+
+.back-container {
+    //extends .back-button
+    height: 1.6rem;
+    width: 1.6rem;
+    border-radius: 50%;
+    background-color: #938e94;
+    cursor: pointer;
+    position: fixed;
+    left: 5rem;
+    top: 6rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.back-button {
+    @extend .back-container;
+    color: $lighterGrey;
+}
+
+.add-to-library {
+    position: absolute;
+    left: 0.7rem;
+    color: $lighterGrey;
+    top: 0.7rem;
+    cursor: pointer;
+}
+
+.search-share {
+    color: $lighterGrey;
+    position: absolute;
+    right: 1.2rem;
+    top: .7rem;
+    cursor: pointer;
+}
+
+.icon-banner {
+    background-color: rgba(189, 195, 199, 0.9);
+    width: 88%;
+    height: 2rem;
+    border-radius: 10px 10px 0 0;
+    position: absolute;
+    top: 0.3rem;
+}
