@@ -18,9 +18,9 @@ export default (
         <Route path='/book/:isbn' component={Book} />
         <Route path='/browse' component={Browse} />
         <Route path='/chat' component={Chat} />
-        <Route path='/club' component={Club} />
-        <Route path='/friend' component={Friend} />
-        <Route path='/my-club' component={MyClub} />
-        <Route path='/setting' component={Setting} />
+        <Route path='/clubs' component={Club} />
+        <Route path='/friends' component={Friend} />
+        <Route path='/my-clubs' component={MyClub} />
+        <Route path='/settings' component={Setting} />
     </Switch>
 )

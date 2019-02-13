@@ -4,9 +4,13 @@ const massive = require('massive')
 const session = require('express-session')
 const bcrypt = require('bcryptjs')
 
-
 const app = express()
 const {SERVER_PORT, SERVER_CONNECTION, SESSION_SECRET} = process.env
+
+// Controllers
+const authCtrl = require('./controllers/authController')
+// Middleware
+
 
 app.use(express.json())
 app.use(session({
@@ -15,6 +19,8 @@ app.use(session({
 	saveUninitialized: false
 }))
 
+// Auth
+app.post('/api/register', authCtrl.register)
 
 
 massive(SERVER_CONNECTION)
