@@ -11,6 +11,10 @@ class Nav extends Component {
       pathname === "/" || pathname === "/book" || pathname === "/club"
         ? "navBarNone"
         : "navBar";
+    const headerStyle =
+      pathname === "/" || pathname === "/book" || pathname === "/club"
+        ? "headerNone"
+        : "header";
     const title =
       pathname === "/"
         ? "WELCOME!"
@@ -28,7 +32,7 @@ class Nav extends Component {
 
     return (
       <div>
-        <div className="upperDiv">
+        <div className={headerStyle}>
           <div className="logo">
             <p>The Finer Things</p>
           </div>
@@ -42,23 +46,32 @@ class Nav extends Component {
         <div className={navBarStyle}>
           <div className="icon">
             <Link to="/my-library" style={{ textDecoration: "none" }}>
-              <div className="nav-button">
+              <div
+                id={pathname === "/my-library" ? "button-current" : ""}
+                className="nav-button"
+              >
                 <i className="fas fa-book-open" />
                 <p className="iconText">My Library</p>
               </div>
             </Link>
           </div>
           <div className="icon">
-            <Link to="/my-club" style={{ textDecoration: "none" }}>
-              <div className="nav-button">
+            <Link to="/my-clubs" style={{ textDecoration: "none" }}>
+              <div
+                id={pathname === "/my-clubs" ? "button-current" : ""}
+                className="nav-button"
+              >
                 <i className="fas fa-book-reader" />
                 <p className="iconText">My Clubs</p>
               </div>
             </Link>
           </div>
           <div className="icon">
-            <Link to="/friend" style={{ textDecoration: "none" }}>
-              <div className="nav-button">
+            <Link to="/friends" style={{ textDecoration: "none" }}>
+              <div
+                id={pathname === "/friends" ? "button-current" : ""}
+                className="nav-button"
+              >
                 <i className="fas fa-user-friends" />
                 <p className="iconText">My Friends</p>
               </div>
@@ -66,15 +79,21 @@ class Nav extends Component {
           </div>
           <div className="icon">
             <Link to="/browse" style={{ textDecoration: "none" }}>
-              <div className="nav-button">
+              <div
+                id={pathname === "/browse" ? "button-current" : ""}
+                className="nav-button"
+              >
                 <i className="fas fa-search" />
                 <p className="iconText">Browse Books</p>
               </div>
             </Link>
           </div>
           <div className="settingsCog">
-            <Link to="/setting" style={{ textDecoration: "none" }}>
-              <div className="nav-setting-button">
+            <Link to="/settings" style={{ textDecoration: "none" }}>
+              <div
+                id={pathname === "/settings" ? "button-current" : ""}
+                className="nav-setting-button"
+              >
                 <i className="fas fa-cog" />
                 <p className="iconText">Settings</p>
               </div>

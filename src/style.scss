@@ -2,14 +2,15 @@
 // font-family: 'Montserrat', sans-serif;
 @import url('https://fonts.googleapis.com/css?family=Raleway');
 // font-family: 'Raleway', sans-serif;
-
+@import url('https://fonts.googleapis.com/css?family=Lobster');
+// font-family: 'Lobster', cursive;
 
 /////////////////////////////////////////////////////
 $white: #ffffff;
 
 $darkerGrey: #383838;
 $darkGrey: #5d5c61;
-$lightGrey: #938e94;
+$lightGrey: #949494;
 $lighterGrey: rgb(248, 248, 248);
 
 $darkBlue: #557a95;
@@ -27,6 +28,8 @@ $navBarWidth: 3.6em;
 
 $titleFontFamily: 'Montserrat', sans-serif;
 $bodyFontFamily: 'Raleway', sans-serif;
+
+$appName: 'Lobster', cursive;
 
 // <i className="fas fa-search"></i>
 // <i className="fas fa-book"></i>
