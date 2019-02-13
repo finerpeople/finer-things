@@ -40,11 +40,15 @@
 
 .searched-book-cover {
     //extends .default-cover
+    overflow: hidden;
     border-radius: 10px;
+    height: 12rem;
+    width: 7.5rem;
 }
 
 .default-cover {
-    @extend .searched-book-cover;
+    // @extend .searched-book-cover;
+    border-radius: 10px;
     height: 12rem;
     width: 7.5rem;
     background-color: $darkBlue;
@@ -82,15 +86,15 @@
     position: absolute;
     left: 0.7rem;
     color: $lighterGrey;
-    top: 0.7rem;
+    top: 0.5rem;
     cursor: pointer;
 }
 
 .search-share {
     color: $lighterGrey;
     position: absolute;
-    right: 1.2rem;
-    top: .7rem;
+    right: .7rem;
+    top: .5rem;
     cursor: pointer;
 }
 
@@ -101,4 +105,6 @@
     border-radius: 10px 10px 0 0;
     position: absolute;
     top: 0.3rem;
+    width: 82.4%;
+    height: 1.8rem;
 }
