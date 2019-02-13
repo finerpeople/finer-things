@@ -40,7 +40,7 @@ class Nav extends Component {
             <p>{title}</p>
           </div>
           <div className="welcome">
-            <p>Hi, Jim!</p>
+            <p>Hi, Oscar!</p>
           </div>
         </div>
         <div className={navBarStyle}>
