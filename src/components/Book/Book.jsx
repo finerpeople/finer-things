@@ -18,12 +18,10 @@ export default class Book extends Component {
 
   componentDidMount() {
     window.scrollTo(0, 0)
-    let {isbn} = this.props.match.params;
-    // console.log(isbn)
+    let { isbn } = this.props.match.params;
     axios.get(`https://www.googleapis.com/books/v1/volumes?q=isbn:${isbn}&fields=items(id, volumeInfo/title, volumeInfo/authors, volumeInfo/description, volumeInfo/industryIdentifiers, volumeInfo/categories, volumeInfo/averageRating, volumeInfo/imageLinks, volumeInfo/previewLink)`)
       .then(res => {
-        // console.log(res.data)
-        this.setState( {
+        this.setState({
           image: res.data.items[0].volumeInfo.imageLinks.thumbnail,
           isbn: isbn,
           title: res.data.items[0].volumeInfo.title,
@@ -32,22 +30,18 @@ export default class Book extends Component {
           rating: res.data.items[0].volumeInfo.averageRating
         })
       })
-
   }
 
   render() {
-    // let image = 
     return (
       <div >
-        <img src={this.state.image} alt='book cover'/>
+        <img src={this.state.image} alt='book cover' />
         <h1>{this.state.title}</h1>
-        {/* <h2>{this.state.rating}</h2> */}
-        <StarRatingComponent 
-          name="rating" 
+        <StarRatingComponent
+          name="rating"
           editing={false}
-          // renderStarIcon={() => <span></span>}
           starCount={5}
-          emptyStarColor={'#5d5c61'} 
+          emptyStarColor={'#5d5c61'}
           value={this.state.rating}
         />
         <h2>{this.state.author}</h2>
