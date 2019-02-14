@@ -40,6 +40,7 @@ class Setting extends Component {
       <div className="mainContainer">
         <div className="profilePicContainer">
           <img
+            className='profileImg'
             src="https://vignette.wikia.nocookie.net/theoffice/images/2/25/Oscar_Martinez.jpg/revision/latest/scale-to-width-down/2000?cb=20170701085818"
             alt="Oscar"
             className="profileImg"
