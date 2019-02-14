@@ -50,12 +50,21 @@ export default class Auth extends Component {
       }
     } catch {
       Swal.fire({
+<<<<<<< HEAD
+        type: 'error',
+        title: 'Oops...',
+        text: 'Incorrect Email or Password. Please try again.',
+        footer: '<a href>Why do I have this issue?</a>'
+      })
+    })
+=======
         type: "error",
         title: "Oops...",
         text: "Inccorect Email or Password. Please try again.",
         footer: "<a href>Why do I have this issue?</a>"
       });
     }
+>>>>>>> master
   };
 
   register = async () => {

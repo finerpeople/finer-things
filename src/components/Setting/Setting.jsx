@@ -7,6 +7,26 @@ export default class Setting extends Component {
     super(props);
 
     this.state = {
+<<<<<<< HEAD
+      firstName: "",
+      lastName: "",
+      email: "",
+      password: props.password,
+      // email: props.email,
+      emailEditable: false,
+      editEmailDone: false,
+      // editSummaryDone: false
+    };
+  }
+  handleChange(prop, val) {
+    this.setState({ [prop]: val });
+  }
+
+  deleteAccount(id) {
+    axios
+      .delete(`/api/delete-account/${id}`)
+      .then(res => this.props.history.push("/"));
+=======
       id: "",
       image: "",
       firstName: "",
@@ -56,12 +76,19 @@ export default class Setting extends Component {
   deleteAccount = async (id) => {
     const res = await axios.put(`/api/updateAccountStatus/${id}`)
     this.props.history.push("/");
+>>>>>>> master
+  }
+  saveProfileChanges() {
+    const { email } = this.state;
+    axios
+      .put("/api/edit-profile", { email: email })
+      .then(this.setState({ emailEditable: false }));
   }
   edit = () => {
-    if (!this.state.editDone) {
-      this.setState({ editable: true, editDone: true });
+    if (!this.state.editEmailDone) {
+      this.setState({ emailEditable: true, editEmailDone: true });
     } else {
-      this.setState({ editable: false, editDone: false });
+      this.setState({ emailEditable: false, editEmailDone: false });
     }
   };
 
@@ -106,6 +133,70 @@ export default class Setting extends Component {
             <span className="makeChangesText">Want to make changes?</span>
             <i className="fas fa-pen fa-md" />
           </div>
+<<<<<<< HEAD
+          <div className="editTextContainer">
+            {this.state.emailEditable ? (
+              <div>
+                <input type="text" value={this.state.email} onChange={e => {
+                this.handleChange("email", e.target.value);
+              }}/>
+              </div>
+            ) : (
+              <span>{this.state.email}</span>
+            )}
+            <div>
+              <br />
+              <button type="button" id="settings-editBtn">
+                {this.state.editEmailDone ? "Cancel" : "Edit"}
+              </button>
+              <hr />
+              <div>
+                {!this.state.editEmailDone ? null : (
+                  <button type="button" id="settings-Btns" onClick={() => this.saveProfileChanges()}>
+                    Save
+                  </button>
+                )}
+              </div>
+            </div>
+            {/* <TextField
+            InputProps={{
+            classes: {
+              input: classes.resize,
+            },
+          }}
+            className="inputFields"
+              type="text"
+              placeholder="Email address"
+              onchange={e => this.setState({ email: e.target.value })}
+            /> */}
+            <br />
+            <input
+              value={this.state.password}
+              className="inputFields"
+              type="text"
+              placeholder="Password"
+              onchange={e => this.setState({ password: e.target.value })}
+            />
+            <br />
+            <div classname="editBtns">
+              <span className="makeChangesText">Want to make changes?</span>
+              <i className="fas fa-pen fa-md" />
+            </div>
+            <div className="saveDeleteBtns">
+              <button 
+                type="button" 
+                id="settings-Btns">
+                Save
+              </button>
+              <button
+                type="button"
+                id="settings-Btns"
+                onClick={() => this.deleteAccount()}
+              >
+                Delete Account
+              </button>
+            </div>
+=======
           <div>
             <Button variant="contained" className={classes.button}>
               Save
@@ -117,10 +208,10 @@ export default class Setting extends Component {
             >
               Delete Account
             </Button>
+>>>>>>> master
           </div>
         </div>
       </div>
     );
   }
 }
-// export default withStyles(styles)(Setting);
