@@ -3,7 +3,6 @@ const express = require('express')
 const massive = require('massive')
 const session = require('express-session')
 const bcrypt = require('bcryptjs')
-const controller = require('./controller');
 
 const app = express()
 const {SERVER_PORT, SERVER_CONNECTION, SESSION_SECRET} = process.env
