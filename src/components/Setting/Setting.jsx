@@ -7,26 +7,6 @@ export default class Setting extends Component {
     super(props);
 
     this.state = {
-<<<<<<< HEAD
-      firstName: "",
-      lastName: "",
-      email: "",
-      password: props.password,
-      // email: props.email,
-      emailEditable: false,
-      editEmailDone: false,
-      // editSummaryDone: false
-    };
-  }
-  handleChange(prop, val) {
-    this.setState({ [prop]: val });
-  }
-
-  deleteAccount(id) {
-    axios
-      .delete(`/api/delete-account/${id}`)
-      .then(res => this.props.history.push("/"));
-=======
       id: "",
       image: "",
       firstName: "",
@@ -35,7 +15,9 @@ export default class Setting extends Component {
       password: "",
       profilePic: "",
       summary: "",
-      status: ""
+      status: "",
+      emailEditable: false,
+      editEmailDone: false
     };
   }
 
@@ -76,7 +58,6 @@ export default class Setting extends Component {
   deleteAccount = async (id) => {
     const res = await axios.put(`/api/updateAccountStatus/${id}`)
     this.props.history.push("/");
->>>>>>> master
   }
   saveProfileChanges() {
     const { email } = this.state;
@@ -133,7 +114,6 @@ export default class Setting extends Component {
             <span className="makeChangesText">Want to make changes?</span>
             <i className="fas fa-pen fa-md" />
           </div>
-<<<<<<< HEAD
           <div className="editTextContainer">
             {this.state.emailEditable ? (
               <div>
@@ -191,24 +171,11 @@ export default class Setting extends Component {
               <button
                 type="button"
                 id="settings-Btns"
-                onClick={() => this.deleteAccount()}
+                onClick={() => this.deleteAccount(this.state.id)}
               >
                 Delete Account
               </button>
             </div>
-=======
-          <div>
-            <Button variant="contained" className={classes.button}>
-              Save
-            </Button>
-            <Button
-              variant="contained"
-              className={classes.button}
-              onClick={() => this.deleteAccount(this.state.id)}
-            >
-              Delete Account
-            </Button>
->>>>>>> master
           </div>
         </div>
       </div>

@@ -39,6 +39,12 @@
     color: $lighterGrey;
     top: 0.5rem;
     cursor: pointer;
+    transition: color .2s;
+
+}
+
+.br-add-to-library:hover {
+    color: $darkerGrey;
 }
 
 .br-search-share {
@@ -47,6 +53,12 @@
     right: .7rem;
     top: .5rem;
     cursor: pointer;
+    transition: color .2s;
+
+}
+
+.br-search-share:hover {
+    color: $darkerGrey;
 }
 
 .br-single-cover {

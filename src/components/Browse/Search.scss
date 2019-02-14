@@ -99,6 +99,11 @@
     color: $lighterGrey;
     top: 0.5rem;
     cursor: pointer;
+    transition: color .2s;
+}
+
+.add-to-library:hover {
+    color: $darkerGrey;
 }
 
 .search-share {
@@ -107,6 +112,11 @@
     right: .7rem;
     top: .5rem;
     cursor: pointer;
+    transition: color .2s;
+}
+
+.search-share:hover {
+    color: $darkerGrey;
 }
 
 .icon-banner {
