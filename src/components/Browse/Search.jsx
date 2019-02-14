@@ -44,9 +44,8 @@ export default class Search extends Component {
 
     render() {
         let displaySearch = this.state.searchedBooks.map((book, i) => {
-            console.log(book.volumeInfo.industryIdentifiers)
             return (
-                <div>
+                <>
                     {book.volumeInfo.imageLinks && book.volumeInfo.industryIdentifiers ? (
                         <div key={i} className='searched-single-book'>
                             <Link to={`/book/${book.volumeInfo.industryIdentifiers[0].identifier}`}>
@@ -60,7 +59,7 @@ export default class Search extends Component {
                         </div>
                     ) : (null)
                     }
-                </div>
+                </>
             )
         })
         return (

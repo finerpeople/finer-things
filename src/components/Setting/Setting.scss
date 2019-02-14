@@ -1,6 +1,6 @@
 @import '../../style.scss';
 
-p {
+.mainContainer p {
     margin-top: -1em;
     font-family: $bodyFontFamily;
 }
@@ -24,7 +24,7 @@ p {
     // background-color: red;
     margin-left: 4.3em;
 }
-img {
+.profileImg {
     height: 18.75em;
     width: 17em;
 }
@@ -95,7 +95,7 @@ img {
         margin-left: 0; 
         width: 100vw;
     }
-    img {
+    .profileImg {
         height: 15em;
         width: 13.25em;
     }

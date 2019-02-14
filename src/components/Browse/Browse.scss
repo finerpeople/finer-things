@@ -33,3 +33,39 @@
 .br-main {
     width: calc(100vw - $navBarWidth);
 }
+.br-add-to-library {
+    position: absolute;
+    left: 0.7rem;
+    color: $lighterGrey;
+    top: 0.5rem;
+    cursor: pointer;
+}
+
+.br-search-share {
+    color: $lighterGrey;
+    position: absolute;
+    right: .7rem;
+    top: .5rem;
+    cursor: pointer;
+}
+
+.br-single-cover {
+    position: relative;
+}
+
+.br-icon-banner {
+    background-color: rgba(189, 195, 199, 0.9);
+    border-radius: 10px 10px 0 0;
+    position: absolute;
+    top: -1.8rem;
+    width: 94.5%;
+    height: 1.8rem;
+    left: 0.5rem;
+    transition: top .7s ease-in-out;
+    visibility: hidden;
+}
+
+.br-single-cover:hover .br-icon-banner{
+    top: 0.5rem;
+    visibility: visible;
+}

@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import axios from "axios";
 import { Link } from 'react-router-dom';
 import "./Browse.scss";
-import Book from "../Book/Book";
+import Card from "./Card";
 
 const key = process.env.REACT_APP_NYT
 
@@ -11,6 +11,8 @@ export default class Browse extends Component {
   state = {
     listName: []
   }
+
+
 
   componentDidMount() {
     axios
@@ -28,11 +30,11 @@ export default class Browse extends Component {
   render() {
     let displayList = this.state.listName.map((book, i) => {
       return (
-        <div key={i}>
-          <Link to={`/book/${book.primary_isbn13}`}>
-            <img src={book.book_image} alt='book cover' className='br-book-cover' />
-          </Link>
-        </div>
+        <Card
+          i={i}
+          img={book.book_image}
+          isbn={book.primary_isbn13}
+        />
       )
     })
 

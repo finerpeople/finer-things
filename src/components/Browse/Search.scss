@@ -13,14 +13,23 @@
     right: 2.3rem;
     top: 0.7rem;
     cursor: pointer;
+    color: $lightGrey;
+}
+
+.br-search-icon:hover {
+    color: $lightBlue;
 }
 
 .search-input {
     height: 2rem;
     width: 13rem;
     font-size: $bodyFontSize;
+    border-radius: 10px;
 }
 
+.search-input:focus {
+    outline: none;
+}
 
 .searched-books {
     display: flex;
@@ -32,19 +41,23 @@
 }
 
 .searched-single-book {
+    position: relative;
     height: 13rem;
     width: 8.5rem;
     padding: 0.3rem;
-    position: relative;
 }
 
 .searched-book-cover {
     //extends .default-cover
+    overflow: hidden;
     border-radius: 10px;
+    height: 12rem;
+    width: 7.5rem;
 }
 
 .default-cover {
-    @extend .searched-book-cover;
+    // @extend .searched-book-cover;
+    border-radius: 10px;
     height: 12rem;
     width: 7.5rem;
     background-color: $darkBlue;
@@ -82,23 +95,30 @@
     position: absolute;
     left: 0.7rem;
     color: $lighterGrey;
-    top: 0.7rem;
+    top: 0.5rem;
     cursor: pointer;
 }
 
 .search-share {
     color: $lighterGrey;
     position: absolute;
-    right: 1.2rem;
-    top: .7rem;
+    right: .7rem;
+    top: .5rem;
     cursor: pointer;
 }
 
 .icon-banner {
     background-color: rgba(189, 195, 199, 0.9);
-    width: 88%;
-    height: 2rem;
     border-radius: 10px 10px 0 0;
     position: absolute;
+    top: -1.5rem;
+    width: 82.5%;
+    height: 1.8rem;
+    transition: top .7s ease-in-out;
+    visibility: hidden;
+}
+
+.searched-single-book:hover .icon-banner {
     top: 0.3rem;
+    visibility: visible;
 }
