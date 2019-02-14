@@ -52,13 +52,13 @@ export default class Setting extends Component {
     if (!res.data.loggedIn) {
       this.props.history.push("/");
     }
-    return res.data
+    return res.data;
   };
 
-  deleteAccount = async (id) => {
-    const res = await axios.put(`/api/updateAccountStatus/${id}`)
+  deleteAccount = async id => {
+    const res = await axios.put(`/api/updateAccountStatus/${id}`);
     this.props.history.push("/");
-  }
+  };
   saveProfileChanges() {
     const { email } = this.state;
     axios
@@ -99,12 +99,12 @@ export default class Setting extends Component {
             crunching numbers, I enjoy a good history or nonfiction book. I
             despise Anne Geddes.
           </p>
-          <TextField
+          <input
             type="text"
             placeholder="Email address"
             onChange={e => this.setState({ email: e.target.value })}
           />
-          <TextField
+          <input
             type="text"
             placeholder="Password"
             onChange={e => this.setState({ password: e.target.value })}
@@ -117,9 +117,13 @@ export default class Setting extends Component {
           <div className="editTextContainer">
             {this.state.emailEditable ? (
               <div>
-                <input type="text" value={this.state.email} onChange={e => {
-                this.handleChange("email", e.target.value);
-              }}/>
+                <input
+                  type="text"
+                  value={this.state.email}
+                  onChange={e => {
+                    this.handleChange("email", e.target.value);
+                  }}
+                />
               </div>
             ) : (
               <span>{this.state.email}</span>
@@ -132,23 +136,16 @@ export default class Setting extends Component {
               <hr />
               <div>
                 {!this.state.editEmailDone ? null : (
-                  <button type="button" id="settings-Btns" onClick={() => this.saveProfileChanges()}>
+                  <button
+                    type="button"
+                    id="settings-Btns"
+                    onClick={() => this.saveProfileChanges()}
+                  >
                     Save
                   </button>
                 )}
               </div>
             </div>
-            {/* <TextField
-            InputProps={{
-            classes: {
-              input: classes.resize,
-            },
-          }}
-            className="inputFields"
-              type="text"
-              placeholder="Email address"
-              onchange={e => this.setState({ email: e.target.value })}
-            /> */}
             <br />
             <input
               value={this.state.password}
@@ -163,9 +160,7 @@ export default class Setting extends Component {
               <i className="fas fa-pen fa-md" />
             </div>
             <div className="saveDeleteBtns">
-              <button 
-                type="button" 
-                id="settings-Btns">
+              <button type="button" id="settings-Btns">
                 Save
               </button>
               <button
