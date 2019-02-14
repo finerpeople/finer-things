@@ -33,7 +33,8 @@ app.get('/api/signout', authCtrl.signout)
 // user library
 app.post('/library/addBook', libraryCtrl.addBook);
 app.post('/library/recommendBook', libraryCtrl.recommendBook);
-app.get('/library/allBooks', libraryCtrl.allBooks);
+app.get('/library/allBooks/:user_id', libraryCtrl.allBooks);
+app.get('/library/getOneBook/:user_id&:isbn', libraryCtrl.getOneBook)
 
 // Settings
 app.get('/api/userData/:id', settingsCtrl.getUserData)

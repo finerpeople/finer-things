@@ -57,5 +57,14 @@ module.exports = {
         const db = req.app.get('db');
         let bookList = await db.user_library.getUserLibrary({user_id});
         res.status(200).send(bookList)
+     },
+     getOneBook: async (req, res) => {
+         const { user_id, isbn } = req.params;
+         const db = req.app.get('db');
+         let book = await db.user_library.getOneBook({
+            user_id,
+            isbn
+         })
+         res.status(200).send(book)
      }
 }

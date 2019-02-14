@@ -33,8 +33,7 @@ export default class Card extends Component {
         const book = await this.getSingleBook();
         console.log(book)
         let res = await axios.post('/library/addBook', {
-            // user_id: this.props.user_id,
-            user_id: 12,
+            user_id: this.props.user_id,
             isbn: this.state.isbn,
             book_img: book.imageLinks.thumbnail,
             title: book.title,
@@ -65,6 +64,7 @@ export default class Card extends Component {
 
                         <Book
                             isbn={this.state.isbn}
+                            addToLibrary={this.addToLibrary}
                         />
                         <button className='close-book-modal' onClick={this.toggle}>X</button>
                     </div>
