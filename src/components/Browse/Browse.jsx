@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import axios from "axios";
-import { Link } from 'react-router-dom';
-import "./Browse.scss";
 import Card from "./Card";
+
+import "./Browse.scss";
 
 const key = process.env.REACT_APP_NYT
 
@@ -11,8 +11,6 @@ export default class Browse extends Component {
   state = {
     listName: []
   }
-
-
 
   componentDidMount() {
     axios
@@ -23,18 +21,19 @@ export default class Browse extends Component {
         this.setState({
           listName: res.data.results.books
         })
-        console.log(this.state.listName)
       });
   }
 
   render() {
     let displayList = this.state.listName.map((book, i) => {
       return (
-        <Card
-          i={i}
-          img={book.book_image}
-          isbn={book.primary_isbn13}
-        />
+        <div key={i}>
+          <Card
+            i={i}
+            img={book.book_image}
+            isbn={book.primary_isbn13}
+          />
+        </div>
       )
     })
 

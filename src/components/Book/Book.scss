@@ -1,43 +1,74 @@
 @import '../../style.scss';
 
+
+
+.flexed {
+    display: flex
+}
+
 .book-info-main {
-    height: 36rem;
-    width: 39rem;
-    display: flex;
+    height: $modalHeight;
+    width: $modalWidth;
+    flex-direction: column;
 
 }
 
 .book-info-img {
-    display: flex;
     flex-direction: column;
     align-items: center;
-    margin: 1rem;
-    height: 15rem;
+    margin: 1.7rem 0rem 1rem 2rem;
+    // height: 15rem;
 }
 
-.book-info-words {
-    display: flex;
-    flex-direction: column;
-}
+// .book-info-words {
+//     display: flex;
+//     flex-direction: column;
+//     margin-right: 1.5rem;
+
+// }
 
 .book-info-header {
+    flex-direction: column;
+    justify-content: flex-start;
+    text-align: start;
+    width: 27rem;
+    align-items: flex-start;
+    margin-top: 0.7rem;
+    margin-left: 1.3rem;
 
 }
 
-.book-info-description {
+.book-info-summary {
+    height: 25rem;
 
 }
 
-.dv-star-rating-non-editable {
-    margin: .5rem;
+// .dv-star-rating-non-editable {
+//     margin: .5rem;
+// }
+
+.book-title {
+    font-size: 1.5rem;
+    margin-bottom: 0;
+    font-family: $titleFontFamily;
 }
 
-.close-book-modal {
-    position: absolute;
-    right: 1.7rem;
-    top: 1.7rem;
-    border: none;
-    background: none;
-    font-size: 1rem;
-    cursor: pointer;
+.book-author {
+    // extends .book-summary
+    font-size: $bodyFontSize;
+    font-family: $bodyFontFamily;
+}
+
+.book-summary {
+    @extend .book-author;
+    overflow: scroll;
+    margin: 0rem 1.4rem 1.7rem 1.4rem;
+
+}
+
+.modal-top {
+    justify-content: space-around;
+    height: 20.5rem;
+    margin-bottom: 3rem;
+
 }

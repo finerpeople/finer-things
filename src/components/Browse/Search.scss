@@ -38,13 +38,14 @@
     margin-top: 10rem;
     margin-left: 3.5rem;
     position: relative;
+    padding-left: 0.2rem;
 }
 
 .searched-single-book {
     position: relative;
     height: 13rem;
     width: 8.5rem;
-    padding: 0.3rem;
+    overflow: hidden;
 }
 
 .searched-book-cover {
@@ -53,6 +54,7 @@
     border-radius: 10px;
     height: 12rem;
     width: 7.5rem;
+    cursor: pointer;
 }
 
 .default-cover {
@@ -112,13 +114,13 @@
     border-radius: 10px 10px 0 0;
     position: absolute;
     top: -1.5rem;
-    width: 82.5%;
+    width: 7.5rem;
     height: 1.8rem;
     transition: top .7s ease-in-out;
     visibility: hidden;
 }
 
 .searched-single-book:hover .icon-banner {
-    top: 0.3rem;
+    top: 0rem;
     visibility: visible;
 }
