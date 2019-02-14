@@ -40,4 +40,4 @@ massive(SERVER_CONNECTION)
 })
 .catch((err) => {console.log(err)})
 
-app.delete('/api/deleteAccount/:id', controller.deleteAccount)
+// app.delete('/api/delete-account/:id', settingsController.deleteAccount)

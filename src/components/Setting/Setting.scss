@@ -3,15 +3,46 @@
 .mainContainer p {
     margin-top: -1em;
     font-family: $bodyFontFamily;
+    overflow-y: auto;
 }
+
 .makeChangesText {
     font-family: $bodyFontFamily;
+    margin-right: 1em;
+    font-size: 0.9em;
 }
-.editBtns {
+
+#settings-Btns {
+    background-color: $tan;
+    border: none;
+    margin: 0.5em 1em;
+    height: 2.3em;
+    width: 9em;
+    font-weight: bold;
+}
+
+#settings-editBtn {
+    background-color: $tan;
+    border: none;
+    margin: 0.5em 0;
+    height: 2.3em;
+    width: 10em;
+    font-weight: bold;
+}
+
+#settings-Btns:hover {
+    background-color: $lightBlue;
+}
+
+#settings-editBtn:hover {
+    background-color: $lightBlue;
+}
+
+.saveDeleteBtns {
+    margin-top: 0.5em;
     display: flex;
-    justify-content: center; 
-    width: 100vw;
 }
+
 .mainContainer {
     // overflow-y: auto; 
     position: relative;
@@ -24,18 +55,20 @@
     // background-color: red;
     margin-left: 4.3em;
 }
+
 .profileImg {
-    height: 18.75em;
+    height: 19em;
     width: 17em;
 }
 
 .profilePicContainer {
-    position: relative; 
-    height: 300px; 
+    position: relative;
+    // height: 300px;
+    height: 19em;
 }
 
 .editProfileBtns {
-    height: 2em;
+    height: 2.5em;
     width: 100.3%;
     position: absolute;
     bottom: 0;
@@ -47,83 +80,231 @@
     opacity: 0.7
 }
 
-.editTextContainer {
+.lowerContainer {
     //holds summary, email/password, buttons
-    width: 19em;
-    height: 18em;
-    // background-color: blue;
-    // position: absolute;
-    // top: 11em;
-    // right: 35em;
     display: flex;
     flex-direction: column;
     align-items: center;
+    // justify-content: space-between;
+    height: 21em;
+    width: 20em;
+    background-color: $darkGrey;
+    color: $white;
 }
 
 .summary {
-    width: 16em;
-    height: 10em;
+    width: 17em;
+    height: 7em;
     text-align: center;
+    padding-top: 1em;
+    // display: flex;
+    // flex-direction: column;
+    // background-color: blue; 
+    position: relative;
+    top: 1em;
+}
+
+.editTextContainer {
+    //holds email/password inputs, buttons
+    width: 19em;
+    height: 11em;
     display: flex;
     flex-direction: column;
-    margin-bottom: -2.5em;
+    align-items: center;
+    // margin-top: 1em; 
+    // background-color: red; 
+    position: relative;
+    top: -1.5em;
 }
 
 .fa-pen {
-    color: $darkerGrey;
+    // color: $darkerGrey;
+    color: $white;
     position: relative;
     top: 0;
+    cursor: pointer;
     // left: 8em;
+}
+
+.fa-pen:hover {
+    color: $darkBlue;
 }
 
 .fa-user-edit,
 .far,
 .fa-trash-alt {
-    // color: $darkerGrey;
     color: $white;
-    // color: red; 
+    cursor: pointer;
 }
 
-@media (max-width: 1024px) {
+.fa-user-edit:hover,
+.far:hover,
+.fa-trash-alt:hover {
+    color: $darkBlue;
+}
+
+@media (max-width: 1000px) {
     .mainContainer {
         display: flex;
         flex-direction: column;
-        align-content: center; 
+        align-content: center;
         justify-content: space-around;
         height: calc(100% - 4.5em);
-        margin-top: 1em;
-        margin-left: 0; 
+        margin-top: 5em;
+        margin-left: 0;
         width: 100vw;
     }
+
+    .lowerContainer {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+        height: 21em;
+        width: 18em;
+        margin-top: 1em;
+        font-size: 0.85em;
+    }
+
     .profileImg {
         height: 15em;
         width: 13.25em;
     }
+
+    .profilePicContainer {
+        height: 15em;
+    }
+
     .editProfileBtns {
         height: 2em;
-        // width: 100.3%;
         position: absolute;
-        bottom: 3.7em;
-        display: flex;
-        justify-content: space-around;
-        align-items: center;
-        background-color: $darkerGrey;
-        // background-color: $white; 
-        opacity: 0.7
+        // bottom: 3.7em;
     }
-    .buttons {
-        position: fixed;
-        top: 46em;
-        left: 13em;
+
+    #settings-editBtn {
+        width: 7.5em;
+        font-size: 0.9em; 
     }
-   
+
+    #settings-Btns {
+        width: 7.5em;
+        font-size: 0.9em; 
+    }
+
+    // .buttons {
+    //     position: fixed;
+    //     top: 46em;
+    //     left: 13em;
+    // }
+
     .editTextContainer {
+        //holds email/password inputs, buttons
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        top: -3em;
+    }
+    .saveDeleteBtns {
+        position: absolute;
+        bottom: -2.8em;
+    }
+    .summary {
+        margin-bottom: -3em;
+    }
+}
+
+@media (max-width: 700px) {
+    .mainContainer {
+        margin-top: 1em;
+    }
+    .profileImg {
+        height: 12em;
+        width: 10.25em;
+    }
+    .profilePicContainer {
+        height: 12em;
+    }
+    .lowerContainer {
+        width: 18em;
+        font-size: 0.8em; 
+    }
+    .saveDeleteBtns {
+        position: absolute;
+        bottom: -2em;
+    }
+
+    #settings-Btns {
+        font-size: 0.8em;
+    }
+
+    #settings-editBtn {
+        font-size: 0.8em;
+        // margin-top: -3em;
+    }
+
+    .inputFields {
+        font-size: 0.8em;
+    }
+}
+
+@media (max-height: 568px) {
+    .lowerContainer {
         //holds summary, email/password, buttons
         display: flex;
         flex-direction: column;
+        align-items: center;
+        // justify-content: space-between;
+        height: 18em;
+        width: 16.5em;
+        margin-top: 1em;
+    }
+
+    .saveDeleteBtns {
+        position: absolute;
+        bottom: -3.5em;
+    }
+
+    #settings-Btns {
+        font-size: 1em;
+    }
+
+    #settings-editBtn {
+        font-size: 1em;
+        margin-top: -3em;
+    }
+
+    .inputFields {
+        font-size: 1em;
+    }
+
+    .profileImg {
+        height: 8em;
+        width: 7em;
+    }
+
+    .profilePicContainer {
+        height: 8em;
     }
 
     .summary {
-        margin-bottom: -3em;
+        font-size: 0.75em;
+    }
+
+    .editTextContainer {
+        //holds email/password inputs, buttons
+        font-size: 0.75em;
+        position: relative;
+        top: -5em;
+    }
+
+    #settings-Btns {
+        margin: 0.5em 1em;
+        height: 2em;
+        width: 7.5em;
+    }
+
+    #settings-editBtn {
+        height: 2em;
+        width: 6.5em;
     }
 }

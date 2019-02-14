@@ -1,49 +1,45 @@
 import React, { Component } from "react";
 import axios from "axios";
 import "./Setting.scss";
-import { TextField } from "@material-ui/core";
-// import PropTypes from 'prop-types';
-import { withStyles } from "@material-ui/core/styles";
-import Button from "@material-ui/core/Button";
 
-const styles = theme => ({
-  button: {
-    margin: theme.spacing.unit
-  },
-  input: {
-    display: "none"
-  }
-});
-
-class Setting extends Component {
+export default class Setting extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      image: "",
+      image: props.image,
       firstName: "",
       lastName: "",
       email: "",
-      password: ""
+      password: props.password,
+      // email: props.email,
+      summary: props.summary,
+      editable: false,
+      editDone: false
     };
   }
   deleteAccount(id) {
     axios
-      .delete(`/api/deleteAccount/${id}`)
-      .then
-      //link to home page?
-      ();
+      .delete(`/api/delete-account/${id}`)
+      .then(res => this.props.history.push("/"));
   }
+  edit = () => {
+    if (!this.state.editDone) {
+      this.setState({ editable: true, editDone: true });
+    } else {
+      this.setState({ editable: false, editDone: false });
+    }
+  };
 
   render() {
-    const { classes } = this.props;
     return (
       <div className="mainContainer">
         <div className="profilePicContainer">
           <img
-            className='profileImg'
+            className="profileImg"
             src="https://vignette.wikia.nocookie.net/theoffice/images/2/25/Oscar_Martinez.jpg/revision/latest/scale-to-width-down/2000?cb=20170701085818"
             alt="Oscar"
+            //TODO render this.state.image here
           />
           <div className="editProfileBtns">
             <div>
@@ -55,42 +51,79 @@ class Setting extends Component {
           </div>
         </div>
 
-        <div className="editTextContainer">
-          <p className="summary">
-            I am an Accountant by day and an avid reader by night. When not
-            crunching numbers, I enjoy a good history or nonfiction book. I
-            despise Anne Geddes.
-          </p>
-          <TextField
-            type="text"
-            placeholder="Email address"
-            onchange={e => this.setState({ email: e.target.value })}
-          />
-          <TextField
-            type="text"
-            placeholder="Password"
-            onchange={e => this.setState({ password: e.target.value })}
-          />
-          <br />
-          <div classname="editBtns">
-            <span className="makeChangesText">Want to make changes?</span>
-            <i className="fas fa-pen fa-md" />
-          </div>
+        <div className="lowerContainer">
           <div>
-            <Button variant="contained" className={classes.button}>
-              Save
-            </Button>
-            <Button
-              variant="contained"
-              className={classes.button}
-              onClick={() => this.deleteAccount()}
-            >
-              Delete Account
-            </Button>
+            <p className="summary">
+              I am an Accountant by day and an avid reader by night. When not
+              crunching numbers, I enjoy a good history or nonfiction book. I
+              despise Anne Geddes photography.
+            </p>
+          </div>
+          {/* render this.state.summary here */}
+          <div className="editTextContainer">
+            {this.state.editable ? (
+              <div>
+                <input type="text" value={this.state.email} />
+              </div>
+            ) : (
+              <span>{this.state.email}</span>
+            )}
+            <div>
+              <br />
+              <button type="button" id="settings-editBtn">
+                {this.state.editDone ? "Cancel" : "Edit"}
+              </button>
+              <hr />
+              <div>
+                {!this.state.editDone ? null : (
+                  <button type="button" id="settings-Btns">
+                    Save
+                  </button>
+                )}
+              </div>
+            </div>
+            {/* <TextField
+            InputProps={{
+            classes: {
+              input: classes.resize,
+            },
+          }}
+            className="inputFields"
+              type="text"
+              placeholder="Email address"
+              onchange={e => this.setState({ email: e.target.value })}
+            /> */}
+            <br />
+            <input
+              value={this.state.password}
+              className="inputFields"
+              type="text"
+              placeholder="Password"
+              onchange={e => this.setState({ password: e.target.value })}
+            />
+            <br />
+            <div classname="editBtns">
+              <span className="makeChangesText">Want to make changes?</span>
+              <i className="fas fa-pen fa-md" />
+            </div>
+            <div className="saveDeleteBtns">
+              <button 
+                type="button" 
+                id="settings-Btns">
+                Save
+              </button>
+              <button
+                type="button"
+                id="settings-Btns"
+                onClick={() => this.deleteAccount()}
+              >
+                Delete Account
+              </button>
+            </div>
           </div>
         </div>
       </div>
     );
   }
 }
-export default withStyles(styles)(Setting);
+// export default withStyles(styles)(Setting);
