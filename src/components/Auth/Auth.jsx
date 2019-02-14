@@ -25,6 +25,8 @@ export default class Auth extends Component {
       if (res.data.loggedIn) {
         this.props.history.push("/my-library");
       }
+      console.log(res.data)
+    const id = res.data.id
       if (res.data.message === "Account suspended") {
         Swal.fire({
           title: 'Wha-oohh!',
@@ -35,13 +37,14 @@ export default class Auth extends Component {
           cancelButtonColor: '#d33',
           confirmButtonText: 'Yes, restore it!'
         }).then((result) => {
-          console.log(result)
           if (result.value) {
             Swal.fire(
               'Restored!',
               'Your account has been restored.',
               'success'
             )
+            axios.put(`/api/updateAccountStatus/${id}`) 
+            this.props.history.push("/my-library");
           }
         })
       }

@@ -34,7 +34,7 @@ app.post('/api/addBook', libraryCtrl.addBook)
 
 // Settings
 app.get('/api/userData/:id', settingsCtrl.getUserData)
-app.delete('/api/deleteAccount/:id', settingsCtrl.deleteAccount)
+app.put('/api/updateAccountStatus/:id', settingsCtrl.updateAccStatus)
 
 
 massive(SERVER_CONNECTION)

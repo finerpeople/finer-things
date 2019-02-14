@@ -67,7 +67,7 @@ class Setting extends Component {
   };
 
   deleteAccount = async (id) => {
-    const res = await axios.delete(`/api/deleteAccount/${id}`)
+    const res = await axios.put(`/api/updateAccountStatus/${id}`)
     this.props.history.push("/");
   }
 

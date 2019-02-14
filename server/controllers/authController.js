@@ -13,9 +13,9 @@ module.exports = {
     if (!compareHash) {
       return res.status(401).send({ message: "Password incorrect" });
     }
-    const {user_id, first_name, status } = userArray[0];
-    if(!status) {
-      return res.status(200).send({message: 'Account suspended'})
+    const {user_id, first_name, user_status } = userArray[0];
+    if(!user_status) {
+      return res.status(200).send({id: user_id, message: 'Account suspended'})
     }
     session.user = {
       id: user_id,
