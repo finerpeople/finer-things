@@ -4,7 +4,7 @@ import Nonfiction from './Nonfiction';
 import Misc from './Misc';
 import YoungAdult from './YoungAdult';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+import Card from './Card';
 
 import "./Search.scss";
 
@@ -23,7 +23,7 @@ export default class Search extends Component {
     }
 
     toggle = () => {
-        window.scrollTo(0, 0)
+        // window.scrollTo(0, 0)
         this.setState({
             toggleSearch: !this.state.toggleSearch
         })
@@ -45,21 +45,17 @@ export default class Search extends Component {
     render() {
         let displaySearch = this.state.searchedBooks.map((book, i) => {
             return (
-                <>
+                <div key={i}>
                     {book.volumeInfo.imageLinks && book.volumeInfo.industryIdentifiers ? (
-                        <div key={i} className='searched-single-book'>
-                            <Link to={`/book/${book.volumeInfo.industryIdentifiers[0].identifier}`}>
-                                <img src={book.volumeInfo.imageLinks.thumbnail} className='searched-book-cover' />
-                            </Link>
-                            <div className='icon-banner'>
-                            <i className="fas fa-plus add-to-library"></i>
-                            <i className="fas fa-share search-share"></i>
-                            </div>
-
-                        </div>
+                        <Card 
+                        i={i}
+                        img={book.volumeInfo.imageLinks.thumbnail}
+                        isbn={book.volumeInfo.industryIdentifiers[0].identifier}
+                        search={true}
+                        />
                     ) : (null)
                     }
-                </>
+                </div>
             )
         })
         return (

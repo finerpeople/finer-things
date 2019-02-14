@@ -12,33 +12,50 @@ export default class Book extends Component {
       title: '',
       author: [],
       description: '',
-      rating: 0
+      rating: 0,
+      category: ''
     }
   }
 
   componentDidMount() {
-    window.scrollTo(0, 0)
-    // let { isbn } = this.props.match.params;
+    // window.scrollTo(0, 0)
     axios.get(`https://www.googleapis.com/books/v1/volumes?q=isbn:${this.state.isbn}&fields=items(id, volumeInfo/title, volumeInfo/authors, volumeInfo/description, volumeInfo/industryIdentifiers, volumeInfo/categories, volumeInfo/averageRating, volumeInfo/imageLinks, volumeInfo/previewLink)`)
       .then(res => {
+        let genre;
+        if (res.data.items[0].volumeInfo.categories) {
+          genre = res.data.items[0].volumeInfo.categories[0]
+        } else {
+          genre = 'no genre'
+        }
+        let rated;
+        if (res.data.items[0].volumeInfo.averageRating) {
+          rated = res.data.items[0].volumeInfo.averageRating
+        } else {
+          rated = 0
+        }
+
         this.setState({
           image: res.data.items[0].volumeInfo.imageLinks.thumbnail,
           isbn: this.state.isbn,
           title: res.data.items[0].volumeInfo.title,
           author: res.data.items[0].volumeInfo.authors,
           description: res.data.items[0].volumeInfo.description,
-          rating: res.data.items[0].volumeInfo.averageRating,
-          category: res.data.items[0].volumeInfo.categories[0]
+          rating: rated,
+          category: genre
         })
-        console.log(this.state)
       })
-  }
+}
 
-  render() {
-    return (
-      <div className='book-info-main'>
-        <div className='book-info-img'>
+render() {
+  return (
+    <div className='book-info-main flexed'>
+      <div className='modal-top flexed'>
+        <div className='book-info-img flexed'>
           <img src={this.state.image} alt='book cover' />
+        </div>
+        <div className='book-info-header flexed'>
+          <p className='book-title'>{this.state.title}</p>
+          <p className='book-author'>{this.state.author}</p>
           <StarRatingComponent
             name="rating"
             editing={false}
@@ -47,16 +64,11 @@ export default class Book extends Component {
             value={this.state.rating}
           />
         </div>
-        <div className='book-info-words'>
-          <div className='book-info-header'>
-            <h1>{this.state.title}</h1>
-            <h2>{this.state.author}</h2>
-          </div>
-          {/* <div className='book-info-description'> */}
-            <p>{this.state.description}</p>
-          {/* </div> */}
-        </div>
       </div>
-    )
-  }
+      <div className='book-info-summary flexed'>
+        <p className='book-summary'>{this.state.description}</p>
+      </div>
+    </div>
+  )
+}
 }
