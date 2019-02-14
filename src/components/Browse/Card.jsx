@@ -58,13 +58,3 @@ export default class Card extends Component {
 
     }
 }
-// <div key={i} className='searched-single-book'>
-                        //     <Link to={`/book/${book.volumeInfo.industryIdentifiers[0].identifier}`}>
-                        //         <img src={book.volumeInfo.imageLinks.thumbnail} alt='book cover' className='searched-book-cover' />
-                        //     </Link>
-                        //     <div className='icon-banner'>
-                        //     <i className="fas fa-plus add-to-library"></i>
-                        //     <i className="fas fa-share search-share"></i>
-                        //     </div>
-
-                        // </div>
