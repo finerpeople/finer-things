@@ -1,49 +1,45 @@
 import React, { Component } from "react";
 import axios from "axios";
 import "./Setting.scss";
-import { TextField } from "@material-ui/core";
-// import PropTypes from 'prop-types';
-import { withStyles } from "@material-ui/core/styles";
-import Button from "@material-ui/core/Button";
 
-const styles = theme => ({
-  button: {
-    margin: theme.spacing.unit
-  },
-  input: {
-    display: "none"
-  },
-  resize: {
-    fontSize: "1em"
-  }
-});
-
-class Setting extends Component {
+export default class Setting extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      image: "",
+      image: props.image,
       firstName: "",
       lastName: "",
       email: "",
-      password: "",
+      password: props.password,
+      // email: props.email,
+      summary: props.summary,
+      editable: false,
+      editDone: false
     };
   }
   deleteAccount(id) {
-    axios.delete(`/api/delete-account/${id}`).then(res => this.props.history.push("/"))
-    ;
+    axios
+      .delete(`/api/delete-account/${id}`)
+      .then(res => this.props.history.push("/"));
   }
+  edit = () => {
+    if (!this.state.editDone) {
+      this.setState({ editable: true, editDone: true });
+    } else {
+      this.setState({ editable: false, editDone: false });
+    }
+  };
 
   render() {
-    const { classes } = this.props;
     return (
       <div className="mainContainer">
         <div className="profilePicContainer">
           <img
-            className='profileImg'
+            className="profileImg"
             src="https://vignette.wikia.nocookie.net/theoffice/images/2/25/Oscar_Martinez.jpg/revision/latest/scale-to-width-down/2000?cb=20170701085818"
             alt="Oscar"
+            //TODO render this.state.image here
           />
           <div className="editProfileBtns">
             <div>
@@ -63,8 +59,30 @@ class Setting extends Component {
               despise Anne Geddes photography.
             </p>
           </div>
+          {/* render this.state.summary here */}
           <div className="editTextContainer">
-            <TextField
+            {this.state.editable ? (
+              <div>
+                <input type="text" value={this.state.email} />
+              </div>
+            ) : (
+              <span>{this.state.email}</span>
+            )}
+            <div>
+              <br />
+              <button type="button" id="settings-editBtn">
+                {this.state.editDone ? "Cancel" : "Edit"}
+              </button>
+              <hr />
+              <div>
+                {!this.state.editDone ? null : (
+                  <button type="button" id="settings-Btns">
+                    Save
+                  </button>
+                )}
+              </div>
+            </div>
+            {/* <TextField
             InputProps={{
             classes: {
               input: classes.resize,
@@ -74,15 +92,11 @@ class Setting extends Component {
               type="text"
               placeholder="Email address"
               onchange={e => this.setState({ email: e.target.value })}
-            />
-            <br/>
-            <TextField
-            InputProps={{
-            classes: {
-              input: classes.resize,
-            },
-          }}
-            className="inputFields"
+            /> */}
+            <br />
+            <input
+              value={this.state.password}
+              className="inputFields"
               type="text"
               placeholder="Password"
               onchange={e => this.setState({ password: e.target.value })}
@@ -93,21 +107,18 @@ class Setting extends Component {
               <i className="fas fa-pen fa-md" />
             </div>
             <div className="saveDeleteBtns">
-              <Button
-                variant="contained"
-                style={{ backgroundColor: "#383838", color: "white" }}
-                className={classes.button}
-              >
+              <button 
+                type="button" 
+                id="settings-Btns">
                 Save
-              </Button>
-              <Button
-                variant="contained"
-                style={{ backgroundColor: "#383838", color: "white" }}
-                className={classes.button}
+              </button>
+              <button
+                type="button"
+                id="settings-Btns"
                 onClick={() => this.deleteAccount()}
               >
                 Delete Account
-              </Button>
+              </button>
             </div>
           </div>
         </div>
@@ -115,4 +126,4 @@ class Setting extends Component {
     );
   }
 }
-export default withStyles(styles)(Setting);
+// export default withStyles(styles)(Setting);
