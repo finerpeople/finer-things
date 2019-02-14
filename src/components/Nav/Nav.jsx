@@ -19,7 +19,6 @@ class Nav extends Component {
   signout = () => {
     axios.get('/api/signout')
     .then(res => {
-      console.log(res)
       this.props.history.push('/')
     })
   }

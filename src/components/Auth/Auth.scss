@@ -32,7 +32,7 @@
   background-color: $tan;
   grid-column: 2 span 2;
   grid-row: 2 / span 2;
-  height: 300%;
+  height: 350%;
   width: 200%;
   margin-left: -150px;
   margin-top: -800px;
@@ -58,7 +58,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: #383838cc;
+  background-color: $darkerGrey;
   width: 400px;
   height: 300px;
   border-radius: 3px;
@@ -111,7 +111,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: #383838cc;
+  background-color: $darkerGrey;
   width: 400px;
   height: 300px;
   border-radius: 3px;
