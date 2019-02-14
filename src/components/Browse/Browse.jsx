@@ -21,6 +21,7 @@ export default class Browse extends Component {
         this.setState({
           listName: res.data.results.books
         })
+        console.log(this.state.listName)
       });
   }
 
