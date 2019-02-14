@@ -8,6 +8,7 @@ CREATE TABLE USERS (
 );
 
 CREATE TABLE USER_LIBRARY (
+    user_library_id SERIAL PRIMARY KEY,
     user_id integer NOT NULL REFERENCES USERS(user_id),
     book_isbn text,
     status text,

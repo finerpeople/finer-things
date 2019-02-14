@@ -9,7 +9,7 @@ module.exports = {
     if (!userArray[0]) {
       return res.status(401).send({ message: "Email not found" });
     }
-    const compareHash = bcrypt.compareSync(password, hash);
+    const compareHash = bcrypt.compareSync(password, userArray[0].hash);
     if (!compareHash) {
       return res.status(401).send({ message: "Password incorrect" });
     }
