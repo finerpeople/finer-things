@@ -7,27 +7,69 @@ export default class Setting extends Component {
     super(props);
 
     this.state = {
-      image: props.image,
+      id: "",
+      image: "",
       firstName: "",
       lastName: "",
       email: "",
-      password: props.password,
-      // email: props.email,
-      summary: props.summary,
-      editable: false,
-      editDone: false
+      password: "",
+      profilePic: "",
+      summary: "",
+      status: "",
+      emailEditable: false,
+      editEmailDone: false
     };
   }
-  deleteAccount(id) {
+
+  componentDidMount = async () => {
+    const session = await this.getSession();
+    const { id } = session;
+    const res = await axios.get(`/api/userData/${id}`);
+    const {
+      user_id,
+      first_name,
+      last_name,
+      email,
+      hash,
+      profile_pic,
+      summary,
+      user_status
+    } = res.data;
+    this.setState({
+      id: user_id,
+      firstName: first_name,
+      lastName: last_name,
+      email,
+      // password: hash,
+      profilePic: profile_pic,
+      summary,
+      status: user_status
+    });
+  };
+
+  getSession = async () => {
+    const res = await axios.get("/api/session");
+    if (!res.data.loggedIn) {
+      this.props.history.push("/");
+    }
+    return res.data;
+  };
+
+  deleteAccount = async id => {
+    const res = await axios.put(`/api/updateAccountStatus/${id}`);
+    this.props.history.push("/");
+  };
+  saveProfileChanges() {
+    const { email } = this.state;
     axios
-      .delete(`/api/delete-account/${id}`)
-      .then(res => this.props.history.push("/"));
+      .put("/api/edit-profile", { email: email })
+      .then(this.setState({ emailEditable: false }));
   }
   edit = () => {
-    if (!this.state.editDone) {
-      this.setState({ editable: true, editDone: true });
+    if (!this.state.editEmailDone) {
+      this.setState({ emailEditable: true, editEmailDone: true });
     } else {
-      this.setState({ editable: false, editDone: false });
+      this.setState({ emailEditable: false, editEmailDone: false });
     }
   };
 
@@ -51,19 +93,37 @@ export default class Setting extends Component {
           </div>
         </div>
 
-        <div className="lowerContainer">
-          <div>
-            <p className="summary">
-              I am an Accountant by day and an avid reader by night. When not
-              crunching numbers, I enjoy a good history or nonfiction book. I
-              despise Anne Geddes photography.
-            </p>
+        <div className="editTextContainer">
+          <p className="summary">
+            I am an Accountant by day and an avid reader by night. When not
+            crunching numbers, I enjoy a good history or nonfiction book. I
+            despise Anne Geddes.
+          </p>
+          <input
+            type="text"
+            placeholder="Email address"
+            onChange={e => this.setState({ email: e.target.value })}
+          />
+          <input
+            type="text"
+            placeholder="Password"
+            onChange={e => this.setState({ password: e.target.value })}
+          />
+          <br />
+          <div className="editBtns">
+            <span className="makeChangesText">Want to make changes?</span>
+            <i className="fas fa-pen fa-md" />
           </div>
-          {/* render this.state.summary here */}
           <div className="editTextContainer">
-            {this.state.editable ? (
+            {this.state.emailEditable ? (
               <div>
-                <input type="text" value={this.state.email} />
+                <input
+                  type="text"
+                  value={this.state.email}
+                  onChange={e => {
+                    this.handleChange("email", e.target.value);
+                  }}
+                />
               </div>
             ) : (
               <span>{this.state.email}</span>
@@ -71,28 +131,21 @@ export default class Setting extends Component {
             <div>
               <br />
               <button type="button" id="settings-editBtn">
-                {this.state.editDone ? "Cancel" : "Edit"}
+                {this.state.editEmailDone ? "Cancel" : "Edit"}
               </button>
               <hr />
               <div>
-                {!this.state.editDone ? null : (
-                  <button type="button" id="settings-Btns">
+                {!this.state.editEmailDone ? null : (
+                  <button
+                    type="button"
+                    id="settings-Btns"
+                    onClick={() => this.saveProfileChanges()}
+                  >
                     Save
                   </button>
                 )}
               </div>
             </div>
-            {/* <TextField
-            InputProps={{
-            classes: {
-              input: classes.resize,
-            },
-          }}
-            className="inputFields"
-              type="text"
-              placeholder="Email address"
-              onchange={e => this.setState({ email: e.target.value })}
-            /> */}
             <br />
             <input
               value={this.state.password}
@@ -107,15 +160,13 @@ export default class Setting extends Component {
               <i className="fas fa-pen fa-md" />
             </div>
             <div className="saveDeleteBtns">
-              <button 
-                type="button" 
-                id="settings-Btns">
+              <button type="button" id="settings-Btns">
                 Save
               </button>
               <button
                 type="button"
                 id="settings-Btns"
-                onClick={() => this.deleteAccount()}
+                onClick={() => this.deleteAccount(this.state.id)}
               >
                 Delete Account
               </button>
@@ -126,4 +177,3 @@ export default class Setting extends Component {
     );
   }
 }
-// export default withStyles(styles)(Setting);

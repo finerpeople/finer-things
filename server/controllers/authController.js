@@ -13,20 +13,14 @@ module.exports = {
     if (!compareHash) {
       return res.status(401).send({ message: "Password incorrect" });
     }
-    const {
-      user_id,
-      first_name,
-      last_name,
-      email,
-      hash,
-      profile_pic
-    } = userArray[0];
+    const {user_id, first_name, user_status } = userArray[0];
+    if(!user_status) {
+      return res.status(200).send({id: user_id, message: 'Account suspended'})
+    }
     session.user = {
       id: user_id,
       firstName: first_name,
-      lastName: last_name,
-      email,
-      profilePic: profile_pic
+      loggedIn: true
     };
     res
       .status(200)
@@ -49,14 +43,12 @@ module.exports = {
       userEmail,
       hash
     });
-    const { user_id, first_name, last_name, email, profile_pic } = newUser[0];
+    const { user_id, first_name } = newUser[0];
 
     session.user = {
       id: user_id,
       firstName: first_name,
-      lastName: last_name,
-      email,
-      profilePic: profile_pic
+      loggedIn: true
     };
     res.status(200).send({
       message: "logged in",
