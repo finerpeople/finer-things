@@ -29,7 +29,7 @@ export default class Auth extends Component {
       Swal.fire({
         type: 'error',
         title: 'Oops...',
-        text: 'Inccorect Email or Password. Please try again.',
+        text: 'Incorrect Email or Password. Please try again.',
         footer: '<a href>Why do I have this issue?</a>'
       })
     })
