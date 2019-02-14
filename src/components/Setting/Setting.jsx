@@ -12,6 +12,9 @@ const styles = theme => ({
   },
   input: {
     display: "none"
+  },
+  resize: {
+    fontSize: "1em"
   }
 });
 
@@ -24,14 +27,12 @@ class Setting extends Component {
       firstName: "",
       lastName: "",
       email: "",
-      password: ""
+      password: "",
     };
   }
   deleteAccount(id) {
-    axios.delete(`/api/delete-account/${id}`);
-    // .then
-    //link to home page?
-    this.props.history.push("/");
+    axios.delete(`/api/delete-account/${id}`).then(res => this.props.history.push("/"))
+    ;
   }
 
   render() {
@@ -43,7 +44,6 @@ class Setting extends Component {
             className='profileImg'
             src="https://vignette.wikia.nocookie.net/theoffice/images/2/25/Oscar_Martinez.jpg/revision/latest/scale-to-width-down/2000?cb=20170701085818"
             alt="Oscar"
-            className="profileImg"
           />
           <div className="editProfileBtns">
             <div>
@@ -65,11 +65,24 @@ class Setting extends Component {
           </div>
           <div className="editTextContainer">
             <TextField
+            InputProps={{
+            classes: {
+              input: classes.resize,
+            },
+          }}
+            className="inputFields"
               type="text"
               placeholder="Email address"
               onchange={e => this.setState({ email: e.target.value })}
             />
+            <br/>
             <TextField
+            InputProps={{
+            classes: {
+              input: classes.resize,
+            },
+          }}
+            className="inputFields"
               type="text"
               placeholder="Password"
               onchange={e => this.setState({ password: e.target.value })}
