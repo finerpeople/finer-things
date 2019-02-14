@@ -28,11 +28,10 @@ class Setting extends Component {
     };
   }
   deleteAccount(id) {
-    axios
-      .delete(`/api/deleteAccount/${id}`)
-      .then
-      //link to home page?
-      ();
+    axios.delete(`/api/delete-account/${id}`);
+    // .then
+    //link to home page?
+    this.props.history.push("/");
   }
 
   render() {
@@ -43,6 +42,7 @@ class Setting extends Component {
           <img
             src="https://vignette.wikia.nocookie.net/theoffice/images/2/25/Oscar_Martinez.jpg/revision/latest/scale-to-width-down/2000?cb=20170701085818"
             alt="Oscar"
+            className="profileImg"
           />
           <div className="editProfileBtns">
             <div>
@@ -54,38 +54,47 @@ class Setting extends Component {
           </div>
         </div>
 
-        <div className="editTextContainer">
-          <p className="summary">
-            I am an Accountant by day and an avid reader by night. When not
-            crunching numbers, I enjoy a good history or nonfiction book. I
-            despise Anne Geddes.
-          </p>
-          <TextField
-            type="text"
-            placeholder="Email address"
-            onchange={e => this.setState({ email: e.target.value })}
-          />
-          <TextField
-            type="text"
-            placeholder="Password"
-            onchange={e => this.setState({ password: e.target.value })}
-          />
-          <br />
-          <div classname="editBtns">
-            <span className="makeChangesText">Want to make changes?</span>
-            <i className="fas fa-pen fa-md" />
-          </div>
+        <div className="lowerContainer">
           <div>
-            <Button variant="contained" className={classes.button}>
-              Save
-            </Button>
-            <Button
-              variant="contained"
-              className={classes.button}
-              onClick={() => this.deleteAccount()}
-            >
-              Delete Account
-            </Button>
+            <p className="summary">
+              I am an Accountant by day and an avid reader by night. When not
+              crunching numbers, I enjoy a good history or nonfiction book. I
+              despise Anne Geddes photography.
+            </p>
+          </div>
+          <div className="editTextContainer">
+            <TextField
+              type="text"
+              placeholder="Email address"
+              onchange={e => this.setState({ email: e.target.value })}
+            />
+            <TextField
+              type="text"
+              placeholder="Password"
+              onchange={e => this.setState({ password: e.target.value })}
+            />
+            <br />
+            <div classname="editBtns">
+              <span className="makeChangesText">Want to make changes?</span>
+              <i className="fas fa-pen fa-md" />
+            </div>
+            <div className="saveDeleteBtns">
+              <Button
+                variant="contained"
+                style={{ backgroundColor: "#383838", color: "white" }}
+                className={classes.button}
+              >
+                Save
+              </Button>
+              <Button
+                variant="contained"
+                style={{ backgroundColor: "#383838", color: "white" }}
+                className={classes.button}
+                onClick={() => this.deleteAccount()}
+              >
+                Delete Account
+              </Button>
+            </div>
           </div>
         </div>
       </div>
