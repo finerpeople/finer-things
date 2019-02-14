@@ -27,8 +27,10 @@ export default class Book extends Component {
           title: res.data.items[0].volumeInfo.title,
           author: res.data.items[0].volumeInfo.authors,
           description: res.data.items[0].volumeInfo.description,
-          rating: res.data.items[0].volumeInfo.averageRating
+          rating: res.data.items[0].volumeInfo.averageRating,
+          category: res.data.items[0].volumeInfo.categories[0]
         })
+        console.log(this.state)
       })
   }
 
