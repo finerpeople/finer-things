@@ -4,7 +4,8 @@ CREATE TABLE USERS (
     last_name character varying(50),
     email character varying(150),
     hash text,
-    profile_pic text
+    profile_pic text,
+    user_status boolean default true
 );
 
 CREATE TABLE USER_LIBRARY (
