@@ -6,6 +6,13 @@ module.exports = {
     const { userEmail, password } = req.body;
     const db = req.app.get("db");
     const userArray = await db.user.get_user({ userEmail });
+    if (!userArray[0]) {
+      return res.status(401).send({ message: "Email not found" });
+    }
+    const compareHash = bcrypt.compareSync(password, hash);
+    if (!compareHash) {
+      return res.status(401).send({ message: "Password incorrect" });
+    }
     const {
       user_id,
       first_name,
@@ -14,13 +21,6 @@ module.exports = {
       hash,
       profile_pic
     } = userArray[0];
-    if (!userArray[0]) {
-      return res.status(200).send({ message: "Email not found" });
-    }
-    const compareHash = bcrypt.compareSync(password, hash);
-    if (!compareHash) {
-      return res.status(401).send({ message: "Password incorrect" });
-    }
     session.user = {
       id: user_id,
       firstName: first_name,
@@ -65,8 +65,8 @@ module.exports = {
     });
   },
   signout: (req, res) => {
-      req.session.destroy()
-      res.status(200).send({message: 'Logged out'})
+    req.session.destroy();
+    res.status(200).send({ message: "Logged out" });
   },
   getUser: (req, res) => {
     return res.status(200).send(req.session.user);
