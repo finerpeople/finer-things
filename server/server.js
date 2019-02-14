@@ -9,7 +9,9 @@ const app = express()
 const {SERVER_PORT, SERVER_CONNECTION, SESSION_SECRET} = process.env
 
 // Controllers
-const authCtrl = require('./controllers/authController')
+const authCtrl = require('./controllers/authController');
+const libraryCtrl = require('./controllers/libraryController');
+
 // Middleware
 
 
@@ -25,6 +27,10 @@ app.post('/api/register', authCtrl.register)
 app.post('/api/login', authCtrl.login)
 app.get('/api/session', authCtrl.getUser)
 app.get('/api/signout', authCtrl.signout)
+
+// user library
+app.post('/api/addBook', libraryCtrl.addBook)
+
 
 massive(SERVER_CONNECTION)
 	.then(connection => {
