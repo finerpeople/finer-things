@@ -4,6 +4,16 @@ import Club from '../Club/Club'
 import './MyClub.scss'
 
 export default class MyClub extends Component {
+  componentDidMount = async () => {
+    this.getSession();
+  };
+
+  getSession = async () => {
+    const res = await axios.get("/api/session");
+    if (!res.data.loggedIn) {
+      this.props.history.push("/");
+    }
+  };
   render() {
     return (
       <div>
