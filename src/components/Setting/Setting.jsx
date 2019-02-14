@@ -152,10 +152,10 @@ export default class Setting extends Component {
               className="inputFields"
               type="text"
               placeholder="Password"
-              onchange={e => this.setState({ password: e.target.value })}
+              onChange={e => this.setState({ password: e.target.value })}
             />
             <br />
-            <div classname="editBtns">
+            <div className="editBtns">
               <span className="makeChangesText">Want to make changes?</span>
               <i className="fas fa-pen fa-md" />
             </div>

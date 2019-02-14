@@ -10,7 +10,8 @@ const key = process.env.REACT_APP_NYT;
 
 class Browse extends Component {
   state = {
-    listName: []
+    listName: [],
+    user_id: 0
   };
 
   componentDidMount = async () => {
@@ -27,6 +28,9 @@ class Browse extends Component {
 
   getSession = async () => {
     const res = await axios.get("/api/session");
+    this.setState({
+      user_id: res.data.id
+    })
     if (!res.data.loggedIn) {
       this.props.history.push("/");
     }
@@ -36,7 +40,7 @@ class Browse extends Component {
     let displayList = this.state.listName.map((book, i) => {
       return (
         <div key={i}>
-          <Card i={i} img={book.book_image} isbn={book.primary_isbn13} />
+          <Card i={i} img={book.book_image} isbn={book.primary_isbn13} user_id={this.state.user_id} />
         </div>
       );
     });
