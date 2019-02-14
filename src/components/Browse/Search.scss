@@ -41,10 +41,10 @@
 }
 
 .searched-single-book {
+    position: relative;
     height: 13rem;
     width: 8.5rem;
     padding: 0.3rem;
-    position: relative;
 }
 
 .searched-book-cover {
@@ -111,7 +111,14 @@
     background-color: rgba(189, 195, 199, 0.9);
     border-radius: 10px 10px 0 0;
     position: absolute;
-    top: 0.3rem;
-    width: 82.4%;
+    top: -1.5rem;
+    width: 82.5%;
     height: 1.8rem;
+    transition: top .7s ease-in-out;
+    visibility: hidden;
+}
+
+.searched-single-book:hover .icon-banner {
+    top: 0.3rem;
+    visibility: visible;
 }
