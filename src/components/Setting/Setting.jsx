@@ -7,21 +7,55 @@ export default class Setting extends Component {
     super(props);
 
     this.state = {
-      image: props.image,
+      id: "",
+      image: "",
       firstName: "",
       lastName: "",
       email: "",
-      password: props.password,
-      // email: props.email,
-      summary: props.summary,
-      editable: false,
-      editDone: false
+      password: "",
+      profilePic: "",
+      summary: "",
+      status: ""
     };
   }
-  deleteAccount(id) {
-    axios
-      .delete(`/api/delete-account/${id}`)
-      .then(res => this.props.history.push("/"));
+
+  componentDidMount = async () => {
+    const session = await this.getSession();
+    const { id } = session;
+    const res = await axios.get(`/api/userData/${id}`);
+    const {
+      user_id,
+      first_name,
+      last_name,
+      email,
+      hash,
+      profile_pic,
+      summary,
+      user_status
+    } = res.data;
+    this.setState({
+      id: user_id,
+      firstName: first_name,
+      lastName: last_name,
+      email,
+      // password: hash,
+      profilePic: profile_pic,
+      summary,
+      status: user_status
+    });
+  };
+
+  getSession = async () => {
+    const res = await axios.get("/api/session");
+    if (!res.data.loggedIn) {
+      this.props.history.push("/");
+    }
+    return res.data
+  };
+
+  deleteAccount = async (id) => {
+    const res = await axios.put(`/api/updateAccountStatus/${id}`)
+    this.props.history.push("/");
   }
   edit = () => {
     if (!this.state.editDone) {
@@ -51,75 +85,38 @@ export default class Setting extends Component {
           </div>
         </div>
 
-        <div className="lowerContainer">
-          <div>
-            <p className="summary">
-              I am an Accountant by day and an avid reader by night. When not
-              crunching numbers, I enjoy a good history or nonfiction book. I
-              despise Anne Geddes photography.
-            </p>
+        <div className="editTextContainer">
+          <p className="summary">
+            I am an Accountant by day and an avid reader by night. When not
+            crunching numbers, I enjoy a good history or nonfiction book. I
+            despise Anne Geddes.
+          </p>
+          <TextField
+            type="text"
+            placeholder="Email address"
+            onChange={e => this.setState({ email: e.target.value })}
+          />
+          <TextField
+            type="text"
+            placeholder="Password"
+            onChange={e => this.setState({ password: e.target.value })}
+          />
+          <br />
+          <div className="editBtns">
+            <span className="makeChangesText">Want to make changes?</span>
+            <i className="fas fa-pen fa-md" />
           </div>
-          {/* render this.state.summary here */}
-          <div className="editTextContainer">
-            {this.state.editable ? (
-              <div>
-                <input type="text" value={this.state.email} />
-              </div>
-            ) : (
-              <span>{this.state.email}</span>
-            )}
-            <div>
-              <br />
-              <button type="button" id="settings-editBtn">
-                {this.state.editDone ? "Cancel" : "Edit"}
-              </button>
-              <hr />
-              <div>
-                {!this.state.editDone ? null : (
-                  <button type="button" id="settings-Btns">
-                    Save
-                  </button>
-                )}
-              </div>
-            </div>
-            {/* <TextField
-            InputProps={{
-            classes: {
-              input: classes.resize,
-            },
-          }}
-            className="inputFields"
-              type="text"
-              placeholder="Email address"
-              onchange={e => this.setState({ email: e.target.value })}
-            /> */}
-            <br />
-            <input
-              value={this.state.password}
-              className="inputFields"
-              type="text"
-              placeholder="Password"
-              onchange={e => this.setState({ password: e.target.value })}
-            />
-            <br />
-            <div classname="editBtns">
-              <span className="makeChangesText">Want to make changes?</span>
-              <i className="fas fa-pen fa-md" />
-            </div>
-            <div className="saveDeleteBtns">
-              <button 
-                type="button" 
-                id="settings-Btns">
-                Save
-              </button>
-              <button
-                type="button"
-                id="settings-Btns"
-                onClick={() => this.deleteAccount()}
-              >
-                Delete Account
-              </button>
-            </div>
+          <div>
+            <Button variant="contained" className={classes.button}>
+              Save
+            </Button>
+            <Button
+              variant="contained"
+              className={classes.button}
+              onClick={() => this.deleteAccount(this.state.id)}
+            >
+              Delete Account
+            </Button>
           </div>
         </div>
       </div>
