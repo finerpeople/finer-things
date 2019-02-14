@@ -1,12 +1,12 @@
 import React, { Component } from "react";
 import axios from "axios";
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import "./Browse.scss";
 import Card from "./Card";
 
 const key = process.env.REACT_APP_NYT
 
-export default class Browse extends Component {
+class Browse extends Component {
 
   state = {
     listName: []
@@ -14,17 +14,23 @@ export default class Browse extends Component {
 
 
 
-  componentDidMount() {
-    axios
+  componentDidMount = async () => {
+    this.getSession()
+    const res = await axios
       .get(
         `https://api.nytimes.com/svc/books/v3/lists/current/${this.props.urlList}.json?api-key=${key}`
       )
-      .then(res => {
         this.setState({
           listName: res.data.results.books
         })
         console.log(this.state.listName)
-      });
+  }
+
+  getSession = async () => {
+    const res = await axios.get("/api/session")
+      if (!res.data.loggedIn) {
+        this.props.history.push("/");
+      }
   }
 
   render() {
@@ -52,3 +58,5 @@ export default class Browse extends Component {
     );
   }
 }
+
+export default withRouter(Browse)

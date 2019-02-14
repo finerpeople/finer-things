@@ -20,19 +20,55 @@ class Setting extends Component {
     super(props);
 
     this.state = {
+      id: "",
       image: "",
       firstName: "",
       lastName: "",
       email: "",
-      password: ""
+      password: "",
+      profilePic: "",
+      summary: "",
+      status: ""
     };
   }
-  deleteAccount(id) {
-    axios
-      .delete(`/api/deleteAccount/${id}`)
-      .then
-      //link to home page?
-      ();
+
+  componentDidMount = async () => {
+    const session = await this.getSession();
+    const { id } = session;
+    const res = await axios.get(`/api/userData/${id}`);
+    const {
+      user_id,
+      first_name,
+      last_name,
+      email,
+      hash,
+      profile_pic,
+      summary,
+      user_status
+    } = res.data;
+    this.setState({
+      id: user_id,
+      firstName: first_name,
+      lastName: last_name,
+      email,
+      // password: hash,
+      profilePic: profile_pic,
+      summary,
+      status: user_status
+    });
+  };
+
+  getSession = async () => {
+    const res = await axios.get("/api/session");
+    if (!res.data.loggedIn) {
+      this.props.history.push("/");
+    }
+    return res.data
+  };
+
+  deleteAccount = async (id) => {
+    const res = await axios.delete(`/api/deleteAccount/${id}`)
+    this.props.history.push("/");
   }
 
   render() {
@@ -41,7 +77,7 @@ class Setting extends Component {
       <div className="mainContainer">
         <div className="profilePicContainer">
           <img
-            className='profileImg'
+            className="profileImg"
             src="https://vignette.wikia.nocookie.net/theoffice/images/2/25/Oscar_Martinez.jpg/revision/latest/scale-to-width-down/2000?cb=20170701085818"
             alt="Oscar"
           />
@@ -64,15 +100,15 @@ class Setting extends Component {
           <TextField
             type="text"
             placeholder="Email address"
-            onchange={e => this.setState({ email: e.target.value })}
+            onChange={e => this.setState({ email: e.target.value })}
           />
           <TextField
             type="text"
             placeholder="Password"
-            onchange={e => this.setState({ password: e.target.value })}
+            onChange={e => this.setState({ password: e.target.value })}
           />
           <br />
-          <div classname="editBtns">
+          <div className="editBtns">
             <span className="makeChangesText">Want to make changes?</span>
             <i className="fas fa-pen fa-md" />
           </div>
@@ -83,7 +119,7 @@ class Setting extends Component {
             <Button
               variant="contained"
               className={classes.button}
-              onClick={() => this.deleteAccount()}
+              onClick={() => this.deleteAccount(this.state.id)}
             >
               Delete Account
             </Button>

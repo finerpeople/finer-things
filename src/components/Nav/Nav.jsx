@@ -9,11 +9,8 @@ class Nav extends Component {
   }
 
   componentDidMount = async () => {
-    await axios.get('/api/session')
-    .then (res => {
+    const res = await axios.get('/api/session')
       this.setState({firstName: res.data.firstName})
-    })
-
   }
 
   signout = () => {
@@ -61,7 +58,7 @@ class Nav extends Component {
           </div>
           <div className="welcome">
             <p>{`Hi, ${firstName}!`}</p>
-            <i class="fas fa-sign-out-alt" onClick={() => this.signout()}></i>
+            <i className="fas fa-sign-out-alt" onClick={() => this.signout()}></i>
           </div>
         </div>
         <div className={navBarStyle}>

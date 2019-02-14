@@ -18,24 +18,44 @@ export default class Auth extends Component {
     });
   };
 
-  login = () => {
+  login = async () => {
     const { userEmail, password } = this.state;
-    axios.post("/api/login", { userEmail, password }).then(res => {
+    try {
+      const res = await axios.post("/api/login", { userEmail, password });
       if (res.data.loggedIn) {
         this.props.history.push("/my-library");
       }
-    })
-    .catch(err => {
+      if (res.data.message === "Account suspended") {
+        Swal.fire({
+          title: 'Wha-oohh!',
+          text: "It looks like your account was deleted.  Would you like to restore it?",
+          type: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Yes, restore it!'
+        }).then((result) => {
+          console.log(result)
+          if (result.value) {
+            Swal.fire(
+              'Restored!',
+              'Your account has been restored.',
+              'success'
+            )
+          }
+        })
+      }
+    } catch {
       Swal.fire({
-        type: 'error',
-        title: 'Oops...',
-        text: 'Inccorect Email or Password. Please try again.',
-        footer: '<a href>Why do I have this issue?</a>'
-      })
-    })
+        type: "error",
+        title: "Oops...",
+        text: "Inccorect Email or Password. Please try again.",
+        footer: "<a href>Why do I have this issue?</a>"
+      });
+    }
   };
 
-  createUser = async () => {
+  register = async () => {
     const { firstName, lastName, userEmail, password } = this.state;
     const res = await axios.post("/api/register", {
       firstName,
@@ -127,7 +147,7 @@ export default class Auth extends Component {
             />
           </div>
           <div id="register-row">
-            <button onClick={() => this.createUser()}>Create Account</button>
+            <button onClick={() => this.register()}>Create Account</button>
           </div>
         </div>
       </div>
