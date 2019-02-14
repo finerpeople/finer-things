@@ -29,7 +29,8 @@ app.get('/api/session', authCtrl.getUser)
 app.get('/api/signout', authCtrl.signout)
 
 // user library
-app.post('/api/addBook', libraryCtrl.addBook)
+app.post('/library/addBook', libraryCtrl.addBook);
+app.post('/library/recommendBook', libraryCtrl.recommendBook);
 
 
 massive(SERVER_CONNECTION)
