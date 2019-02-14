@@ -4,8 +4,29 @@ import { Link, withRouter } from "react-router-dom";
 import "./Nav.scss";
 
 class Nav extends Component {
+  state = {
+    firstName: ''
+  }
+
+  componentDidMount = async () => {
+    await axios.get('/api/session')
+    .then (res => {
+      this.setState({firstName: res.data.firstName})
+    })
+
+  }
+
+  signout = () => {
+    axios.get('/api/signout')
+    .then(res => {
+      console.log(res)
+      this.props.history.push('/')
+    })
+  }
+
   render() {
     const { pathname } = this.props.location;
+    const {firstName} = this.state
 
     const navBarStyle =
       pathname === "/" || pathname === "/book" || pathname === "/club"
@@ -20,13 +41,13 @@ class Nav extends Component {
         ? "WELCOME!"
         : pathname === "/my-library"
         ? "My Library"
-        : pathname === "/my-club"
+        : pathname === "/my-clubs"
         ? "My Clubs"
         : pathname === "/browse"
         ? "Book Store"
-        : pathname === "/friend"
+        : pathname === "/friends"
         ? "My Friends"
-        : pathname === "/setting"
+        : pathname === "/settings"
         ? "Settings"
         : null;
 
@@ -40,7 +61,8 @@ class Nav extends Component {
             <p>{title}</p>
           </div>
           <div className="welcome">
-            <p>Hi, Oscar!</p>
+            <p>{`Hi, ${firstName}!`}</p>
+            <i class="fas fa-sign-out-alt" onClick={() => this.signout()}></i>
           </div>
         </div>
         <div className={navBarStyle}>

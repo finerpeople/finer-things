@@ -22,8 +22,9 @@ app.use(session({
 
 // Auth
 app.post('/api/register', authCtrl.register)
-app.post('/api/login', authCtrl.register)
-
+app.post('/api/login', authCtrl.login)
+app.get('/api/session', authCtrl.getUser)
+app.get('/api/signout', authCtrl.signout)
 
 massive(SERVER_CONNECTION)
 	.then(connection => {

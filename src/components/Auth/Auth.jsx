@@ -17,6 +17,16 @@ export default class Auth extends Component {
     })
   }
 
+  login = () => {
+    const {userEmail, password} = this.state
+    axios.post('/api/login', {userEmail, password})
+    .then(res => {
+      if(res.data.loggedIn) {
+        this.props.history.push('/my-library')
+      }
+    })
+  }
+
   createUser = async () => {
     const {firstName, lastName, userEmail, password} = this.state
     const res = await axios.post('/api/register', {firstName, lastName, userEmail, password})
@@ -25,9 +35,20 @@ export default class Auth extends Component {
     }
   }
 
+  enterKey = (prop, e) => {
+    const code = e.keyCode || e.which
+    if(code === 13) {
+      if(prop === 'login') {
+        this.login()
+      }
+      if(prop === 'register') {
+        this.register()
+      }
+    }
+  }
+
   render() {
     const {userEmail, password, firstName, lastName, login} = this.state
-    console.log(userEmail, password, firstName, lastName)
 
     return (
       <div id="auth-main">
@@ -36,22 +57,20 @@ export default class Auth extends Component {
           <div className="auth-right-bg" />
         </div>
         <p>The Finer Things</p>
-        /////////////////////////////////////////////////////////////////////////////
         <div id={!login ? "login-none" : "login-container"}>
           <div id="login-row">
             <input type="email" placeholder="Email" onChange={e => this.handleChange('userEmail', e)}/>
           </div>
           <div id="login-row">
-            <input type="password" placeholder="Password"  onChange={e => this.handleChange('password', e)}/>
+            <input type="password" placeholder="Password"  onChange={e => this.handleChange('password', e)} onKeyPress={(e) => this.enterKey('login', e)}/>
           </div>
           <div id="login-row">
-            <button>Login</button>
+            <button onClick={() => this.login()}>Login</button>
             <p>
               Don't have an account? <button onClick={e => this.setState({login: false})}>Register now!</button>
             </p>
           </div>
         </div>
-        /////////////////////////////////////////////////////////////////////////////
         <div id={login ? "register-none" : "register-container"}>
           <div id="register-row">
             <input type="text" placeholder="First Name"  onChange={e => this.handleChange('firstName', e)}/>
@@ -63,7 +82,7 @@ export default class Auth extends Component {
             <input type="email" placeholder="Email"  onChange={e => this.handleChange('userEmail', e)}/>
           </div>
           <div id="register-row">
-            <input type="password" placeholder="Password"  onChange={e => this.handleChange('password', e)}/>
+            <input type="password" placeholder="Password"  onChange={e => this.handleChange('password', e)} onKeyPress={(e) => this.enterKey('register', e)}/>
           </div>
           <div id="register-row">
             <button onClick={() => this.createUser()}>Create Account</button>
