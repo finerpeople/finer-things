@@ -23,15 +23,20 @@
   background-color: $lightBlue;
   grid-row: 1 / span 3;
   height: 150%;
+  width: 150%;
   transform: rotate(15deg);
-  border-radius: 3px;
+  margin-left: -250px;
+  margin-top: -250px;
 }
 .auth-right-bg {
   background-color: $tan;
-  grid-column: 3;
+  grid-column: 2 span 2;
   grid-row: 2 / span 2;
+  height: 350%;
+  width: 200%;
+  margin-left: -150px;
+  margin-top: -800px;
   transform: rotate(-45deg);
-  border-radius: 3px;
 }
 
 #auth-main > p {
@@ -39,7 +44,7 @@
   top: -0.1em;
   color: $darkerGrey;
   font-family: $appName;
-  font-size: 2.5em;
+  font-size: 3em;
   font-weight: 700;
   letter-spacing: 0.2em;
 }
@@ -53,7 +58,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: #383838cc;
+  background-color: $darkerGrey;
   width: 400px;
   height: 300px;
   border-radius: 3px;
@@ -106,7 +111,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: #383838cc;
+  background-color: $darkerGrey;
   width: 400px;
   height: 300px;
   border-radius: 3px;
@@ -117,4 +122,35 @@
   align-items: center;
   flex-wrap: wrap;
   width: 15em;
+}
+#register-row > button {
+  margin: 0.5em 0;
+  height: 2.3em;
+  width: 100%;
+  background-color: $tan;
+  border: none;
+  border-radius: 1px;
+  font-family: $bodyFontFamily;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+////////////////////////////////////////////////////////////////////
+@media (max-width: 550px) {
+  #login-container, #register-container {
+    width: 300px;
+    height: 240px;
+  }
+  #login-row, #register-row {
+    width: 12em;
+  }
+  #auth-main input {
+    margin: 0.4em 0;
+    height: 2em;
+  }
+  #login-row p {
+    margin: 0px;
+  }
+  #auth-main > p {
+    font-size: 2em;
+  }
 }

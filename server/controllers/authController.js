@@ -3,8 +3,34 @@ const bcrypt = require("bcryptjs");
 module.exports = {
   login: async (req, res) => {
     const { session } = req;
-    const { firstName, lastName, userEmail, password } = req.body;
+    const { userEmail, password } = req.body;
     const db = req.app.get("db");
+    const userArray = await db.user.get_user({ userEmail });
+    if (!userArray[0]) {
+      return res.status(401).send({ message: "Email not found" });
+    }
+    const compareHash = bcrypt.compareSync(password, hash);
+    if (!compareHash) {
+      return res.status(401).send({ message: "Password incorrect" });
+    }
+    const {
+      user_id,
+      first_name,
+      last_name,
+      email,
+      hash,
+      profile_pic
+    } = userArray[0];
+    session.user = {
+      id: user_id,
+      firstName: first_name,
+      lastName: last_name,
+      email,
+      profilePic: profile_pic
+    };
+    res
+      .status(200)
+      .send({ message: "logged in", userData: session.user, loggedIn: true });
   },
   register: async (req, res) => {
     const { session } = req;
@@ -38,8 +64,11 @@ module.exports = {
       loggedIn: true
     });
   },
-  signout: (req, res) => {},
+  signout: (req, res) => {
+    req.session.destroy();
+    res.status(200).send({ message: "Logged out" });
+  },
   getUser: (req, res) => {
-    res.status(200).send(req.session.user);
+    return res.status(200).send(req.session.user);
   }
 };
