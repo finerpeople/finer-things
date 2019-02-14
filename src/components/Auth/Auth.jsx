@@ -25,46 +25,38 @@ export default class Auth extends Component {
       if (res.data.loggedIn) {
         this.props.history.push("/my-library");
       }
-      console.log(res.data)
-    const id = res.data.id
+      console.log(res.data);
+      const id = res.data.id;
       if (res.data.message === "Account suspended") {
         Swal.fire({
-          title: 'Wha-oohh!',
-          text: "It looks like your account was deleted.  Would you like to restore it?",
-          type: 'warning',
+          title: "Wha-oohh!",
+          text:
+            "It looks like your account was deleted.  Would you like to restore it?",
+          type: "warning",
           showCancelButton: true,
-          confirmButtonColor: '#3085d6',
-          cancelButtonColor: '#d33',
-          confirmButtonText: 'Yes, restore it!'
-        }).then((result) => {
+          confirmButtonColor: "#3085d6",
+          cancelButtonColor: "#d33",
+          confirmButtonText: "Yes, restore it!"
+        }).then(result => {
           if (result.value) {
             Swal.fire(
-              'Restored!',
-              'Your account has been restored.',
-              'success'
-            )
-            axios.put(`/api/updateAccountStatus/${id}`) 
+              "Restored!",
+              "Your account has been restored.",
+              "success"
+            );
+            axios.put(`/api/updateAccountStatus/${id}`);
             this.props.history.push("/my-library");
           }
-        })
+        });
       }
     } catch {
       Swal.fire({
-<<<<<<< HEAD
-        type: 'error',
-        title: 'Oops...',
-        text: 'Incorrect Email or Password. Please try again.',
-        footer: '<a href>Why do I have this issue?</a>'
-      })
-    })
-=======
         type: "error",
         title: "Oops...",
-        text: "Inccorect Email or Password. Please try again.",
+        text: "Incorrect Email or Password. Please try again.",
         footer: "<a href>Why do I have this issue?</a>"
       });
     }
->>>>>>> master
   };
 
   register = async () => {
