@@ -46,27 +46,27 @@ export default class Book extends Component {
 
   render() {
     return (
-      <div className="book-info-main">
-        <div className="book-info-img">
-          <img src={this.state.image} alt="book cover" />
-          <StarRatingComponent
-            name="rating"
-            editing={false}
-            starCount={5}
-            emptyStarColor={"#5d5c61"}
-            value={this.state.rating}
-          />
-        </div>
-        <div className="book-info-words">
-          <div className="book-info-header">
-            <h1>{this.state.title}</h1>
-            <h2>{this.state.author}</h2>
+      <div className='book-info-main flexed'>
+        <div className='modal-top flexed'>
+          <div className='book-info-img flexed'>
+            <img src={this.state.image} alt='book cover' />
           </div>
-          {/* <div className='book-info-description'> */}
-          <p>{this.state.description}</p>
-          {/* </div> */}
+          <div className='book-info-header flexed'>
+            <p className='book-title'>{this.state.title}</p>
+            <p className='book-author'>{this.state.author}</p>
+            <StarRatingComponent
+              name="rating"
+              editing={false}
+              starCount={5}
+              emptyStarColor={'#5d5c61'}
+              value={this.state.rating}
+            />
+          </div>
+        </div>
+        <div className='book-info-summary flexed'>
+          <p className='book-summary'>{this.state.description}</p>
         </div>
       </div>
-    );
-  }
+    )
+}
 }

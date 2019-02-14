@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
-import "./Browse.scss";
-import './Card.scss'
 import Book from '../Book/Book';
+
+
+import "./Browse.scss";
+import './Card.scss';
+import './Search.scss';
 
 
 export default class Card extends Component {
@@ -17,7 +20,6 @@ export default class Card extends Component {
     }
 
     render() {
-        console.log(this.state.bookModal)
 
         return (
             <div className='card-main'>
@@ -32,13 +34,25 @@ export default class Card extends Component {
                 ) : (
                         null
                     )}
-                <div key={this.props.i} className='br-single-cover'>
-                    <img src={this.props.img} alt='book cover' className='br-book-cover' onClick={this.toggle} />
-                    <div className='br-icon-banner'>
-                        <i className="fas fa-plus br-add-to-library"></i>
-                        <i className="fas fa-share br-search-share"></i>
+                {this.props.search ? (
+                    <div key={this.props.i} className='searched-single-book'>
+                        <img src={this.props.img} alt='book cover' className='searched-book-cover' onClick={this.toggle} />
+                        <div className='icon-banner'>
+                            <i className="fas fa-plus add-to-library"></i>
+                            <i className="fas fa-share search-share"></i>
+                        </div>
                     </div>
-                </div>
+
+                ) : (
+
+                        <div key={this.props.i} className='br-single-cover'>
+                            <img src={this.props.img} alt='book cover' className='br-book-cover' onClick={this.toggle} />
+                            <div className='br-icon-banner'>
+                                <i className="fas fa-plus br-add-to-library"></i>
+                                <i className="fas fa-share br-search-share"></i>
+                            </div>
+                        </div>
+                    )}
             </div>
         )
 

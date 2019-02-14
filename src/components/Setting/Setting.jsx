@@ -1,21 +1,8 @@
 import React, { Component } from "react";
 import axios from "axios";
 import "./Setting.scss";
-import { TextField } from "@material-ui/core";
-// import PropTypes from 'prop-types';
-import { withStyles } from "@material-ui/core/styles";
-import Button from "@material-ui/core/Button";
 
-const styles = theme => ({
-  button: {
-    margin: theme.spacing.unit
-  },
-  input: {
-    display: "none"
-  }
-});
-
-class Setting extends Component {
+export default class Setting extends Component {
   constructor(props) {
     super(props);
 
@@ -70,9 +57,15 @@ class Setting extends Component {
     const res = await axios.put(`/api/updateAccountStatus/${id}`)
     this.props.history.push("/");
   }
+  edit = () => {
+    if (!this.state.editDone) {
+      this.setState({ editable: true, editDone: true });
+    } else {
+      this.setState({ editable: false, editDone: false });
+    }
+  };
 
   render() {
-    const { classes } = this.props;
     return (
       <div className="mainContainer">
         <div className="profilePicContainer">
@@ -80,6 +73,7 @@ class Setting extends Component {
             className="profileImg"
             src="https://vignette.wikia.nocookie.net/theoffice/images/2/25/Oscar_Martinez.jpg/revision/latest/scale-to-width-down/2000?cb=20170701085818"
             alt="Oscar"
+            //TODO render this.state.image here
           />
           <div className="editProfileBtns">
             <div>
@@ -129,4 +123,4 @@ class Setting extends Component {
     );
   }
 }
-export default withStyles(styles)(Setting);
+// export default withStyles(styles)(Setting);

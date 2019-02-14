@@ -1,16 +1,29 @@
 @import '../../style.scss';
 
 .book-modal-container {
-    background-color: aquamarine;
+    background-color: $darkBlue;
     position: absolute;
     left: 30rem;
     z-index: 1;
-    height: 36rem;
-    width: 39rem;
+    height: $modalHeight;
+    width: $modalWidth;
     border-radius: 10px;
-
+    color: $lighterGrey;
 }
 
-.card-main {
-    // position: relative;
+.close-book-modal {
+    cursor: pointer;
+    color: $lighterGrey;
+    transition: color .2s;
+    font-weight: 900;
+    position: absolute;
+    right: 1.1rem;
+    top: 1rem;
+    border: none;
+    background: none;
+    font-size: 1rem;
+}
+
+.close-book-modal:hover {
+    color: $darkerGrey;
 }
