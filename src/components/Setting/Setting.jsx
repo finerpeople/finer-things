@@ -141,7 +141,23 @@ export default class Setting extends Component {
             </div>
             <br />
 
-            <div className="deleteBtn">
+            
+            <input
+              value={this.state.password}
+              className="inputFields"
+              type="text"
+              placeholder="Password"
+              onChange={e => this.setState({ password: e.target.value })}
+            />
+            <br />
+            <div className="editBtns">
+              <span className="makeChangesText">Want to make changes?</span>
+              <i className="fas fa-pen fa-md" />
+            </div>
+            <div className="saveDeleteBtns">
+              <button type="button" id="settings-Btns">
+                Save
+              </button>
               <button
                 type="button"
                 id="settings-Btns"

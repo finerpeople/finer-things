@@ -3,6 +3,7 @@ const express = require('express')
 const massive = require('massive')
 const session = require('express-session')
 const bcrypt = require('bcryptjs')
+// const controller = require('./controller');
 
 const app = express()
 const {SERVER_PORT, SERVER_CONNECTION, SESSION_SECRET} = process.env
@@ -32,6 +33,8 @@ app.get('/api/signout', authCtrl.signout)
 // user library
 app.post('/library/addBook', libraryCtrl.addBook);
 app.post('/library/recommendBook', libraryCtrl.recommendBook);
+app.get('/library/allBooks/:user_id', libraryCtrl.allBooks);
+app.get('/library/getOneBook/:user_id&:isbn', libraryCtrl.getOneBook)
 
 // Settings
 app.get('/api/userData/:id', settingsCtrl.getUserData)

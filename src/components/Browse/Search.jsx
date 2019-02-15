@@ -13,8 +13,19 @@ export default class Search extends Component {
     state = {
         userInput: '',
         searchedBooks: [],
-        toggleSearch: false
+        toggleSearch: false,
+        user_id: 0
     }
+    async componentDidMount() {
+        await this.getSession();    
+    }
+
+    getSession = async () => {
+        const res = await axios.get("/api/session");
+        this.setState({
+          user_id: res.data.id
+        })
+      };
 
     handleChange = (prop, val) => {
         this.setState({
@@ -52,6 +63,7 @@ export default class Search extends Component {
                         img={book.volumeInfo.imageLinks.thumbnail}
                         isbn={book.volumeInfo.industryIdentifiers[0].identifier}
                         search={true}
+                        user_id={this.state.user_id}
                         />
                     ) : (null)
                     }

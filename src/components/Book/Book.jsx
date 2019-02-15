@@ -12,13 +12,15 @@ export default class Book extends Component {
       title: "",
       author: [],
       description: "",
-      rating: 0
+      rating: 0,
+      user_id: 0,
+      libraryButton: "Add to My Library"
     };
   }
 
   componentDidMount = async () => {
     this.getSession();
-    window.scrollTo(0, 0);
+    // window.scrollTo(0, 0);
     // let { isbn } = this.props.match.params;
     const res = await axios.get(
       `https://www.googleapis.com/books/v1/volumes?q=isbn:${
@@ -34,15 +36,31 @@ export default class Book extends Component {
       rating: res.data.items[0].volumeInfo.averageRating,
       category: res.data.items[0].volumeInfo.categories[0]
     });
-    console.log(this.state);
+    // console.log(this.state);
+    this.inLibrary()
   };
 
   getSession = async () => {
     const res = await axios.get("/api/session");
+    this.setState({ user_id: res.data.id })
     if (!res.data.loggedIn) {
       this.props.history.push("/");
     }
   };
+
+  inLibrary = async () => {
+    let res = await axios.get(`/library/getOneBook/${this.state.user_id}&${this.state.isbn}`)
+    console.log(res.data)
+    if(res.data.length === 0){
+      this.setState({
+        libraryButton: "Add to My Library"
+      })
+    } else {
+      this.setState({
+        libraryButton: "Already in My Library"
+      })
+    }
+  }
 
   render() {
     return (
@@ -61,6 +79,7 @@ export default class Book extends Component {
               emptyStarColor={'#5d5c61'}
               value={this.state.rating}
             />
+            <button onClick={this.props.addToLibrary}>{this.state.libraryButton}</button>
           </div>
         </div>
         <div className='book-info-summary flexed'>
