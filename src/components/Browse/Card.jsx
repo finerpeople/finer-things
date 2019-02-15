@@ -11,12 +11,19 @@ import axios from 'axios';
 export default class Card extends Component {
     state = {
         bookModal: false,
-        isbn: this.props.isbn
+        isbn: this.props.isbn,
+        moreModal: false
     }
 
     toggle = () => {
         this.setState({
             bookModal: !this.state.bookModal
+        })
+    }
+
+    moreToggle = () => {
+        this.setState({
+            moreModal: !this.state.moreModal
         })
     }
 
@@ -38,6 +45,7 @@ export default class Card extends Component {
             author: book.authors[0],
             category: book.categories[0]
         })
+        this.toggle()
     }
 
     recommendToFriend = async () => {
@@ -51,6 +59,11 @@ export default class Card extends Component {
             author: book.authors[0],
             category: book.categories[0]
         })
+    }
+
+    deleteBook = () => {
+        this.props.deleteBook(this.props.user_library_id)
+        this.moreToggle()
     }
 
     render() {
@@ -73,6 +86,21 @@ export default class Card extends Component {
                         <div key={this.props.i} className='searched-single-book'>
                             <img src={this.props.img} alt='book cover' className='searched-book-cover' onClick={this.toggle} />
                             <div className='icon-banner'>
+                            <i className="fas fa-ellipsis-h dots" onClick={this.moreToggle}></i>
+                                    {this.state.moreModal ? (
+                                        <div className='more-modal' 
+                                        onMouseLeave={this.moreToggle}
+                                        >
+                                        <div className='more-delete flexed' onClick={this.deleteBook}>
+                                            <p className='more-delete-text'>Delete</p>
+                                            <i className="far fa-trash-alt book-delete"></i>                                            
+                                        </div>
+                                        <div className='more-share flexed'>
+                                            <p className='more-share-text'>Share</p>
+                                            <i className="fas fa-share my-lib-share"></i> 
+                                        </div>
+                                        </div>
+                                    ) : null}
                                 {/* <i className="fas fa-plus add-to-library"
                                     onClick={this.addToLibrary}></i>
                                 <i className="fas fa-share search-share"

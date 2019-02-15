@@ -32,8 +32,9 @@ export default class MyLibrary extends Component {
   };
 
   async deleteBook(user_library_id){
-    
+
     await axios.delete(`/library/removeBook/${user_library_id}&${this.state.user_id}`)
+
     this.getMyLibrary()
   }
 
@@ -48,10 +49,11 @@ export default class MyLibrary extends Component {
             isbn={book.book_isbn}
             user_id={this.state.user_id}
             search={true}
-            deleteBook = {this.deleteBook}
+            myLibrary={true}
+            deleteBook = {() => this.deleteBook(book.user_library_id)}
           />
-          {console.log(book.user_library_id)}
-          <button onClick={() => this.deleteBook(book.user_library_id)}>delete</button>
+          {/* {console.log(book.user_library_id)} */}
+          {/* <button onClick={() => this.deleteBook(book.user_library_id)}>delete</button> */}
         </div>
       )
     })
