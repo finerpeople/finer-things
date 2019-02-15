@@ -17,16 +17,25 @@
     font-family: $titleFontFamily;
 }
 #settings-profileContainer {
-    background-color: tan;
+    // background-color: tan;
     width: 50%;
     display: flex;
-    flex-direction: column;
-    justify-content: center;  
-    align-content: center; 
+    justify-content: center; 
+    align-items: center; 
     font-family: $titleFontFamily;
     color: $white; 
     text-align: center; 
     position: relative; 
+}
+.colorContainer {
+    background-color: $darkGrey;
+    width: 70%;
+    height: 70%;
+    // margin-top: 3em; 
+    position: absolute; 
+    flex-direction: column;
+    justify-content: center;  
+    align-items: center; 
 }
 .settings-AboutWrapper {
     height: 60%;
@@ -45,6 +54,7 @@
     height: 19em;
     width: 16.5em;
     position: relative; 
+    margin-top: 1em; 
 }
 .editProfileBtns {
     height: 2.5em;
@@ -58,6 +68,7 @@
     opacity: 0.8
 }
 
+
 //////////////TODO EDIT PROFILE CONTAINER////////////////////////
 #settings-editProfileContainer {
     // background-color: blue; 
@@ -70,7 +81,7 @@
 #settings-inputFields {
     background-color: $darkGrey; 
     width: 70%;
-    height: 50%;
+    height: 70%;
     display: flex;
     flex-direction: column; 
     justify-content: center; 

@@ -77,7 +77,7 @@ export default class Setting extends Component {
     return (
       <div id="settings-mainContainer">
         <div id="settings-profileContainer">
-          <div>
+          <div className="colorContainer">
             <img
               id="settings-profileImg"
               src="https://vignette.wikia.nocookie.net/theoffice/images/2/25/Oscar_Martinez.jpg/revision/latest/scale-to-width-down/2000?cb=20170701085818"
@@ -117,9 +117,9 @@ export default class Setting extends Component {
         <div id="settings-editProfileContainer">
           <div id="settings-inputFields">
             <p id="settings-greeting">
-              Hi (name), you can edit your profile here
+              Hi (name), make any profile changes here
             </p>
-            <form action="">
+            <form action="" id="settings-form">
               <div>
                 About Me:{" "}
                 <textarea name="about" id="aboutMeText" cols="50" rows="3" />
