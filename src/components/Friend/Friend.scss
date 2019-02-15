@@ -1,2 +1,33 @@
-@import '../../style.scss';
+@import "../../style.scss";
 
+#friend {
+  display: flex;
+  justify-content: center;
+  margin-left: $navBarWidth;
+  margin-top: $headerHeight;
+  width: calc(100vw - $navBarWidth);
+}
+#friend-header {
+  display: grid;
+  grid-template-columns: repeat(9, 1fr);
+  margin-top: 2em;
+}
+.friend-header-input {
+  grid-column: 8;
+  height: 2em;
+  width: 16em;
+  border: none;
+  box-shadow: 0px 1px 10px $buttonShadow;
+  border-radius: 2px;
+  font-family: $bodyFontFamily;
+  font-size: $bodyFontSize;
+  padding-left: 0.5em;
+}
+.friend-header-btn {
+  display: flex;
+  align-items: center;
+  grid-column: 9;
+  margin-left: -1.3em;
+  font-size: 1.3em;
+  color: $lightGrey;
+}
