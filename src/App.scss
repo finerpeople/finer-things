@@ -1,5 +1,9 @@
 @import "./style.scss";
 
+.App {
+  // overflow: scroll;
+}
+
 .app-input-container {
   grid-column: 8;
   display: flex;
@@ -25,4 +29,17 @@
   font-size: 1.3em;
   color: $lightGrey;
   width: 3em;
+}
+
+::-webkit-scrollbar {
+  width: 0.5em;
+}
+::-webkit-scrollbar-thumb {
+  border-radius: 2px;
+  background: $tan;
+}
+::-webkit-scrollbar-button:vertical:decrement {
+  background: $darkBlue;
+  height: 4.5em;
+  width: 0;
 }
