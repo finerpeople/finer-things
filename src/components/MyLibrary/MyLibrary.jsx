@@ -92,7 +92,6 @@ export default class MyLibrary extends Component {
       <div className='my-lib-container'>
         <div className='my-lib-title'>My Books</div>
         <div>
-          <button onClick={() => this.sortBooks("book_title")}>sort</button>
           <select name="sort" id="sort" onChange={(e) => this.sortBooks(e.target.value)}>
             <option value="">Sort Options</option>
             <option value="book_title">Book Title</option>
