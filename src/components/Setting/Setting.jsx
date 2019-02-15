@@ -64,7 +64,7 @@ export default class Setting extends Component {
     axios
       .put("/api/edit-profile", { email: email })
       .then(this.setState({ emailEditable: false }));
-  }
+  };
   edit = () => {
     if (!this.state.editEmailDone) {
       this.setState({ emailEditable: true, editEmailDone: true });
@@ -75,98 +75,80 @@ export default class Setting extends Component {
 
   render() {
     return (
-      <div className="mainContainer">
-        <div className="profilePicContainer">
-          <img
-            className="profileImg"
-            src="https://vignette.wikia.nocookie.net/theoffice/images/2/25/Oscar_Martinez.jpg/revision/latest/scale-to-width-down/2000?cb=20170701085818"
-            alt="Oscar"
-          />
-          <div className="editProfileBtns">
-            <div>
-              <i className="fas fa-user-edit fa-lg" />
+      <div id="settings-mainContainer">
+        <div id="settings-profileContainer">
+          <div className="colorContainer">
+            <img
+              id="settings-profileImg"
+              src="https://vignette.wikia.nocookie.net/theoffice/images/2/25/Oscar_Martinez.jpg/revision/latest/scale-to-width-down/2000?cb=20170701085818"
+              alt="Oscar"
+            />
+            <div className="editProfileBtns">
+              <div>
+                <i className="fas fa-plus" />
+              </div>
+              <div>
+                <i className="fas fa-user-edit fa-lg" />
+              </div>
+              <div>
+                <i className="far fa-trash-alt fa-lg" />
+              </div>
             </div>
-            <div className="deleteBtn">
-              <i className="far fa-trash-alt fa-lg" />
+            <div className="settings-AboutWrapper">
+            <div className="settings-aboutMe">
+              <h4 id="settingsSumTitle">About Me</h4>
+              <br/>
+              <p id="settings-summary">
+                I am an Accountant by day and an avid reader by night. When not
+                crunching numbers, I enjoy a good history or nonfiction book. I
+                despise Anne Geddes photography. 
+              </p>
+              <br/>
+              <p id="settings-email">
+                Name: {this.state.firstName} {this.state.lastName}
+              </p>
+              <br/>
+              <p id="settings-email">Email: {this.state.email}</p>
+            </div>
             </div>
           </div>
         </div>
-        <div className="lowerContainer">
-        <div id="settings-makeChanges">
-          <span className="makeChangesText">Want to make changes?</span>
-          {/* <i className="fas fa-pen fa-md" /> */}
-        </div> 
-        <div className="editTextContainer">
-          <p className="summary">
-            I am an Accountant by day and an avid reader by night. When not
-            crunching numbers, I enjoy a good history or nonfiction book. I
-            despise Anne Geddes photography.
-          </p>
-          <hr />
-          <div className="editTextContainer">
-            {this.state.emailEditable ? (
-              <div id="settings-InputBoxes">
-                <input
-                  className="inputFields"
-                  type="text"
-                  value={this.state.email}
-                    onChange={e => this.setState({ email: e.target.value })}
-                />
-                <input
-                  className="inputFields"
-                  type="password"
-                  placeholder="New password"
-                  onChange={e => this.setState({ password: e.target.value })}
-                />
-              </div>
-            ) : null}
-            <div>
-              <br />
-              <button type="button" id="settings-editBtn" onClick={this.edit}>
-                {this.state.editEmailDone
-                  ? "Cancel"
-                  : "Update Email or Password"}
-              </button>
-              <div>
-                {!this.state.editEmailDone ? null : (
-                  <button
-                    type="button"
-                    id="settings-editBtn"
-                    onClick={() => this.editProfile()}
-                  >
-                    Save
-                  </button>
-                )}
-              </div>
-            </div>
-            <br />
 
-            
-            <input
-              value={this.state.password}
-              className="inputFields"
-              type="text"
-              placeholder="Password"
-              onChange={e => this.setState({ password: e.target.value })}
-            />
-            <br />
-            <div className="editBtns">
-              <span className="makeChangesText">Want to make changes?</span>
-              <i className="fas fa-pen fa-md" />
-            </div>
-            <div className="saveDeleteBtns">
-              <button type="button" id="settings-Btns">
-                Save
-              </button>
-              <button
-                type="button"
-                id="settings-Btns"
-                onClick={() => this.deleteAccount(this.state.id)}
-              >
-                Delete Account
-              </button>
-            </div>
-            </div>
+        <div id="settings-editProfileContainer">
+          <div id="settings-inputFields">
+            <p id="settings-greeting">
+              Hi (name), make any profile changes here
+            </p>
+            <form action="" id="settings-form">
+              <div>
+                About Me:{" "}
+                <textarea name="about" id="aboutMeText" cols="50" rows="3" />
+              </div>
+              <br />
+              <div>
+                First Name: <input type="text" id="editInputs" />
+              </div>
+              <br />
+              <div>
+                Last Name: <input type="text" id="editInputs" />
+              </div>
+              <br />
+              <div>
+                Email: <input type="text" id="editInputs" />
+              </div>
+              <br />
+              Password: <input type="text" id="editInputs" />
+              <div id="settings-mainBtns">
+                <button id="settings-btns" type="button">Save Changes</button>
+                <button
+                id="settings-btns" 
+                  type="button"
+                  onClick={() => this.deleteAccount(this.state.id)}
+                >
+                  Delete Account
+                </button>
+              </div>
+            </form>
           </div>
         </div>
       </div>
