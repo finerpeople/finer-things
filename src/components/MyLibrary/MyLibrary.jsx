@@ -32,6 +32,7 @@ export default class MyLibrary extends Component {
   };
 
   async deleteBook(user_library_id){
+    
     await axios.delete(`/library/removeBook/${user_library_id}&${this.state.user_id}`)
     this.getMyLibrary()
   }
