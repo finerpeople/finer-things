@@ -136,10 +136,10 @@
   letter-spacing: .03em;
 }
 
-::-webkit-scrollbar {
+#recommend::-webkit-scrollbar, #my-friends::-webkit-scrollbar {
   width: .2em;
 }
-::-webkit-scrollbar-thumb {
+#recommend::-webkit-scrollbar-thumb, #my-friends::-webkit-scrollbar-thumb {
   width: .1em;
   height: .1em;
   border-radius: 2px;

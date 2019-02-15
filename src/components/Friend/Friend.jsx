@@ -53,6 +53,7 @@ export default class Friend extends Component {
     });
     const myRecFriends = recFriends.map((friend, i) => {
       const { first_name, last_name, profile_pic, user_id } = friend;
+      if(user_id === userId) return
       return (
         <div id="my-rec-cards">
           <div id="my-rec-card">
