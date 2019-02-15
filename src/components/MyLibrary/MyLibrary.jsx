@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import axios from "axios";
-// import Book from '../Book/Book'
 import "./MyLibrary.scss";
 import Card from "../Browse/Card";
 
@@ -18,7 +17,6 @@ export default class MyLibrary extends Component {
 
   getMyLibrary = async () => {
     let res = await axios.get(`/library/allBooks/${this.state.user_id}`)
-    // console.log(res.data)
     this.setState({
       myLibrary: res.data
     })
@@ -40,10 +38,12 @@ export default class MyLibrary extends Component {
           <Card
             i={i}
             img={book.book_img}
-            ibsn={book.book_isbn}
+            isbn={book.book_isbn}
             user_id={this.state.user_id}
             search={true}
+            myLibrary={true}
           />
+          <button>delete</button>
         </div>
       )
     })

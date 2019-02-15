@@ -25,14 +25,12 @@ export default class Card extends Component {
         &maxResults=1&langRestrict=en&fields=kind, items(id, volumeInfo/title, 
         volumeInfo/authors, volumeInfo/industryIdentifiers, 
         volumeInfo/categories, volumeInfo/imageLinks)`)
-        // console.log(res.data)
         return res.data.items[0].volumeInfo
     }
 
     addToLibrary = async () => {
         const book = await this.getSingleBook();
-        console.log(book)
-        let res = await axios.post('/library/addBook', {
+        await axios.post('/library/addBook', {
             user_id: this.props.user_id,
             isbn: this.state.isbn,
             book_img: book.imageLinks.thumbnail,
@@ -44,7 +42,7 @@ export default class Card extends Component {
 
     recommendToFriend = async () => {
         const book = await this.getSingleBook();
-        let res = await axios.post('/library/recommendBook', {
+        await axios.post('/library/recommendBook', {
             user_id: 17,
             isbn: this.state.isbn,
             friend_id: 12,
@@ -56,7 +54,6 @@ export default class Card extends Component {
     }
 
     render() {
-
         return (
             <div className='card-main'>
                 {this.state.bookModal ? (
@@ -72,15 +69,27 @@ export default class Card extends Component {
                         null
                     )}
                 {this.props.search ? (
-                    <div key={this.props.i} className='searched-single-book'>
-                        <img src={this.props.img} alt='book cover' className='searched-book-cover' onClick={this.toggle} />
-                        <div className='icon-banner'>
-                            <i className="fas fa-plus add-to-library"
-                                onClick={this.addToLibrary}></i>
-                            <i className="fas fa-share search-share"
-                                onClick={this.recommendToFriend}></i>
+                    this.props.myLibrary ? (
+                        <div key={this.props.i} className='searched-single-book'>
+                            <img src={this.props.img} alt='book cover' className='searched-book-cover' onClick={this.toggle} />
+                            <div className='icon-banner'>
+                                {/* <i className="fas fa-plus add-to-library"
+                                    onClick={this.addToLibrary}></i>
+                                <i className="fas fa-share search-share"
+                                    onClick={this.recommendToFriend}></i> */}
+                            </div>
                         </div>
-                    </div>
+                    ) : (
+                        <div key={this.props.i} className='searched-single-book'>
+                            <img src={this.props.img} alt='book cover' className='searched-book-cover' onClick={this.toggle} />
+                            <div className='icon-banner'>
+                                <i className="fas fa-plus add-to-library"
+                                    onClick={this.addToLibrary}></i>
+                                <i className="fas fa-share search-share"
+                                    onClick={this.recommendToFriend}></i>
+                            </div>
+                        </div>
+                    )
 
                 ) : (
 
