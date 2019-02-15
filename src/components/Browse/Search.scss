@@ -95,19 +95,30 @@
 }
 
 .add-to-library {
-  position: absolute;
-  left: 0.7rem;
-  color: $lighterGrey;
-  top: 0.5rem;
-  cursor: pointer;
+    position: absolute;
+    left: 0.7rem;
+    color: $lighterGrey;
+    top: 0.5rem;
+    cursor: pointer;
+    transition: color .2s;
+}
+
+.add-to-library:hover {
+    color: $darkerGrey;
 }
 
 .search-share {
-  color: $lighterGrey;
-  position: absolute;
-  right: 0.7rem;
-  top: 0.5rem;
-  cursor: pointer;
+  
+    color: $lighterGrey;
+    position: absolute;
+    right: .7rem;
+    top: .5rem;
+    cursor: pointer;
+    transition: color .2s;
+}
+
+.search-share:hover {
+    color: $darkerGrey;
 }
 
 .icon-banner {
