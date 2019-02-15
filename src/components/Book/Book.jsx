@@ -18,7 +18,7 @@ export default class Book extends Component {
 
   componentDidMount = async () => {
     this.getSession();
-    window.scrollTo(0, 0);
+    // window.scrollTo(0, 0);
     // let { isbn } = this.props.match.params;
     const res = await axios.get(
       `https://www.googleapis.com/books/v1/volumes?q=isbn:${
@@ -61,6 +61,7 @@ export default class Book extends Component {
               emptyStarColor={'#5d5c61'}
               value={this.state.rating}
             />
+            <button>Add to My Library</button>
           </div>
         </div>
         <div className='book-info-summary flexed'>
