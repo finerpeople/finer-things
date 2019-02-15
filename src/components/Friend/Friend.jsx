@@ -18,9 +18,20 @@ export default class Friend extends Component {
     return (
       <div id="friend">
         <div id="friend-header">
-          <input className="friend-header-input" type="text" placeholder='Search'/>
-          <div className='friend-header-btn'>
+          <div className="app-input-container">
+            <input className="app-input" type="text" placeholder="Search" />
+          </div>
+          <div className="friend-header-btn">
             <i className="fas fa-search" />
+          </div>
+        </div>
+        {/* ///////////////////////////////////////////////////// */}
+        <div id='friend-body'>
+          <div id="recommend">
+            <h4>Recomendations</h4>
+          </div>
+          <div id="my-friends">
+            <h4>Friends</h4>
           </div>
         </div>
       </div>

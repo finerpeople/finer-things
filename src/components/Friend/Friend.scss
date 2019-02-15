@@ -2,27 +2,21 @@
 
 #friend {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
   margin-left: $navBarWidth;
   margin-top: $headerHeight;
-  width: calc(100vw - $navBarWidth);
+  width: calc(100vw - 3.6em);
+  height: calc(100vh - 4.5em);
+  box-sizing: border-box;
 }
+////////////////////  Header  //////////////////////
 #friend-header {
   display: grid;
   grid-template-columns: repeat(9, 1fr);
   margin-top: 2em;
 }
-.friend-header-input {
-  grid-column: 8;
-  height: 2em;
-  width: 16em;
-  border: none;
-  box-shadow: 0px 1px 10px $buttonShadow;
-  border-radius: 2px;
-  font-family: $bodyFontFamily;
-  font-size: $bodyFontSize;
-  padding-left: 0.5em;
-}
+
 .friend-header-btn {
   display: flex;
   align-items: center;
@@ -30,4 +24,27 @@
   margin-left: -1.3em;
   font-size: 1.3em;
   color: $lightGrey;
+}
+////////////////////////  Body  ///////////////////////
+#friend-body {
+  display: flex;
+  justify-content: space-between;
+  height: calc(100vh - 8.7em);
+  width: calc(100vw - 3.6em);
+  padding: 2.2em 2.4em;
+  box-sizing: border-box;
+}
+#recommend {
+  width: calc(30%);
+  height: 100%;
+  box-shadow: 0px 1px 10px $buttonShadow;
+  border-radius: 2px;
+  font-family: $titleFontFamily;
+}
+#my-friends {
+  width: 65%;
+  height: 100%;
+  box-shadow: 0px 1px 10px $buttonShadow;
+  border-radius: 2px;
+  font-family: $titleFontFamily;
 }

@@ -79,23 +79,25 @@
   color: white;
 }
 #auth-main input {
-  margin: 0.8em 0;
+  margin: 0.4em 0;
   height: $inputHeight;
   width: 100%;
-  border-radius: 1px;
+  border-radius: 2px;
   border: none;
+  font-size: .8em;
   font-family: $bodyFontFamily;
+  padding-left: .5em;
 }
 
 #login-row button {
-  margin: 0.5em 0;
+  margin: 1em 0;
   height: 2.3em;
   width: 100%;
   background-color: $tan;
   border: none;
-  border-radius: 1px;
+  border-radius: 2px;
   font-family: $bodyFontFamily;
-  font-weight: 700;
+  font-weight: 600;
   letter-spacing: 1px;
 }
 #login-row p > button {

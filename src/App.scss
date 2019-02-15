@@ -1,0 +1,19 @@
+@import "./style.scss";
+
+.app-input-container {
+  grid-column: 8;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.app-input {
+  height: 2em;
+  width: 16em;
+  border: none;
+  box-shadow: 0px 1px 10px $buttonShadow;
+  border-radius: 2px;
+  font-family: $bodyFontFamily;
+  font-size: $bodyFontSize;
+  padding-left: 0.5em;
+  margin-left: 33em;
+}
