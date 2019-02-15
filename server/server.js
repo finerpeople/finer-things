@@ -12,6 +12,7 @@ const {SERVER_PORT, SERVER_CONNECTION, SESSION_SECRET} = process.env
 const authCtrl = require('./controllers/authController');
 const libraryCtrl = require('./controllers/libraryController');
 const settingsCtrl = require('./controllers/settingsController')
+const friendsCtrl = require('./controllers/friendsController')
 
 // Middleware
 const userInSession = require('./controllers/middleware/userInSession')
@@ -40,6 +41,10 @@ app.get('/library/getOneBook/:user_id&:isbn', libraryCtrl.getOneBook)
 app.get('/api/userData/:id', settingsCtrl.getUserData)
 app.put('/api/updateAccountStatus/:id', settingsCtrl.updateAccStatus)
 app.put('/api/edit-profile', settingsCtrl.editProfile) 
+
+// Friends
+app.get('/api/friendsData/:id', friendsCtrl.getFriends)
+app.get('/api/recFriendsData/:id', friendsCtrl.getRecFriends)
 
 
 massive(SERVER_CONNECTION)

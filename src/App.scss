@@ -1,5 +1,8 @@
 @import "./style.scss";
 
+.App {
+
+}
 .app-input-container {
   grid-column: 8;
   display: flex;
@@ -26,3 +29,5 @@
   color: $lightGrey;
   width: 3em;
 }
+
+
