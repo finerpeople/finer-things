@@ -35,16 +35,18 @@ export default class MyLibrary extends Component {
     }
     // console.log(key)
     return function (a, b) {
+      console.log(a , b)
       if (sortOrder == -1) {
-        return b[key].localeCompare(a[key]);
+        return b[key].toString().localeCompare(a[key].toString());
       } else {
-        return a[key].localeCompare(b[key]);
+        return a[key].toString().localeCompare(b[key].toString());
       }
     }
   }
 
   sortBooks = async (sortOrder) => {
     console.log(sortOrder)
+    console.log(this.state.myLibrary)
     let sortedArray = [...this.state.myLibrary]
     await sortedArray.sort(this.dynamicSort(sortOrder))
     this.setState({
@@ -95,8 +97,8 @@ export default class MyLibrary extends Component {
             <option value="">Sort Options</option>
             <option value="book_title">Book Title</option>
             <option value="book_author">Author</option>
-            <option value="-book_rating">Rating High to Low</option>
-            <option value="book_rating">Rating Low to High</option>
+            <option value="-user_rating">Rating High to Low</option>
+            <option value="user_rating">Rating Low to High</option>
             <option value="-date_added">Newest Added</option>
             <option value="date_added">Oldest Added</option>
           </select>
