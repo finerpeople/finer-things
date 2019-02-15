@@ -8,10 +8,10 @@ module.exports = {
             user_id,
             isbn
         })
-        if(book.length > 0){
+        if (book.length > 0) {
             // console.log('book exists')
             // if in library return message
-            res.status(200).send({message: "inLibrary"});
+            res.status(200).send({ message: "inLibrary" });
         } else {
             // else add to library
             let response = await db.user_library.addBook({
@@ -33,11 +33,11 @@ module.exports = {
         let book = await db.user_library.getOneBook({
             user_id,
             isbn
-        }) 
-        if(book.length > 0){
+        })
+        if (book.length > 0) {
             // console.log('book exists')
             // if in library return message
-            res.status(200).send({message: "inLibrary"});
+            res.status(200).send({ message: "inLibrary" });
         } else {
             // else add to friends library
             let response = await db.user_library.recommendBook({
@@ -55,25 +55,35 @@ module.exports = {
     allBooks: async (req, res) => {
         const { user_id } = req.params;
         const db = req.app.get('db');
-        let bookList = await db.user_library.getUserLibrary({user_id});
+        let bookList = await db.user_library.getUserLibrary({ user_id});
         res.status(200).send(bookList)
-     },
-     getOneBook: async (req, res) => {
-         const { user_id, isbn } = req.params;
-         const db = req.app.get('db');
-         let book = await db.user_library.getOneBook({
+    },
+    getOneBook: async (req, res) => {
+        const { user_id, isbn } = req.params;
+        const db = req.app.get('db');
+        let book = await db.user_library.getOneBook({
             user_id,
             isbn
-         })
-         res.status(200).send(book)
-     },
-     removeBook: async (req, res) => {
-         const { user_library_id, user_id } = req.params;
-         const db = req.app.get('db');
-         let removedBook = await db.user_library.removeBook({
-             user_library_id,
-             user_id
-         })
-         res.status(200).send(removedBook)
-     }
+        })
+        res.status(200).send(book)
+    },
+    removeBook: async (req, res) => {
+        const { user_library_id, user_id } = req.params;
+        const db = req.app.get('db');
+        let removedBook = await db.user_library.removeBook({
+            user_library_id,
+            user_id
+        })
+        res.status(200).send(removedBook)
+    },
+    updateRating: async (req, res) => {
+        const { user_rating, user_library_id, user_id } = req.params;
+        const db = req.app.get('db');
+        let updated = await db.user_library.updateRating({
+            user_rating, 
+            user_library_id,
+            user_id
+        })
+        res.status(200).send(updated)
+    }
 }
