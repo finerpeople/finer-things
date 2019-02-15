@@ -66,5 +66,14 @@ module.exports = {
             isbn
          })
          res.status(200).send(book)
+     },
+     removeBook: async (req, res) => {
+         const { user_library_id, user_id } = req.params;
+         const db = req.app.get('db');
+         let removedBook = await db.user_library.removeBook({
+             user_library_id,
+             user_id
+         })
+         res.status(200).send(removedBook)
      }
 }

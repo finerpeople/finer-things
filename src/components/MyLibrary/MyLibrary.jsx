@@ -33,17 +33,26 @@ export default class MyLibrary extends Component {
     }
   };
 
+  async deleteBook(user_library_id){
+    await axios.delete(`/library/removeBook/${user_library_id}&${this.state.user_id}`)
+    this.getMyLibrary()
+  }
+
   render() {
     let displayBooks = this.state.myLibrary.map((book, i) => {
       return (
         <div key={i}>
           <Card
             i={i}
+            user_library_id={book.user_library_id}
             img={book.book_img}
-            ibsn={book.book_isbn}
+            isbn={book.book_isbn}
             user_id={this.state.user_id}
             search={true}
+            deleteBook = {this.deleteBook}
           />
+          {console.log(book.user_library_id)}
+          <button onClick={() => this.deleteBook(book.user_library_id)}>delete</button>
         </div>
       )
     })
