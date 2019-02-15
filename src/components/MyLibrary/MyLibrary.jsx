@@ -59,7 +59,7 @@ export default class MyLibrary extends Component {
     })
     return (
       <div className='my-lib-container'>
-        <div className='my-lib-title'>My Library</div>
+        <div className='my-lib-title'>My Books</div>
         <div className='my-lib-list'>{displayBooks}</div>
       </div>
     );
