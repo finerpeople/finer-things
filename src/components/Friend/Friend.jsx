@@ -21,7 +21,7 @@ export default class Friend extends Component {
           <div className="app-input-container">
             <input className="app-input" type="text" placeholder="Search" />
           </div>
-          <div className="friend-header-btn">
+          <div className="search-input-btn">
             <i className="fas fa-search" />
           </div>
         </div>

@@ -85,7 +85,7 @@ export default class Search extends Component {
                   value={this.state.userInput}
                 />
               </div>
-              <div className="browse-header-btn">
+              <div className="search-input-btn">
                 <div className="app-input-container">
                   <i className="fas fa-search" onClick={this.searchBooks} />
                 </div>
