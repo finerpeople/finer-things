@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import axios from "axios";
-// import Book from '../Book/Book'
 import "./MyLibrary.scss";
 import Card from "../Browse/Card";
 
@@ -20,9 +19,6 @@ export default class MyLibrary extends Component {
   getMyLibrary = async () => {
     console.log(this.state.user_id)
     let res = await axios.get(`/library/allBooks/${this.state.user_id}`)
-    // console.log(res.data)
-    // res.data.sort(this.dynamicSort('book_title'))
-    console.log(res.data)
     this.setState({
       myLibrary: res.data
     })
@@ -66,7 +62,9 @@ export default class MyLibrary extends Component {
   };
 
   async deleteBook(user_library_id){
+
     await axios.delete(`/library/removeBook/${user_library_id}&${this.state.user_id}`)
+
     this.getMyLibrary()
   }
 
@@ -81,15 +79,16 @@ export default class MyLibrary extends Component {
             isbn={book.book_isbn}
             user_id={this.state.user_id}
             search={true}
-            deleteBook={this.deleteBook}
+            myLibrary={true}
+            deleteBook = {() => this.deleteBook(book.user_library_id)}
           />
-          <button onClick={() => this.deleteBook(book.user_library_id)}>delete</button>
+          {/* {console.log(book.user_library_id)} */}
+          {/* <button onClick={() => this.deleteBook(book.user_library_id)}>delete</button> */}
         </div>
       )
     })
     return (
       <div className='my-lib-container'>
-        <div className='my-lib-title'>My Library</div>
         <div>
           <button onClick={() => this.sortBooks("book_title")}>sort</button>
           <select name="sort" id="sort" onChange={(e) => this.sortBooks(e.target.value)}>
@@ -102,6 +101,7 @@ export default class MyLibrary extends Component {
             <option value="date_added">Oldest Added</option>
           </select>
         </div>
+        <div className='my-lib-title'>My Books</div>
         <div className='my-lib-list'>{displayBooks}</div>
       </div>
     );
