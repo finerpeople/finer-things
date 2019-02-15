@@ -20,7 +20,7 @@ export default class Book extends Component {
 
   componentDidMount = async () => {
     this.getSession();
-    window.scrollTo(0, 0);
+    // window.scrollTo(0, 0);
     // let { isbn } = this.props.match.params;
     const res = await axios.get(
       `https://www.googleapis.com/books/v1/volumes?q=isbn:${
