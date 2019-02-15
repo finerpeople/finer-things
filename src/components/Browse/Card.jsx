@@ -68,13 +68,13 @@ export default class Card extends Component {
 
     render() {
         return (
-            <div className='card-main'>
+            <div className='card-main' >
                 {this.state.bookModal ? (
                     <div className='book-modal-container'>
-
                         <Book
                             isbn={this.state.isbn}
                             addToLibrary={this.addToLibrary}
+                            myLibrary={this.props.myLibrary}
                         />
                         <button className='close-book-modal' onClick={this.toggle}>X</button>
                     </div>
@@ -86,41 +86,35 @@ export default class Card extends Component {
                         <div key={this.props.i} className='searched-single-book'>
                             <img src={this.props.img} alt='book cover' className='searched-book-cover' onClick={this.toggle} />
                             <div className='icon-banner'>
-                            <i className="fas fa-ellipsis-h dots" onClick={this.moreToggle}></i>
-                                    {this.state.moreModal ? (
-                                        <div className='more-modal' 
+                                <i className="fas fa-ellipsis-h dots" onClick={this.moreToggle}></i>
+                                {this.state.moreModal ? (
+                                    <div className='more-modal'
                                         onMouseLeave={this.moreToggle}
-                                        >
+                                    >
                                         <div className='more-delete flexed' onClick={this.deleteBook}>
                                             <p className='more-delete-text'>Delete</p>
-                                            <i className="far fa-trash-alt book-delete"></i>                                            
+                                            <i className="far fa-trash-alt book-delete"></i>
                                         </div>
                                         <div className='more-share flexed'>
                                             <p className='more-share-text'>Share</p>
-                                            <i className="fas fa-share my-lib-share"></i> 
+                                            <i className="fas fa-share my-lib-share"></i>
                                         </div>
-                                        </div>
-                                    ) : null}
-                                {/* <i className="fas fa-plus add-to-library"
-                                    onClick={this.addToLibrary}></i>
-                                <i className="fas fa-share search-share"
-                                    onClick={this.recommendToFriend}></i> */}
+                                    </div>
+                                ) : null}
                             </div>
                         </div>
                     ) : (
-                        <div key={this.props.i} className='searched-single-book'>
-                            <img src={this.props.img} alt='book cover' className='searched-book-cover' onClick={this.toggle} />
-                            <div className='icon-banner'>
-                                <i className="fas fa-plus add-to-library"
-                                    onClick={this.addToLibrary}></i>
-                                <i className="fas fa-share search-share"
-                                    onClick={this.recommendToFriend}></i>
+                            <div key={this.props.i} className='searched-single-book'>
+                                <img src={this.props.img} alt='book cover' className='searched-book-cover' onClick={this.toggle} />
+                                <div className='icon-banner'>
+                                    <i className="fas fa-plus add-to-library"
+                                        onClick={this.addToLibrary}></i>
+                                    <i className="fas fa-share search-share"
+                                        onClick={this.recommendToFriend}></i>
+                                </div>
                             </div>
-                        </div>
-                    )
-
+                        )
                 ) : (
-
                         <div key={this.props.i} className='br-single-cover'>
                             <img src={this.props.img} alt='book cover' className='br-book-cover' onClick={this.toggle} />
                             <div className='br-icon-banner'>

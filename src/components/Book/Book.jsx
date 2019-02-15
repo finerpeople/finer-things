@@ -47,14 +47,20 @@ export default class Book extends Component {
 
   inLibrary = async () => {
     let res = await axios.get(`/library/getOneBook/${this.state.user_id}&${this.state.isbn}`)
-    if(res.data.length === 0){
+    if(this.props.myLibrary) {
       this.setState({
-        libraryButton: "Add to My Library"
+        libraryButton: 'Enjoy reading this book!'
       })
     } else {
-      this.setState({
-        libraryButton: "Already in My Library"
-      })
+      if(res.data.length === 0){
+        this.setState({
+          libraryButton: "Add to My Library"
+        })
+      } else {
+        this.setState({
+          libraryButton: "Already in My Library"
+        })
+      }
     }
   }
 
