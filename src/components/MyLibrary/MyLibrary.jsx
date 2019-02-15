@@ -48,6 +48,7 @@ export default class MyLibrary extends Component {
   }
 
   sortBooks = async (sortOrder) => {
+    console.log(sortOrder)
     let sortedArray = [...this.state.myLibrary]
     await sortedArray.sort(this.dynamicSort(sortOrder))
     this.setState({
@@ -89,7 +90,18 @@ export default class MyLibrary extends Component {
     return (
       <div className='my-lib-container'>
         <div className='my-lib-title'>My Library</div>
-        <div><button onClick={() => this.sortBooks("book_title")}>sort</button></div>
+        <div>
+          <button onClick={() => this.sortBooks("book_title")}>sort</button>
+          <select name="sort" id="sort" onChange={(e) => this.sortBooks(e.target.value)}>
+            <option value="">Sort Options</option>
+            <option value="book_title">Book Title</option>
+            <option value="book_author">Author</option>
+            <option value="-book_rating">Rating High to Low</option>
+            <option value="book_rating">Rating Low to High</option>
+            <option value="-date_added">Newest Added</option>
+            <option value="date_added">Oldest Added</option>
+          </select>
+        </div>
         <div className='my-lib-list'>{displayBooks}</div>
       </div>
     );
