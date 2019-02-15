@@ -36,6 +36,7 @@ app.post('/library/recommendBook', libraryCtrl.recommendBook);
 // Settings
 app.get('/api/userData/:id', settingsCtrl.getUserData)
 app.put('/api/updateAccountStatus/:id', settingsCtrl.updateAccStatus)
+app.put('/api/edit-profile', settingsCtrl.editProfile) 
 
 
 massive(SERVER_CONNECTION)
