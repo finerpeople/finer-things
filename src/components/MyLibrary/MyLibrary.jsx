@@ -42,6 +42,7 @@ export default class MyLibrary extends Component {
             img={book.book_img}
             ibsn={book.book_isbn}
             user_id={this.state.user_id}
+            search={true}
           />
         </div>
       )
