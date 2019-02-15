@@ -37,6 +37,7 @@ app.post('/library/recommendBook', libraryCtrl.recommendBook);
 app.get('/library/allBooks/:user_id', libraryCtrl.allBooks);
 app.get('/library/getOneBook/:user_id&:isbn', libraryCtrl.getOneBook)
 app.delete('/library/removeBook/:user_library_id&:user_id', libraryCtrl.removeBook)
+app.put('/library/updateRating/:user_rating&:user_library_id&:user_id', libraryCtrl.updateRating)
 
 // Settings
 app.get('/api/userData/:id', settingsCtrl.getUserData)

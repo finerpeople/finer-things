@@ -12,15 +12,46 @@ export default class MyLibrary extends Component {
 
   componentDidMount = async () => {
     await this.getSession();
-    this.getMyLibrary();
+    await this.getMyLibrary();
+
   };
 
   getMyLibrary = async () => {
+    // console.log(this.state.user_id)
     let res = await axios.get(`/library/allBooks/${this.state.user_id}`)
     this.setState({
       myLibrary: res.data
     })
+  }
 
+  dynamicSort(key) {
+    // console.log(key)
+    // console.log(this.state.myLibrary)
+    var sortOrder = 1;
+
+    if(key[0] === "-") {
+        sortOrder = -1;
+        key = key.substr(1);
+    }
+    // console.log(key)
+    return function (a, b) {
+      if (sortOrder == -1) {
+        return b[key].toString().localeCompare(a[key].toString());
+      } else {
+        return a[key].toString().localeCompare(b[key].toString());
+      }
+    }
+  }
+
+  sortBooks = async (sortOrder) => {
+    // console.log(sortOrder)
+    // console.log(this.state.myLibrary)
+    let sortedArray = [...this.state.myLibrary]
+    await sortedArray.sort(this.dynamicSort(sortOrder))
+    this.setState({
+      myLibrary: sortedArray
+    })
+    // console.log(this.state.myLibrary)
   }
 
   getSession = async () => {
@@ -59,6 +90,18 @@ export default class MyLibrary extends Component {
     })
     return (
       <div className='my-lib-container'>
+        <div>
+          <button onClick={() => this.sortBooks("book_title")}>sort</button>
+          <select name="sort" id="sort" onChange={(e) => this.sortBooks(e.target.value)}>
+            <option value="">Sort Options</option>
+            <option value="book_title">Book Title</option>
+            <option value="book_author">Author</option>
+            <option value="-user_rating">Rating High to Low</option>
+            <option value="user_rating">Rating Low to High</option>
+            <option value="-date_added">Newest Added</option>
+            <option value="date_added">Oldest Added</option>
+          </select>
+        </div>
         <div className='my-lib-title'>My Books</div>
         <div className='my-lib-list'>{displayBooks}</div>
       </div>
