@@ -17,7 +17,7 @@ export default class MyLibrary extends Component {
   };
 
   getMyLibrary = async () => {
-    console.log(this.state.user_id)
+    // console.log(this.state.user_id)
     let res = await axios.get(`/library/allBooks/${this.state.user_id}`)
     this.setState({
       myLibrary: res.data
@@ -26,7 +26,7 @@ export default class MyLibrary extends Component {
 
   dynamicSort(key) {
     // console.log(key)
-    console.log(this.state.myLibrary)
+    // console.log(this.state.myLibrary)
     var sortOrder = 1;
 
     if(key[0] === "-") {
@@ -35,7 +35,6 @@ export default class MyLibrary extends Component {
     }
     // console.log(key)
     return function (a, b) {
-      console.log(a , b)
       if (sortOrder == -1) {
         return b[key].toString().localeCompare(a[key].toString());
       } else {
@@ -45,14 +44,14 @@ export default class MyLibrary extends Component {
   }
 
   sortBooks = async (sortOrder) => {
-    console.log(sortOrder)
-    console.log(this.state.myLibrary)
+    // console.log(sortOrder)
+    // console.log(this.state.myLibrary)
     let sortedArray = [...this.state.myLibrary]
     await sortedArray.sort(this.dynamicSort(sortOrder))
     this.setState({
       myLibrary: sortedArray
     })
-    console.log(this.state.myLibrary)
+    // console.log(this.state.myLibrary)
   }
 
   getSession = async () => {
