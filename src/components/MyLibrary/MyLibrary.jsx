@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import axios from "axios";
-// import Book from '../Book/Book'
 import "./MyLibrary.scss";
 import Card from "../Browse/Card";
 
@@ -18,7 +17,6 @@ export default class MyLibrary extends Component {
 
   getMyLibrary = async () => {
     let res = await axios.get(`/library/allBooks/${this.state.user_id}`)
-    // console.log(res.data)
     this.setState({
       myLibrary: res.data
     })
@@ -34,7 +32,9 @@ export default class MyLibrary extends Component {
   };
 
   async deleteBook(user_library_id){
+
     await axios.delete(`/library/removeBook/${user_library_id}&${this.state.user_id}`)
+
     this.getMyLibrary()
   }
 
@@ -49,16 +49,17 @@ export default class MyLibrary extends Component {
             isbn={book.book_isbn}
             user_id={this.state.user_id}
             search={true}
-            deleteBook = {this.deleteBook}
+            myLibrary={true}
+            deleteBook = {() => this.deleteBook(book.user_library_id)}
           />
-          {console.log(book.user_library_id)}
-          <button onClick={() => this.deleteBook(book.user_library_id)}>delete</button>
+          {/* {console.log(book.user_library_id)} */}
+          {/* <button onClick={() => this.deleteBook(book.user_library_id)}>delete</button> */}
         </div>
       )
     })
     return (
       <div className='my-lib-container'>
-        <div className='my-lib-title'>My Library</div>
+        <div className='my-lib-title'>My Books</div>
         <div className='my-lib-list'>{displayBooks}</div>
       </div>
     );

@@ -34,7 +34,7 @@ export default class Book extends Component {
       rating: res.data.items[0].volumeInfo.averageRating,
       category: res.data.items[0].volumeInfo.categories[0]
     });
-    this.inLibrary()
+    await this.inLibrary()
   };
 
   getSession = async () => {
