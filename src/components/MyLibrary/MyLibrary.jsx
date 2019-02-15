@@ -13,16 +13,47 @@ export default class MyLibrary extends Component {
 
   componentDidMount = async () => {
     await this.getSession();
-    this.getMyLibrary();
+    await this.getMyLibrary();
+
   };
 
   getMyLibrary = async () => {
+    console.log(this.state.user_id)
     let res = await axios.get(`/library/allBooks/${this.state.user_id}`)
     // console.log(res.data)
+    // res.data.sort(this.dynamicSort('book_title'))
+    console.log(res.data)
     this.setState({
       myLibrary: res.data
     })
+  }
 
+  dynamicSort(key) {
+    // console.log(key)
+    console.log(this.state.myLibrary)
+    var sortOrder = 1;
+
+    if(key[0] === "-") {
+        sortOrder = -1;
+        key = key.substr(1);
+    }
+    // console.log(key)
+    return function (a, b) {
+      if (sortOrder == -1) {
+        return b[key].localeCompare(a[key]);
+      } else {
+        return a[key].localeCompare(b[key]);
+      }
+    }
+  }
+
+  sortBooks = async (sortOrder) => {
+    let sortedArray = [...this.state.myLibrary]
+    await sortedArray.sort(this.dynamicSort(sortOrder))
+    this.setState({
+      myLibrary: sortedArray
+    })
+    console.log(this.state.myLibrary)
   }
 
   getSession = async () => {
@@ -49,9 +80,8 @@ export default class MyLibrary extends Component {
             isbn={book.book_isbn}
             user_id={this.state.user_id}
             search={true}
-            deleteBook = {this.deleteBook}
+            deleteBook={this.deleteBook}
           />
-          {console.log(book.user_library_id)}
           <button onClick={() => this.deleteBook(book.user_library_id)}>delete</button>
         </div>
       )
@@ -59,6 +89,7 @@ export default class MyLibrary extends Component {
     return (
       <div className='my-lib-container'>
         <div className='my-lib-title'>My Library</div>
+        <div><button onClick={() => this.sortBooks("book_title")}>sort</button></div>
         <div className='my-lib-list'>{displayBooks}</div>
       </div>
     );
