@@ -59,7 +59,7 @@ export default class Setting extends Component {
     const res = await axios.put(`/api/updateAccountStatus/${id}`);
     this.props.history.push("/");
   };
-  saveProfileChanges() {
+  editProfile = () => {
     const { email } = this.state;
     axios
       .put("/api/edit-profile", { email: email })
@@ -81,7 +81,6 @@ export default class Setting extends Component {
             className="profileImg"
             src="https://vignette.wikia.nocookie.net/theoffice/images/2/25/Oscar_Martinez.jpg/revision/latest/scale-to-width-down/2000?cb=20170701085818"
             alt="Oscar"
-            //TODO render this.state.image here
           />
           <div className="editProfileBtns">
             <div>
@@ -92,54 +91,48 @@ export default class Setting extends Component {
             </div>
           </div>
         </div>
-
+        <div className="lowerContainer">
+        <div id="settings-makeChanges">
+          <span className="makeChangesText">Want to make changes?</span>
+          {/* <i className="fas fa-pen fa-md" /> */}
+        </div> 
         <div className="editTextContainer">
           <p className="summary">
             I am an Accountant by day and an avid reader by night. When not
             crunching numbers, I enjoy a good history or nonfiction book. I
-            despise Anne Geddes.
+            despise Anne Geddes photography.
           </p>
-          <input
-            type="text"
-            placeholder="Email address"
-            onChange={e => this.setState({ email: e.target.value })}
-          />
-          <input
-            type="text"
-            placeholder="Password"
-            onChange={e => this.setState({ password: e.target.value })}
-          />
-          <br />
-          <div className="editBtns">
-            <span className="makeChangesText">Want to make changes?</span>
-            <i className="fas fa-pen fa-md" />
-          </div>
+          <hr />
           <div className="editTextContainer">
             {this.state.emailEditable ? (
-              <div>
+              <div id="settings-InputBoxes">
                 <input
+                  className="inputFields"
                   type="text"
                   value={this.state.email}
-                  onChange={e => {
-                    this.handleChange("email", e.target.value);
-                  }}
+                    onChange={e => this.setState({ email: e.target.value })}
+                />
+                <input
+                  className="inputFields"
+                  type="password"
+                  placeholder="New password"
+                  onChange={e => this.setState({ password: e.target.value })}
                 />
               </div>
-            ) : (
-              <span>{this.state.email}</span>
-            )}
+            ) : null}
             <div>
               <br />
-              <button type="button" id="settings-editBtn">
-                {this.state.editEmailDone ? "Cancel" : "Edit"}
+              <button type="button" id="settings-editBtn" onClick={this.edit}>
+                {this.state.editEmailDone
+                  ? "Cancel"
+                  : "Update Email or Password"}
               </button>
-              <hr />
               <div>
                 {!this.state.editEmailDone ? null : (
                   <button
                     type="button"
-                    id="settings-Btns"
-                    onClick={() => this.saveProfileChanges()}
+                    id="settings-editBtn"
+                    onClick={() => this.editProfile()}
                   >
                     Save
                   </button>
@@ -147,6 +140,8 @@ export default class Setting extends Component {
               </div>
             </div>
             <br />
+
+            
             <input
               value={this.state.password}
               className="inputFields"
@@ -170,6 +165,7 @@ export default class Setting extends Component {
               >
                 Delete Account
               </button>
+            </div>
             </div>
           </div>
         </div>
