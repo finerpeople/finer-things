@@ -11,7 +11,8 @@ import axios from 'axios';
 export default class Card extends Component {
     state = {
         bookModal: false,
-        isbn: this.props.isbn
+        isbn: this.props.isbn,
+        moreModal: false
     }
 
     toggle = () => {
@@ -20,19 +21,23 @@ export default class Card extends Component {
         })
     }
 
+    moreToggle = () => {
+        this.setState({
+            moreModal: !this.state.moreModal
+        })
+    }
+
     getSingleBook = async () => {
         let res = await axios.get(`https://www.googleapis.com/books/v1/volumes?q=isbn:${this.state.isbn}
         &maxResults=1&langRestrict=en&fields=kind, items(id, volumeInfo/title, 
         volumeInfo/authors, volumeInfo/industryIdentifiers, 
         volumeInfo/categories, volumeInfo/imageLinks)`)
-        // console.log(res.data)
         return res.data.items[0].volumeInfo
     }
 
     addToLibrary = async () => {
         const book = await this.getSingleBook();
-        console.log(book)
-        let res = await axios.post('/library/addBook', {
+        await axios.post('/library/addBook', {
             user_id: this.props.user_id,
             isbn: this.state.isbn,
             book_img: book.imageLinks.thumbnail,
@@ -40,11 +45,12 @@ export default class Card extends Component {
             author: book.authors[0],
             category: book.categories[0]
         })
+        this.toggle()
     }
 
     recommendToFriend = async () => {
         const book = await this.getSingleBook();
-        let res = await axios.post('/library/recommendBook', {
+        await axios.post('/library/recommendBook', {
             user_id: 17,
             isbn: this.state.isbn,
             friend_id: 12,
@@ -55,8 +61,12 @@ export default class Card extends Component {
         })
     }
 
-    render() {
+    deleteBook = () => {
+        this.props.deleteBook(this.props.user_library_id)
+        this.moreToggle()
+    }
 
+    render() {
         return (
             <div className='card-main'>
                 {this.state.bookModal ? (
@@ -72,15 +82,42 @@ export default class Card extends Component {
                         null
                     )}
                 {this.props.search ? (
-                    <div key={this.props.i} className='searched-single-book'>
-                        <img src={this.props.img} alt='book cover' className='searched-book-cover' onClick={this.toggle} />
-                        <div className='icon-banner'>
-                            <i className="fas fa-plus add-to-library"
-                                onClick={this.addToLibrary}></i>
-                            <i className="fas fa-share search-share"
-                                onClick={this.recommendToFriend}></i>
+                    this.props.myLibrary ? (
+                        <div key={this.props.i} className='searched-single-book'>
+                            <img src={this.props.img} alt='book cover' className='searched-book-cover' onClick={this.toggle} />
+                            <div className='icon-banner'>
+                            <i className="fas fa-ellipsis-h dots" onClick={this.moreToggle}></i>
+                                    {this.state.moreModal ? (
+                                        <div className='more-modal' 
+                                        onMouseLeave={this.moreToggle}
+                                        >
+                                        <div className='more-delete flexed' onClick={this.deleteBook}>
+                                            <p className='more-delete-text'>Delete</p>
+                                            <i className="far fa-trash-alt book-delete"></i>                                            
+                                        </div>
+                                        <div className='more-share flexed'>
+                                            <p className='more-share-text'>Share</p>
+                                            <i className="fas fa-share my-lib-share"></i> 
+                                        </div>
+                                        </div>
+                                    ) : null}
+                                {/* <i className="fas fa-plus add-to-library"
+                                    onClick={this.addToLibrary}></i>
+                                <i className="fas fa-share search-share"
+                                    onClick={this.recommendToFriend}></i> */}
+                            </div>
                         </div>
-                    </div>
+                    ) : (
+                        <div key={this.props.i} className='searched-single-book'>
+                            <img src={this.props.img} alt='book cover' className='searched-book-cover' onClick={this.toggle} />
+                            <div className='icon-banner'>
+                                <i className="fas fa-plus add-to-library"
+                                    onClick={this.addToLibrary}></i>
+                                <i className="fas fa-share search-share"
+                                    onClick={this.recommendToFriend}></i>
+                            </div>
+                        </div>
+                    )
 
                 ) : (
 
