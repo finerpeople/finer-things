@@ -27,3 +27,63 @@
 .close-book-modal:hover {
     color: $darkerGrey;
 }
+
+.dots {
+    position: absolute;
+    right: 0.5rem;
+    top: 0.3rem;
+    cursor: pointer;
+
+}
+
+.more-modal {
+    position: absolute;
+    background-color: brown;
+    height: 3.4rem;
+    width: 4.4rem;
+    left: 4rem;
+    top: 1.2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-end;
+    border-radius: 10px;
+
+}
+
+.more-delete-text {
+    //extends .more-share-text
+    margin: 0;
+    font-family: $bodyFontFamily;
+    font-size: $bodyFontSize;
+    padding-right: .15rem;
+}
+
+.more-share-text {
+    @extend .more-delete-text;
+}
+
+.more-delete {
+    //extends .more-share
+    color: $lighterGrey;
+    padding: .23rem;
+    cursor: pointer;
+}
+
+.more-delete:hover {
+    //extends .more-share
+    color: $lightGrey;
+}
+
+.more-share {
+    @extend .more-delete;
+}
+
+.book-delete {
+    //extends .my-lib-share
+    color: $lighterGrey;
+}
+
+.my-lib-share {
+    @extend .book-delete;
+}

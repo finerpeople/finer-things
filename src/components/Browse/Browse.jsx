@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
-import { Link, withRouter } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import "./Browse.scss";
 import Card from "./Card";
 
@@ -18,7 +18,7 @@ class Browse extends Component {
     this.getSession();
     const res = await axios.get(
       `https://api.nytimes.com/svc/books/v3/lists/current/${
-        this.props.urlList
+      this.props.urlList
       }.json?api-key=${key}`
     );
     this.setState({
@@ -40,7 +40,12 @@ class Browse extends Component {
     let displayList = this.state.listName.map((book, i) => {
       return (
         <div key={i}>
-          <Card i={i} img={book.book_image} isbn={book.primary_isbn13} user_id={this.state.user_id} />
+          <Card
+            i={i}
+            img={book.book_image}
+            isbn={book.primary_isbn13}
+            user_id={this.state.user_id}
+          />
         </div>
       );
     });
