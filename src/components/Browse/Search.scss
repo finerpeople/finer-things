@@ -1,96 +1,97 @@
-@import '../../style.scss';
+@import "../../style.scss";
 
-.search {
-    height: 4rem;
-    width: 15rem;
-    position: absolute;
-    right: 2rem;
-    top: 6.5rem;
+.search-header {
+  display: grid;
+  margin-left: $navBarWidth;
+  margin-top: $headerHeight;
+  width: calc(100vw - $navBarWidth);
+  grid-template-columns: repeat(9, 1fr);
+  padding-top: 2em;
 }
 
 .br-search-icon {
-    position: absolute;
-    right: 2.3rem;
-    top: 0.7rem;
-    cursor: pointer;
-    color: $lightGrey;
+  position: absolute;
+  right: 2.3rem;
+  top: 0.7rem;
+  cursor: pointer;
+  color: $lightGrey;
 }
 
 .br-search-icon:hover {
-    color: $lightBlue;
+  color: $lightBlue;
 }
 
 .search-input {
-    height: 2rem;
-    width: 13rem;
-    font-size: $bodyFontSize;
-    border-radius: 10px;
+  height: 2rem;
+  width: 13rem;
+  font-size: $bodyFontSize;
+  border-radius: 10px;
 }
 
 .search-input:focus {
-    outline: none;
+  outline: none;
 }
 
 .searched-books {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    margin-top: 10rem;
-    margin-left: 3.5rem;
-    position: relative;
-    padding-left: 0.2rem;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 10rem;
+  margin-left: 3.5rem;
+  position: relative;
+  padding-left: 0.2rem;
 }
 
 .searched-single-book {
-    position: relative;
-    height: 13rem;
-    width: 8.5rem;
-    overflow: hidden;
+  position: relative;
+  height: 13rem;
+  width: 8.5rem;
+  overflow: hidden;
 }
 
 .searched-book-cover {
-    //extends .default-cover
-    overflow: hidden;
-    border-radius: 10px;
-    height: 12rem;
-    width: 7.5rem;
-    cursor: pointer;
+  //extends .default-cover
+  overflow: hidden;
+  border-radius: 10px;
+  height: 12rem;
+  width: 7.5rem;
+  cursor: pointer;
 }
 
 .default-cover {
-    // @extend .searched-book-cover;
-    border-radius: 10px;
-    height: 12rem;
-    width: 7.5rem;
-    background-color: $darkBlue;
-    color: $lighterGrey;
-    font-family: $titleFontFamily;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    padding: 0.3rem;
-    box-sizing: border-box;
+  // @extend .searched-book-cover;
+  border-radius: 10px;
+  height: 12rem;
+  width: 7.5rem;
+  background-color: $darkBlue;
+  color: $lighterGrey;
+  font-family: $titleFontFamily;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 0.3rem;
+  box-sizing: border-box;
 }
 
 .back-container {
-    //extends .back-button
-    height: 1.6rem;
-    width: 1.6rem;
-    border-radius: 50%;
-    background-color: #938e94;
-    cursor: pointer;
-    position: fixed;
-    left: 5rem;
-    top: 6rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  //extends .back-button
+  height: 1.6rem;
+  width: 1.6rem;
+  border-radius: 50%;
+  background-color: #938e94;
+  cursor: pointer;
+  position: fixed;
+  left: 5rem;
+  top: 6rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .back-button {
-    @extend .back-container;
-    color: $lighterGrey;
+  @extend .back-container;
+  color: $lighterGrey;
 }
 
 .add-to-library {
@@ -107,6 +108,7 @@
 }
 
 .search-share {
+  
     color: $lighterGrey;
     position: absolute;
     right: .7rem;
@@ -120,17 +122,18 @@
 }
 
 .icon-banner {
-    background-color: rgba(189, 195, 199, 0.9);
-    border-radius: 10px 10px 0 0;
-    position: absolute;
-    top: -1.5rem;
-    width: 7.5rem;
-    height: 1.8rem;
-    transition: top .7s ease-in-out;
-    visibility: hidden;
+  background-color: rgba(189, 195, 199, 0.9);
+  border-radius: 10px 10px 0 0;
+  position: absolute;
+  top: -1.5rem;
+  width: 7.5rem;
+  height: 1.8rem;
+  transition: top 0.7s ease-in-out;
+  visibility: hidden;
 }
 
 .searched-single-book:hover .icon-banner {
-    top: 0rem;
-    visibility: visible;
+  top: 0rem;
+  visibility: visible;
 }
+

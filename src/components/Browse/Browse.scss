@@ -4,9 +4,8 @@
     font-family: $titleFontFamily;
     font-size: $titleFontSize;
     position: absolute;
+    top: -1.5em;
     left: 2rem;
-    top: -4rem;
-    margin: 1rem;
     margin-left: 3.5rem;
 }
 
@@ -18,16 +17,17 @@
 }
 
 .book-carousel {
-    overflow: scroll;
-    margin-top: 7rem;
-    margin-left: 5rem;
+    overflow-x: scroll;
+    margin-top: 5rem;
     margin-right: 2rem;
+    margin-left: 5rem;
     display: flex;
 }
 
 .br-container {
     position: relative;
-    height: 45vh;
+    height: 23rem;
+    margin-bottom: 7em;
 }
 
 .br-main {

@@ -25,9 +25,20 @@
     background-color: $tan;
     border: none;
     margin: 0.5em 0;
+    height: 3em;
+    width: 15em;
+    font-weight: bold;
+}
+#settings-saveBtn {
+    background-color: $tan;
+    border: none;
+    margin: 0.5em 0;
     height: 2.3em;
     width: 10em;
     font-weight: bold;
+}
+#settings-saveBtn:hover {
+    background-color: $lightBlue;
 }
 
 #settings-Btns:hover {
@@ -38,7 +49,7 @@
     background-color: $lightBlue;
 }
 
-.saveDeleteBtns {
+.deleteBtn {
     margin-top: 0.5em;
     display: flex;
 }
@@ -52,7 +63,6 @@
     align-items: center;
     height: 30em;
     width: 100vw;
-    // background-color: red;
     margin-left: 4.3em;
 }
 
@@ -93,15 +103,15 @@
 }
 
 .summary {
-    width: 17em;
-    height: 7em;
+    width: 18em;
+    height: 30em;
     text-align: center;
     padding-top: 1em;
     // display: flex;
     // flex-direction: column;
     // background-color: blue; 
     position: relative;
-    top: 1em;
+    top: 2em;
 }
 
 .editTextContainer {
@@ -116,7 +126,12 @@
     position: relative;
     top: -1.5em;
 }
-
+#settings-InputBoxes {
+    margin-top: 2em; 
+    display: flex;
+    flex-direction: column;
+    justify-content: center; 
+}
 .fa-pen {
     // color: $darkerGrey;
     color: $white;
@@ -142,6 +157,7 @@
 .fa-trash-alt:hover {
     color: $darkBlue;
 }
+
 
 @media (max-width: 1000px) {
     .mainContainer {

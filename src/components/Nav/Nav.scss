@@ -5,7 +5,7 @@
   top: 0;
   display: grid;
   grid-template-columns: repeat(9, 1fr);
-  height: 4.5em;
+  height: $headerHeight;
   width: 100vw;
   background-color: $darkBlue;
   box-shadow: 0px 1px 5px $darkerGrey;
@@ -32,10 +32,13 @@
   align-items: center;
   grid-column: 3 / 8;
   color: $white;
-  font-weight: 600;
+  font-weight: 700;
   letter-spacing: 0.1em;
   font-size: $titleFontSize;
   font-family: $titleFontFamily;
+}
+.title p {
+  margin: 0;
 }
 .welcome {
   display: flex;

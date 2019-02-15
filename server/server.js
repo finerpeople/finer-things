@@ -39,6 +39,7 @@ app.get('/library/getOneBook/:user_id&:isbn', libraryCtrl.getOneBook)
 // Settings
 app.get('/api/userData/:id', settingsCtrl.getUserData)
 app.put('/api/updateAccountStatus/:id', settingsCtrl.updateAccStatus)
+app.put('/api/edit-profile', settingsCtrl.editProfile) 
 
 
 massive(SERVER_CONNECTION)
