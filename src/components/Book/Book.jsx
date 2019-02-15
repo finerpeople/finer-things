@@ -19,9 +19,7 @@ export default class Book extends Component {
   }
 
   componentDidMount = async () => {
-    this.getSession();
-    // window.scrollTo(0, 0);
-    // let { isbn } = this.props.match.params;
+    await this.getSession();
     const res = await axios.get(
       `https://www.googleapis.com/books/v1/volumes?q=isbn:${
         this.state.isbn
@@ -36,7 +34,6 @@ export default class Book extends Component {
       rating: res.data.items[0].volumeInfo.averageRating,
       category: res.data.items[0].volumeInfo.categories[0]
     });
-    // console.log(this.state);
     this.inLibrary()
   };
 
@@ -50,7 +47,6 @@ export default class Book extends Component {
 
   inLibrary = async () => {
     let res = await axios.get(`/library/getOneBook/${this.state.user_id}&${this.state.isbn}`)
-    console.log(res.data)
     if(res.data.length === 0){
       this.setState({
         libraryButton: "Add to My Library"

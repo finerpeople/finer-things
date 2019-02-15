@@ -25,7 +25,7 @@ export default class Card extends Component {
         &maxResults=1&langRestrict=en&fields=kind, items(id, volumeInfo/title, 
         volumeInfo/authors, volumeInfo/industryIdentifiers, 
         volumeInfo/categories, volumeInfo/imageLinks)`)
-        console.log(res.data)
+        // console.log(res.data)
         return res.data.items[0].volumeInfo
     }
 

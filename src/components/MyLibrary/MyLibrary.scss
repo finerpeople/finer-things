@@ -1,1 +1,24 @@
-@import '../../style.scss'
+@import '../../style.scss';
+
+.my-lib-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    margin: 6rem;
+
+}
+
+.my-lib-title {
+    font-size: 3rem;
+    height: 68px;
+    width: 300px;
+    background-color: aliceblue;
+    text-align: center;
+}
+
+.my-lib-list {
+    display: flex;
+    flex-wrap: wrap;
+
+}
