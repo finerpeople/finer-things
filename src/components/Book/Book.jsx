@@ -75,7 +75,7 @@ export default class Book extends Component {
               emptyStarColor={'#5d5c61'}
               value={this.state.rating}
             />
-            <button onClick={this.props.addToLibrary}>{this.state.libraryButton}</button>
+            <button className='book-add' onClick={this.props.addToLibrary}>{this.state.libraryButton}</button>
           </div>
         </div>
         <div className='book-info-summary flexed'>

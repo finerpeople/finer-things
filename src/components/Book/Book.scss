@@ -40,23 +40,23 @@
 
 .book-info-summary {
     height: 25rem;
-
 }
 
 // .dv-star-rating-non-editable {
-//     margin: .5rem;
-// }
-
-.book-title {
-    font-size: 1.5rem;
-    margin-bottom: 0;
-    font-family: $titleFontFamily;
-}
-
-.book-author {
-    // extends .book-summary
-    font-size: $bodyFontSize;
-    font-family: $bodyFontFamily;
+    //     margin: .5rem;
+    // }
+    
+    .book-title {
+        font-size: 1.5rem;
+        margin-bottom: 0;
+        font-family: $titleFontFamily;
+    }
+    
+    .book-author {
+        // extends .book-summary
+        font-size: $bodyFontSize;
+        font-family: $bodyFontFamily;
+        cursor: default;
 }
 
 .book-summary {
@@ -71,4 +71,8 @@
     height: 20.5rem;
     margin-bottom: 3rem;
 
+}
+
+.book-add {
+    cursor: pointer;
 }
