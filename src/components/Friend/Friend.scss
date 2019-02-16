@@ -17,9 +17,17 @@
   margin-top: 2em;
 }
 ////////////////////////  Body  ///////////////////////
+// .friend-body{
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+//   width: calc(100vw - $navBarWidth);
+//   height: calc(100vh - 12em);
+// }
+
 #friend-body {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   height: 100%;
   width: 100%;
   margin: 2.2em 2.4em;
@@ -53,9 +61,9 @@
   grid-template-rows: 2em repeat(6, 1fr);
   width: 45em;
   height: 100%;
-  box-shadow: 0px 1px 10px $buttonShadow;
   border-radius: 2px;
   padding: .7em;
+  margin-left: 1.5em;
   overflow-y: scroll;
 }
 #my-friends-cards {
@@ -67,15 +75,18 @@
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-  border-radius: 5px;
   border-radius: 2px;
   height: 170px;
   width: 150px;
+  box-shadow: 0px 1px 10px $lightGrey;
   overflow: hidden;
 }
-#my-friends-card img {
-  width: auto;
-  max-height: 100%;
+.friends-profile-pic {
+  height: 170px;
+  width: 150px;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
   border-radius: 2px 2px 0 0;
   box-shadow: 0px 1px 10px $buttonShadow;
 }
@@ -96,9 +107,10 @@
   grid-template-rows: 2em repeat(6, 1fr);
   width: 20em;
   height: 100%;
-  box-shadow: 0px 1px 10px $buttonShadow;
+  // box-shadow: 0px 1px 10px $buttonShadow;
   border-radius: 2px;
   padding: .7em;
+  margin-right: 1.5em;
   overflow-y: scroll;
 }
 #my-rec-cards {
@@ -110,21 +122,24 @@
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-  border-radius: 5px;
   border-radius: 2px;
   height: 155px;
   width: 135px;
+  box-shadow: 0px 1px 10px $lightGrey;
   overflow: hidden;
 }
-#my-rec-card img {
-  width: auto;
-  height: 100%;
+.rec-profile-pic {
+  height: 155px;
+  width: 135px;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
   border-radius: 2px 2px 0 0;
   box-shadow: 0px 1px 10px $buttonShadow;
 }
-#my-rec-card img:focus {
-  flex-grow: 2;
-}
+// .rec-profile-pic:focus {
+//   flex-grow: 2;
+// }
 #my-rec-cards > p {
   display: flex;
   align-items: center;
@@ -143,5 +158,10 @@
   width: .1em;
   height: .1em;
   border-radius: 2px;
-  background: $lightBlue;
+  background: $tan;
+}
+#recommend::-webkit-scrollbar-button:vertical:decrement, #my-friends::-webkit-scrollbar-button:vertical:decrement {
+  background: $darkBlue;
+  height: 0;
+  width: 0;
 }

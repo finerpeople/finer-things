@@ -43,9 +43,12 @@ export default class Friend extends Component {
       console.log(friend);
       const { first_name, last_name, profile_pic, user_id } = friend;
       return (
-        <div id="my-friends-cards">
+        <div key={i} id="my-friends-cards">
           <div id="my-friends-card">
-            <img id={user_id} src={profile_pic} alt="profile picture" />
+          <div
+              className="friends-profile-pic"
+              style={{ backgroundImage: `url(${profile_pic})` }}
+            />
           </div>
           <p>{`${first_name} ${last_name}`}</p>
         </div>
@@ -53,11 +56,15 @@ export default class Friend extends Component {
     });
     const myRecFriends = recFriends.map((friend, i) => {
       const { first_name, last_name, profile_pic, user_id } = friend;
-      if(user_id === userId) return
+      if (user_id === userId) return;
+      const profilePic = `"backgroundColor:url(${profile_pic})"`;
       return (
-        <div id="my-rec-cards">
+        <div key={i} id="my-rec-cards">
           <div id="my-rec-card">
-            <img id={user_id} src={profile_pic} alt="profile picture" />
+            <div
+              className="rec-profile-pic"
+              style={{ backgroundImage: `url(${profile_pic})` }}
+            />
           </div>
           <p>{`${first_name} ${last_name}`}</p>
         </div>
@@ -75,6 +82,7 @@ export default class Friend extends Component {
           </div>
         </div>
         {/* ///////////////////////////////////////////////////// */}
+        {/* <div className="friend-body"> */}
         <div id="friend-body">
           <div id="recommend">
             <h4>Recommendations</h4>
@@ -85,6 +93,7 @@ export default class Friend extends Component {
             {myFriends}
           </div>
         </div>
+        {/* </div> */}
       </div>
     );
   }

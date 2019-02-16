@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import axios from "axios";
 import Swal from "sweetalert2";
 import "./Auth.scss";
+import logo from "../../The-Finer-Things.png";
 
 export default class Auth extends Component {
   state = {
@@ -93,17 +94,18 @@ export default class Auth extends Component {
           <div className="auth-left-bg" />
           <div className="auth-right-bg" />
         </div>
-        <p>The Finer Things</p>
+        <img src={logo} alt="" />
+        <div id="login-blur" />
         <div id={!login ? "login-none" : "login-container"}>
           <div id="login-row">
-            <input
+            <input className='login-input'
               type="email"
               placeholder="Email"
               onChange={e => this.handleChange("userEmail", e)}
             />
           </div>
           <div id="login-row">
-            <input
+            <input className='login-input'
               type="password"
               placeholder="Password"
               onChange={e => this.handleChange("password", e)}
@@ -111,39 +113,39 @@ export default class Auth extends Component {
             />
           </div>
           <div id="login-row">
-            <button onClick={() => this.login()}>Login</button>
+            <button onClick={() => this.login()}>LOGIN</button>
             <p>
-              Don't have an account?{" "}
-              <button onClick={e => this.setState({ login: false })}>
+              Don't have an account? <span>Register now!</span>
+              {/* <button onClick={e => this.setState({ login: false })}>
                 Register now!
-              </button>
+              </button> */}
             </p>
           </div>
         </div>
         <div id={login ? "register-none" : "register-container"}>
           <div id="register-row">
-            <input
+            <input className='login-input'
               type="text"
               placeholder="First Name"
               onChange={e => this.handleChange("firstName", e)}
             />
           </div>
           <div id="register-row">
-            <input
+            <input className='login-input'
               type="text"
               placeholder="Last Name"
               onChange={e => this.handleChange("lastName", e)}
             />
           </div>
           <div id="register-row">
-            <input
+            <input className='login-input'
               type="email"
               placeholder="Email"
               onChange={e => this.handleChange("userEmail", e)}
             />
           </div>
           <div id="register-row">
-            <input
+            <input className='login-input'
               type="password"
               placeholder="Password"
               onChange={e => this.handleChange("password", e)}
