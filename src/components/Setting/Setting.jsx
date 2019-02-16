@@ -16,8 +16,8 @@ export default class Setting extends Component {
       profilePic: "",
       summary: "",
       status: "",
-      emailEditable: false,
-      editEmailDone: false
+      // emailEditable: false,
+      // editEmailDone: false
     };
   }
 
@@ -78,6 +78,7 @@ export default class Setting extends Component {
       <div id="settings-mainContainer">
         <div id="settings-profileContainer">
           <div className="colorContainer">
+            <div id="settings-picContainer">
             <img
               id="settings-profileImg"
               src="https://vignette.wikia.nocookie.net/theoffice/images/2/25/Oscar_Martinez.jpg/revision/latest/scale-to-width-down/2000?cb=20170701085818"
@@ -94,9 +95,10 @@ export default class Setting extends Component {
                 <i className="far fa-trash-alt fa-lg" />
               </div>
             </div>
+            </div>
             <div className="settings-AboutWrapper">
             <div className="settings-aboutMe">
-              <h4 id="settingsSumTitle">About Me</h4>
+              <p id="settingsSumTitle">About Me</p>
               <br/>
               <p id="settings-summary">
                 I am an Accountant by day and an avid reader by night. When not
