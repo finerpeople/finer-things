@@ -43,14 +43,17 @@ export default class Friend extends Component {
       console.log(friend);
       const { first_name, last_name, profile_pic, user_id } = friend;
       return (
-        <div key={i} id="my-friends-cards">
-          <div id="my-friends-card">
-          <div
+        <div key={i} id="my-friends-card">
+          <div id="my-friends-pic-container">
+            <div
               className="friends-profile-pic"
               style={{ backgroundImage: `url(${profile_pic})` }}
             />
           </div>
-          <p>{`${first_name} ${last_name}`}</p>
+          <div id="my-friend-name">
+            <p>{`${first_name} ${last_name}`}</p>
+            <button>Add</button>
+          </div>
         </div>
       );
     });
@@ -59,14 +62,17 @@ export default class Friend extends Component {
       if (user_id === userId) return;
       const profilePic = `"backgroundColor:url(${profile_pic})"`;
       return (
-        <div key={i} id="my-rec-cards">
-          <div id="my-rec-card">
+        <div key={i} id="my-rec-card">
+          <div id="my-rec-pic-container">
             <div
               className="rec-profile-pic"
               style={{ backgroundImage: `url(${profile_pic})` }}
             />
           </div>
-          <p>{`${first_name} ${last_name}`}</p>
+          <div id="my-rec-name">
+            <p>{`${first_name} ${last_name}`}</p>
+            <button>Add</button>
+          </div>
         </div>
       );
     });
@@ -82,7 +88,6 @@ export default class Friend extends Component {
           </div>
         </div>
         {/* ///////////////////////////////////////////////////// */}
-        {/* <div className="friend-body"> */}
         <div id="friend-body">
           <div id="recommend">
             <h4>Recommendations</h4>
@@ -93,7 +98,6 @@ export default class Friend extends Component {
             {myFriends}
           </div>
         </div>
-        {/* </div> */}
       </div>
     );
   }
