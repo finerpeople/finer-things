@@ -9,6 +9,8 @@ export default class Friend extends Component {
     friends: [],
     recFriends: [],
     displayChat: false,
+    friendChatId: '', 
+    friendMessages: []
   };
 
   componentDidMount = async () => {
@@ -47,8 +49,16 @@ export default class Friend extends Component {
     });
   };
 
-  toggleChat = () => {
-    this.setState({displayChat: !this.state.displayChat})
+  toggleChat = async (friendId) => {
+    const {userId} = this.state
+    console.log(this.state.userId, friendId)
+    const res = await axios.post('/api/getMessages', {userId, friendId})
+    console.log(res.data)
+    this.setState({
+      friendMessages: res.data, 
+      displayChat: !this.state.displayChat, 
+      friendChatId: friendId
+    })
   }
 
   deleteFriend = async (userId, friendId) => {
@@ -60,14 +70,14 @@ export default class Friend extends Component {
   };
 
   render() {
-    const { userId, friends, recFriends } = this.state;
+    const { userId, friends, recFriends, displayChat, friendChatId, friendMessages } = this.state;
     const myFriends = friends.map((friend, i) => {
       const { first_name, last_name, profile_pic, user_id } = friend;
       const friendId = user_id;
       return (
         <div key={i} id="my-friends-card">
           <div id="my-friends-card-more">
-            <i className="fas fa-comments" onClick={() => this.toggleChat()}/>
+            <i className="fas fa-comments" onClick={() => this.toggleChat(friendId)}/>
             <button
               onClick={() => this.deleteFriend(this.state.userId, friendId)}
             >
@@ -130,7 +140,7 @@ export default class Friend extends Component {
             {myFriends}
           </div>
         </div>
-        <MiniChat userId={this.state.userId} display={this.state.displayChat} toggleChat={this.toggleChat}/>
+        <MiniChat userId={userId} friendId={friendChatId} display={displayChat} toggleChat={this.toggleChat} messages={friendMessages}/>
       </div>
     );
   }
