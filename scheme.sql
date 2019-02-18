@@ -29,7 +29,7 @@ CREATE TABLE FRIEND (
 
 
 CREATE TABLE COMMENTS (
-    comment_id integer PRIMARY KEY,
+    comment_id serial PRIMARY KEY,
     user_id integer NOT NULL REFERENCES USERS(user_id),
     time_stamp date,
     comment text
@@ -49,13 +49,17 @@ CREATE TABLE CLUB_BOOK (
 
 
 CREATE TABLE CLUB (
-    club_id integer PRIMARY KEY,
+    club_id SERIAL PRIMARY KEY,
     club_name character varying(150),
     club_owner integer NOT NULL REFERENCES USERS(user_id),
     summary character varying(500)
 );
 
- 
+CREATE TABLE club_members (
+    club_id integer NOT NULL REFERENCES CLUB(club_id),
+    user_id integer NOT NULL REFERENCES USERS(user_id)
+)
+
 CREATE TABLE CHAT (
     comment_id integer NOT NULL REFERENCES COMMENTS(comment_id),
     friend_id integer NOT NULL ,

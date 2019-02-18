@@ -13,6 +13,8 @@ const authCtrl = require('./controllers/authController');
 const libraryCtrl = require('./controllers/libraryController');
 const settingsCtrl = require('./controllers/settingsController')
 const friendsCtrl = require('./controllers/friendsController')
+const clubsCtrl = require('./controllers/clubsController')
+const chatCtrl = require('./controllers/chatController')
 
 // Middleware
 const userInSession = require('./controllers/middleware/userInSession')
@@ -49,6 +51,12 @@ app.get('/api/friendsData/:id', friendsCtrl.getFriends)
 app.get('/api/recFriendsData/:id', friendsCtrl.getRecFriends)
 app.post('/api/addFriend', friendsCtrl.addFriend)
 app.delete('/api/deleteFriend/:userId&:friendId', friendsCtrl.deleteFriend)
+
+//clubs
+app.get('/club/getUsersClubs/:user_id', clubsCtrl.getUsersClubs)
+// Chat
+app.post('/api/getMessages', chatCtrl.getMessages)
+app.post('/api/addMessage', chatCtrl.addMessage)
 
 
 massive(SERVER_CONNECTION)
