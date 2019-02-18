@@ -15,9 +15,7 @@ export default class Setting extends Component {
       password: "",
       profilePic: "",
       summary: "",
-      status: "",
-      // emailEditable: false,
-      // editEmailDone: false
+      status: ""
     };
   }
 
@@ -59,10 +57,10 @@ export default class Setting extends Component {
     const res = await axios.put(`/api/updateAccountStatus/${id}`);
     this.props.history.push("/");
   };
-  editProfile = () => {
-    const { email } = this.state;
-    axios
-      .put("/api/edit-profile", { email: email })
+  editProfile = async () => {
+    const { email, summary, firstName, lastName, password } = this.state;
+    await axios
+      .put("/api/edit-profile", { summary: summary, firstName: firstName, lastName: lastName, email: email, password: password })
       .then(this.setState({ emailEditable: false }));
   };
   edit = () => {
@@ -79,76 +77,87 @@ export default class Setting extends Component {
         <div id="settings-profileContainer">
           <div className="colorContainer">
             <div id="settings-picContainer">
-            <img
-              id="settings-profileImg"
-              src="https://vignette.wikia.nocookie.net/theoffice/images/2/25/Oscar_Martinez.jpg/revision/latest/scale-to-width-down/2000?cb=20170701085818"
-              alt="Oscar"
-            />
-            <div className="editProfileBtns">
-              <div>
-                <i className="fas fa-plus" />
+              <img
+                id="settings-profileImg"
+                src="https://vignette.wikia.nocookie.net/theoffice/images/2/25/Oscar_Martinez.jpg/revision/latest/scale-to-width-down/2000?cb=20170701085818"
+                alt="Oscar"
+              />
+              <div className="editProfileBtns">
+                <div>
+                  <i className="fas fa-plus" />
+                </div>
+                <div>
+                  <i className="fas fa-user-edit fa-lg" />
+                </div>
+                <div>
+                  <i className="far fa-trash-alt fa-lg" />
+                </div>
               </div>
-              <div>
-                <i className="fas fa-user-edit fa-lg" />
-              </div>
-              <div>
-                <i className="far fa-trash-alt fa-lg" />
-              </div>
-            </div>
             </div>
             <div className="settings-AboutWrapper">
-            <div className="settings-aboutMe">
-              <p id="settingsSumTitle">About Me</p>
-              <br/>
-              <p id="settings-summary">
-                I am an Accountant by day and an avid reader by night. When not
-                crunching numbers, I enjoy a good history or nonfiction book. I
-                despise Anne Geddes photography. 
-              </p>
-              <br/>
-              <p id="settings-email">
-                Name: {this.state.firstName} {this.state.lastName}
-              </p>
-              <br/>
-              <p id="settings-email">Email: {this.state.email}</p>
-            </div>
+              <div className="settings-aboutMe">
+                <br />
+                <p id="settings-summary">
+                  <p>About Me</p>
+                  I am an Accountant by day and an avid reader by
+                  night. When not crunching numbers, I enjoy a good history or
+                  nonfiction book. I despise Anne Geddes photography.
+                  {/* {this.state.summary} */}
+                </p>
+                <br />
+                <p id="settings-email">
+                  Name: {this.state.firstName} {this.state.lastName}
+                </p>
+                <br />
+                <p id="settings-email">Email: {this.state.email}</p>
+              </div>
             </div>
           </div>
         </div>
 
         <div id="settings-editProfileContainer">
           <div id="settings-inputFields">
-            <p id="settings-greeting">
-              Hi (name), make any profile changes here
-            </p>
+            <p id="settings-greeting">Make any profile changes here</p>
             <form action="" id="settings-form">
-              <div>
+              <div id="settings-individualInput" style={{ fontSize: "0.9em" }}>
                 About Me:{" "}
-                <textarea name="about" id="aboutMeText" cols="50" rows="3" />
+                <textarea name="about" id="aboutMeText" cols="45" rows="3" onChange={e => this.setState({ summary: e.target.value })}/>
               </div>
               <br />
-              <div>
-                First Name: <input type="text" id="editInputs" />
+              <div id="settings-individualInput" style={{ fontSize: "0.9em" }}>
+                First Name:
+                <input type="text" id="editInputs" onChange={e => this.setState({ firstName: e.target.value })}/>
               </div>
               <br />
-              <div>
-                Last Name: <input type="text" id="editInputs" />
+              <div id="settings-individualInput" style={{ fontSize: "0.9em" }}>
+                Last Name:
+                <input type="text" id="editInputs" onChange={e => this.setState({ lastName: e.target.value })}/>
               </div>
               <br />
-              <div>
-                Email: <input type="text" id="editInputs" />
+              <div id="settings-individualInput" style={{ fontSize: "0.9em" }}>
+                Email: 
+                <input type="text" id="editInputs" onChange={e => this.setState({ email: e.target.value })}/>
               </div>
               <br />
-              Password: <input type="text" id="editInputs" />
+              <div id="settings-individualInput" style={{ fontSize: "0.9em" }}>
+                Password: 
+                <input type="text" id="editInputs" onChange={e => this.setState({ password: e.target.value })}/>
+              </div>
               <div id="settings-mainBtns">
-                <button id="settings-btns" type="button">Save Changes</button>
-                <button
-                id="settings-btns" 
-                  type="button"
-                  onClick={() => this.deleteAccount(this.state.id)}
-                >
-                  Delete Account
-                </button>
+                <div>
+                  <button id="settings-btns" type="button" onClick={() => this.editProfile()}>
+                    Save Changes
+                  </button>
+                </div>
+                <div>
+                  <button
+                    id="settings-btns"
+                    type="button"
+                    onClick={() => this.deleteAccount(this.state.id)}
+                  >
+                    Delete Account
+                  </button>
+                </div>
               </div>
             </form>
           </div>

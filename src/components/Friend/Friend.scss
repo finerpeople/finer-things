@@ -145,3 +145,8 @@
   border-radius: 2px;
   background: $lightBlue;
 }
+#recommend::-webkit-scrollbar-button:vertical:decrement, #my-friends::-webkit-scrollbar-button:vertical:decrement {
+  background: $darkBlue;
+  height: 0;
+  width: 0;
+ }
