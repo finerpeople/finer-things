@@ -1,2 +1,57 @@
-@import '../../style.scss'
+@import "../../style.scss";
 
+#mini-chat-container {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  background-color: $tan;
+  box-shadow: 3px 5px 20px $darkerGrey;
+  border-radius: 3px;
+}
+#mini-chat-msgs-header {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    width: 93%;
+    color: $darkerGrey;
+}
+#mini-chat-msgs-body{
+    display: flex;
+    justify-content: flex-start;
+    height: 22em;
+    width: 91%;
+    padding: .4em;
+    background-color: rgba(255, 255, 255, 0.801);
+    border-radius: 3px
+}
+
+#mini-chat-send-msg {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 91%;
+    height: 3em;
+    padding: 0;
+    margin: .4em 0;
+    color: $darkerGrey;
+}
+#mini-chat-send-msg .fa-video {
+    font-size: 1em;
+    margin: 0 .4em 0 0;
+}
+#mini-chat-send-msg .fa-paper-plane {
+    font-size: 1.3em;
+    margin: 0 0 0 .4em;
+}
+
+#mini-chat-input {
+    width: 100%;
+    height: 3em;
+    padding: .4em;
+    border-radius: 3px;
+    resize: none;
+    font-family: $bodyFontFamily;
+    letter-spacing: .1em;
+}

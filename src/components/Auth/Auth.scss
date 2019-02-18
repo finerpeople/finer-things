@@ -8,42 +8,45 @@
   align-items: center;
   width: 100vw;
   height: 100vh;
+  background-image: url("../../Background-Image.jpg");
+  background-position: center;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
 }
-#auth-bg-icons {
-  position: absolute;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: repeat(3, 1fr);
-  overflow: hidden;
-  width: 100vw;
-  height: 100vh;
-  background-color: $darkBlue;
-}
-.auth-left-bg {
-  background-color: $lightBlue;
-  grid-row: 1 / span 3;
-  height: 150%;
-  width: 150%;
-  transform: rotate(15deg);
-  margin-left: -250px;
-  margin-top: -250px;
-}
-.auth-right-bg {
-  background-color: $tan;
-  grid-column: 2 span 2;
-  grid-row: 2 / span 2;
-  height: 350%;
-  width: 200%;
-  margin-left: -150px;
-  margin-top: -800px;
-  transform: rotate(-45deg);
-}
+// #auth-bg-icons {
+//   position: absolute;
+//   display: grid;
+//   grid-template-columns: repeat(3, 1fr);
+//   grid-template-rows: repeat(3, 1fr);
+//   overflow: hidden;
+//   width: 100vw;
+//   height: 100vh;
+//   background-color: $darkBlue;
+// }
+// .auth-left-bg {
+//   background-color: $lightBlue;
+//   grid-row: 1 / span 3;
+//   height: 150%;
+//   width: 150%;
+//   transform: rotate(15deg);
+//   margin-left: -250px;
+//   margin-top: -250px;
+// }
+// .auth-right-bg {
+//   background-color: $tan;
+//   grid-column: 2 span 2;
+//   grid-row: 2 / span 2;
+//   height: 350%;
+//   width: 200%;
+//   margin-left: -150px;
+//   margin-top: -800px;
+//   transform: rotate(-45deg);
+// }
 
-#auth-main > p {
+#auth-main > img {
   position: fixed;
-  top: -0.1em;
-  color: $darkerGrey;
-  font-family: $appName;
+  top: 0.5em;
+  color: white;
   font-size: 3em;
   font-weight: 700;
   letter-spacing: 0.2em;
@@ -52,15 +55,25 @@
 #login-none {
   display: none;
 }
+#login-blur {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 400px;
+  height: 285px;
+  background-color: #ffffffee;
+  filter: blur(.02em);
+}
 #login-container {
   position: relative;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: $darkerGrey;
   width: 400px;
-  height: 300px;
+  height: 285px;
   border-radius: 3px;
 }
 
@@ -69,39 +82,50 @@
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
-  width: 15em;
+  width: 18em;
 }
 #login-row p {
   font-family: $bodyFontFamily;
-  font-size: 10px;
+  font-size: 11px;
   font-weight: 500;
   letter-spacing: 1px;
-  color: white;
 }
-#auth-main input {
-  margin: 0.4em 0;
+.login-input {
+  margin: 1em 0;
   height: $inputHeight;
   width: 100%;
   border-radius: 2px;
   border: none;
-  font-size: .8em;
+  font-size: 0.8em;
+  background: transparent;
+  border-bottom: 1px solid $darkGrey;
   font-family: $bodyFontFamily;
-  padding-left: .5em;
+  padding-left: 1em;
+  font-style: italic;
+}
+.login-input:-webkit-autofill,
+.login-input:-webkit-autofill:hover, 
+.login-input:-webkit-autofill:focus, 
+.login-input:-webkit-autofill:active  {
+    -webkit-box-shadow: 0 0 0 40px #F8F8F8 inset !important;
 }
 
 #login-row button {
-  margin: 1em 0;
-  height: 2.3em;
-  width: 100%;
-  background-color: $tan;
+  margin: 1em 3em;
+  padding: 0;
+  height: 1.9em;
+  width: 3.6em;
+  background-color: transparent;
   border: none;
-  border-radius: 2px;
+  border-bottom: .3em solid $tan;
+  color: $darkGrey;
   font-family: $bodyFontFamily;
   font-weight: 600;
   letter-spacing: 1px;
 }
-#login-row p > button {
-  background-color: $lightGrey;
+#login-row span {
+  font-style: italic;
+  text-decoration: underline;
 }
 ///////////////////////////////////////////////////////////////////////
 #register-none {
@@ -138,11 +162,13 @@
 }
 ////////////////////////////////////////////////////////////////////
 @media (max-width: 550px) {
-  #login-container, #register-container {
+  #login-container,
+  #register-container {
     width: 300px;
     height: 240px;
   }
-  #login-row, #register-row {
+  #login-row,
+  #register-row {
     width: 12em;
   }
   #auth-main input {

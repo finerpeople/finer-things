@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import axios from "axios";
 import { Link, withRouter } from "react-router-dom";
 import "./Nav.scss";
+import logo from '../../The-Finer-Things.png'
 
 class Nav extends Component {
   state = {
@@ -51,7 +52,7 @@ class Nav extends Component {
       <div>
         <div className={headerStyle}>
           <div className="logo">
-            <p>The Finer Things</p>
+            <img src={logo} alt=""/>
           </div>
           <div className="title">
             <p>{title}</p>
