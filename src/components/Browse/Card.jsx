@@ -13,7 +13,8 @@ export default class Card extends Component {
     state = {
         bookModal: false,
         isbn: this.props.isbn,
-        moreModal: false
+        moreModal: false,
+        friends: []
     }
 
     toggle = () => {
@@ -62,12 +63,21 @@ export default class Card extends Component {
         this.toggle()
     }
 
-    recommendToFriend = async () => {
+    getFriends = async () => {
+        const friends = await axios.get(`/api/friendsData/${this.props.user_id}`)
+        this.setState({
+            friends: friends.data
+        })
+        console.log(this.state.friends)
+    }
+
+    recommendToFriend = async (user_id) => {
         const book = await this.getSingleBook();
+        // this.getFriends();
         await axios.post('/library/recommendBook', {
-            user_id: 17,
+            user_id: user_id,
             isbn: this.state.isbn,
-            friend_id: 12,
+            friend_id: this.props.user_id,
             book_img: book.imageLinks.thumbnail,
             title: book.title,
             author: book.authors[0],
@@ -81,8 +91,16 @@ export default class Card extends Component {
     }
 
     render() {
+        let friendsList = this.state.friends.map((friend) => {
+            return (
+                <div key={friend.user_id}>
+                    <p onClick={() => this.recommendToFriend(friend.user_id)}>{`${friend.first_name} ${friend.last_name}`}</p>
+                </div>
+            )
+        })
         return (
-            <div className='card-main' >
+            <div className='card-main'>
+                {friendsList}
                 {this.state.bookModal ? (
                     <div className='book-modal-container'>
                         <Book
@@ -124,10 +142,11 @@ export default class Card extends Component {
                                     <i className="fas fa-plus add-to-library"
                                         onClick={this.addToLibrary}></i>
                                     <i className="fas fa-share search-share"
-                                        onClick={this.recommendToFriend}></i>
+                                        onClick={this.getFriends}></i>
                                 </div>
                             </div>
                         )
+
                 ) : (
                         <div key={this.props.i} className='br-single-cover'>
                             <img src={this.props.img} alt='book cover' className='br-book-cover' onClick={this.toggle} />
@@ -135,7 +154,7 @@ export default class Card extends Component {
                                 <i className="fas fa-plus br-add-to-library"
                                     onClick={this.addToLibrary}></i>
                                 <i className="fas fa-share br-search-share"
-                                    onClick={this.recommendToFriend}></i>
+                                    onClick={this.getFriends}></i>
                             </div>
                         </div>
                     )}
