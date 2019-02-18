@@ -47,14 +47,20 @@ export default class Book extends Component {
 
   inLibrary = async () => {
     let res = await axios.get(`/library/getOneBook/${this.state.user_id}&${this.state.isbn}`)
-    if(res.data.length === 0){
+    if(this.props.myLibrary) {
       this.setState({
-        libraryButton: "Add to My Library"
+        libraryButton: 'Enjoy reading this book!'
       })
     } else {
-      this.setState({
-        libraryButton: "Already in My Library"
-      })
+      if(res.data.length === 0){
+        this.setState({
+          libraryButton: "Add to My Library"
+        })
+      } else {
+        this.setState({
+          libraryButton: "Already in My Library"
+        })
+      }
     }
   }
 
@@ -68,6 +74,11 @@ export default class Book extends Component {
           <div className='book-info-header flexed'>
             <p className='book-title'>{this.state.title}</p>
             <p className='book-author'>{this.state.author}</p>
+            {this.state.libraryButton === 'Add to My Library' ? (
+              <button className='book-add' onClick={this.props.modalAddToLibrary}>{this.state.libraryButton}</button>
+            ) : (
+              <button className='book-status'>{this.state.libraryButton}</button>
+            )}
             <StarRatingComponent
               name="rating"
               editing={false}
@@ -75,7 +86,6 @@ export default class Book extends Component {
               emptyStarColor={'#5d5c61'}
               value={this.state.rating}
             />
-            <button onClick={this.props.addToLibrary}>{this.state.libraryButton}</button>
           </div>
         </div>
         <div className='book-info-summary flexed'>

@@ -143,5 +143,11 @@
   width: .1em;
   height: .1em;
   border-radius: 2px;
-  background: $lightBlue;
+  background: $tan;
 }
+
+#recommend::-webkit-scrollbar-button:vertical:decrement, #my-friends::-webkit-scrollbar-button:vertical:decrement {
+  background: $darkBlue;
+  height: 0;
+  width: 0;
+ }
