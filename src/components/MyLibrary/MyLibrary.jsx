@@ -67,7 +67,7 @@ export default class MyLibrary extends Component {
   render() {
     let displayBooks = this.state.myLibrary.map((book, i) => {
       return (
-        <div key={i}>
+        <div key={book.user_library_id}>
           <Card
             i={i}
             user_library_id={book.user_library_id}
