@@ -57,30 +57,31 @@ export default class Setting extends Component {
     const res = await axios.put(`/api/updateAccountStatus/${id}`);
     this.props.history.push("/");
   };
-  editProfile = async () => {
-    const { email, summary, firstName, lastName, password } = this.state;
-    await axios
-      .put("/api/edit-profile", { summary: summary, firstName: firstName, lastName: lastName, email: email, password: password })
-      .then(this.setState({ emailEditable: false }));
-  };
-  edit = () => {
-    if (!this.state.editEmailDone) {
-      this.setState({ emailEditable: true, editEmailDone: true });
-    } else {
-      this.setState({ emailEditable: false, editEmailDone: false });
-    }
+  editProfile = async id => {
+    // const res = await axios.put(`/api/edit-profile/${id}`)
+    // console.log(res.data)
+    // return res.data
+    ////////////////////////////////////////////////////////////////
+    const { summary, email, firstName, lastName, password } = this.state
+    const res = await axios.put(`/api/edit-profile/${id}`, {summary: summary, firstName: firstName, lastName: lastName, email: email, password: password})
+    this.setState()
+    console.log(lastName)
+    console.log(summary)
+    // return res.data
+
   };
 
   render() {
     return (
+      <div id="settings-entireContainer">
       <div id="settings-mainContainer">
         <div id="settings-profileContainer">
           <div className="colorContainer">
             <div id="settings-picContainer">
               <img
                 id="settings-profileImg"
-                src="https://vignette.wikia.nocookie.net/theoffice/images/2/25/Oscar_Martinez.jpg/revision/latest/scale-to-width-down/2000?cb=20170701085818"
-                alt="Oscar"
+                src={this.state.profilePic}
+                alt="pic of me"
               />
               <div className="editProfileBtns">
                 <div>
@@ -97,13 +98,10 @@ export default class Setting extends Component {
             <div className="settings-AboutWrapper">
               <div className="settings-aboutMe">
                 <br />
-                <p id="settings-summary">
+                <div id="settings-summary">
                   <p>About Me</p>
-                  I am an Accountant by day and an avid reader by
-                  night. When not crunching numbers, I enjoy a good history or
-                  nonfiction book. I despise Anne Geddes photography.
-                  {/* {this.state.summary} */}
-                </p>
+                  {this.state.summary}
+                </div>
                 <br />
                 <p id="settings-email">
                   Name: {this.state.firstName} {this.state.lastName}
@@ -121,31 +119,57 @@ export default class Setting extends Component {
             <form action="" id="settings-form">
               <div id="settings-individualInput" style={{ fontSize: "0.9em" }}>
                 About Me:{" "}
-                <textarea name="about" id="aboutMeText" cols="45" rows="3" onChange={e => this.setState({ summary: e.target.value })}/>
+                <textarea
+                  name="about"
+                  id="aboutMeText"
+                  cols="45"
+                  rows="3"
+                  onChange={e => this.setState({ summary: e.target.value })}
+                />
               </div>
               <br />
               <div id="settings-individualInput" style={{ fontSize: "0.9em" }}>
                 First Name:
-                <input type="text" id="editInputs" onChange={e => this.setState({ firstName: e.target.value })}/>
+                <input
+                  type="text"
+                  id="editInputs"
+                  onChange={e => this.setState({ firstName: e.target.value })}
+                />
               </div>
               <br />
               <div id="settings-individualInput" style={{ fontSize: "0.9em" }}>
                 Last Name:
-                <input type="text" id="editInputs" onChange={e => this.setState({ lastName: e.target.value })}/>
+                <input
+                  type="text"
+                  id="editInputs"
+                  onChange={e => this.setState({ lastName: e.target.value })}
+                />
               </div>
               <br />
               <div id="settings-individualInput" style={{ fontSize: "0.9em" }}>
-                Email: 
-                <input type="text" id="editInputs" onChange={e => this.setState({ email: e.target.value })}/>
+                Email:
+                <input
+                  type="text"
+                  id="editInputs"
+                  onChange={e => this.setState({ email: e.target.value })}
+                />
               </div>
               <br />
               <div id="settings-individualInput" style={{ fontSize: "0.9em" }}>
-                Password: 
-                <input type="text" id="editInputs" onChange={e => this.setState({ password: e.target.value })}/>
+                Password:
+                <input
+                  type="text"
+                  id="editInputs"
+                  onChange={e => this.setState({ password: e.target.value })}
+                />
               </div>
               <div id="settings-mainBtns">
                 <div>
-                  <button id="settings-btns" type="button" onClick={() => this.editProfile()}>
+                  <button
+                    id="settings-btns"
+                    type="button"
+                    onClick={() => this.editProfile(this.state.id)}
+                  >
                     Save Changes
                   </button>
                 </div>
@@ -162,6 +186,7 @@ export default class Setting extends Component {
             </form>
           </div>
         </div>
+      </div>
       </div>
     );
   }

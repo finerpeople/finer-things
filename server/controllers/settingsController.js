@@ -12,9 +12,9 @@ module.exports = {
     res.status(200).send(userData);
   },
   editProfile: async (req, res) => {
-    const { email, hash } = req.body;
-    const db = req.app.get("db");
-    let updatedUser = await db.user.edit_profile({ email, hash });
+    const { id, summary, firstName, lastName, email, password } = req.body; 
+    const db = req.app.get('db');
+    let updatedUser = await db.user.edit_profile({ id: id, summary: summary, firstName: firstName, lastName: lastName, email: email, password: password });
     res.status(200).send(updatedUser);
   }
 };
