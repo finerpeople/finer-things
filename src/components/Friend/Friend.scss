@@ -63,6 +63,7 @@
   overflow-y: scroll;
 }
 #my-friends-card {
+  position: relative;
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
@@ -70,6 +71,50 @@
   width: 150px;
   border-radius: 2px;
   box-shadow: 0px 1px 2px $lightGrey;
+  overflow: hidden;
+}
+#my-friends-card-more {
+  display: none;
+  position: absolute;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  top: -25px;
+  left: 0;
+  right: 0;
+  padding: 0 .5em;
+  background-color: rgba(255, 255, 255, 0.493);
+  transition: all .5s;
+}
+#my-friends-card:hover #my-friends-card-more {
+  top: 0;
+  transition: all .5s;
+}
+#my-friends-card-more > button {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  font-family: $bodyFontFamily;
+  background-color: $lightBlue;
+  color: white;
+  height: 1.5em;
+  width: 4.5em;
+  margin: 0.4em 0;
+  padding: 0.1em;
+  font-size: 0.7em;
+  letter-spacing: 0.03em;
+  border-radius: 2px;
+  border: none;
+}
+#my-friends-card-more > button:hover {
+  background-color: $darkBlue;
+  color: white;
+}
+#my-friends-card-more > i {
+  color: $darkGrey;
+}
+#my-friends-card-more > i:hover {
+  color: $darkerGrey;
 }
 #my-friends-pic-container {
   display: flex;
@@ -115,26 +160,7 @@
   font-weight: 600;
   letter-spacing: 0.03em;
 }
-#my-friend-name > button {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  font-family: $bodyFontFamily;
-  background-color: $lightBlue;
-  color: white;
-  height: 1.5em;
-  width: 2.5em;
-  margin: 0.4em 0;
-  padding: 0.1em;
-  font-size: 0.7em;
-  letter-spacing: 0.03em;
-  border-radius: 2px;
-  border: none;
-}
-#my-friend-name > button:hover {
-  background-color: $darkBlue;
-  color: white;
-}
+
 ////////////////////////////////////////////////////////////////
 #recommend {
   display: grid;

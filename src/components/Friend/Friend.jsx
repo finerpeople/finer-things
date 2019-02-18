@@ -1,12 +1,14 @@
 import React, { Component } from "react";
 import axios from "axios";
 import "./Friend.scss";
+import MiniChat from "../MiniChat/MiniChat";
 
 export default class Friend extends Component {
   state = {
     userId: "",
     friends: [],
-    recFriends: []
+    recFriends: [],
+    displayChat: false,
   };
 
   componentDidMount = async () => {
@@ -37,13 +39,41 @@ export default class Friend extends Component {
     });
   };
 
+  addFriend = async (userId, friendId) => {
+    const res = await axios.post("/api/addFriend", { userId, friendId });
+    this.setState({
+      friends: res.data.friends,
+      recFriends: res.data.recFriends
+    });
+  };
+
+  toggleChat = () => {
+    this.setState({displayChat: !this.state.displayChat})
+  }
+
+  deleteFriend = async (userId, friendId) => {
+    const res = await axios.delete(`/api/deleteFriend/${userId}&${friendId}`);
+    this.setState({
+      friends: res.data.friends,
+      recFriends: res.data.recFriends
+    });
+  };
+
   render() {
     const { userId, friends, recFriends } = this.state;
     const myFriends = friends.map((friend, i) => {
-      console.log(friend);
       const { first_name, last_name, profile_pic, user_id } = friend;
+      const friendId = user_id;
       return (
         <div key={i} id="my-friends-card">
+          <div id="my-friends-card-more">
+            <i className="fas fa-comments" onClick={() => this.toggleChat()}/>
+            <button
+              onClick={() => this.deleteFriend(this.state.userId, friendId)}
+            >
+              Remove
+            </button>
+          </div>
           <div id="my-friends-pic-container">
             <div
               className="friends-profile-pic"
@@ -52,7 +82,6 @@ export default class Friend extends Component {
           </div>
           <div id="my-friend-name">
             <p>{`${first_name} ${last_name}`}</p>
-            <button>Add</button>
           </div>
         </div>
       );
@@ -61,6 +90,7 @@ export default class Friend extends Component {
       const { first_name, last_name, profile_pic, user_id } = friend;
       if (user_id === userId) return;
       const profilePic = `"backgroundColor:url(${profile_pic})"`;
+      const friendId = user_id;
       return (
         <div key={i} id="my-rec-card">
           <div id="my-rec-pic-container">
@@ -71,7 +101,9 @@ export default class Friend extends Component {
           </div>
           <div id="my-rec-name">
             <p>{`${first_name} ${last_name}`}</p>
-            <button>Add</button>
+            <button onClick={() => this.addFriend(this.state.userId, friendId)}>
+              Add
+            </button>
           </div>
         </div>
       );
@@ -98,6 +130,7 @@ export default class Friend extends Component {
             {myFriends}
           </div>
         </div>
+        <MiniChat userId={this.state.userId} display={this.state.displayChat} toggleChat={this.toggleChat}/>
       </div>
     );
   }

@@ -26,7 +26,6 @@ export default class Auth extends Component {
       if (res.data.loggedIn) {
         this.props.history.push("/my-library");
       }
-      console.log(res.data);
       const id = res.data.id;
       if (res.data.message === "Account suspended") {
         Swal.fire({
