@@ -29,7 +29,7 @@ CREATE TABLE FRIEND (
 
 
 CREATE TABLE COMMENTS (
-    comment_id integer PRIMARY KEY,
+    comment_id serial PRIMARY KEY,
     user_id integer NOT NULL REFERENCES USERS(user_id),
     time_stamp date,
     comment text
