@@ -6,3 +6,4 @@ where user_id in
 		from friend
 		where user_id = ${id}
 	)
+ORDER BY u.first_name;
