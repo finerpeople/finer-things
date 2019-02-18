@@ -20,11 +20,9 @@
   justify-content: flex-start;
   align-items: center;
   grid-column: 2 / span 2;
-  color: $white;
-  font-weight: 600;
-  letter-spacing: 0.1em;
-  font-size: $bodyFontSize;
-  font-family: $titleFontFamily;
+}
+.logo img {
+  height: 3em;
 }
 .title {
   display: flex;
@@ -72,7 +70,7 @@
   grid-template-columns: $navBarWidth;
   grid-template-rows: repeat(5, 6em);
   height: calc(100% - 4.5em);
-  background-color: $lighterGrey;
+  background-color: white;
   box-shadow: -2px 0px 5px 0px $darkerGrey;
   z-index: 1;
 }

@@ -1,1 +1,159 @@
-@import '../../style.scss'
+@import "../../style.scss";
+
+#club {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  margin-left: $navBarWidth;
+  margin-top: $headerHeight;
+  box-sizing: border-box;
+  height: calc(100vh - 4.6em);
+  background-color: $lighterGrey;
+  box-sizing: border-box;
+}
+////////////////////  Header  //////////////////////
+#club-header {
+  display: grid;
+  grid-template-columns: repeat(9, 1fr);
+  margin-top: 2em;
+}
+////////////////////////  Body  ///////////////////////
+#club-body {
+  display: flex;
+  justify-content: flex-start;
+  height: calc(100vh - 8em - 4.6em);
+  width: 100%;
+  margin: 2em 2.4em;
+}
+#club-body h4 {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  font-family: $titleFontFamily;
+  letter-spacing: 0.05em;
+}
+#recommend h4 {
+  align-items: flex-end;
+  padding: 1em .5em;
+  margin-top: .3em;
+  grid-column: 1 / span 2;
+  grid-row: 1;
+}
+#my-clubs h4 {
+  display: flex;
+  align-items: flex-end;
+  padding: 1em 1em;
+  margin-top: .3em;
+  grid-column: 1 / span 4;
+  grid-row: 1;
+}
+/////////////////////////////////////////////////////////////////
+#my-clubs {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: 2em repeat(6, 1fr);
+  width: 45em;
+  border-radius: 2px;
+  padding: .7em;
+  margin-left: 1.5em;
+  box-shadow: 0px 1px 10px $buttonShadow;
+  background-color: white;
+  overflow-y: scroll;
+}
+#my-clubs-card {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+#my-clubs-pic-container {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  border-radius: 2px;
+  height: 170px;
+  width: 150px;
+  overflow: hidden;
+}
+.clubs-profile-pic {
+  height: 170px;
+  width: 150px;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  border-radius: 2px 2px 0 0;
+  box-shadow: 0px 1px 10px $buttonShadow;
+}
+#my-clubs-card > p {
+  display: flex;
+  align-items: center;
+  margin: 0 0 .7em 0;
+  font-family: $titleFontFamily;
+  height: 2.2em;
+  font-size: .8em;
+  font-weight: 600;
+  letter-spacing: .03em;
+}
+////////////////////////////////////////////////////////////////
+#recommend {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: 2em repeat(6, 1fr);
+  width: 20em;
+  box-shadow: 0px 1px 10px $buttonShadow;
+  border-radius: 2px;
+  padding: .7em;
+  margin: 0 1.5em;
+  background-color: white;
+  overflow-y: scroll;
+}
+#my-rec-card {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+#my-rec-pic-container {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  border-radius: 2px;
+  height: 155px;
+  width: 135px;
+  overflow: hidden;
+}
+.rec-profile-pic {
+  height: 155px;
+  width: 135px;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  border-radius: 2px 2px 0 0;
+  box-shadow: 0px 1px 10px $buttonShadow;
+}
+// .rec-profile-pic:focus {
+//   flex-grow: 2;
+// }
+#my-rec-card > p {
+  display: flex;
+  align-items: center;
+  margin: 0 0 .7em 0;
+  font-family: $titleFontFamily;
+  height: 2.2em;
+  font-size: .8em;
+  font-weight: 600;
+  letter-spacing: .03em;
+}
+
+#recommend::-webkit-scrollbar, #my-clubs::-webkit-scrollbar {
+  width: .2em;
+}
+#recommend::-webkit-scrollbar-thumb, #my-clubs::-webkit-scrollbar-thumb {
+  width: .1em;
+  height: .1em;
+  border-radius: 2px;
+  background: $tan;
+}
+#recommend::-webkit-scrollbar-button:vertical:decrement, #my-clubs::-webkit-scrollbar-button:vertical:decrement {
+  background: $darkBlue;
+  height: 0;
+  width: 0;
+}

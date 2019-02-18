@@ -7,7 +7,8 @@
   margin-left: $navBarWidth;
   margin-top: $headerHeight;
   box-sizing: border-box;
-  height: 525px;
+  height: calc(100vh - 4.6em);
+  background-color: $lighterGrey;
   box-sizing: border-box;
 }
 ////////////////////  Header  //////////////////////
@@ -19,10 +20,10 @@
 ////////////////////////  Body  ///////////////////////
 #friend-body {
   display: flex;
-  justify-content: space-between;
-  height: 100%;
+  justify-content: flex-start;
+  height: calc(100vh - 8em - 4.6em);
   width: 100%;
-  margin: 2.2em 2.4em;
+  margin: 2em 2.4em;
 }
 #friend-body h4 {
   display: flex;
@@ -33,8 +34,8 @@
 }
 #recommend h4 {
   align-items: flex-end;
-  padding: 1em .5em;
-  margin-top: .3em;
+  padding: 1em 0.5em;
+  margin-top: 0.3em;
   grid-column: 1 / span 2;
   grid-row: 1;
 }
@@ -42,7 +43,7 @@
   display: flex;
   align-items: flex-end;
   padding: 1em 1em;
-  margin-top: .3em;
+  margin-top: 0.3em;
   grid-column: 1 / span 4;
   grid-row: 1;
 }
@@ -51,102 +52,205 @@
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: 2em repeat(6, 1fr);
+  grid-gap: 0.7em 0.5em;
+  justify-items: center;
   width: 45em;
-  height: 100%;
-  box-shadow: 0px 1px 10px $buttonShadow;
   border-radius: 2px;
-  padding: .7em;
+  padding: 0.7em;
+  margin-left: 1.5em;
+  box-shadow: 0px 1px 10px $buttonShadow;
+  background-color: white;
   overflow-y: scroll;
 }
-#my-friends-cards {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-}
 #my-friends-card {
+  position: relative;
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-  border-radius: 5px;
+  height: 195px;
+  width: 150px;
+  border-radius: 2px;
+  box-shadow: 0px 1px 2px $lightGrey;
+  overflow: hidden;
+}
+#my-friends-card-more {
+  display: none;
+  position: absolute;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  top: -25px;
+  left: 0;
+  right: 0;
+  padding: 0 .5em;
+  background-color: rgba(255, 255, 255, 0.493);
+  transition: all .5s;
+}
+#my-friends-card:hover #my-friends-card-more {
+  top: 0;
+  transition: all .5s;
+}
+#my-friends-card-more > button {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  font-family: $bodyFontFamily;
+  background-color: $lightBlue;
+  color: white;
+  height: 1.5em;
+  width: 4.5em;
+  margin: 0.4em 0;
+  padding: 0.1em;
+  font-size: 0.7em;
+  letter-spacing: 0.03em;
+  border-radius: 2px;
+  border: none;
+}
+#my-friends-card-more > button:hover {
+  background-color: $darkBlue;
+  color: white;
+}
+#my-friends-card-more > i {
+  color: $darkGrey;
+}
+#my-friends-card-more > i:hover {
+  color: $darkerGrey;
+}
+#my-friends-pic-container {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
   border-radius: 2px;
   height: 170px;
   width: 150px;
   overflow: hidden;
 }
-#my-friends-card img {
-  width: auto;
-  max-height: 100%;
+.friends-profile-pic {
+  height: 170px;
+  width: 150px;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
   border-radius: 2px 2px 0 0;
   box-shadow: 0px 1px 10px $buttonShadow;
 }
-#my-friends-cards > p {
+#my-friends-card > p {
   display: flex;
   align-items: center;
-  margin: 0 0 .7em 0;
+  margin: 0 0 0.7em 0;
   font-family: $titleFontFamily;
   height: 2.2em;
-  font-size: .8em;
+  font-size: 0.8em;
   font-weight: 600;
-  letter-spacing: .03em;
+  letter-spacing: 0.03em;
 }
+#my-friend-name {
+  display: flex;
+  justify-content: space-between;
+  width: 135px;
+  padding: 0 0.2em;
+}
+#my-friend-name > p {
+  display: flex;
+  align-items: center;
+  margin: 0;
+  font-family: $titleFontFamily;
+  height: 2.2em;
+  font-size: 0.7em;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+}
+
 ////////////////////////////////////////////////////////////////
 #recommend {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   grid-template-rows: 2em repeat(6, 1fr);
+  grid-gap: 0.7em 0.5em;
+  justify-items: center;
   width: 20em;
-  height: 100%;
   box-shadow: 0px 1px 10px $buttonShadow;
   border-radius: 2px;
-  padding: .7em;
+  padding: 0.7em;
+  margin: 0 1.5em;
+  background-color: white;
   overflow-y: scroll;
-}
-#my-rec-cards {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
 }
 #my-rec-card {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-  border-radius: 5px;
+  height: 180px;
+  width: 135px;
+  border-radius: 2px;
+  box-shadow: 0px 1px 2px $lightGrey;
+}
+#my-rec-pic-container {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
   border-radius: 2px;
   height: 155px;
   width: 135px;
+  // margin-top: .5em;
   overflow: hidden;
 }
-#my-rec-card img {
-  width: auto;
-  height: 100%;
-  border-radius: 2px 2px 0 0;
+.rec-profile-pic {
+  height: 155px;
+  width: 135px;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  // border-radius: 2px 2px 0 0;
   box-shadow: 0px 1px 10px $buttonShadow;
 }
-#my-rec-card img:focus {
-  flex-grow: 2;
+#my-rec-name {
+  display: flex;
+  justify-content: space-between;
+  width: 135px;
+  padding: 0 0.2em;
 }
-#my-rec-cards > p {
+#my-rec-name > p {
   display: flex;
   align-items: center;
-  margin: 0 0 .7em 0;
+  margin: 0;
   font-family: $titleFontFamily;
   height: 2.2em;
-  font-size: .8em;
+  font-size: 0.7em;
   font-weight: 600;
-  letter-spacing: .03em;
+  letter-spacing: 0.03em;
+}
+#my-rec-name > button {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  font-family: $bodyFontFamily;
+  background-color: $lightBlue;
+  color: white;
+  height: 1.5em;
+  width: 2.5em;
+  margin: 0.4em 0;
+  padding: 0.1em;
+  font-size: 0.7em;
+  letter-spacing: 0.03em;
+  border-radius: 2px;
+  border: none;
+}
+#my-rec-name > button:hover {
+  background-color: $darkBlue;
+  color: white;
 }
 
-#recommend::-webkit-scrollbar, #my-friends::-webkit-scrollbar {
-  width: .2em;
+#recommend::-webkit-scrollbar,
+#my-friends::-webkit-scrollbar {
+  width: 0.1em;
 }
-#recommend::-webkit-scrollbar-thumb, #my-friends::-webkit-scrollbar-thumb {
-  width: .1em;
-  height: .1em;
-  border-radius: 2px;
-  background: $lightBlue;
+#recommend::-webkit-scrollbar-thumb,
+#my-friends::-webkit-scrollbar-thumb {
+  background: rgb(206, 206, 206);
 }
-#recommend::-webkit-scrollbar-button:vertical:decrement, #my-friends::-webkit-scrollbar-button:vertical:decrement {
-  background: $darkBlue;
+#recommend::-webkit-scrollbar-button:vertical:decrement,
+#my-friends::-webkit-scrollbar-button:vertical:decrement {
   height: 0;
   width: 0;
- }
+}

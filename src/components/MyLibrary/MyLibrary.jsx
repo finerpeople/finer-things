@@ -25,8 +25,6 @@ export default class MyLibrary extends Component {
   }
 
   dynamicSort(key) {
-    // console.log(key)
-    // console.log(this.state.myLibrary)
     var sortOrder = 1;
 
     if(key[0] === "-") {
@@ -35,7 +33,7 @@ export default class MyLibrary extends Component {
     }
     // console.log(key)
     return function (a, b) {
-      if (sortOrder == -1) {
+      if (sortOrder === -1) {
         return b[key].toString().localeCompare(a[key].toString());
       } else {
         return a[key].toString().localeCompare(b[key].toString());
@@ -44,14 +42,11 @@ export default class MyLibrary extends Component {
   }
 
   sortBooks = async (sortOrder) => {
-    // console.log(sortOrder)
-    // console.log(this.state.myLibrary)
     let sortedArray = [...this.state.myLibrary]
     await sortedArray.sort(this.dynamicSort(sortOrder))
     this.setState({
       myLibrary: sortedArray
     })
-    // console.log(this.state.myLibrary)
   }
 
   getSession = async () => {
@@ -83,17 +78,15 @@ export default class MyLibrary extends Component {
             myLibrary={true}
             deleteBook = {() => this.deleteBook(book.user_library_id)}
           />
-          {/* {console.log(book.user_library_id)} */}
-          {/* <button onClick={() => this.deleteBook(book.user_library_id)}>delete</button> */}
         </div>
       )
     })
     return (
       <div className='my-lib-container'>
-        <div>
-          <button onClick={() => this.sortBooks("book_title")}>sort</button>
-          <select name="sort" id="sort" onChange={(e) => this.sortBooks(e.target.value)}>
-            <option value="">Sort Options</option>
+        <div className='my-lib-title'>My Books</div>
+        <div className='my-lib-sort-container'>
+          <select className='my-lib-sort' name="sort" id="sort" onChange={(e) => this.sortBooks(e.target.value)}>
+            <option value="-date_added">Sort Options</option>
             <option value="book_title">Book Title</option>
             <option value="book_author">Author</option>
             <option value="-user_rating">Rating High to Low</option>
@@ -102,7 +95,6 @@ export default class MyLibrary extends Component {
             <option value="date_added">Oldest Added</option>
           </select>
         </div>
-        <div className='my-lib-title'>My Books</div>
         <div className='my-lib-list'>{displayBooks}</div>
       </div>
     );

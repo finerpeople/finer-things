@@ -33,12 +33,18 @@
     right: 0.5rem;
     top: 0.3rem;
     cursor: pointer;
-
+    color: $darkGrey;
+    transition: color .2s;
 }
+
+.dots:hover {
+    color: $darkerGrey;
+}
+
 
 .more-modal {
     position: absolute;
-    background-color: brown;
+    background-color: $tan;
     height: 3.4rem;
     width: 4.4rem;
     left: 4rem;
@@ -72,18 +78,28 @@
 
 .more-delete:hover {
     //extends .more-share
-    color: $lightGrey;
+    color: $darkerGrey;
 }
 
 .more-share {
     @extend .more-delete;
 }
 
-.book-delete {
+#book-delete {
     //extends .my-lib-share
+    color: $lighterGrey;
+    transition: color .2s;
+}
+
+#book-delete:hover {
     color: $lighterGrey;
 }
 
 .my-lib-share {
-    @extend .book-delete;
+    @extend #book-delete;
 }
+
+.margin {
+    margin-top: $navBarWidth;
+}
+

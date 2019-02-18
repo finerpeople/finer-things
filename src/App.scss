@@ -43,3 +43,8 @@
   height: 4.5em;
   width: 0;
 }
+::-webkit-scrollbar-button:vertical:increment {
+  background: white;
+  height: 0;
+  width: 0;
+}

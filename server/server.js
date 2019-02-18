@@ -47,6 +47,8 @@ app.put('/api/edit-profile/:id', settingsCtrl.editProfile)
 // Friends
 app.get('/api/friendsData/:id', friendsCtrl.getFriends)
 app.get('/api/recFriendsData/:id', friendsCtrl.getRecFriends)
+app.post('/api/addFriend', friendsCtrl.addFriend)
+app.delete('/api/deleteFriend/:userId&:friendId', friendsCtrl.deleteFriend)
 
 
 massive(SERVER_CONNECTION)
