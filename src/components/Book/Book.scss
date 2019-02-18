@@ -55,6 +55,31 @@
     margin-bottom: 3rem;
 }
 
+
+.book-status {
+    margin-bottom: 0.5rem;
+    background: none;
+    border: none;
+    color: $lighterGrey;
+    border-radius: 10px;
+    transition: background-color .2s;
+    padding: 0;
+}
+
 .book-add {
+    margin-bottom: 0.5rem;
+    background: none;
+    color: $lighterGrey;
+    border-radius: 10px;
+    transition: background-color .2s;
+    border: solid $tan 0.1rem;
     cursor: pointer;
+}
+
+.book-add:focus {
+    outline: none;
+}
+
+.book-add:hover {
+    background-color: $tan;
 }

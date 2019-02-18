@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Swal from 'sweetalert2';
 import Book from '../Book/Book';
 
 
@@ -28,10 +29,7 @@ export default class Card extends Component {
     }
 
     getSingleBook = async () => {
-        let res = await axios.get(`https://www.googleapis.com/books/v1/volumes?q=isbn:${this.state.isbn}
-        &maxResults=1&langRestrict=en&fields=kind, items(id, volumeInfo/title, 
-        volumeInfo/authors, volumeInfo/industryIdentifiers, 
-        volumeInfo/categories, volumeInfo/imageLinks)`)
+        let res = await axios.get(`https://www.googleapis.com/books/v1/volumes?q=isbn:${this.state.isbn}&maxResults=1&langRestrict=en&fields=kind, items(id, volumeInfo/title, volumeInfo/authors, volumeInfo/industryIdentifiers, volumeInfo/categories, volumeInfo/imageLinks)`)
         return res.data.items[0].volumeInfo
     }
 
@@ -45,6 +43,22 @@ export default class Card extends Component {
             author: book.authors[0],
             category: book.categories[0]
         })
+        const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000,
+            customClass: 'margin'
+          });
+          
+          Toast.fire({
+            type: 'success',
+            title: 'Added to My Library'
+          })
+    }
+
+    modalAddToLibrary = async () => {
+        await this.addToLibrary()
         this.toggle()
     }
 
@@ -73,7 +87,7 @@ export default class Card extends Component {
                     <div className='book-modal-container'>
                         <Book
                             isbn={this.state.isbn}
-                            addToLibrary={this.addToLibrary}
+                            modalAddToLibrary={this.modalAddToLibrary}
                             myLibrary={this.props.myLibrary}
                         />
                         <button className='close-book-modal' onClick={this.toggle}>X</button>
@@ -93,7 +107,7 @@ export default class Card extends Component {
                                     >
                                         <div className='more-delete flexed' onClick={this.deleteBook}>
                                             <p className='more-delete-text'>Delete</p>
-                                            <i className="far fa-trash-alt book-delete"></i>
+                                            <i className="far fa-trash-alt book-delete" id='book-delete'></i>
                                         </div>
                                         <div className='more-share flexed'>
                                             <p className='more-share-text'>Share</p>

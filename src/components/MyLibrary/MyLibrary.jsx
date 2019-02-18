@@ -91,8 +91,8 @@ export default class MyLibrary extends Component {
     return (
       <div className='my-lib-container'>
         <div className='my-lib-title'>My Books</div>
-        <div>
-          <select name="sort" id="sort" onChange={(e) => this.sortBooks(e.target.value)}>
+        <div className='my-lib-sort-container'>
+          <select className='my-lib-sort' name="sort" id="sort" onChange={(e) => this.sortBooks(e.target.value)}>
             <option value="">Sort Options</option>
             <option value="book_title">Book Title</option>
             <option value="book_author">Author</option>
