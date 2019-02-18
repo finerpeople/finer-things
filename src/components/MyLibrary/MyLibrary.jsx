@@ -83,8 +83,9 @@ export default class MyLibrary extends Component {
     })
     return (
       <div className='my-lib-container'>
-        <div>
-          <select name="sort" id="sort" onChange={(e) => this.sortBooks(e.target.value)}>
+        <div className='my-lib-title'>My Books</div>
+        <div className='my-lib-sort-container'>
+          <select className='my-lib-sort' name="sort" id="sort" onChange={(e) => this.sortBooks(e.target.value)}>
             <option value="-date_added">Sort Options</option>
             <option value="book_title">Book Title</option>
             <option value="book_author">Author</option>
@@ -94,7 +95,6 @@ export default class MyLibrary extends Component {
             <option value="date_added">Oldest Added</option>
           </select>
         </div>
-        <div className='my-lib-title'>My Books</div>
         <div className='my-lib-list'>{displayBooks}</div>
       </div>
     );
