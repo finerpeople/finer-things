@@ -4,24 +4,38 @@ import "./MiniChat.scss";
 
 export default class MiniChat extends Component {
   state = {
-    messages: [],
-    messageInput: ''
-  };
-  componentDidMount = async () => {
-    // this.getSession();
+    messageInput: ""
   };
 
-  handleChange = (e) => {
-    this.setState({messageInput: e.target.value})
-  }
+  handleChange = e => {
+    this.setState({ messageInput: e.target.value });
+  };
+
+  sendMessage = async (userId, friendChatId, messageInput) => {
+    console.log(friendChatId)
+    const res = await axios.post("/api/addMessage", {
+      userId,
+      friendId: friendChatId,
+      message: messageInput
+    });
+    this.setState({
+      messages: res.data
+    });
+  };
 
   render() {
-    const { messages } = this.state;
+    const { messageInput } = this.state;
+    const { userId, friendId, messages } = this.props;
 
     const chatDisplay = this.props.display ? "mini-chat-send-msg" : null;
 
-    console.log(this.state.messageInput)
-      
+    const displayMessages = messages.map((message, i) => (
+        <div key={i}>
+          <p>{message.comment}</p>
+        </div>
+      )
+    )
+
     return (
       <div
         style={
@@ -46,15 +60,26 @@ export default class MiniChat extends Component {
         id="mini-chat-container"
       >
         <div id="mini-chat-msgs-header">
-          <i className="fas fa-times" onClick={() => this.props.toggleChat()} />
+          <i
+            className="fas fa-times"
+            onClick={() => this.props.toggleChat("")}
+          />
         </div>
         <div id="mini-chat-msgs-body">
-
+          {displayMessages}
         </div>
         <div id="mini-chat-send-msg">
           <i className="fas fa-video" />
-          <textarea name="message" id="mini-chat-input" rows="1" onChange={e => this.handleChange(e)}/>
-          <i className="fas fa-paper-plane" />
+          <textarea
+            name="message"
+            id="mini-chat-input"
+            rows="1"
+            onChange={e => this.handleChange(e)}
+          />
+          <i
+            className="fas fa-paper-plane"
+            onClick={() => this.sendMessage(userId, friendId, messageInput)}
+          />
         </div>
       </div>
     );

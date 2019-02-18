@@ -102,6 +102,7 @@ export default class Card extends Component {
         let friendsList = this.state.friends.map((friend) => {
             return (
                 <div key={friend.user_id}>
+                    {/* <img src={friend.profile_pic} alt='friend pic'/> */}
                     <p onClick={() => this.recommendToFriend(friend.user_id)}>{`${friend.first_name} ${friend.last_name}`}</p>
                 </div>
             )

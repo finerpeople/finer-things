@@ -97,14 +97,16 @@ export default class Auth extends Component {
         <div id="login-blur" />
         <div id={!login ? "login-none" : "login-container"}>
           <div id="login-row">
-            <input className='login-input'
+            <input
+              className="login-input"
               type="email"
               placeholder="Email"
               onChange={e => this.handleChange("userEmail", e)}
             />
           </div>
           <div id="login-row">
-            <input className='login-input'
+            <input
+              className="login-input"
               type="password"
               placeholder="Password"
               onChange={e => this.handleChange("password", e)}
@@ -114,37 +116,41 @@ export default class Auth extends Component {
           <div id="login-row">
             <button onClick={() => this.login()}>LOGIN</button>
             <p>
-              Don't have an account? <span>Register now!</span>
-              {/* <button onClick={e => this.setState({ login: false })}>
+              Don't have an account?{" "}
+              <span onClick={e => this.setState({ login: false })}>
                 Register now!
-              </button> */}
+              </span>
             </p>
           </div>
         </div>
         <div id={login ? "register-none" : "register-container"}>
           <div id="register-row">
-            <input className='login-input'
+            <input
+              className="login-input"
               type="text"
               placeholder="First Name"
               onChange={e => this.handleChange("firstName", e)}
             />
           </div>
           <div id="register-row">
-            <input className='login-input'
+            <input
+              className="login-input"
               type="text"
               placeholder="Last Name"
               onChange={e => this.handleChange("lastName", e)}
             />
           </div>
           <div id="register-row">
-            <input className='login-input'
+            <input
+              className="login-input"
               type="email"
               placeholder="Email"
               onChange={e => this.handleChange("userEmail", e)}
             />
           </div>
           <div id="register-row">
-            <input className='login-input'
+            <input
+              className="login-input"
               type="password"
               placeholder="Password"
               onChange={e => this.handleChange("password", e)}

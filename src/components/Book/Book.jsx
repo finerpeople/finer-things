@@ -15,7 +15,8 @@ export default class Book extends Component {
       rating: 0,
       user_id: 0,
       libraryButton: "Add to My Library",
-      userRating: 0
+      userRating: 0,
+      inLibrary: []
     };
   }
 
@@ -51,7 +52,7 @@ export default class Book extends Component {
   inLibrary = async () => {
     let res = await axios.get(`/library/getOneBook/${this.state.user_id}&${this.state.isbn}`)
     // console.log(res.data)
-    if (this.props.myLibrary) {
+    if(this.props.myLibrary) {
       this.setState({
         libraryButton: 'Enjoy reading this book!',
         userRating: res.data[0].user_rating
