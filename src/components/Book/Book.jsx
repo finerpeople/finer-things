@@ -15,6 +15,7 @@ export default class Book extends Component {
       rating: 0,
       user_id: 0,
       libraryButton: "Add to My Library",
+      userRating: 0,
       inLibrary: []
     };
   }
@@ -23,9 +24,10 @@ export default class Book extends Component {
     await this.getSession();
     const res = await axios.get(
       `https://www.googleapis.com/books/v1/volumes?q=isbn:${
-        this.state.isbn
+      this.state.isbn
       }&fields=items(id, volumeInfo/title, volumeInfo/authors, volumeInfo/description, volumeInfo/industryIdentifiers, volumeInfo/categories, volumeInfo/averageRating, volumeInfo/imageLinks, volumeInfo/previewLink)`
     );
+    // console.log(res.data)
     this.setState({
       image: res.data.items[0].volumeInfo.imageLinks.thumbnail,
       isbn: this.state.isbn,
@@ -33,7 +35,8 @@ export default class Book extends Component {
       author: res.data.items[0].volumeInfo.authors,
       description: res.data.items[0].volumeInfo.description,
       rating: res.data.items[0].volumeInfo.averageRating,
-      category: res.data.items[0].volumeInfo.categories[0]
+      category: res.data.items[0].volumeInfo.categories[0],
+      userRating: this.state.userRating
     });
     await this.inLibrary()
   };
@@ -51,10 +54,11 @@ export default class Book extends Component {
     // console.log(res.data)
     if(this.props.myLibrary) {
       this.setState({
-        libraryButton: 'Enjoy reading this book!'
+        libraryButton: 'Enjoy reading this book!',
+        userRating: res.data[0].user_rating
       })
     } else {
-      if(res.data.length === 0){
+      if (res.data.length === 0) {
         this.setState({
           libraryButton: "Add to My Library"
         })
@@ -64,6 +68,17 @@ export default class Book extends Component {
         })
       }
     }
+  }
+
+  onStarClick = async (nextValue, prevValue, name) => {
+    // console.log(nextValue, prevValue, name)
+    await this.setState({ userRating: nextValue })
+    // console.log(this.state.userRating)
+    let res = await axios.put(`/library/updateRating/${this.state.userRating}&${this.props.user_library_id}&${this.state.user_id}`)
+    this.setState({
+      userRating: nextValue
+    })
+    // console.log(res)
   }
 
   render() {
@@ -79,15 +94,26 @@ export default class Book extends Component {
             {this.state.libraryButton === 'Add to My Library' ? (
               <button className='book-add' onClick={this.props.modalAddToLibrary}>{this.state.libraryButton}</button>
             ) : (
-              <button className='book-status'>{this.state.libraryButton}</button>
-            )}
-            <StarRatingComponent
-              name="rating"
-              editing={false}
-              starCount={5}
-              emptyStarColor={'#5d5c61'}
-              value={this.state.rating}
-            />
+                <button className='book-status'>{this.state.libraryButton}</button>
+              )}
+            {this.props.myLibrary ? (
+              <StarRatingComponent
+                name="rating"
+                editing={true}
+                starCount={5}
+                emptyStarColor={'#5d5c61'}
+                value={this.state.userRating}
+                onStarClick={this.onStarClick}
+              />
+            ) : (
+                <StarRatingComponent
+                  name="rating"
+                  editing={false}
+                  starCount={5}
+                  emptyStarColor={'#5d5c61'}
+                  value={this.state.rating}
+                />
+              )}
           </div>
         </div>
         <div className='book-info-summary flexed'>
@@ -95,5 +121,5 @@ export default class Book extends Component {
         </div>
       </div>
     )
-}
+  }
 }

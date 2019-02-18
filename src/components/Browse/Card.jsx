@@ -14,7 +14,8 @@ export default class Card extends Component {
         bookModal: false,
         isbn: this.props.isbn,
         moreModal: false,
-        friends: []
+        friends: [],
+        myClubs: []
     }
 
     toggle = () => {
@@ -68,7 +69,14 @@ export default class Card extends Component {
         this.setState({
             friends: friends.data
         })
-        console.log(this.state.friends)
+        // console.log(this.state.friends)
+        this.getUsersClubs()
+    }
+
+    getUsersClubs = async () => {
+        const myClubs = await axios.get(`/club/getUsersClubs/${this.props.user_id}`)
+        this.setState({myClubs: myClubs.data})
+        console.log(myClubs.data)
     }
 
     recommendToFriend = async (user_id) => {
@@ -99,15 +107,24 @@ export default class Card extends Component {
                 </div>
             )
         })
+        let myClubsList = this.state.myClubs.map((club, i) => {
+            return (
+                <div key={i}>
+                    <p>{club.club_name}</p>
+                </div>
+            )
+        })
         return (
             <div className='card-main'>
                 {friendsList}
+                {myClubsList}
                 {this.state.bookModal ? (
                     <div className='book-modal-container'>
                         <Book
                             isbn={this.state.isbn}
                             modalAddToLibrary={this.modalAddToLibrary}
                             myLibrary={this.props.myLibrary}
+                            user_library_id={this.props.user_library_id}
                         />
                         <button className='close-book-modal' onClick={this.toggle}>X</button>
                     </div>
