@@ -1,7 +1,5 @@
 @import '../../style.scss';
 
-
-
 .flexed {
     display: flex
 }
@@ -10,22 +8,13 @@
     height: $modalHeight;
     width: $modalWidth;
     flex-direction: column;
-
 }
 
 .book-info-img {
     flex-direction: column;
     align-items: center;
     margin: 1.7rem 0rem 1rem 2rem;
-    // height: 15rem;
 }
-
-// .book-info-words {
-//     display: flex;
-//     flex-direction: column;
-//     margin-right: 1.5rem;
-
-// }
 
 .book-info-header {
     flex-direction: column;
@@ -35,40 +24,62 @@
     align-items: flex-start;
     margin-top: 0.7rem;
     margin-left: 1.3rem;
-
 }
 
 .book-info-summary {
     height: 25rem;
-
 }
-
-// .dv-star-rating-non-editable {
-//     margin: .5rem;
-// }
 
 .book-title {
     font-size: 1.5rem;
     margin-bottom: 0;
     font-family: $titleFontFamily;
 }
-
+    
 .book-author {
     // extends .book-summary
     font-size: $bodyFontSize;
     font-family: $bodyFontFamily;
+    cursor: default;
 }
 
 .book-summary {
     @extend .book-author;
     overflow: scroll;
     margin: 0rem 1.4rem 1.7rem 1.4rem;
-
 }
 
 .modal-top {
     justify-content: space-around;
     height: 20.5rem;
     margin-bottom: 3rem;
+}
 
+
+.book-status {
+    margin-bottom: 0.5rem;
+    background: none;
+    border: none;
+    color: $lighterGrey;
+    border-radius: 10px;
+    transition: background-color .2s;
+    padding: 0;
+}
+
+.book-add {
+    margin-bottom: 0.5rem;
+    background: none;
+    color: $lighterGrey;
+    border-radius: 10px;
+    transition: background-color .2s;
+    border: solid $tan 0.1rem;
+    cursor: pointer;
+}
+
+.book-add:focus {
+    outline: none;
+}
+
+.book-add:hover {
+    background-color: $tan;
 }
