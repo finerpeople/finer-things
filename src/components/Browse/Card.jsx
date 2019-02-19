@@ -45,7 +45,7 @@ export default class Card extends Component {
 
     addToLibrary = async () => {
         const book = await this.getSingleBook();
-        console.log(book)
+        // console.log(book)
         await axios.post('/library/addBook', {
             user_id: this.props.user_id,
             isbn: this.state.isbn,
