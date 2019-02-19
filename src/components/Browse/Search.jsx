@@ -60,7 +60,7 @@ export default class Search extends Component {
   render() {
     let displaySearch = this.state.searchedBooks.map((book, i) => {
       return (
-        <div key={i}>
+        <div className='search-card-display-container' key={i}>
           {book.volumeInfo.imageLinks && book.volumeInfo.industryIdentifiers ? (
             <Card
               i={i}

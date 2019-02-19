@@ -12,8 +12,9 @@
     font-family: $titleFontFamily;
     color: $darkerGrey;
     height: 2.5rem;
-    width: 11rem;
-    text-align: center;
+    width: 27rem;
+    text-align: start;
+    margin-left: 1rem;
 }
 
 .my-lib-list {
@@ -34,6 +35,14 @@
     border: none;
     font-family: $bodyFontFamily;
     font-size: $bodyFontSize;
+}
+
+.my-lib-recommended-list {
+    display: flex;
+    height: 15rem;
+    width: 59rem;
+    margin: 1rem;
+    overflow-x: scroll;
 }
 
 @media (max-width: 1024px) {

@@ -38,6 +38,7 @@ class Browse extends Component {
 
   render() {
     let displayList = this.state.listName.map((book, i) => {
+      // console.log(book)
       return (
         <div key={i}>
           <Card
