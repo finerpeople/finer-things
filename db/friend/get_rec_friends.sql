@@ -7,3 +7,4 @@ where user_id not in
 		from friend
 		where user_id = ${id}
 	)
+order by u.first_name;
