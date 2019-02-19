@@ -22,7 +22,7 @@ export default class MiniChat extends Component {
     this.socket.on(`user not typing`, data => this.removeUserTyping(data));
   }
 
-  componentDidMount() {
+  componentDidMount = async () => {
     const { userId, friend } = this.props.props;
     const { messageInput } = this.state;
     const room =
@@ -30,11 +30,6 @@ export default class MiniChat extends Component {
         ? `${friend.user_id}${userId}`
         : `${userId}${friend.user_id}`;
     this.socket.emit(`join room`, { userId, messageInput, room });
-    // const res = await axios.post("/api/addMessage", {
-    //   userId,
-    //   friendId: friendChatId,
-    //   message: messageInput
-    // });
   }
 
   handleChange = e => {
@@ -55,18 +50,6 @@ export default class MiniChat extends Component {
     });
   }
 
-  toggleChat = async friendId => {
-    console.log(friendId);
-    const { userId } = this.state;
-    const res = await axios.post("/api/getMessages", { userId, friendId });
-
-    this.setState({
-      friendMessages: res.data,
-      displayChat: !this.state.displayChat,
-      friendChatId: friendId
-    });
-  };
-
   enterKey = (e) => {
     const {
       userId,
@@ -82,16 +65,34 @@ export default class MiniChat extends Component {
   };
 
   render() {
-    console.log(this.state);
     const { messageInput } = this.state;
     const {
       userId,
       messages,
       displayChat,
       friendChatId,
-      friend
+      friend,
+      friendMessages
     } = this.props.props;
 
+    const displayOldMessages = friendMessages.map((message, i) => {
+      if (userId === message.user_id) {
+        return (
+          <div key={i} id="my-message-line-container">
+            <div id="message-line">
+              <p>{message.comment}</p>
+            </div>
+          </div>
+        );
+      }
+      return (
+        <div key={i} id="your-message-line-container">
+          <div id="message-line">
+            <p>{message.comment}</p>
+          </div>
+        </div>
+      );
+    });
     const displayMessages = this.state.messages.map((message, i) => {
       if (userId === message.userId) {
         return (
@@ -141,7 +142,10 @@ export default class MiniChat extends Component {
             onClick={() => this.props.props.toggleChat(friendChatId)}
           />
         </div>
-        <div id="mini-chat-msgs-body">{displayMessages}</div>
+        <div id="mini-chat-msgs-body">
+          {displayOldMessages}
+          {displayMessages}
+        </div>
         <div id="mini-chat-send-msg">
           <i className="fas fa-video" />
           <textarea

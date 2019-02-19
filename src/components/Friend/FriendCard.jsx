@@ -16,7 +16,6 @@ export default class FriendCard extends Component {
       last_name,
     } = this.props.friend;
     const {deleteFriend, getMessages, toggleChat, userId, displayChat} = this.props
-    console.log(this.props)
 
     const friendId = user_id
 
