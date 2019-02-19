@@ -15,7 +15,8 @@ export default class Card extends Component {
         isbn: this.props.isbn,
         moreModal: false,
         friends: [],
-        myClubs: []
+        myClubs: [],
+        toggleShare: false
     }
 
     toggle = () => {
@@ -30,6 +31,13 @@ export default class Card extends Component {
         })
     }
 
+    toggleShare = async () => {
+        this.setState({
+            toggleShare: !this.state.toggleShare
+        })
+        await this.getPeopleToShareWith()
+    }
+
     getSingleBook = async () => {
         let res = await axios.get(`https://www.googleapis.com/books/v1/volumes?q=isbn:${this.state.isbn}&maxResults=1&langRestrict=en&fields=kind, items(id, volumeInfo/title, volumeInfo/authors, volumeInfo/industryIdentifiers, volumeInfo/categories, volumeInfo/imageLinks)`)
         return res.data.items[0].volumeInfo
@@ -37,6 +45,7 @@ export default class Card extends Component {
 
     addToLibrary = async () => {
         const book = await this.getSingleBook();
+        // console.log(book)
         await axios.post('/library/addBook', {
             user_id: this.props.user_id,
             isbn: this.state.isbn,
@@ -51,12 +60,12 @@ export default class Card extends Component {
             showConfirmButton: false,
             timer: 3000,
             customClass: 'margin'
-          });
-          
-          Toast.fire({
+        });
+
+        Toast.fire({
             type: 'success',
             title: 'Added to My Library'
-          })
+        })
     }
 
     modalAddToLibrary = async () => {
@@ -64,24 +73,25 @@ export default class Card extends Component {
         this.toggle()
     }
 
+    getPeopleToShareWith = async () => {
+        this.getFriends()
+        this.getUsersClubs()
+    }
+
     getFriends = async () => {
         const friends = await axios.get(`/api/friendsData/${this.props.user_id}`)
         this.setState({
             friends: friends.data
         })
-        // console.log(this.state.friends)
-        this.getUsersClubs()
     }
 
     getUsersClubs = async () => {
         const myClubs = await axios.get(`/club/getUsersClubs/${this.props.user_id}`)
-        this.setState({myClubs: myClubs.data})
-        console.log(myClubs.data)
+        this.setState({ myClubs: myClubs.data })
     }
 
     recommendToFriend = async (user_id) => {
         const book = await this.getSingleBook();
-        // this.getFriends();
         await axios.post('/library/recommendBook', {
             user_id: user_id,
             isbn: this.state.isbn,
@@ -91,6 +101,7 @@ export default class Card extends Component {
             author: book.authors[0],
             category: book.categories[0]
         })
+        this.toggleShare()
     }
 
     deleteBook = () => {
@@ -101,23 +112,30 @@ export default class Card extends Component {
     render() {
         let friendsList = this.state.friends.map((friend) => {
             return (
-                <div key={friend.user_id}>
-                    {/* <img src={friend.profile_pic} alt='friend pic'/> */}
-                    <p onClick={() => this.recommendToFriend(friend.user_id)}>{`${friend.first_name} ${friend.last_name}`}</p>
+                <div className='share-list-names-container' key={friend.user_id}>
+                    <button className='share-list-buttons' onClick={() => this.recommendToFriend(friend.user_id)}>
+                        <div className='share-img-div' style={{ backgroundImage: `url(${friend.profile_pic})` }}></div>
+                        <p className='share-list-name'>
+                            {`${friend.first_name} ${friend.last_name}`}
+                        </p>
+                    </button>
                 </div>
             )
         })
         let myClubsList = this.state.myClubs.map((club, i) => {
             return (
-                <div key={i}>
-                    <p>{club.club_name}</p>
+                <div className='share-list-names-container' key={i}>
+                    <button className='share-list-buttons'>
+                        <div className='share-img-div' style={{ backgroundImage: `url(${club.profile_pic})` }}></div>
+                        <p className='share-list-name'>
+                            {club.club_name}
+                        </p>
+                    </button>
                 </div>
             )
         })
         return (
             <div className='card-main'>
-                {friendsList}
-                {myClubsList}
                 {this.state.bookModal ? (
                     <div className='book-modal-container'>
                         <Book
@@ -125,6 +143,7 @@ export default class Card extends Component {
                             modalAddToLibrary={this.modalAddToLibrary}
                             myLibrary={this.props.myLibrary}
                             user_library_id={this.props.user_library_id}
+                            book_status={this.props.book_status}
                         />
                         <button className='close-book-modal' onClick={this.toggle}>X</button>
                     </div>
@@ -135,6 +154,9 @@ export default class Card extends Component {
                     this.props.myLibrary ? (
                         <div key={this.props.i} className='searched-single-book'>
                             <img src={this.props.img} alt='book cover' className='searched-book-cover' onClick={this.toggle} />
+                            <div>
+                                {this.props.book_status}
+                            </div>
                             <div className='icon-banner'>
                                 <i className="fas fa-ellipsis-h dots" onClick={this.moreToggle}></i>
                                 {this.state.moreModal ? (
@@ -160,8 +182,23 @@ export default class Card extends Component {
                                     <i className="fas fa-plus add-to-library"
                                         onClick={this.addToLibrary}></i>
                                     <i className="fas fa-share search-share"
-                                        onClick={this.getFriends}></i>
+                                        onClick={this.toggleShare}></i>
                                 </div>
+                                {this.state.toggleShare ? (
+                                    <div className='share-list-container'
+                                    // onMouseLeave={this.toggleShare}
+                                    >
+                                        <div className='share-list'>
+                                            <p className='share-list-title'>Friends: </p>
+                                            {friendsList}
+                                            <p className='share-list-title'>My Clubs: </p>
+                                            {myClubsList}
+                                        </div>
+                                        <div className='close-share-list'>
+                                            <button className='close-share-list-button' onClick={this.toggleShare}>X</button>
+                                        </div>
+                                    </div>
+                                ) : null}
                             </div>
                         )
 
@@ -172,8 +209,24 @@ export default class Card extends Component {
                                 <i className="fas fa-plus br-add-to-library"
                                     onClick={this.addToLibrary}></i>
                                 <i className="fas fa-share br-search-share"
-                                    onClick={this.getFriends}></i>
+                                    onClick={this.toggleShare}
+                                ></i>
                             </div>
+                            {this.state.toggleShare ? (
+                                <div className='share-list-container'
+                                onMouseLeave={this.toggleShare}
+                                >
+                                    <div className='share-list'>
+                                        <p className='share-list-title'>Friends: </p>
+                                        {friendsList}
+                                        <p className='share-list-title'>My Clubs: </p>
+                                        {myClubsList}
+                                    </div>
+                                    <div className='close-share-list'>
+                                        <button className='close-share-list-button' onClick={this.toggleShare}>X</button>
+                                    </div>
+                                </div>
+                            ) : null}
                         </div>
                     )}
             </div>
