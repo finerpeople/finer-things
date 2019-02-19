@@ -1,48 +1,122 @@
 import React, { Component } from "react";
 import axios from "axios";
 import "./MiniChat.scss";
+import io from "socket.io-client";
 
 export default class MiniChat extends Component {
-  state = {
-    messageInput: ""
-  };
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      messages: [],
+      messageInput: "",
+      userTyping: false
+    };
+
+    this.socket = io.connect(":4000");
+    this.socket.on("generate room response", data => {
+      console.log(data);
+      this.roomResponse(data);
+    });
+    this.socket.on("user is typing", data => this.setUserTyping(data));
+    this.socket.on(`user not typing`, data => this.removeUserTyping(data));
+  }
+
+  componentDidMount() {
+    const { userId, friend } = this.props.props;
+    const { messageInput } = this.state;
+    const room =
+      userId > friend.user_id
+        ? `${friend.user_id}${userId}`
+        : `${userId}${friend.user_id}`;
+    this.socket.emit(`join room`, { userId, messageInput, room });
+    // const res = await axios.post("/api/addMessage", {
+    //   userId,
+    //   friendId: friendChatId,
+    //   message: messageInput
+    // });
+  }
 
   handleChange = e => {
     this.setState({ messageInput: e.target.value });
   };
 
   sendMessage = async (userId, friendChatId, messageInput) => {
-    console.log(friendChatId)
-    const res = await axios.post("/api/addMessage", {
-      userId,
-      friendId: friendChatId,
-      message: messageInput
-    });
+    const room =
+      userId > friendChatId
+        ? `${friendChatId}${userId}`
+        : `${userId}${friendChatId}`;
+    this.socket.emit(`blast message to room`, { userId, messageInput, room });
+    this.setState({messageInput: ''})
+  };
+  roomResponse(data) {
     this.setState({
-      messages: res.data
+      messages: [...this.state.messages, data]
     });
-    this.props.refreshMessages()
+  }
+
+  toggleChat = async friendId => {
+    console.log(friendId);
+    const { userId } = this.state;
+    const res = await axios.post("/api/getMessages", { userId, friendId });
+
+    this.setState({
+      friendMessages: res.data,
+      displayChat: !this.state.displayChat,
+      friendChatId: friendId
+    });
+  };
+
+  enterKey = (e) => {
+    const {
+      userId,
+      messages,
+      displayChat,
+      friendChatId,
+      friend
+    } = this.props.props;
+    const code = e.keyCode || e.which;
+    if (code === 13) {
+        this.sendMessage(userId, friendChatId, this.state.messageInput);
+    }
   };
 
   render() {
+    console.log(this.state);
     const { messageInput } = this.state;
-    const { userId, friendId, messages } = this.props;
+    const {
+      userId,
+      messages,
+      displayChat,
+      friendChatId,
+      friend
+    } = this.props.props;
 
-    const chatDisplay = this.props.display ? "mini-chat-send-msg" : null;
-
-    const displayMessages = messages.map((message, i) => (
-        <div key={i} id="my-message-line">
-          <p>{message.comment}</p>
+    const displayMessages = this.state.messages.map((message, i) => {
+      if (userId === message.userId) {
+        return (
+          <div key={i} id="my-message-line-container">
+            <div id="message-line">
+              <p>{message.messageInput}</p>
+            </div>
+          </div>
+        );
+      }
+      return (
+        <div key={i} id="your-message-line-container">
+          <div id="message-line">
+            <p>{message.messageInput}</p>
+          </div>
         </div>
-      )
-    )
+      );
+    });
 
     return (
       <div
         style={
-          this.props.display
+          displayChat && friendChatId === friend.user_id
             ? {
-                overflow: "hidden",
+                // overflow: "hidden",
                 bottom: "20px",
                 right: "20px",
                 height: "30em",
@@ -61,14 +135,13 @@ export default class MiniChat extends Component {
         id="mini-chat-container"
       >
         <div id="mini-chat-msgs-header">
+          <h5>{`${friend.first_name}`}</h5>
           <i
             className="fas fa-times"
-            onClick={() => this.props.toggleChat(friendId)}
+            onClick={() => this.props.props.toggleChat(friendChatId)}
           />
         </div>
-        <div id="mini-chat-msgs-body">
-          {displayMessages}
-        </div>
+        <div id="mini-chat-msgs-body">{displayMessages}</div>
         <div id="mini-chat-send-msg">
           <i className="fas fa-video" />
           <textarea
@@ -76,10 +149,12 @@ export default class MiniChat extends Component {
             id="mini-chat-input"
             rows="1"
             onChange={e => this.handleChange(e)}
+            onKeyPress={(e) => this.enterKey(e)}
+            value={messageInput}
           />
           <i
             className="fas fa-paper-plane"
-            onClick={() => this.sendMessage(userId, friendId, messageInput)}
+            onClick={() => this.sendMessage(userId, friendChatId, messageInput)}
           />
         </div>
       </div>

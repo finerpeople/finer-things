@@ -1,7 +1,7 @@
 @import "../../style.scss";
 
 #mini-chat-container {
-  position: absolute;
+  position: fixed;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -9,36 +9,80 @@
   background-color: $lightBlue;
   box-shadow: 3px 5px 20px $darkerGrey;
   border-radius: 3px;
+  z-index: 1;
 }
 #mini-chat-msgs-header {
+    display: grid;
+    grid-template-columns: repeat(9, 1fr);
+    width: 93%;
+    height: 1.5em;
+    color: $darkerGrey;
+}
+#mini-chat-msgs-header > h5 {
+    display: flex;
+    justify-content: center;
+    grid-column: 3 / 8;
+    top: .4em;
+    left: 50%;
+    right: 50%;
+    margin: 0;
+    font-size: 1em;
+    color: white;
+    letter-spacing: .1em;
+}
+#mini-chat-msgs-header > .fa-times {
     display: flex;
     justify-content: flex-end;
     align-items: center;
-    width: 93%;
-    color: $darkerGrey;
+    grid-column: 9;
 }
 #mini-chat-msgs-body{
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    align-items: flex-end;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-rows: 1fr;
+    grid-row-gap: .2em;
     height: 22em;
     width: 91%;
     padding: .4em;
-    border-radius: 3px
+    border-radius: 3px;
+    overflow-y: scroll;
+    overflow-x: hidden;
 }
-#my-message-line {
+#my-message-line-container {
     display: flex;
-    justify-content: flex-end;
-    width: fit-content;
+    flex-direction: column-reverse;
+    justify-content: flex-start;
+    align-items: flex-end;
+    width: 325px;
+}
+#my-message-line-container > #message-line {
     background-color: $lighterGrey;
+    width: 85%;
+}
+
+#your-message-line-container {
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content: flex-start;
+    width: 325px;
+}
+#your-message-line-container > #message-line {
+    background-color: $darkBlue;
+    color: white;
+    width: 85%;
+}
+#message-line {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    max-width: fit-content;
     border-radius: 5px;
     margin: .2em;
+    overflow-wrap: break-word;
 }
-#my-message-line p{
-    margin: .2em;
-    padding: .1em;
+#message-line p{
+    max-width: 90%;
+    margin: 0em;
+    padding: .2em .5em;
 }
 
 #mini-chat-send-msg {
@@ -68,4 +112,9 @@
     resize: none;
     font-family: $bodyFontFamily;
     letter-spacing: .1em;
+}
+
+#mini-chat-msgs-body::-webkit-scrollbar-button:vertical:decrement {
+  height: 0;
+  width: 0;
 }

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 import "./Friend.scss";
-import MiniChat from "../MiniChat/MiniChat";
+import FriendCard from "./FriendCard";
 
 export default class Friend extends Component {
   state = {
@@ -9,7 +9,7 @@ export default class Friend extends Component {
     friends: [],
     recFriends: [],
     displayChat: false,
-    friendChatId: '', 
+    friendChatId: "",
     friendMessages: []
   };
 
@@ -49,26 +49,27 @@ export default class Friend extends Component {
     });
   };
 
-  toggleChat = async (friendId) => {
-    const {userId} = this.state
-    const res = await axios.post('/api/getMessages', {userId, friendId})
+  toggleChat = friendId => {
+    const { userId } = this.state;
+    const res = axios.post("/api/getMessages", { userId, friendId });
     this.setState({
-      friendMessages: res.data, 
-      displayChat: !this.state.displayChat, 
+      friendMessages: res.data,
+      displayChat: !this.state.displayChat,
       friendChatId: friendId
-    })
-  }
+    });
+  };
 
   getMessages = async () => {
-    const {userId, friendChatId} = this.state
-    let friendId = friendChatId
-    const res = await axios.post('/api/getMessages', {userId, friendId})
+    const { userId, friendChatId } = this.state;
+    let friendId = friendChatId;
+    const res = await axios.post("/api/getMessages", { userId, friendId });
     this.setState({
       friendMessages: res.data
-    })
-  }
+    });
+  };
 
   deleteFriend = async (userId, friendId) => {
+    console.log(userId, friendId);
     const res = await axios.delete(`/api/deleteFriend/${userId}&${friendId}`);
     this.setState({
       friends: res.data.friends,
@@ -77,30 +78,25 @@ export default class Friend extends Component {
   };
 
   render() {
-    const { userId, friends, recFriends, displayChat, friendChatId, friendMessages } = this.state;
+    const {
+      userId,
+      friends,
+      recFriends,
+      displayChat,
+      friendChatId,
+      friendMessages
+    } = this.state;
     const myFriends = friends.map((friend, i) => {
-      const { first_name, last_name, profile_pic, user_id } = friend;
-      const friendId = user_id;
       return (
-        <div key={i} id="my-friends-card">
-          <div id="my-friends-card-more">
-            <i className="fas fa-comments" onClick={() => this.toggleChat(friendId)}/>
-            <button
-              onClick={() => this.deleteFriend(this.state.userId, friendId)}
-            >
-              Remove
-            </button>
-          </div>
-          <div id="my-friends-pic-container">
-            <div
-              className="friends-profile-pic"
-              style={{ backgroundImage: `url(${profile_pic})` }}
-            />
-          </div>
-          <div id="my-friend-name">
-            <p>{`${first_name} ${last_name}`}</p>
-          </div>
-        </div>
+        <FriendCard
+          friend={friend}
+          deleteFriend={this.deleteFriend}
+          getMessages={this.getMessages}
+          toggleChat={this.toggleChat}
+          userId={userId}
+          displayChat={displayChat}
+          friendChatId={friendChatId}
+        />
       );
     });
     const myRecFriends = recFriends.map((friend, i) => {
@@ -147,7 +143,6 @@ export default class Friend extends Component {
             {myFriends}
           </div>
         </div>
-        <MiniChat userId={userId} friendId={friendChatId} display={displayChat} toggleChat={this.toggleChat} messages={friendMessages} refreshMessages={this.getMessages}/>
       </div>
     );
   }
