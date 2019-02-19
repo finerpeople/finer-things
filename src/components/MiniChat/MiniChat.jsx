@@ -21,6 +21,7 @@ export default class MiniChat extends Component {
     this.setState({
       messages: res.data
     });
+    this.props.refreshMessages()
   };
 
   render() {
@@ -30,7 +31,7 @@ export default class MiniChat extends Component {
     const chatDisplay = this.props.display ? "mini-chat-send-msg" : null;
 
     const displayMessages = messages.map((message, i) => (
-        <div key={i}>
+        <div key={i} id="my-message-line">
           <p>{message.comment}</p>
         </div>
       )
@@ -62,7 +63,7 @@ export default class MiniChat extends Component {
         <div id="mini-chat-msgs-header">
           <i
             className="fas fa-times"
-            onClick={() => this.props.toggleChat("")}
+            onClick={() => this.props.toggleChat(friendId)}
           />
         </div>
         <div id="mini-chat-msgs-body">

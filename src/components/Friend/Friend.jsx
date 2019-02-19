@@ -51,13 +51,20 @@ export default class Friend extends Component {
 
   toggleChat = async (friendId) => {
     const {userId} = this.state
-    console.log(this.state.userId, friendId)
     const res = await axios.post('/api/getMessages', {userId, friendId})
-    console.log(res.data)
     this.setState({
       friendMessages: res.data, 
       displayChat: !this.state.displayChat, 
       friendChatId: friendId
+    })
+  }
+
+  getMessages = async () => {
+    const {userId, friendChatId} = this.state
+    let friendId = friendChatId
+    const res = await axios.post('/api/getMessages', {userId, friendId})
+    this.setState({
+      friendMessages: res.data
     })
   }
 
@@ -140,7 +147,7 @@ export default class Friend extends Component {
             {myFriends}
           </div>
         </div>
-        <MiniChat userId={userId} friendId={friendChatId} display={displayChat} toggleChat={this.toggleChat} messages={friendMessages}/>
+        <MiniChat userId={userId} friendId={friendChatId} display={displayChat} toggleChat={this.toggleChat} messages={friendMessages} refreshMessages={this.getMessages}/>
       </div>
     );
   }

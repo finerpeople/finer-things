@@ -6,7 +6,7 @@
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
-  background-color: $tan;
+  background-color: $lightBlue;
   box-shadow: 3px 5px 20px $darkerGrey;
   border-radius: 3px;
 }
@@ -19,12 +19,26 @@
 }
 #mini-chat-msgs-body{
     display: flex;
-    justify-content: flex-start;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-end;
+    flex-wrap: wrap;
     height: 22em;
     width: 91%;
     padding: .4em;
-    background-color: rgba(255, 255, 255, 0.801);
     border-radius: 3px
+}
+#my-message-line {
+    display: flex;
+    justify-content: flex-end;
+    width: fit-content;
+    background-color: $lighterGrey;
+    border-radius: 5px;
+    margin: .2em;
+}
+#my-message-line p{
+    margin: .2em;
+    padding: .1em;
 }
 
 #mini-chat-send-msg {
