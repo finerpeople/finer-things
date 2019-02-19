@@ -103,3 +103,76 @@
     margin-top: $navBarWidth;
 }
 
+.share-list-container {
+    height: 22rem;
+    width: 16rem;
+    position: absolute;
+    right: -13rem;
+    top: 1rem;
+    z-index: 1;
+    background-color: aliceblue;
+    overflow: hidden;
+    overflow-y: scroll;
+    cursor: default;
+
+}
+
+.close-share-list-button {
+    background: none;
+    border: none;
+    font-size: $bodyFontSize;
+    font-family: $bodyFontFamily;
+    font-weight: 900;
+    cursor: pointer;
+}
+
+.close-share-list {
+    position: absolute;
+    right: 1rem;
+    top: 1rem;
+}
+
+.share-list {
+    position: relative;
+
+}
+
+.share-list-buttons {
+    background: none;
+    // border: tan solid 0.1rem;
+    width: 100%;
+    height: 3rem;
+    font-family: $bodyFontFamily;
+    font-size: $bodyFontSize;
+    text-align: start;
+    cursor: pointer;
+}
+
+.share-img-div {
+    height: 2rem;
+    width: 2rem;
+    border-radius: 50%;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.share-list-names-container {
+    position: relative;
+}
+
+.share-img-div {
+    position: absolute;
+    top: 0.6rem;
+}
+
+.share-list-title {
+    margin: 1rem;
+    font-family: $titleFontFamily;
+    font-size: $midFontSize;
+    cursor: default;
+}
+
+.share-list-name {
+    margin: 0.1rem 0 0 2.5rem;
+}
