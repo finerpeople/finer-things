@@ -63,11 +63,13 @@ export default class Setting extends Component {
     // return res.data
     ////////////////////////////////////////////////////////////////
     const { summary, email, firstName, lastName, password } = this.state
-    const res = await axios.put(`/api/edit-profile/${id}`, {summary: summary, firstName: firstName, lastName: lastName, email: email, password: password})
-    this.setState()
+    const res = await axios.put(`/api/edit-profile/${id}`
+    // , {summary: summary, firstName: firstName, lastName: lastName, email: email, password: password}
+    )
+    this.setState({firstName: firstName, lastName: lastName, summary: summary, email: email, password: password})
     console.log(lastName)
     console.log(summary)
-    // return res.data
+    
 
   };
 
