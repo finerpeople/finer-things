@@ -52,13 +52,14 @@ export default class Book extends Component {
   inLibrary = async () => {
     let res = await axios.get(`/library/getOneBook/${this.state.user_id}&${this.state.isbn}`)
     // console.log(res.data)
-    if(this.props.myLibrary) {
+    console.log({true: this.props.book_status && this.props.book_status !== 'Recommended'})
+    if(this.props.myLibrary && this.props.book_status !== 'Recommended') {
       this.setState({
         libraryButton: 'Enjoy reading this book!',
         userRating: res.data[0].user_rating
       })
     } else {
-      if (res.data.length === 0) {
+      if (res.data.length === 0 || this.props.book_status === 'Recommended') {
         this.setState({
           libraryButton: "Add to My Library"
         })
@@ -114,6 +115,9 @@ export default class Book extends Component {
                   value={this.state.rating}
                 />
               )}
+          <div>
+              <button>Share</button>
+          </div>
           </div>
         </div>
         <div className='book-info-summary flexed'>

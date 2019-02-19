@@ -7,7 +7,8 @@ export default class MyLibrary extends Component {
 
   state = {
     user_id: 0,
-    myLibrary: []
+    myLibrary: [],
+    recommended: []
   }
 
   componentDidMount = async () => {
@@ -27,9 +28,9 @@ export default class MyLibrary extends Component {
   dynamicSort(key) {
     var sortOrder = 1;
 
-    if(key[0] === "-") {
-        sortOrder = -1;
-        key = key.substr(1);
+    if (key[0] === "-") {
+      sortOrder = -1;
+      key = key.substr(1);
     }
     // console.log(key)
     return function (a, b) {
@@ -57,7 +58,7 @@ export default class MyLibrary extends Component {
     }
   };
 
-  async deleteBook(user_library_id){
+  async deleteBook(user_library_id) {
 
     await axios.delete(`/library/removeBook/${user_library_id}&${this.state.user_id}`)
 
@@ -66,8 +67,31 @@ export default class MyLibrary extends Component {
 
   render() {
     let displayBooks = this.state.myLibrary.map((book, i) => {
+      // console.log(book)
+      if (book.status === 'Recommended') {
+        this.state.recommended.push(book)
+      } else {
+        return (
+          <div key={book.user_library_id}>
+            <Card
+              i={i}
+              user_library_id={book.user_library_id}
+              img={book.book_img}
+              isbn={book.book_isbn}
+              user_id={this.state.user_id}
+              search={true}
+              myLibrary={true}
+              deleteBook={() => this.deleteBook(book.user_library_id)}
+              book_status={book.status}
+              />
+          </div>
+        )
+      }
+    })
+    
+    let recommendedBooks = this.state.recommended.map((book, i) => {
       return (
-        <div key={i}>
+        <div key={book.user_library_id}>
           <Card
             i={i}
             user_library_id={book.user_library_id}
@@ -76,13 +100,21 @@ export default class MyLibrary extends Component {
             user_id={this.state.user_id}
             search={true}
             myLibrary={true}
-            deleteBook = {() => this.deleteBook(book.user_library_id)}
+            deleteBook={() => this.deleteBook(book.user_library_id)}
+            book_status={book.status}
           />
         </div>
       )
     })
+    // console.log(this.state.recommended)
+    // console.log(recommendedBooks)
+
     return (
       <div className='my-lib-container'>
+        <div className='my-lib-title'>My Recommended Books</div>
+        <div className='my-lib-recommended-list'>
+          {recommendedBooks}
+        </div>
         <div className='my-lib-title'>My Books</div>
         <div className='my-lib-sort-container'>
           <select className='my-lib-sort' name="sort" id="sort" onChange={(e) => this.sortBooks(e.target.value)}>
