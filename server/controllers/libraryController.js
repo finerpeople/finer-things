@@ -85,5 +85,24 @@ module.exports = {
             user_id
         })
         res.status(200).send(updated)
+    },
+    changeNewStatus: async (req, res) => {
+        const { user_id, user_library_id, status } = req.params;
+        const db = req.app.get('db');
+        let updated = await db.user_library.changeNewStatus({
+            user_library_id
+        });
+        let bookList = await db.user_library.getUserLibrary({user_id})
+        res.status(200).send(bookList)
+    },
+    updateBookStatus: async (req, res) => {
+        const { user_id, user_library_id, status } = req.params;
+        const db = req.app.get('db');
+        let updated = await db.user_library.updateBookStatus({
+            user_library_id,
+            status
+        });
+        let bookList = await db.user_library.getUserLibrary({user_id})
+        res.status(200).send(bookList)
     }
 }
