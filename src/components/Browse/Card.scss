@@ -78,7 +78,7 @@
 
 .more-delete:hover {
     //extends .more-share
-    color: $darkerGrey;
+    color: $lightGrey;
 }
 
 .more-share {
@@ -104,7 +104,7 @@
 }
 
 .share-list-container {
-    height: 22rem;
+    height: 21.6rem;
     width: 16rem;
     position: absolute;
     right: -13rem;
@@ -114,7 +114,7 @@
     overflow: hidden;
     overflow-y: scroll;
     cursor: default;
-
+    border-radius: 10px;
 }
 
 .close-share-list-button {
@@ -187,4 +187,17 @@
     border-radius: 8px;
     font-size: $smallFontSize;
     font-family: $bodyFontFamily;
+}
+
+#recommended-add-to-library {
+    position: absolute;
+    left: 0.7rem;
+    color: $darkGrey;
+    top: 0.5rem;
+    cursor: pointer;
+    transition: color .2s;
+}
+
+#recommended-add-to-library:hover {
+    color: $darkerGrey;
 }

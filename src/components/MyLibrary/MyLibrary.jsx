@@ -83,12 +83,12 @@ export default class MyLibrary extends Component {
               myLibrary={true}
               deleteBook={() => this.deleteBook(book.user_library_id)}
               book_status={book.status}
-              />
+            />
           </div>
         )
       }
     })
-    
+
     let recommendedBooks = this.state.recommended.map((book, i) => {
       return (
         <div key={book.user_library_id}>
@@ -111,9 +111,11 @@ export default class MyLibrary extends Component {
 
     return (
       <div className='my-lib-container'>
-        <div className='my-lib-title'>My Recommended Books</div>
-        <div className='my-lib-recommended-list'>
-          {recommendedBooks}
+        <div className='my-lib-recommended-container'>
+          <div className='my-lib-title'>My Recommended Books</div>
+          <div className='my-lib-recommended-list'>
+            {recommendedBooks}
+          </div>
         </div>
         <div className='my-lib-title'>My Books</div>
         <div className='my-lib-sort-container'>
