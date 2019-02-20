@@ -2,16 +2,18 @@ import React, { Component } from 'react'
 import axios from 'axios'
 import Club from '../Club/Club'
 import './MyClub.scss'
+import ClubCard from './ClubCard';
 
 export default class MyClub extends Component {
   state = {
     userId: "",
-    clubs: [],
+    myClubs: [],
     recclubs: []
   };
 
   componentDidMount = async () => {
-    this.getSession();
+    await this.getSession();
+    await this.getUsersClubs()
   };
 
   getSession = async () => {
@@ -25,21 +27,35 @@ export default class MyClub extends Component {
     }
     id = res.data.id;
 
-    res = await axios.get(`/api/clubsData/${id}`);
-    clubs = res.data;
-
-    res = await axios.get(`/api/recClubsData/${id}`);
-    recClubs = res.data;
-
     this.setState({
-      userId: id,
-      clubs,
-      recClubs
+      userId: id
     });
   };
 
+  getUsersClubs = async () => {
+    let res = await axios.get(`/club/getUsersClubs/${this.state.userId}`)
+    console.log(res.data)
+    this.setState({
+      myClubs: res.data
+    })
+  }
+
   render() {
     const { userId, clubs, recClubs } = this.state;
+
+    let displayMyClubs = this.state.myClubs.map((club, i) => {
+      return (
+  
+        <ClubCard
+          clubName={club.club_name}
+          firstName={club.first_name}
+          lastName={club.last_name}
+          email={club.email}
+          profilePic={club.profile_pic}
+          clubId={club.club_id}
+        />
+      )
+    })
     // const myClubs = clubs.map((club, i) => {
     //   console.log(club);
     //   const { first_name, last_name, profile_pic, user_id } = club;
@@ -90,7 +106,7 @@ export default class MyClub extends Component {
           </div>
           <div id="my-clubs">
             <h4>Clubs</h4>
-            {/* {myClubs} */}
+            {displayMyClubs}
           </div>
         </div>
       </div>
