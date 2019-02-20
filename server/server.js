@@ -58,6 +58,10 @@ app.delete("/api/deleteFriend/:userId&:friendId", friendsCtrl.deleteFriend);
 
 //clubs
 app.get("/club/getUsersClubs/:user_id", clubsCtrl.getUsersClubs);
+app.get("/club/getAllClubs", clubsCtrl.getAllClubs);
+app.get("/club/getOneClub/:club_id", clubsCtrl.getOneClub);
+app.get("/club/getClubMembers/:club_id", clubsCtrl.getClubMembers);
+
 // Chat
 app.post("/api/getMessages", chatCtrl.getMessages);
 app.post("/api/addMessage", chatCtrl.addMessage);
