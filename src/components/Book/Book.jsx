@@ -16,9 +16,24 @@ export default class Book extends Component {
       user_id: 0,
       libraryButton: "Add to My Library",
       userRating: 0,
-      inLibrary: []
+      inLibrary: [],
+      toggleShare: this.props.toggleShare
     };
   }
+
+  // toggle = async () => {
+  //   this.setState({
+  //     bookToggleShare: !this.state.bookToggleShare
+  //   })
+  //   await this.props.getPeopleToShareWith()
+  // }
+
+  toggleShare = async () => {
+    this.setState({
+        toggleShare: !this.state.toggleShare
+    })
+    await this.props.getPeopleToShareWith()
+}
 
   componentDidMount = async () => {
     await this.getSession();
@@ -52,8 +67,8 @@ export default class Book extends Component {
   inLibrary = async () => {
     let res = await axios.get(`/library/getOneBook/${this.state.user_id}&${this.state.isbn}`)
     // console.log(res.data)
-    console.log({true: this.props.book_status && this.props.book_status !== 'Recommended'})
-    if(this.props.myLibrary && this.props.book_status !== 'Recommended') {
+    // console.log({true: this.props.book_status && this.props.book_status !== 'Recommended'})
+    if (this.props.myLibrary && this.props.book_status !== 'Recommended') {
       this.setState({
         libraryButton: 'Enjoy reading this book!',
         userRating: res.data[0].user_rating
@@ -83,6 +98,7 @@ export default class Book extends Component {
   }
 
   render() {
+    console.log(this.state.toggleShare)
     return (
       <div className='book-info-main flexed'>
         <div className='modal-top flexed'>
@@ -93,7 +109,7 @@ export default class Book extends Component {
             <p className='book-title'>{this.state.title}</p>
             <p className='book-author'>{this.state.author}</p>
             {this.state.libraryButton === 'Add to My Library' ? (
-              <button className='book-add' onClick={this.props.modalAddToLibrary}>{this.state.libraryButton}</button>
+              <button className='book-add' onClick={this.props.addRecommendedBook}>{this.state.libraryButton}</button>
             ) : (
                 <button className='book-status'>{this.state.libraryButton}</button>
               )}
@@ -115,9 +131,25 @@ export default class Book extends Component {
                   value={this.state.rating}
                 />
               )}
-          <div>
-              <button>Share</button>
-          </div>
+            <div>
+              <button onClick={this.toggleShare}>Share</button>
+              {this.state.toggleShare ? (
+                <div className='share-list-container'
+                onMouseLeave={this.toggleShare}
+                >
+                  <div className='share-list'>  
+                  
+                     <p className='share-list-title'>Friends: </p>
+                    {this.props.friendsList}
+                    <p className='share-list-title'>My Clubs: </p>
+                    {this.props.myClubsList}
+                  </div>
+                  <div className='close-share-list'>
+                    <button className='close-share-list-button' onClick={this.toggleShare}>X</button>
+                  </div>
+                </div>
+              ) : null}
+            </div>
           </div>
         </div>
         <div className='book-info-summary flexed'>

@@ -27,7 +27,7 @@ export default class MyLibrary extends Component {
 
   async addRecommended(user_id, user_library_id) {
     let res = await axios.put(`/library/changeNewStatus/${user_id}&${user_library_id}`)
-    console.log(res)
+    // console.log(res)
     this.setState({
         myLibrary: res.data
     })
