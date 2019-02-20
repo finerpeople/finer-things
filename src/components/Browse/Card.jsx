@@ -44,6 +44,8 @@ export default class Card extends Component {
         return res.data.items[0].volumeInfo
     }
 
+    
+
     addToLibrary = async () => {
         const book = await this.getSingleBook();
         // console.log(book)
@@ -110,7 +112,13 @@ export default class Card extends Component {
         this.moreToggle()
     }
 
+    addRecommendedBook = () => {
+        this.props.addRecommended(this.props.user_id, this.props.user_library_id)
+    }
+    
+
     render() {
+        // console.log(() => this.props.addRecommended(5, 257))
         let friendsList = this.state.friends.map((friend) => {
             return (
                 <div className='share-list-names-container' key={friend.user_id}>
@@ -178,7 +186,7 @@ export default class Card extends Component {
                                 ) : null}
                                 {this.props.book_status === 'Recommended' ? (
                                     <i className="fas fa-plus" id='recommended-add-to-library'
-                                        onClick={this.addToLibrary}></i>
+                                        onClick={this.addRecommendedBook}></i>
                                 ) : null}
                             </div>
                             {this.state.toggleShare ? (

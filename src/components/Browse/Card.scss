@@ -104,13 +104,13 @@
 }
 
 .share-list-container {
-    height: 21.6rem;
+    height: 14.6rem;
     width: 16rem;
     position: absolute;
     right: -13rem;
     top: 1rem;
     z-index: 1;
-    background-color: aliceblue;
+    background-color: $lightBlue;
     overflow: hidden;
     overflow-y: scroll;
     cursor: default;
@@ -146,6 +146,8 @@
     font-size: $bodyFontSize;
     text-align: start;
     cursor: pointer;
+    border: none;
+
 }
 
 .share-img-div {

@@ -25,6 +25,14 @@ export default class MyLibrary extends Component {
     })
   }
 
+  async addRecommended(user_id, user_library_id) {
+    let res = await axios.put(`/library/changeNewStatus/${user_id}&${user_library_id}`)
+    console.log(res)
+    this.setState({
+        myLibrary: res.data
+    })
+}
+
   dynamicSort(key) {
     var sortOrder = 1;
 
@@ -66,6 +74,7 @@ export default class MyLibrary extends Component {
   }
 
   render() {
+    this.state.recommended = []
     let displayBooks = this.state.myLibrary.map((book, i) => {
       // console.log(book)
       if (book.status === 'Recommended') {
@@ -83,12 +92,12 @@ export default class MyLibrary extends Component {
               myLibrary={true}
               deleteBook={() => this.deleteBook(book.user_library_id)}
               book_status={book.status}
-            />
+              />
           </div>
         )
       }
     })
-
+    
     let recommendedBooks = this.state.recommended.map((book, i) => {
       return (
         <div key={book.user_library_id}>
@@ -102,21 +111,22 @@ export default class MyLibrary extends Component {
             myLibrary={true}
             deleteBook={() => this.deleteBook(book.user_library_id)}
             book_status={book.status}
+            addRecommended={() => this.addRecommended(this.state.user_id, book.user_library_id)}
           />
         </div>
       )
     })
-    // console.log(this.state.recommended)
-    // console.log(recommendedBooks)
 
     return (
       <div className='my-lib-container'>
+      {this.state.recommended.length >= 1 ? (
         <div className='my-lib-recommended-container'>
           <div className='my-lib-title'>My Recommended Books</div>
           <div className='my-lib-recommended-list'>
             {recommendedBooks}
           </div>
         </div>
+      ) : null}
         <div className='my-lib-title'>My Books</div>
         <div className='my-lib-sort-container'>
           <select className='my-lib-sort' name="sort" id="sort" onChange={(e) => this.sortBooks(e.target.value)}>
