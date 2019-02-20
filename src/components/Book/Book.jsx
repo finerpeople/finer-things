@@ -93,7 +93,7 @@ export default class Book extends Component {
             <p className='book-title'>{this.state.title}</p>
             <p className='book-author'>{this.state.author}</p>
             {this.state.libraryButton === 'Add to My Library' ? (
-              <button className='book-add' onClick={this.props.modalAddToLibrary}>{this.state.libraryButton}</button>
+              <button className='book-add' onClick={this.props.addRecommendedBook}>{this.state.libraryButton}</button>
             ) : (
                 <button className='book-status'>{this.state.libraryButton}</button>
               )}

@@ -153,6 +153,7 @@ export default class Card extends Component {
                             myLibrary={this.props.myLibrary}
                             user_library_id={this.props.user_library_id}
                             book_status={this.props.book_status}
+                            addRecommendedBook={this.addRecommendedBook}
                         />
                         <button className='close-book-modal' onClick={this.toggle}>X</button>
                     </div>
