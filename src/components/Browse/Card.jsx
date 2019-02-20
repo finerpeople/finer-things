@@ -32,7 +32,6 @@ export default class Card extends Component {
     }
 
     toggleShare = async () => {
-        // console.log(this.state.toggleShare)
         this.setState({
             toggleShare: !this.state.toggleShare
         })
@@ -104,7 +103,7 @@ export default class Card extends Component {
             author: book.authors[0],
             category: book.categories[0]
         })
-        this.toggleShare()
+        // this.toggleShare()
     }
 
     deleteBook = () => {
@@ -154,6 +153,10 @@ export default class Card extends Component {
                             user_library_id={this.props.user_library_id}
                             book_status={this.props.book_status}
                             addRecommendedBook={this.addRecommendedBook}
+                            getPeopleToShareWith={this.getPeopleToShareWith}
+                            myClubsList={myClubsList}
+                            friendsList={friendsList}
+                            toggleShare={this.state.toggleShare}
                         />
                         <button className='close-book-modal' onClick={this.toggle}>X</button>
                     </div>
@@ -192,7 +195,7 @@ export default class Card extends Component {
                             </div>
                             {this.state.toggleShare ? (
                                 <div className='share-list-container'
-                                    // onMouseLeave={this.toggleShare}
+                                    onMouseLeave={this.toggleShare}
                                 >
                                     <div className='share-list'>
                                         <p className='share-list-title'>Friends: </p>
