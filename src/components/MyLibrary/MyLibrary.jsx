@@ -37,13 +37,10 @@ export default class MyLibrary extends Component {
         this.setState({filteredLibrary: this.state.filteredLibrary})
       }
     })
-    console.log(this.state.recommended)
-    console.log(this.state.filteredLibrary)
   }
 
       async addRecommended(user_id, user_library_id) {
         let res = await axios.put(`/library/changeNewStatus/${user_id}&${user_library_id}`)
-        console.log(res)
         this.setState({
           myLibrary: res.data
         })
@@ -56,7 +53,6 @@ export default class MyLibrary extends Component {
           sortOrder = -1;
           key = key.substr(1);
         }
-        // console.log(key)
         return function (a, b) {
           if (sortOrder === -1) {
             return b[key].toString().localeCompare(a[key].toString());
@@ -90,10 +86,8 @@ export default class MyLibrary extends Component {
       }
 
       render() {
-        console.log(this.state.filteredLibrary)
         // this.state.recommended = []
         let displayBooks = this.state.filteredLibrary.map((book, i) => {
-          console.log(book)
           // if (book.status === 'Recommended') {
           //   this.state.recommended.push(book)
           // } else {
