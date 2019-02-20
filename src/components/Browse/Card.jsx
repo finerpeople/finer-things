@@ -154,9 +154,11 @@ export default class Card extends Component {
                     this.props.myLibrary ? (
                         <div key={this.props.i} className='searched-single-book'>
                             <img src={this.props.img} alt='book cover' className='searched-book-cover' onClick={this.toggle} />
-                            <div>
-                                {this.props.book_status}
-                            </div>
+                            {this.props.book_status !== 'Recommended' ? (
+                                <div className='card-status'>
+                                    {this.props.book_status}
+                                </div>
+                            ) : null}
                             <div className='icon-banner'>
                                 <i className="fas fa-ellipsis-h dots" onClick={this.moreToggle}></i>
                                 {this.state.moreModal ? (
@@ -214,7 +216,7 @@ export default class Card extends Component {
                             </div>
                             {this.state.toggleShare ? (
                                 <div className='share-list-container'
-                                onMouseLeave={this.toggleShare}
+                                    onMouseLeave={this.toggleShare}
                                 >
                                     <div className='share-list'>
                                         <p className='share-list-title'>Friends: </p>

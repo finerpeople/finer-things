@@ -176,3 +176,15 @@
 .share-list-name {
     margin: 0.1rem 0 0 2.5rem;
 }
+
+.card-status {
+    position: absolute;
+    left: 0.3rem;
+    bottom: 1.3rem;
+    background-color: aliceblue;
+    width: 2.6rem;
+    text-align: center;
+    border-radius: 8px;
+    font-size: $smallFontSize;
+    font-family: $bodyFontFamily;
+}
