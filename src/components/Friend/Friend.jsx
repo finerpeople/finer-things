@@ -52,7 +52,7 @@ export default class Friend extends Component {
   toggleChat = async friendId => {
     const { userId } = this.state;
     const res = await axios.post("/api/getMessages", { userId, friendId });
-    console.log(res.data)
+    // console.log(res.data)
     this.setState({
       friendMessages: res.data,
       displayChat: !this.state.displayChat,

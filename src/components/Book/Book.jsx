@@ -87,7 +87,7 @@ export default class Book extends Component {
       <div className='book-info-main flexed'>
         <div className='modal-top flexed'>
           <div className='book-info-img flexed'>
-            <img src={this.state.image} alt='book cover' />
+            <img className='book-img' src={this.state.image} alt='book cover' />
           </div>
           <div className='book-info-header flexed'>
             <p className='book-title'>{this.state.title}</p>

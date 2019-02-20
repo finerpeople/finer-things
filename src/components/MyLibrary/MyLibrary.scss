@@ -40,9 +40,13 @@
 .my-lib-recommended-list {
     display: flex;
     height: 15rem;
-    width: 59rem;
+    width: 87rem;
     margin: 1rem;
+}
+
+.my-lib-recommended-container {
     overflow-x: scroll;
+
 }
 
 @media (max-width: 1024px) {
