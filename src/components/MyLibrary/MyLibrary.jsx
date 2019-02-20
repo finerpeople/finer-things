@@ -19,7 +19,6 @@ export default class MyLibrary extends Component {
   };
 
   getMyLibrary = async () => {
-    // console.log(this.state.user_id)
     let res = await axios.get(`/library/allBooks/${this.state.user_id}`)
     await this.setState({
       myLibrary: res.data
@@ -86,12 +85,7 @@ export default class MyLibrary extends Component {
       }
 
       render() {
-        // this.state.recommended = []
         let displayBooks = this.state.filteredLibrary.map((book, i) => {
-          // if (book.status === 'Recommended') {
-          //   this.state.recommended.push(book)
-          // } else {
-            // this.state.filteredLibrary.push(book)
             return (
               <div key={book.user_library_id}>
                 <Card
