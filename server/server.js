@@ -52,7 +52,7 @@ app.put(
 // Settings
 app.get("/api/userData/:id", settingsCtrl.getUserData);
 app.put("/api/updateAccountStatus/:id", settingsCtrl.updateAccStatus);
-app.put("/api/edit-profile", settingsCtrl.editProfile);
+app.put('/api/edit-profile/:id', settingsCtrl.editProfile);
 
 // Friends
 app.get("/api/friendsData/:id", friendsCtrl.getFriends);
