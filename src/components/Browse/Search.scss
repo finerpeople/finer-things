@@ -44,9 +44,10 @@
 
 .searched-single-book {
   position: relative;
-  height: 13rem;
-  width: 8.5rem;
-  // overflow: hidden;
+  margin-right: .6em;
+  margin-left: .6em;
+  border-radius: 10px;
+  overflow: hidden;
 }
 
 .searched-book-cover {
@@ -125,16 +126,14 @@
   background-color: rgba(189, 195, 199, 0.9);
   border-radius: 10px 10px 0 0;
   position: absolute;
-  top: -1.5rem;
+  top: -1.8rem;
   width: 7.5rem;
-  height: 1.8rem;
+  height: 1.6rem;
   transition: top 0.7s ease-in-out;
-  visibility: hidden;
 }
 
 .searched-single-book:hover .icon-banner {
   top: 0rem;
-  visibility: visible;
 }
 
 .search-card-display-container {
