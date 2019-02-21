@@ -65,6 +65,7 @@ app.get("/club/getOneClub/:club_id", clubsCtrl.getOneClub);
 app.get("/club/getClubMembers/:club_id", clubsCtrl.getClubMembers);
 app.get("/club/getOtherClubs/:user_id", clubsCtrl.getOtherClubs);
 app.post("/club/joinClub/:club_id&:user_id", clubsCtrl.joinClub);
+app.delete("/club/quitClub/:club_id&:user_id", clubsCtrl.quitClub);
 
 // Chat
 app.post("/api/getMessages", chatCtrl.getMessages);
