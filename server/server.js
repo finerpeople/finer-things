@@ -15,6 +15,7 @@ const settingsCtrl = require("./controllers/settingsController");
 const friendsCtrl = require("./controllers/friendsController");
 const clubsCtrl = require("./controllers/clubsController");
 const chatCtrl = require("./controllers/chatController");
+const clubLibCtrl = require("./controllers/clubLibraryController");
 
 // Middleware
 const userInSession = require("./controllers/middleware/userInSession");
@@ -67,6 +68,12 @@ app.get("/club/getClubMembers/:club_id", clubsCtrl.getClubMembers);
 app.get("/club/getOtherClubs/:user_id", clubsCtrl.getOtherClubs);
 app.post("/club/joinClub/:club_id&:user_id", clubsCtrl.joinClub);
 app.delete("/club/quitClub/:club_id&:user_id", clubsCtrl.quitClub);
+app.post("/club/createNewClub", clubsCtrl.createNewClub);
+
+//club library
+app.post("/clubLibrary/recommendBookToClub", clubLibCtrl.recommendBookToClub);
+app.get("/clubLibrary/getOneBook/:club_id&:book_isbn", clubLibCtrl.getOneBook);
+app.get("/clubLibrary/getClubBooks/:club_id", clubLibCtrl.getClubBooks);
 
 // Chat
 app.post("/api/getMessages", chatCtrl.getMessages);

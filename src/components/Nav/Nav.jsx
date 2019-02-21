@@ -22,7 +22,7 @@ class Nav extends Component {
   };
 
   render() {
-    console.log(this.props);
+    // console.log(this.props);
     const { pathname } = this.props.location;
 
     const navBarStyle =
