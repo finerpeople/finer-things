@@ -1,10 +1,12 @@
 import React, { Component } from "react";
 import axios from "axios";
 import Swal from "sweetalert2";
+import {connect} from 'react-redux'
+import {updateFirstName} from '../../ducks/reducer'
 import "./Auth.scss";
 import logo from "../../The-Finer-Things.png";
 
-export default class Auth extends Component {
+class Auth extends Component {
   state = {
     userEmail: "",
     password: "",
@@ -23,6 +25,7 @@ export default class Auth extends Component {
     const { userEmail, password } = this.state;
     try {
       const res = await axios.post("/api/login", { userEmail, password });
+      this.props.updateFirstName(res.data.userData.firstName)
       if (res.data.loggedIn) {
         this.props.history.push("/my-library");
       }
@@ -165,3 +168,12 @@ export default class Auth extends Component {
     );
   }
 }
+
+function mapStateToProps(reduxState) {
+  return {
+    firstName: reduxState.firstName
+  }
+}
+
+
+export default connect(mapStateToProps, {updateFirstName})(Auth)
