@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
+import swal from "sweetalert";
 import "./Setting.scss";
 
 export default class Setting extends Component {
@@ -16,10 +17,7 @@ export default class Setting extends Component {
       email: "",
       emailEdit: "",
       password: "",
-      // passwordEdit: "",
       profilePic: "",
-      // summary: "",
-      // summaryEdit: "",
       status: "",
       modalToggle: false
     };
@@ -80,6 +78,11 @@ export default class Setting extends Component {
       lastName,
       email
     });
+    swal({
+      title: "Success!",
+      text: "",
+      icon: "success"
+    });
     this.setState({
       firstName: firstName,
       lastName: lastName,
@@ -93,9 +96,15 @@ export default class Setting extends Component {
       id,
       password
     });
+    swal({
+      title: "Success!",
+      text: "",
+      icon: "success"
+    })
     // console.log(password)
     this.setState({
-      password: password
+      password: password,
+      modalToggle: false
     });
   };
 
@@ -145,19 +154,19 @@ export default class Setting extends Component {
             <div id="settings-inputFields">
               <p id="settings-greeting">Make any profile changes here</p>
               <form action="" id="settings-form">
-                <div
+                {/* <div
                   id="settings-individualInput"
                   style={{ fontSize: "0.9em" }}
                 >
-                  {/* About Me:{" "}
+                  About Me:{" "}
                   <textarea
                     name="about"
                     id="aboutMeText"
                     cols="45"
                     rows="3"
                     onChange={e => this.setState({ summary: e.target.value })}
-                  /> */}
-                </div>
+                  /> 
+                </div>*/}
                 <br />
                 <div
                   id="settings-individualInput"
@@ -215,7 +224,7 @@ export default class Setting extends Component {
                           type="password"
                           id="passwordEdit"
                           onChange={e =>
-                            this.setState({ passwordEdit: e.target.value })
+                            this.setState({ password: e.target.value })
                           }
                         />
                       </div>
