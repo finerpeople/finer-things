@@ -120,13 +120,14 @@ class Auth extends Component {
             <button onClick={() => this.login()}>LOGIN</button>
             <p>
               Don't have an account?{" "}
-              <span onClick={e => this.setState({ login: false })}>
+              <button onClick={e => this.setState({ login: false })}>
                 Register now!
-              </span>
+              </button>
             </p>
           </div>
         </div>
         <div id={login ? "register-none" : "register-container"}>
+          <button onClick={e => this.setState({ login: true })}>Back</button>
           <div id="register-row">
             <input
               className="login-input"
@@ -161,7 +162,7 @@ class Auth extends Component {
             />
           </div>
           <div id="register-row">
-            <button onClick={() => this.register()}>Create Account</button>
+            <button onClick={() => this.register()}>CREATE ACCOUNT</button>
           </div>
         </div>
       </div>

@@ -22,7 +22,6 @@ class Nav extends Component {
   };
 
   render() {
-    console.log(this.props);
     const { pathname } = this.props.location;
 
     const navBarStyle =
@@ -48,7 +47,7 @@ class Nav extends Component {
         ? "Settings"
         : null;
       
-      const name = this.state.firstName === '' ? this.props.firstName : this.state.firstName
+      const name = this.state.firstName ? this.state.firstName : this.props.firstName
 
     return (
       <div>
