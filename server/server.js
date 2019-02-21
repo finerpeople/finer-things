@@ -44,6 +44,8 @@ app.delete("/library/removeBook/:user_library_id&:user_id", libraryCtrl.removeBo
 app.put("/library/updateRating/:user_rating&:user_library_id&:user_id", libraryCtrl.updateRating);
 app.put("/library/changeNewStatus/:user_id&:user_library_id", libraryCtrl.changeNewStatus);
 app.put("/library/updateBookStatus/:user_id&:user_library_id&:status", libraryCtrl.updateBookStatus);
+app.get("/library/getRecommendedLibrary/:user_id", libraryCtrl.getRecommendedLibrary);
+app.get("/library/getMyLibrary/:user_id", libraryCtrl.getMyLibrary);
 
 // Settings
 app.get("/api/userData/:id", settingsCtrl.getUserData);

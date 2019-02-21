@@ -47,7 +47,6 @@ export default class Card extends Component {
 
     addToLibrary = async () => {
         const book = await this.getSingleBook();
-        // console.log(book)
         await axios.post('/library/addBook', {
             user_id: this.props.user_id,
             isbn: this.state.isbn,
@@ -103,7 +102,6 @@ export default class Card extends Component {
             author: book.authors[0],
             category: book.categories[0]
         })
-        // this.toggleShare()
         const Toast = Swal.mixin({
             toast: true,
             position: 'top-end',
@@ -129,7 +127,6 @@ export default class Card extends Component {
     
 
     render() {
-        // console.log(() => this.props.addRecommended(5, 257))
         let friendsList = this.state.friends.map((friend) => {
             return (
                 <div className='share-list-names-container' key={friend.user_id}>
