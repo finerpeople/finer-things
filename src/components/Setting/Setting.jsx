@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
+import swal from "sweetalert";
 import "./Setting.scss";
 
 export default class Setting extends Component {
@@ -80,6 +81,11 @@ export default class Setting extends Component {
       lastName,
       email
     });
+    swal({
+      title: "Success!",
+      text: "",
+      icon: "success"
+    });
     this.setState({
       firstName: firstName,
       lastName: lastName,
@@ -92,6 +98,11 @@ export default class Setting extends Component {
     const res = await axios.put("/api/edit-password", {
       id,
       password
+    });
+    swal({
+      title: "Success!",
+      text: "",
+      icon: "success"
     });
     // console.log(password)
     this.setState({
@@ -215,7 +226,7 @@ export default class Setting extends Component {
                           type="password"
                           id="passwordEdit"
                           onChange={e =>
-                            this.setState({ passwordEdit: e.target.value })
+                            this.setState({ password: e.target.value })
                           }
                         />
                       </div>
