@@ -40,14 +40,10 @@ app.post("/library/addBook", libraryCtrl.addBook);
 app.post("/library/recommendBook", libraryCtrl.recommendBook);
 app.get("/library/allBooks/:user_id", libraryCtrl.allBooks);
 app.get("/library/getOneBook/:user_id&:isbn", libraryCtrl.getOneBook);
-app.delete(
-  "/library/removeBook/:user_library_id&:user_id",
-  libraryCtrl.removeBook
-);
-app.put(
-  "/library/updateRating/:user_rating&:user_library_id&:user_id",
-  libraryCtrl.updateRating
-);
+app.delete("/library/removeBook/:user_library_id&:user_id", libraryCtrl.removeBook);
+app.put("/library/updateRating/:user_rating&:user_library_id&:user_id", libraryCtrl.updateRating);
+app.put("/library/changeNewStatus/:user_id&:user_library_id", libraryCtrl.changeNewStatus);
+app.put("/library/updateBookStatus/:user_id&:user_library_id&:status", libraryCtrl.updateBookStatus);
 
 // Settings
 app.get("/api/userData/:id", settingsCtrl.getUserData);
@@ -62,6 +58,10 @@ app.delete("/api/deleteFriend/:userId&:friendId", friendsCtrl.deleteFriend);
 
 //clubs
 app.get("/club/getUsersClubs/:user_id", clubsCtrl.getUsersClubs);
+app.get("/club/getAllClubs", clubsCtrl.getAllClubs);
+app.get("/club/getOneClub/:club_id", clubsCtrl.getOneClub);
+app.get("/club/getClubMembers/:club_id", clubsCtrl.getClubMembers);
+
 // Chat
 app.post("/api/getMessages", chatCtrl.getMessages);
 app.post("/api/addMessage", chatCtrl.addMessage);
