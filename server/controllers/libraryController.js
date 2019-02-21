@@ -104,5 +104,17 @@ module.exports = {
         });
         let bookList = await db.user_library.getUserLibrary({user_id})
         res.status(200).send(bookList)
+    },
+    getRecommendedLibrary: async (req, res) => {
+        const {user_id} = req.params;
+        const db = req.app.get('db');
+        let recommendedLibrary = await db.user_library.getRecommendedLibrary({user_id})
+        res.status(200).send(recommendedLibrary)
+    },
+    getMyLibrary: async (req, res) => {
+        const { user_id } = req.params;
+        const db = req.app.get('db');
+        let myLibrary = await db.user_library.getMyLibrary({user_id})
+        res.status(200).send(myLibrary)
     }
 }

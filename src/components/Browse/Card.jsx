@@ -47,7 +47,6 @@ export default class Card extends Component {
 
     addToLibrary = async () => {
         const book = await this.getSingleBook();
-        // console.log(book)
         await axios.post('/library/addBook', {
             user_id: this.props.user_id,
             isbn: this.state.isbn,
@@ -103,7 +102,18 @@ export default class Card extends Component {
             author: book.authors[0],
             category: book.categories[0]
         })
-        // this.toggleShare()
+        const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000,
+            customClass: 'margin'
+        });
+
+        Toast.fire({
+            type: 'success',
+            title: 'Book Shared'
+        })
     }
 
     deleteBook = () => {
@@ -117,7 +127,6 @@ export default class Card extends Component {
     
 
     render() {
-        // console.log(() => this.props.addRecommended(5, 257))
         let friendsList = this.state.friends.map((friend) => {
             return (
                 <div className='share-list-names-container' key={friend.user_id}>
@@ -143,7 +152,7 @@ export default class Card extends Component {
             )
         })
         return (
-            <div className='card-main'>
+            <div className='card-main' >
                 {this.state.bookModal ? (
                     <div className='book-modal-container'>
                         <Book
