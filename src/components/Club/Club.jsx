@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import axios from 'axios'
 import './Club.scss'
 import Card from '../Browse/Card';
+import {Link} from 'react-router-dom';
 
 export default class Club extends Component {
   state = {
@@ -64,6 +65,7 @@ export default class Club extends Component {
     })
     return (
       <div className='club-book-details-main-container'>
+      <Link to={'/my-clubs'}>Back</Link>
         <div>
           Books in Club
           {displayBooks}
