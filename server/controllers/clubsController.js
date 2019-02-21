@@ -40,5 +40,13 @@ module.exports = {
         const db = req.app.get('db');
         let quitClub = await db.clubs.quitClub({club_id, user_id})
         res.status(200).send(quitClub)
+    },
+    createNewClub: async (req, res) => {
+        const {club_name, club_owner, summary} = req.body;
+        const db = req.app.get('db');
+        let newClub = await db.clubs.createNewClub({club_name, club_owner, summary})
+        await db.clubs.joinClub({club_id: newClub[0].club_id, user_id: club_owner})
+        let clubs = await db.clubs.getUsersClubs({user_id: club_owner})
+        res.status(200).send(clubs)
     }
 }

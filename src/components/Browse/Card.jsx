@@ -43,8 +43,6 @@ export default class Card extends Component {
         return res.data.items[0].volumeInfo
     }
 
-    
-
     addToLibrary = async () => {
         const book = await this.getSingleBook();
         await axios.post('/library/addBook', {
@@ -116,6 +114,32 @@ export default class Card extends Component {
         })
     }
 
+    recommendToClub = async (club_id) => {
+        const book = await this.getSingleBook()
+        console.log(this.state)
+        await axios.post(`/clubLibrary/recommendBookToClub`, {
+            club_id,
+            book_isbn: this.state.isbn,
+            user_id: this.props.user_id,
+            book_img: book.imageLinks.thumbnail,
+            book_title: book.title,
+            book_author: book.authors[0],
+            book_genre: book.categories[0]
+        })
+        const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000,
+            customClass: 'margin'
+        });
+
+        Toast.fire({
+            type: 'success',
+            title: 'Book Shared to Club'
+        })
+    }
+
     deleteBook = () => {
         this.props.deleteBook(this.props.user_library_id)
         this.moreToggle()
@@ -140,9 +164,10 @@ export default class Card extends Component {
             )
         })
         let myClubsList = this.state.myClubs.map((club, i) => {
+            // console.log(club)
             return (
                 <div className='share-list-names-container' key={i}>
-                    <button className='share-list-buttons'>
+                    <button className='share-list-buttons' onClick={() => this.recommendToClub(club.club_id)}>
                         <div className='share-img-div' style={{ backgroundImage: `url(${club.profile_pic})` }}></div>
                         <p className='share-list-name'>
                             {club.club_name}
