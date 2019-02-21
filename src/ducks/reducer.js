@@ -5,7 +5,6 @@ const initialState = {
 const UPDATE_FIRST_NAME = 'UPDATE_FIRST_NAME'
 
 function reducer(state = initialState, action) {
-    // console.log(action)
     switch(action.type) {
         case UPDATE_FIRST_NAME:
         return {...state, firstName: action.payload}
@@ -15,7 +14,6 @@ function reducer(state = initialState, action) {
 }
 
 export function updateFirstName(firstName) {
-    // console.log(firstName)
     return {
         type: UPDATE_FIRST_NAME,
         payload: firstName
