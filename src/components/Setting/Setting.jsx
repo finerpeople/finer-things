@@ -10,12 +10,18 @@ export default class Setting extends Component {
       id: "",
       image: "",
       firstName: "",
+      firstNameEdit: "",
       lastName: "",
+      lastNameEdit: "",
       email: "",
+      emailEdit: "",
       password: "",
+      // passwordEdit: "",
       profilePic: "",
-      summary: "",
-      status: ""
+      // summary: "",
+      // summaryEdit: "",
+      status: "",
+      modalToggle: false
     };
   }
 
@@ -57,31 +63,40 @@ export default class Setting extends Component {
     const res = await axios.put(`/api/updateAccountStatus/${id}`);
     this.props.history.push("/");
   };
-  editProfile = async id => {
-    const { summary, email, firstName, lastName, password } = this.state;
-    const res = await axios.put(`/api/edit-profile/${id}`, {
-      // summary: summary,
-      // // first_name: firstName,
-      // // last_name: lastName,
-      // firstName: firstName,
-      // lastName: lastName,
-      // email: email,
-      // hash: password
-      summary,
+  editProfile = async () => {
+    const { id, emailEdit, firstNameEdit, lastNameEdit } = this.state;
+    let email, firstName, lastName;
+    emailEdit === "" ? (email = this.state.email) : (email = emailEdit);
+    firstNameEdit === ""
+      ? (firstName = this.state.firstName)
+      : (firstName = firstNameEdit);
+    lastNameEdit === ""
+      ? (lastName = this.state.lastName)
+      : (lastName = lastNameEdit);
+    // passwordEdit === '' ? password=this.state.password : email=passwordEdit
+    const res = await axios.put("/api/edit-profile", {
+      id,
       firstName,
       lastName,
-      email,
-      password
-    })
+      email
+    });
     this.setState({
       firstName: firstName,
       lastName: lastName,
-      summary: summary,
-      email: email,
-      // password: 
-    })
-    console.log(this.state.lastName);
-    console.log(this.state.email);
+      email: email
+      // password:
+    });
+  };
+  editPassword = async () => {
+    const { id, password } = this.state;
+    const res = await axios.put("/api/edit-password", {
+      id,
+      password
+    });
+    // console.log(password)
+    this.setState({
+      password: password
+    });
   };
 
   render() {
@@ -94,7 +109,7 @@ export default class Setting extends Component {
                 <img
                   id="settings-profileImg"
                   src={this.state.profilePic}
-                  alt="pic of me"
+                  alt="user"
                 />
                 <div className="editProfileBtns">
                   <div>
@@ -111,10 +126,10 @@ export default class Setting extends Component {
               <div className="settings-AboutWrapper">
                 <div className="settings-aboutMe">
                   <br />
-                  <div id="settings-summary">
+                  {/* <div id="settings-summary">
                     <p>About Me: </p>
                     {this.state.summary}
-                  </div>
+                  </div> */}
                   <br />
                   <p id="settings-email">
                     Name: {this.state.firstName} {this.state.lastName}
@@ -134,14 +149,14 @@ export default class Setting extends Component {
                   id="settings-individualInput"
                   style={{ fontSize: "0.9em" }}
                 >
-                  About Me:{" "}
+                  {/* About Me:{" "}
                   <textarea
                     name="about"
                     id="aboutMeText"
                     cols="45"
                     rows="3"
                     onChange={e => this.setState({ summary: e.target.value })}
-                  />
+                  /> */}
                 </div>
                 <br />
                 <div
@@ -151,8 +166,11 @@ export default class Setting extends Component {
                   First Name:
                   <input
                     type="text"
+                    placeholder={this.state.firstName}
                     id="editInputs"
-                    onChange={e => this.setState({ firstName: e.target.value })}
+                    onChange={e =>
+                      this.setState({ firstNameEdit: e.target.value })
+                    }
                   />
                 </div>
                 <br />
@@ -163,8 +181,11 @@ export default class Setting extends Component {
                   Last Name:
                   <input
                     type="text"
+                    placeholder={this.state.lastName}
                     id="editInputs"
-                    onChange={e => this.setState({ lastName: e.target.value })}
+                    onChange={e =>
+                      this.setState({ lastNameEdit: e.target.value })
+                    }
                   />
                 </div>
                 <br />
@@ -175,22 +196,48 @@ export default class Setting extends Component {
                   Email:
                   <input
                     type="text"
+                    placeholder={this.state.email}
                     id="editInputs"
-                    onChange={e => this.setState({ email: e.target.value })}
+                    onChange={e => this.setState({ emailEdit: e.target.value })}
                   />
                 </div>
                 <br />
-                <div
-                  id="settings-individualInput"
-                  style={{ fontSize: "0.9em" }}
-                >
-                  Password:
-                  <input
-                    type="text"
-                    id="editInputs"
-                    onChange={e => this.setState({ password: e.target.value })}
-                  />
-                </div>
+
+                {this.state.modalToggle === true ? (
+                  <div id="settings-modalWrapper">
+                    <div>
+                      <div
+                        id="settings-passwordInput"
+                        style={{ fontSize: "0.9em" }}
+                      >
+                        New Password:
+                        <input
+                          type="password"
+                          id="passwordEdit"
+                          onChange={e =>
+                            this.setState({ passwordEdit: e.target.value })
+                          }
+                        />
+                      </div>
+
+                      <div id="modalButtons">
+                        <button
+                          id="settings-btns"
+                          onClick={() => this.editPassword(this.state.id)}
+                        >
+                          Save
+                        </button>
+                        <button
+                          id="settings-btns"
+                          onClick={() => this.setState({ modalToggle: false })}
+                        >
+                          Cancel
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                ) : null}
+
                 <div id="settings-mainBtns">
                   <div>
                     <button
@@ -212,6 +259,15 @@ export default class Setting extends Component {
                   </div>
                 </div>
               </form>
+              <div id="settings-changePassword">
+                <button
+                  id="settings-btns"
+                  type="button"
+                  onClick={() => this.setState({ modalToggle: true })}
+                >
+                  Change Password
+                </button>
+              </div>
             </div>
           </div>
         </div>

@@ -2,9 +2,8 @@ UPDATE users
 SET 
     first_name = ${firstName},
     last_name = ${lastName},
-    summary = ${summary},
-    email = ${email}, 
-    hash = ${password}
+    email = ${email}
+ 
 where 
     user_id = ${id}
 
