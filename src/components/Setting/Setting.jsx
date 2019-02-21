@@ -10,12 +10,18 @@ export default class Setting extends Component {
       id: "",
       image: "",
       firstName: "",
+      firstNameEdit: "",
       lastName: "",
+      lastNameEdit: "",
       email: "",
+      emailEdit: "",
       password: "",
+      // passwordEdit: "",
       profilePic: "",
-      summary: "",
-      status: ""
+      // summary: "",
+      // summaryEdit: "",
+      status: "",
+      modalToggle: false
     };
   }
 
@@ -57,138 +63,214 @@ export default class Setting extends Component {
     const res = await axios.put(`/api/updateAccountStatus/${id}`);
     this.props.history.push("/");
   };
-  editProfile = async id => {
-    // const res = await axios.put(`/api/edit-profile/${id}`)
-    // console.log(res.data)
-    // return res.data
-    ////////////////////////////////////////////////////////////////
-    const { summary, email, firstName, lastName, password } = this.state
-    const res = await axios.put(`/api/edit-profile/${id}`
-    // , {summary: summary, firstName: firstName, lastName: lastName, email: email, password: password}
-    )
-    this.setState({firstName: firstName, lastName: lastName, summary: summary, email: email, password: password})
-    console.log(lastName)
-    console.log(summary)
-    
-
+  editProfile = async () => {
+    const { id, emailEdit, firstNameEdit, lastNameEdit } = this.state;
+    let email, firstName, lastName;
+    emailEdit === "" ? (email = this.state.email) : (email = emailEdit);
+    firstNameEdit === ""
+      ? (firstName = this.state.firstName)
+      : (firstName = firstNameEdit);
+    lastNameEdit === ""
+      ? (lastName = this.state.lastName)
+      : (lastName = lastNameEdit);
+    // passwordEdit === '' ? password=this.state.password : email=passwordEdit
+    const res = await axios.put("/api/edit-profile", {
+      id,
+      firstName,
+      lastName,
+      email
+    });
+    this.setState({
+      firstName: firstName,
+      lastName: lastName,
+      email: email
+      // password:
+    });
+  };
+  editPassword = async () => {
+    const { id, password } = this.state;
+    const res = await axios.put("/api/edit-password", {
+      id,
+      password
+    });
+    // console.log(password)
+    this.setState({
+      password: password
+    });
   };
 
   render() {
     return (
       <div id="settings-entireContainer">
-      <div id="settings-mainContainer">
-        <div id="settings-profileContainer">
-          <div className="colorContainer">
-            <div id="settings-picContainer">
-              <img
-                id="settings-profileImg"
-                src={this.state.profilePic}
-                alt="pic of me"
-              />
-              <div className="editProfileBtns">
-                <div>
-                  <i className="fas fa-plus" />
-                </div>
-                <div>
-                  <i className="fas fa-user-edit fa-lg" />
-                </div>
-                <div>
-                  <i className="far fa-trash-alt fa-lg" />
+        <div id="settings-mainContainer">
+          <div id="settings-profileContainer">
+            <div className="colorContainer">
+              <div id="settings-picContainer">
+                <img
+                  id="settings-profileImg"
+                  src={this.state.profilePic}
+                  alt="user"
+                />
+                <div className="editProfileBtns">
+                  <div>
+                    <i id="settings" className="fas fa-plus" />
+                  </div>
+                  <div>
+                    <i id="settings" className="fas fa-user-edit fa-lg" />
+                  </div>
+                  <div>
+                    <i id="settings" className="far fa-trash-alt fa-lg" />
+                  </div>
                 </div>
               </div>
-            </div>
-            <div className="settings-AboutWrapper">
-              <div className="settings-aboutMe">
-                <br />
-                <div id="settings-summary">
-                  <p>About Me</p>
-                  {this.state.summary}
+              <div className="settings-AboutWrapper">
+                <div className="settings-aboutMe">
+                  <br />
+                  {/* <div id="settings-summary">
+                    <p>About Me: </p>
+                    {this.state.summary}
+                  </div> */}
+                  <br />
+                  <p id="settings-email">
+                    Name: {this.state.firstName} {this.state.lastName}
+                  </p>
+                  <br />
+                  <p id="settings-email">Email: {this.state.email}</p>
                 </div>
-                <br />
-                <p id="settings-email">
-                  Name: {this.state.firstName} {this.state.lastName}
-                </p>
-                <br />
-                <p id="settings-email">Email: {this.state.email}</p>
               </div>
             </div>
           </div>
-        </div>
 
-        <div id="settings-editProfileContainer">
-          <div id="settings-inputFields">
-            <p id="settings-greeting">Make any profile changes here</p>
-            <form action="" id="settings-form">
-              <div id="settings-individualInput" style={{ fontSize: "0.9em" }}>
-                About Me:{" "}
-                <textarea
-                  name="about"
-                  id="aboutMeText"
-                  cols="45"
-                  rows="3"
-                  onChange={e => this.setState({ summary: e.target.value })}
-                />
-              </div>
-              <br />
-              <div id="settings-individualInput" style={{ fontSize: "0.9em" }}>
-                First Name:
-                <input
-                  type="text"
-                  id="editInputs"
-                  onChange={e => this.setState({ firstName: e.target.value })}
-                />
-              </div>
-              <br />
-              <div id="settings-individualInput" style={{ fontSize: "0.9em" }}>
-                Last Name:
-                <input
-                  type="text"
-                  id="editInputs"
-                  onChange={e => this.setState({ lastName: e.target.value })}
-                />
-              </div>
-              <br />
-              <div id="settings-individualInput" style={{ fontSize: "0.9em" }}>
-                Email:
-                <input
-                  type="text"
-                  id="editInputs"
-                  onChange={e => this.setState({ email: e.target.value })}
-                />
-              </div>
-              <br />
-              <div id="settings-individualInput" style={{ fontSize: "0.9em" }}>
-                Password:
-                <input
-                  type="text"
-                  id="editInputs"
-                  onChange={e => this.setState({ password: e.target.value })}
-                />
-              </div>
-              <div id="settings-mainBtns">
-                <div>
-                  <button
-                    id="settings-btns"
-                    type="button"
-                    onClick={() => this.editProfile(this.state.id)}
-                  >
-                    Save Changes
-                  </button>
+          <div id="settings-editProfileContainer">
+            <div id="settings-inputFields">
+              <p id="settings-greeting">Make any profile changes here</p>
+              <form action="" id="settings-form">
+                <div
+                  id="settings-individualInput"
+                  style={{ fontSize: "0.9em" }}
+                >
+                  {/* About Me:{" "}
+                  <textarea
+                    name="about"
+                    id="aboutMeText"
+                    cols="45"
+                    rows="3"
+                    onChange={e => this.setState({ summary: e.target.value })}
+                  /> */}
                 </div>
-                <div>
-                  <button
-                    id="settings-btns"
-                    type="button"
-                    onClick={() => this.deleteAccount(this.state.id)}
-                  >
-                    Delete Account
-                  </button>
+                <br />
+                <div
+                  id="settings-individualInput"
+                  style={{ fontSize: "0.9em" }}
+                >
+                  First Name:
+                  <input
+                    type="text"
+                    placeholder={this.state.firstName}
+                    id="editInputs"
+                    onChange={e =>
+                      this.setState({ firstNameEdit: e.target.value })
+                    }
+                  />
                 </div>
+                <br />
+                <div
+                  id="settings-individualInput"
+                  style={{ fontSize: "0.9em" }}
+                >
+                  Last Name:
+                  <input
+                    type="text"
+                    placeholder={this.state.lastName}
+                    id="editInputs"
+                    onChange={e =>
+                      this.setState({ lastNameEdit: e.target.value })
+                    }
+                  />
+                </div>
+                <br />
+                <div
+                  id="settings-individualInput"
+                  style={{ fontSize: "0.9em" }}
+                >
+                  Email:
+                  <input
+                    type="text"
+                    placeholder={this.state.email}
+                    id="editInputs"
+                    onChange={e => this.setState({ emailEdit: e.target.value })}
+                  />
+                </div>
+                <br />
+
+                {this.state.modalToggle === true ? (
+                  <div id="settings-modalWrapper">
+                    <div>
+                      <div
+                        id="settings-passwordInput"
+                        style={{ fontSize: "0.9em" }}
+                      >
+                        New Password:
+                        <input
+                          type="password"
+                          id="passwordEdit"
+                          onChange={e =>
+                            this.setState({ passwordEdit: e.target.value })
+                          }
+                        />
+                      </div>
+
+                      <div id="modalButtons">
+                        <button
+                          id="settings-btns"
+                          onClick={() => this.editPassword(this.state.id)}
+                        >
+                          Save
+                        </button>
+                        <button
+                          id="settings-btns"
+                          onClick={() => this.setState({ modalToggle: false })}
+                        >
+                          Cancel
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                ) : null}
+
+                <div id="settings-mainBtns">
+                  <div>
+                    <button
+                      id="settings-btns"
+                      type="button"
+                      onClick={() => this.editProfile(this.state.id)}
+                    >
+                      Save Changes
+                    </button>
+                  </div>
+                  <div>
+                    <button
+                      id="settings-btns"
+                      type="button"
+                      onClick={() => this.deleteAccount(this.state.id)}
+                    >
+                      Delete Account
+                    </button>
+                  </div>
+                </div>
+              </form>
+              <div id="settings-changePassword">
+                <button
+                  id="settings-btns"
+                  type="button"
+                  onClick={() => this.setState({ modalToggle: true })}
+                >
+                  Change Password
+                </button>
               </div>
-            </form>
+            </div>
           </div>
         </div>
-      </div>
       </div>
     );
   }
