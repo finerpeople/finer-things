@@ -1,29 +1,29 @@
 import React, { Component } from "react";
 import axios from "axios";
 import { Link, withRouter } from "react-router-dom";
+import { connect } from "react-redux";
 import "./Nav.scss";
-import logo from '../../The-Finer-Things.png'
+import logo from "../../The-Finer-Things.png";
 
 class Nav extends Component {
   state = {
-    firstName: ''
-  }
+    firstName: ""
+  };
 
   componentDidMount = async () => {
-    const res = await axios.get('/api/session')
-      this.setState({firstName: res.data.firstName})
-  }
+    const res = await axios.get("/api/session");
+    this.setState({ firstName: res.data.firstName });
+  };
 
   signout = () => {
-    axios.get('/api/signout')
-    .then(res => {
-      this.props.history.push('/')
-    })
-  }
+    axios.get("/api/signout").then(res => {
+      this.props.history.push("/");
+    });
+  };
 
   render() {
+    console.log(this.props);
     const { pathname } = this.props.location;
-    const {firstName} = this.state
 
     const navBarStyle =
       pathname === "/" || pathname === "/book" || pathname === "/club"
@@ -47,19 +47,21 @@ class Nav extends Component {
         : pathname === "/settings"
         ? "Settings"
         : null;
+      
+      const name = this.state.firstName === '' ? this.props.firstName : this.state.firstName
 
     return (
       <div>
         <div className={headerStyle}>
           <div className="logo">
-            <img src={logo} alt=""/>
+            <img src={logo} alt="" />
           </div>
           <div className="title">
             <p>{title}</p>
           </div>
           <div className="welcome">
-            <p>{`Hi, ${firstName}!`}</p>
-            <i className="fas fa-sign-out-alt" onClick={() => this.signout()}></i>
+            <p>{`Hi, ${name}!`}</p>
+            <i className="fas fa-sign-out-alt" onClick={() => this.signout()} />
           </div>
         </div>
         <div className={navBarStyle}>
@@ -124,4 +126,6 @@ class Nav extends Component {
   }
 }
 
-export default withRouter(Nav);
+const mapStateToProps = reduxState => reduxState;
+
+export default withRouter(connect(mapStateToProps)(Nav));
