@@ -37,8 +37,10 @@ CREATE TABLE COMMENTS (
 
 
 CREATE TABLE CLUB_BOOK (
+    club_book_id SERIAL PRIMARY KEY,
     club_id integer REFERENCES CLUB(club_id),
     book_isbn text,
+    date_added date,
     status text,
     recommend_by integer,
     book_img text,

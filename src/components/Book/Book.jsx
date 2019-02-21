@@ -21,13 +21,6 @@ export default class Book extends Component {
     };
   }
 
-  // toggle = async () => {
-  //   this.setState({
-  //     bookToggleShare: !this.state.bookToggleShare
-  //   })
-  //   await this.props.getPeopleToShareWith()
-  // }
-
   toggleShare = async () => {
     this.setState({
         toggleShare: !this.state.toggleShare
@@ -37,12 +30,7 @@ export default class Book extends Component {
 
   componentDidMount = async () => {
     await this.getSession();
-    const res = await axios.get(
-      `https://www.googleapis.com/books/v1/volumes?q=isbn:${
-      this.state.isbn
-      }&fields=items(id, volumeInfo/title, volumeInfo/authors, volumeInfo/description, volumeInfo/industryIdentifiers, volumeInfo/categories, volumeInfo/averageRating, volumeInfo/imageLinks, volumeInfo/previewLink)`
-    );
-    // console.log(res.data)
+    const res = await axios.get(`https://www.googleapis.com/books/v1/volumes?q=isbn:${this.state.isbn}&fields=items(id, volumeInfo/title, volumeInfo/authors, volumeInfo/description, volumeInfo/industryIdentifiers, volumeInfo/categories, volumeInfo/averageRating, volumeInfo/imageLinks, volumeInfo/previewLink)`);
     this.setState({
       image: res.data.items[0].volumeInfo.imageLinks.thumbnail,
       isbn: this.state.isbn,
@@ -66,8 +54,6 @@ export default class Book extends Component {
 
   inLibrary = async () => {
     let res = await axios.get(`/library/getOneBook/${this.state.user_id}&${this.state.isbn}`)
-    // console.log(res.data)
-    // console.log({true: this.props.book_status && this.props.book_status !== 'Recommended'})
     if (this.props.myLibrary && this.props.book_status !== 'Recommended') {
       this.setState({
         libraryButton: 'Enjoy reading this book!',
@@ -87,18 +73,14 @@ export default class Book extends Component {
   }
 
   onStarClick = async (nextValue, prevValue, name) => {
-    // console.log(nextValue, prevValue, name)
     await this.setState({ userRating: nextValue })
-    // console.log(this.state.userRating)
-    let res = await axios.put(`/library/updateRating/${this.state.userRating}&${this.props.user_library_id}&${this.state.user_id}`)
+    await axios.put(`/library/updateRating/${this.state.userRating}&${this.props.user_library_id}&${this.state.user_id}`)
     this.setState({
       userRating: nextValue
     })
-    // console.log(res)
   }
 
   render() {
-    console.log(this.state.toggleShare)
     return (
       <div className='book-info-main flexed'>
         <div className='modal-top flexed'>

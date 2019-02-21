@@ -43,11 +43,8 @@ export default class Card extends Component {
         return res.data.items[0].volumeInfo
     }
 
-    
-
     addToLibrary = async () => {
         const book = await this.getSingleBook();
-        // console.log(book)
         await axios.post('/library/addBook', {
             user_id: this.props.user_id,
             isbn: this.state.isbn,
@@ -103,7 +100,44 @@ export default class Card extends Component {
             author: book.authors[0],
             category: book.categories[0]
         })
-        // this.toggleShare()
+        const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000,
+            customClass: 'margin'
+        });
+
+        Toast.fire({
+            type: 'success',
+            title: 'Book Shared'
+        })
+    }
+
+    recommendToClub = async (club_id) => {
+        const book = await this.getSingleBook()
+        console.log(this.state)
+        await axios.post(`/clubLibrary/recommendBookToClub`, {
+            club_id,
+            book_isbn: this.state.isbn,
+            user_id: this.props.user_id,
+            book_img: book.imageLinks.thumbnail,
+            book_title: book.title,
+            book_author: book.authors[0],
+            book_genre: book.categories[0]
+        })
+        const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000,
+            customClass: 'margin'
+        });
+
+        Toast.fire({
+            type: 'success',
+            title: 'Book Shared to Club'
+        })
     }
 
     deleteBook = () => {
@@ -117,7 +151,6 @@ export default class Card extends Component {
     
 
     render() {
-        // console.log(() => this.props.addRecommended(5, 257))
         let friendsList = this.state.friends.map((friend) => {
             return (
                 <div className='share-list-names-container' key={friend.user_id}>
@@ -131,9 +164,10 @@ export default class Card extends Component {
             )
         })
         let myClubsList = this.state.myClubs.map((club, i) => {
+            // console.log(club)
             return (
                 <div className='share-list-names-container' key={i}>
-                    <button className='share-list-buttons'>
+                    <button className='share-list-buttons' onClick={() => this.recommendToClub(club.club_id)}>
                         <div className='share-img-div' style={{ backgroundImage: `url(${club.profile_pic})` }}></div>
                         <p className='share-list-name'>
                             {club.club_name}
@@ -143,7 +177,7 @@ export default class Card extends Component {
             )
         })
         return (
-            <div className='card-main'>
+            <div className='card-main' >
                 {this.state.bookModal ? (
                     <div className='book-modal-container'>
                         <Book

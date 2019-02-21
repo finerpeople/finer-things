@@ -1,3 +1,5 @@
+const bcrypt = require("bcryptjs");
+
 module.exports = {
   getUserData: async (req, res) => {
     const { id } = req.params;
@@ -12,9 +14,28 @@ module.exports = {
     res.status(200).send(userData);
   },
   editProfile: async (req, res) => {
-    const { id, summary, firstName, lastName, email, password } = req.body; 
+    const { id, firstName, lastName, email, } = req.body;
+    // console.log(req.body)
+    const db = req.app.get("db");
+    let updatedUser = await db.user.edit_profile({
+      id,
+      firstName,
+      lastName,
+      email
+    });
+    res.status(200).send(updatedUser);
+  },
+  editPassword: async (req, res) => {
+    const {id, password} = req.body;
+    // console.log(password)
+    const salt = bcrypt.genSaltSync(10);
+    const hash = bcrypt.hashSync(password, salt);
     const db = req.app.get('db');
-    let updatedUser = await db.user.edit_profile({ id: id, summary: summary, firstName: firstName, lastName: lastName, email: email, password: password });
-    res.status(200).send(updatedUser[0]);
+    // console.log(hash)
+    let updatedPassword = await db.user.edit_password({
+      id,
+      hash
+    });
+    res.status(200).send(updatedPassword)
   }
 };
