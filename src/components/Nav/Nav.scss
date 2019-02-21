@@ -213,6 +213,24 @@
   #button-current {
     color: $darkerGrey;
   }
+  .logo {
+    display: flex;
+    justify-content: center;
+    grid-column: 4/7;
+    height: 2.5em;
+    padding-top: .4em;
+  }
+  .header {
+    height: 4.5em;
+  }
+  .title p {
+    padding-bottom: .6em;
+  }
+  .welcome {
+    position: absolute;
+    top: 1.4em;
+    right: -1em;
+  }
 }
 
 @media (max-height: 540px) {

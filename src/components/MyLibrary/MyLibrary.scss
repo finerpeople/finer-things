@@ -1,11 +1,15 @@
 @import '../../style.scss';
 
 .my-lib-container {
+    position: fixed;
+    left: 0;
+    right: 0;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
-    margin: 6rem 3rem 1rem 6rem;}
+    margin: 6rem 3rem 1rem 6rem;
+}
 
 .my-lib-title {
     font-size: $titleFontSize;
@@ -62,15 +66,31 @@
     .my-lib-container {
         margin: 6rem 2rem 1rem 3rem;
     }
-    
-    
+    .my-lib-recommended-list {
+        width: 91%;
+    }
+    .my-lib-recommended-container {
+        width: 100%;
+    }
+    .my-lib-list > div {
+        margin: 0 .4em;
+    }
 }
 
 @media (max-width: 488px) {
     .my-lib-container {
         margin: 6rem 2rem 1rem 2rem;
     }
-
+    .my-lib-title {
+        font-size: 1.3em;
+    }
+    .my-lib-container {
+        position: absolute;
+        margin-left: 0;
+        margin-right: 0;
+        padding-bottom: 4em;
+        overflow-x: hidden;
+    }
 }
 
 @media (max-width: 350px) {
