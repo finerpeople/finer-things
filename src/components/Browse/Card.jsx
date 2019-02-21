@@ -104,6 +104,18 @@ export default class Card extends Component {
             category: book.categories[0]
         })
         // this.toggleShare()
+        const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000,
+            customClass: 'margin'
+        });
+
+        Toast.fire({
+            type: 'success',
+            title: 'Book Shared'
+        })
     }
 
     deleteBook = () => {
@@ -143,7 +155,7 @@ export default class Card extends Component {
             )
         })
         return (
-            <div className='card-main'>
+            <div className='card-main' >
                 {this.state.bookModal ? (
                     <div className='book-modal-container'>
                         <Book
