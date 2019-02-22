@@ -1,9 +1,11 @@
 import React, { Component } from 'react'
 import axios from 'axios'
-import './MyClub.scss'
 import ClubCard from './ClubCard';
+import { connect } from 'react-redux';
 
-export default class MyClub extends Component {
+import './MyClub.scss'
+
+class MyClub extends Component {
   state = {
     userId: "",
     myClubs: [],
@@ -74,7 +76,6 @@ export default class MyClub extends Component {
   }
 
   createNewClub = async () => {
-    // console.log(this.state)
     let res = await axios.post('/club/createNewClub', {
       club_name: this.state.clubName, 
       club_owner: this.state.userId,
@@ -102,7 +103,6 @@ export default class MyClub extends Component {
             button={'quit'}
             clubId={club.club_id}
             joinRemoveFn={this.quitClub}
-
           />
         </div>
       )
@@ -127,11 +127,6 @@ export default class MyClub extends Component {
 
     return (
       <div id="club">
-      {/* {this.state.toggleClubDetails ? (
-        <div>
-        <Club  />
-        </div>
-      ) : ( */}
         <div>
         <button onClick={this.toggle}>+</button>
         {this.state.toggleAddClub ? (
@@ -171,10 +166,11 @@ export default class MyClub extends Component {
             </div>
           </div>
           </div>
-
-      {/* )} */}
       </div>
     );
   }
 }
 
+const mapStateToProps = reduxState => reduxState;
+
+export default connect(mapStateToProps)(MyClub)
