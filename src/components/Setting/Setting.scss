@@ -98,7 +98,7 @@
     justify-content: space-around;
     align-items: center;
     // background-color: #5C0029;
-    background-color: #557A95;
+    background-color: $lightBlue;
     // opacity: 0.8
 }
 
@@ -187,10 +187,10 @@ input[id="editInputs"] {
 textarea[id="aboutMeText"]:focus,
 input[id="editInputs"]:focus {
     border-radius: 3px;
-    border: 3px solid #557A95;;
+    border: 3px solid $lightBlue;
 }
 #settings-modalWrapper {
-    background-color: $darkBlue; 
+    background-color: $maroon; 
     height: 15em;
     position: fixed;
     top:39%;
@@ -246,8 +246,8 @@ input[id="passwordEdit"] {
 .fa-plus[id="settings"]:hover,
 .fa-trash-alt[id="settings"]:hover {
     // color: $darkerGrey;
-    // color: #557A95;
-    color:  #353831;
+    // color: $lightBlue;
+    color: $grey;
 }
 
 #settings-mainBtns {
@@ -277,7 +277,7 @@ input[id="passwordEdit"] {
 
 #settings-btns:hover {
     // background-color: $lightBlue;
-    background-color: #557A95;
+    background-color: $lightBlue;
     // background-color: #5C0029;
     color: $white;
 }

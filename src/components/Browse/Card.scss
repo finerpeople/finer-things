@@ -1,7 +1,7 @@
 @import '../../style.scss';
 
 .book-modal-container {
-    background-color: $darkBlue;
+    background-color: $maroon;
     position: absolute;
     left: 30rem;
     z-index: 1;
@@ -44,7 +44,7 @@
 
 .more-modal {
     position: absolute;
-    background-color: $tan;
+    background-color: $darkGreen;
     height: 3.4rem;
     width: 4.4rem;
     left: 4rem;
