@@ -21,5 +21,12 @@ module.exports = {
         const db = req.app.get('db');
         let clubBooks = await db.club_library.getClubBooks({club_id})
         res.status(200).send(clubBooks)
+    },
+    deleteClubBook: async (req, res) => {
+        const {club_book_id, club_id} = req.params;
+        const db = req.app.get('db');
+        await db.club_library.deleteClubBook({club_book_id})
+        let clubBooks = await db.club_library.getClubBooks({club_id})
+        res.status(200).send(clubBooks)
     }
 }

@@ -9,22 +9,22 @@ import Card from "./Card";
 import "./Search.scss";
 
 export default class Search extends Component {
-    state = {
-        userInput: '',
-        searchedBooks: [],
-        toggleSearch: false,
-        user_id: 0
-    }
-    async componentDidMount() {
-        await this.getSession();    
-    }
+  state = {
+    userInput: '',
+    searchedBooks: [],
+    toggleSearch: false,
+    user_id: 0
+  }
+  async componentDidMount() {
+    await this.getSession();
+  }
 
-    getSession = async () => {
-        const res = await axios.get("/api/session");
-        this.setState({
-          user_id: res.data.id
-        })
-      };
+  getSession = async () => {
+    const res = await axios.get("/api/session");
+    this.setState({
+      user_id: res.data.id
+    })
+  };
 
   handleChange = (prop, val) => {
     this.setState({
@@ -33,21 +33,13 @@ export default class Search extends Component {
   };
 
   toggle = () => {
-    // window.scrollTo(0, 0)
     this.setState({
       toggleSearch: !this.state.toggleSearch
     });
   };
 
   searchBooks = () => {
-    axios
-      .get(
-        `https://www.googleapis.com/books/v1/volumes?q=${this.state.userInput}
-            &maxResults=40&langRestrict=en&fields=kind, totalItems, items(id, volumeInfo/title, 
-            volumeInfo/authors, volumeInfo/description, volumeInfo/industryIdentifiers, 
-            volumeInfo/categories, volumeInfo/averageRating, volumeInfo/imageLinks, 
-            volumeInfo/previewLink)`
-      )
+    axios.get(`https://www.googleapis.com/books/v1/volumes?q=${this.state.userInput}&maxResults=40&langRestrict=en&fields=kind, totalItems, items(id, volumeInfo/title, volumeInfo/authors, volumeInfo/description, volumeInfo/industryIdentifiers, volumeInfo/categories, volumeInfo/averageRating, volumeInfo/imageLinks, volumeInfo/previewLink)`)
       .then(res => {
         this.setState({
           searchedBooks: res.data.items,
@@ -59,8 +51,9 @@ export default class Search extends Component {
 
   render() {
     let displaySearch = this.state.searchedBooks.map((book, i) => {
+      console.log(book)
       return (
-        <div className='search-card-display-container' key={i}>
+        <div className='search-card-display-container' key={book.id}>
           {book.volumeInfo.imageLinks && book.volumeInfo.industryIdentifiers ? (
             <Card
               i={i}
@@ -86,29 +79,29 @@ export default class Search extends Component {
             </div>
           </div>
         ) : (
-          <>
-            <label className="search-header">
-              <div className="app-input-container">
-                <input
-                  className="app-input"
-                  type="text"
-                  placeholder="Search"
-                  onChange={e => this.handleChange("userInput", e.target.value)}
-                  value={this.state.userInput}
-                />
-              </div>
-              <div className="search-input-btn">
+            <>
+              <label className="search-header">
                 <div className="app-input-container">
-                  <i className="fas fa-search" onClick={this.searchBooks} />
+                  <input
+                    className="app-input"
+                    type="text"
+                    placeholder="Search"
+                    onChange={e => this.handleChange("userInput", e.target.value)}
+                    value={this.state.userInput}
+                  />
                 </div>
-              </div>
-            </label>
-            <Fiction />
-            <Nonfiction />
-            <Misc />
-            <YoungAdult />
-          </>
-        )}
+                <div className="search-input-btn">
+                  <div className="app-input-container">
+                    <i className="fas fa-search" onClick={this.searchBooks} />
+                  </div>
+                </div>
+              </label>
+              <Fiction />
+              <Nonfiction />
+              <Misc />
+              <YoungAdult />
+            </>
+          )}
       </>
     );
   }
