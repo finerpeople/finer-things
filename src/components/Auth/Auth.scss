@@ -28,7 +28,7 @@
 //   overflow: hidden;
 //   width: 100vw;
 //   height: 100vh;
-//   background-color: $darkBlue;
+//   background-color: $maroon;
 // }
 // .auth-left-bg {
 //   background-color: $lightBlue;
@@ -40,7 +40,7 @@
 //   margin-top: -250px;
 // }
 // .auth-right-bg {
-//   background-color: $tan;
+//   background-color: $darkGreen;
 //   grid-column: 2 span 2;
 //   grid-row: 2 / span 2;
 //   height: 350%;
@@ -122,7 +122,7 @@
   width: fit-content;
   background-color: transparent;
   border: none;
-  border-bottom: 0.3em solid $tan;
+  border-bottom: 0.3em solid $darkGreen;
   color: $darkGrey;
   font-family: $bodyFontFamily;
   font-weight: 600;
@@ -172,7 +172,7 @@
   width: fit-content;
   background-color: transparent;
   border: none;
-  border-bottom: 0.3em solid $tan;
+  border-bottom: 0.3em solid $darkGreen;
   color: $darkGrey;
   font-family: $bodyFontFamily;
   font-weight: 600;
@@ -183,7 +183,7 @@
   position: absolute;
   top: 0.8em;
   left: 0.8em;
-  background-color: $tan;
+  background-color: $darkGreen;
   margin: 0;
   padding: 0.3em;
   height: fit-content;
