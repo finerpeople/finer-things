@@ -81,17 +81,7 @@ export default class Friend extends Component {
   };
 
   handleChange = (e) => {
-    let input = e.target.value
-    let filterFriends = this.state.friends.filter((friendObj, i) => {
-      return (
-        <div>
-          <img src="" alt="profile picture"/>
-          <p>name</p>
-          <i>chat icon</i>
-          <button>add</button>
-        </div>
-      )
-    })
+    this.setState({searchInput: e.target.value})
   }
 
   render() {
@@ -140,6 +130,17 @@ export default class Friend extends Component {
         </div>
       );
     });
+
+    const filteredFriends = this.state.friends.filter((friendObj, i) => {
+      return (
+        <div>
+          <img src="" alt="profile picture"/>
+          <p>name</p>
+          <i>chat icon</i>
+          <button>add</button>
+        </div>
+      )
+    })
 
     return (
       <div id="friend">
