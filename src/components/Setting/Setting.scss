@@ -278,14 +278,14 @@ input[id="passwordEdit"] {
 #settings-btns:hover {
     // background-color: $lightBlue;
     background-color: $lightBlue;
-    // background-color: #5C0029;
+    // background-color: $maroon;
     color: $white;
 }
 
 @media (max-width: 1350px) {
     .colorContainer {
         // background-color: red; 
-        height: 75%;
+        height: 83%;
         width: 95%;
     }
 
@@ -310,7 +310,7 @@ input[id="passwordEdit"] {
 
     #settings-inputFields {
         // background-color: green; 
-        height: 75%;
+        height: 83%;
         width: 95%;
     }
 
@@ -326,7 +326,6 @@ input[id="passwordEdit"] {
         flex-direction: column;
         height: 100vh;
     }
-
     #settings-mainContainer {
         display: flex;
         flex-direction: column;
@@ -339,15 +338,16 @@ input[id="passwordEdit"] {
     #settings-profileImg {
         height: 11em;
         width: 8em;
-        position: relative;
+        // position: relative;
+        top: 1em; 
         // margin-left: 1em; 
     }
-
+  
     #settings-picContainer {
         position: relative;
         height: 11em;
         width: 8em;
-        margin-top: 0em;
+        margin-top: 1.5em;
         margin-left: -20em;
     }
 
@@ -359,7 +359,7 @@ input[id="passwordEdit"] {
 
     #settings-profileContainer {
         width: 42em;
-        height: 20em;
+        height: 2em;
     }
 
     .settings-aboutMe {
@@ -385,23 +385,26 @@ input[id="passwordEdit"] {
 @media (max-width: 700px) {
 
     #settings-profileImg {
-        height: 10em;
-        width: 8em;
+        height: 9em;
+        width: 7.5em;
         position: relative;
         // margin-left: 1em; 
     }
-
+    .editProfileBtns {
+        height: 1.7em;
+        bottom: -1.2em;  
+    }
     #settings-picContainer {
         position: relative;
-        height: 11em;
-        width: 8em;
-        margin-top: -0.1em;
+        height: 9em;
+        width: 7.5em;
+        margin-top: 1.5em;
         margin-left: -20em;
     }
 
     #settings-inputFields {
         width: 35em;
-        height: 25em;
+        height: 32em;
         // background-color: green; 
     }
 
@@ -428,24 +431,23 @@ input[id="passwordEdit"] {
         height: 2em;
         max-width: 95%;
     }
-    .editProfileBtns{
-        margin-bottom: 0.5em; 
-    }
+
 }
-//planted, angel
-@media (max-height:568px) and (max-width:340px) {
+
+@media(max-width:340px) {
 .colorContainer {
     // background-color: red; 
-    width: 110vw;
+    // width: 110vw;
     margin-left: 4em; 
 }
 #settings-inputFields {
     // background-color: green; 
-    width: 110vw;
+    // width: 110vw;
     margin-left: 4em; 
     height:45em;
     flex-direction: column; 
 }
+
 #settings-picContainer {
     // background-color: purple; 
     height: 7em;
@@ -475,3 +477,45 @@ input[id="passwordEdit"] {
 }
 
 }
+@media (max-height:568px){
+    .colorContainer {
+        // background-color: red; 
+        // width: 110vw;
+        margin-left: 4em; 
+    }
+    #settings-inputFields {
+        // background-color: green; 
+        // width: 110vw;
+        margin-left: 4em; 
+        height:45em;
+        flex-direction: column; 
+    }
+    #settings-picContainer {
+        // background-color: purple; 
+        height: 7em;
+        width: 5em;
+        margin-left: -15em;
+    }
+    #settings-profileImg {
+        // background-color: purple; 
+        height: 7em; 
+        width: 5em; 
+    }
+    .editProfileBtns {
+        height: 1.5em;
+        bottom: -1.1em; 
+    }
+    #settings-form {
+        height: 50%;
+        // background-color: yellow; 
+        width: 85%;
+    }
+    #settings-btns {
+        width: 90%;
+    }
+    #settings-changePassword {
+        // background-color: red; 
+        margin-top: 3em;
+    }
+    
+    }

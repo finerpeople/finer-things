@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import axios from "axios";
+// import axios from "axios";
 import "./MiniChat.scss";
 import io from "socket.io-client";
 
@@ -53,10 +53,10 @@ export default class MiniChat extends Component {
   enterKey = (e) => {
     const {
       userId,
-      messages,
-      displayChat,
+      // messages,
+      // displayChat,
       friendChatId,
-      friend
+      // friend
     } = this.props.props;
     const code = e.keyCode || e.which;
     if (code === 13) {
@@ -68,7 +68,7 @@ export default class MiniChat extends Component {
     const { messageInput } = this.state;
     const {
       userId,
-      messages,
+      // messages,
       displayChat,
       friendChatId,
       friend,

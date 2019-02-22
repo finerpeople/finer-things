@@ -32,7 +32,7 @@ export default class Setting extends Component {
       first_name,
       last_name,
       email,
-      hash,
+      // hash,
       profile_pic,
       summary,
       user_status
@@ -141,10 +141,11 @@ export default class Setting extends Component {
                   </div> */}
                   <br />
                   <p id="settings-email">
-                    Name: {this.state.firstName} {this.state.lastName}
+                    Name: 
+                    <br/>{this.state.firstName} {this.state.lastName}
                   </p>
                   <br />
-                  <p id="settings-email">Email: {this.state.email}</p>
+                  <p id="settings-email">Email: <br/> {this.state.email}</p>
                 </div>
               </div>
             </div>

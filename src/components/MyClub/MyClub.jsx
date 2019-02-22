@@ -153,7 +153,6 @@ class MyClub extends Component {
               <input className="app-input" type="text" placeholder="Search" />
             </div>
             <div className="search-input-btn">
-              <i className="fas fa-search" />
             </div>
           </div>
           <div id="club-body">
