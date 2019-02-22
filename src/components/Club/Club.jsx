@@ -54,7 +54,6 @@ class Club extends Component {
   }
 
   async deleteClubBook(club_book_id) {
-    console.log('hey')
     await axios.delete(`/clubLibrary/deleteClubBook/${club_book_id}&${this.state.clubId}`)
     await this.getClubBooks()
   }
