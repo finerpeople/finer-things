@@ -81,7 +81,7 @@
     color: $lighterGrey;
     border-radius: 10px;
     transition: background-color .2s;
-    border: solid $tan 0.1rem;
+    border: solid $darkGreen 0.1rem;
     cursor: pointer;
 }
 
@@ -90,5 +90,5 @@
 }
 
 .book-add:hover {
-    background-color: $tan;
+    background-color: $darkGreen;
 }
