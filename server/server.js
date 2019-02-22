@@ -77,6 +77,7 @@ app.post("/club/createNewClub", clubsCtrl.createNewClub);
 app.post("/clubLibrary/recommendBookToClub", clubLibCtrl.recommendBookToClub);
 app.get("/clubLibrary/getOneBook/:club_id&:book_isbn", clubLibCtrl.getOneBook);
 app.get("/clubLibrary/getClubBooks/:club_id", clubLibCtrl.getClubBooks);
+app.delete("/clubLibrary/deleteClubBook/:club_book_id&:club_id", clubLibCtrl.deleteClubBook);
 
 // Chat
 app.post("/api/getMessages", chatCtrl.getMessages);
