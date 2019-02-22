@@ -23,10 +23,10 @@ export default class Book extends Component {
 
   toggleShare = async () => {
     this.setState({
-        toggleShare: !this.state.toggleShare
+      toggleShare: !this.state.toggleShare
     })
     await this.props.getPeopleToShareWith()
-}
+  }
 
   componentDidMount = async () => {
     await this.getSession();
@@ -90,10 +90,18 @@ export default class Book extends Component {
           <div className='book-info-header flexed'>
             <p className='book-title'>{this.state.title}</p>
             <p className='book-author'>{this.state.author}</p>
-            {this.state.libraryButton === 'Add to My Library' ? (
-              <button className='book-add' onClick={this.props.addRecommendedBook}>{this.state.libraryButton}</button>
+            {this.props.myRecommended ? (
+              this.state.libraryButton === 'Add to My Library' ? (
+                <button className='book-add' onClick={this.props.addRecommendedBook}>{this.state.libraryButton}</button>
+              ) : (
+                  <button className='book-status'>{this.state.libraryButton}</button>
+                )
             ) : (
-                <button className='book-status'>{this.state.libraryButton}</button>
+                this.state.libraryButton === 'Add to My Library' ? (
+                  <button className='book-add' onClick={this.props.modalAddToLibrary}>{this.state.libraryButton}</button>
+                ) : (
+                    <button className='book-status'>{this.state.libraryButton}</button>
+                  )
               )}
             {this.props.myLibrary ? (
               <StarRatingComponent
@@ -117,11 +125,11 @@ export default class Book extends Component {
               <button onClick={this.toggleShare}>Share</button>
               {this.state.toggleShare ? (
                 <div className='share-list-container'
-                onMouseLeave={this.toggleShare}
+                  onMouseLeave={this.toggleShare}
                 >
-                  <div className='share-list'>  
-                  
-                     <p className='share-list-title'>Friends: </p>
+                  <div className='share-list'>
+
+                    <p className='share-list-title'>Friends: </p>
                     {this.props.friendsList}
                     <p className='share-list-title'>My Clubs: </p>
                     {this.props.myClubsList}

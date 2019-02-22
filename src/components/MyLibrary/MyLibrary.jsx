@@ -107,6 +107,7 @@ export default class MyLibrary extends Component {
             user_id={this.state.user_id}
             search={true}
             myLibrary={true}
+            myRecommended={true}
             deleteBook={() => this.deleteBook(book.user_library_id)}
             book_status={book.status}
             addRecommended={() => this.addRecommended(this.state.user_id, book.user_library_id)}

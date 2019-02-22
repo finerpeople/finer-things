@@ -52,6 +52,13 @@ class Club extends Component {
     let res = await axios.get(`/club/getClubMembers/${this.state.clubId}`)
     this.setState({ members: res.data })
   }
+
+  async deleteClubBook(club_book_id) {
+    console.log('hey')
+    await axios.delete(`/clubLibrary/deleteClubBook/${club_book_id}&${this.state.clubId}`)
+    await this.getClubBooks()
+  }
+
   render() {
     const { summary, first_name, last_name, email, profile_pic } = this.state.club
 
@@ -76,6 +83,8 @@ class Club extends Component {
             search={true}
             myLibrary={true}
             book_status={book.status}
+            deleteBook={() => this.deleteClubBook(book.club_book_id)}
+            clubBook={true}
           />
         </div>
       )
