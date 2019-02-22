@@ -20,6 +20,8 @@ const clubLibCtrl = require("./controllers/clubLibraryController");
 // Middleware
 const userInSession = require("./controllers/middleware/userInSession");
 
+app.use( express.static( `${__dirname}/../build` ) )
+
 app.use(express.json());
 app.use(
   session({
@@ -29,6 +31,7 @@ app.use(
   })
 );
 app.use(userInSession);
+// app.use(cors());
 
 // Auth
 app.post("/api/register", authCtrl.register);
