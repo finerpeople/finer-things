@@ -8,6 +8,7 @@ export default class Friend extends Component {
     userId: "",
     friends: [],
     recFriends: [],
+    allUsers: [],
     displayChat: false,
     friendChatId: "",
     friendMessages: [],
@@ -18,6 +19,9 @@ export default class Friend extends Component {
   componentDidMount = async () => {
     this.getSession();
   };
+  // componentWillUpdate() {
+  //   this.getSession()
+  // }
 
   getSession = async () => {
     let id = "";
@@ -36,10 +40,12 @@ export default class Friend extends Component {
     res = await axios.get(`/api/recFriendsData/${id}`);
     recFriends = res.data;
 
+    const allUsers = [...friends, ...recFriends];
     this.setState({
       userId: id,
       friends,
-      recFriends
+      recFriends,
+      allUsers
     });
   };
 
@@ -75,10 +81,11 @@ export default class Friend extends Component {
   deleteFriend = async friendId => {
     const { userId } = this.state;
     const res = await axios.delete(`/api/deleteFriend/${userId}&${friendId}`);
-    this.setState({
+    await this.setState({
       friends: res.data.friends,
       recFriends: res.data.recFriends
     });
+    this.getSession();
   };
 
   handleChange = e => {
@@ -130,50 +137,55 @@ export default class Friend extends Component {
       );
     });
 
-    const filteredFriends = this.state.friends.map((friendObj, i) => {
+    const searchUsers = this.state.allUsers.map((friendObj, i) => {
       const { first_name, last_name, user_id, profile_pic } = friendObj;
       const friendName = first_name + " " + last_name;
-      if (!this.state.searchInput)
-        return (
-          <div id="friend-search-none">
-            <div />
-          </div>
-        );
+      let isFriend = friends.map(friendObj2 => {
+        if (friendObj2.user_id === user_id) return user_id;
+      });
+      const switchButton = isFriend.includes(user_id) ? (
+        <button onClick={() => this.deleteFriend(user_id)}>Remove</button>
+      ) : (
+        <button onClick={() => this.addFriend(user_id)}>Add</button>
+      );
       if (friendName.toLowerCase().includes(this.state.searchInput)) {
         return (
-          <div key={i} id="friend-search-results">
-            <div id="search-pic-container">
-              <div
-                className="search-profile-pic"
-                style={{ backgroundImage: `url(${profile_pic})` }}
-              />
-            </div>
-            <p>{`${first_name} ${last_name}`}</p>
-            <i
-              className="fas fa-comments"
-              onClick={() => this.toggleChat(user_id)}
+          <div key={i} id="friend-search-row">
+            <div
+              className="search-profile-pic"
+              style={{ backgroundImage: `url(${profile_pic})` }}
             />
-            <button onClick={() => this.deleteFriend(user_id)}>Remove</button>
+            <div id="friend-search-row-info">
+              <p>{`${first_name} ${last_name}`}</p>
+              <div id="friend-search-row-info-btn">
+                <i
+                  className="fas fa-comments"
+                  onClick={() => this.toggleChat(user_id)}
+                />
+                {switchButton}
+              </div>
+            </div>
           </div>
         );
       }
     });
 
+    const searchResults = !this.state.searchInput
+      ? "friend-search-none"
+      : "friend-search-results";
+
     return (
       <div id="friend">
         <div id="friend-header">
-          <div className="app-input-container">
+          <div className="friend-input-container">
             <input
-              className="app-input"
+              className="friend-input"
               type="text"
               placeholder="Search"
               onChange={e => this.handleChange(e)}
             />
+            <div id={searchResults}>{searchUsers}</div>
           </div>
-          <div className="search-input-btn">
-            <i className="fas fa-search" />
-          </div>
-          {filteredFriends}
         </div>
         {/* ///////////////////////////////////////////////////// */}
         <div id="friend-body">

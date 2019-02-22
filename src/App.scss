@@ -5,10 +5,14 @@
 }
 
 .app-input-container {
-  grid-column: 8;
+  position: absolute;
   display: flex;
-  justify-content: center;
+  justify-content: flex-end;
   align-items: center;
+  width: 100%;
+  max-width: 85em;
+  top: 6.5em;
+  left: -4em;
 }
 .app-input {
   height: 2em;
@@ -19,16 +23,7 @@
   font-family: $bodyFontFamily;
   font-size: $bodyFontSize;
   padding-left: 0.5em;
-  margin-left: 15em;
-}
-.search-input-btn {
-  display: flex;
-  align-items: center;
-  grid-column: 9;
-  margin-left: -1.3em;
-  font-size: 1.3em;
-  color: $lightGrey;
-  width: 3em;
+  margin-right: 2.5em;
 }
 
 ::-webkit-scrollbar {
@@ -47,4 +42,10 @@
   background: white;
   height: 0;
   width: 0;
+}
+
+@media (max-width: 1202px) {
+  .app-input-container {
+    position: relative;
+  }
 }
