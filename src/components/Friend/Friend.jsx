@@ -8,14 +8,20 @@ export default class Friend extends Component {
     userId: "",
     friends: [],
     recFriends: [],
+    allUsers: [],
     displayChat: false,
     friendChatId: "",
-    friendMessages: []
+    friendMessages: [],
+    searchInput: "",
+    searchFriends: []
   };
 
   componentDidMount = async () => {
     this.getSession();
   };
+  // componentWillUpdate() {
+  //   this.getSession()
+  // }
 
   getSession = async () => {
     let id = "";
@@ -34,14 +40,17 @@ export default class Friend extends Component {
     res = await axios.get(`/api/recFriendsData/${id}`);
     recFriends = res.data;
 
+    const allUsers = [...friends, ...recFriends];
     this.setState({
       userId: id,
       friends,
-      recFriends
+      recFriends,
+      allUsers
     });
   };
 
-  addFriend = async (userId, friendId) => {
+  addFriend = async friendId => {
+    const { userId } = this.state;
     const res = await axios.post("/api/addFriend", { userId, friendId });
     this.setState({
       friends: res.data.friends,
@@ -69,13 +78,18 @@ export default class Friend extends Component {
     });
   };
 
-  deleteFriend = async (userId, friendId) => {
-    console.log(userId, friendId);
+  deleteFriend = async friendId => {
+    const { userId } = this.state;
     const res = await axios.delete(`/api/deleteFriend/${userId}&${friendId}`);
-    this.setState({
+    await this.setState({
       friends: res.data.friends,
       recFriends: res.data.recFriends
     });
+    this.getSession();
+  };
+
+  handleChange = e => {
+    this.setState({ searchInput: e.target.value });
   };
 
   render() {
@@ -90,6 +104,7 @@ export default class Friend extends Component {
     const myFriends = friends.map((friend, i) => {
       return (
         <FriendCard
+          key={i}
           friend={friend}
           deleteFriend={this.deleteFriend}
           getMessages={this.getMessages}
@@ -104,7 +119,7 @@ export default class Friend extends Component {
     const myRecFriends = recFriends.map((friend, i) => {
       const { first_name, last_name, profile_pic, user_id } = friend;
       if (user_id === userId) return;
-      const profilePic = `"backgroundColor:url(${profile_pic})"`;
+      // const profilePic = `"backgroundColor:url(${profile_pic})"`;
       const friendId = user_id;
       return (
         <div key={i} id="my-rec-card">
@@ -116,22 +131,60 @@ export default class Friend extends Component {
           </div>
           <div id="my-rec-name">
             <p>{`${first_name} ${last_name}`}</p>
-            <button onClick={() => this.addFriend(this.state.userId, friendId)}>
-              Add
-            </button>
+            <button onClick={() => this.addFriend(friendId)}>Add</button>
           </div>
         </div>
       );
     });
 
+    const searchUsers = this.state.allUsers.map((friendObj, i) => {
+      const { first_name, last_name, user_id, profile_pic } = friendObj;
+      const friendName = first_name + " " + last_name;
+      let isFriend = friends.map(friendObj2 => {
+        if (friendObj2.user_id === user_id) return user_id;
+      });
+      const switchButton = isFriend.includes(user_id) ? (
+        <button onClick={() => this.deleteFriend(user_id)}>Remove</button>
+      ) : (
+        <button onClick={() => this.addFriend(user_id)}>Add</button>
+      );
+      if (friendName.toLowerCase().includes(this.state.searchInput)) {
+        return (
+          <div key={i} id="friend-search-row">
+            <div
+              className="search-profile-pic"
+              style={{ backgroundImage: `url(${profile_pic})` }}
+            />
+            <div id="friend-search-row-info">
+              <p>{`${first_name} ${last_name}`}</p>
+              <div id="friend-search-row-info-btn">
+                <i
+                  className="fas fa-comments"
+                  onClick={() => this.toggleChat(user_id)}
+                />
+                {switchButton}
+              </div>
+            </div>
+          </div>
+        );
+      }
+    });
+
+    const searchResults = !this.state.searchInput
+      ? "friend-search-none"
+      : "friend-search-results";
+
     return (
       <div id="friend">
         <div id="friend-header">
-          <div className="app-input-container">
-            <input className="app-input" type="text" placeholder="Search" />
-          </div>
-          <div className="search-input-btn">
-            <i className="fas fa-search" />
+          <div className="friend-input-container">
+            <input
+              className="friend-input"
+              type="text"
+              placeholder="Search"
+              onChange={e => this.handleChange(e)}
+            />
+            <div id={searchResults}>{searchUsers}</div>
           </div>
         </div>
         {/* ///////////////////////////////////////////////////// */}
