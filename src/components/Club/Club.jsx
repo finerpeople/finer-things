@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
 import axios from 'axios'
-import './Club.scss'
 import Card from '../Browse/Card';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { updateClubName } from '../../ducks/reducer';
 
+import './Club.scss'
 
 class Club extends Component {
   state = {
@@ -42,22 +42,22 @@ class Club extends Component {
     this.setState({ club: res.data[0] })
     this.props.updateClubName(res.data[0].club_name)
   }
-  
+
   getClubBooks = async () => {
     let res = await axios.get(`/clubLibrary/getClubBooks/${this.state.clubId}`)
     this.setState({ books: res.data })
   }
-  
+
   getClubMembers = async () => {
     let res = await axios.get(`/club/getClubMembers/${this.state.clubId}`)
     this.setState({ members: res.data })
   }
   render() {
-    const { club_name, summary, first_name, last_name, email, profile_pic } = this.state.club
+    const { summary, first_name, last_name, email, profile_pic } = this.state.club
 
     let displayMembers = this.state.members.map((person, i) => {
       return (
-        <div key={person.user_id}>
+        <div className='flexed member-card' key={person.user_id}>
           <div className='club-members-pic-div' style={{ backgroundImage: `url(${person.profile_pic})` }}></div>
           {person.first_name} {person.last_name}
         </div>
@@ -82,28 +82,36 @@ class Club extends Component {
     })
     return (
       <div className='club-book-details-main-container flexed'>
-        <Link to={'/my-clubs'}>Back</Link>
-        <div className='club-books flexed'>
-          <h3>
-            Books in Club
-          </h3>
-          <div className='club-books-display flexed'>
-          {displayBooks}
+        <Link className='a' to={'/my-clubs'}>
+          <div className='club-back-container flexed'>
+            <i className="fas fa-arrow-left 5x club-back"></i>
           </div>
+        </Link>
+        <div className='club-books flexed'>
+          <h3>Recommended Books:</h3>
+          <div className='club-books-display flexed'>
+            {displayBooks}
+          </div>
+          <h3>Books in Club: </h3>
         </div>
         <div className='club-details-container flexed'>
-          <h1>{club_name}</h1>
           <div className='club-details'>
-            Summary:
-            {summary}
-            owner name
-            <img src={profile_pic} alt='profile pic' />
-            {first_name} {last_name}
-            {email}
+            <div className='club-owner-details flexed'>
+              <h3>Owner:</h3>
+              <div className='book-owner-img-div' style={{ backgroundImage: `url(${profile_pic})` }}></div>
+              <p>{first_name} {last_name}</p>
+              <p>email: {email}</p>
+            </div>
+            <div>
+              <h3>Summary:</h3>
+              <p>{summary}</p>
+            </div>
           </div>
           <div className='club-members'>
-            Members
-            {displayMembers}
+            <h2>Members:</h2>
+            <div className='flexed'>
+              {displayMembers}
+            </div>
           </div>
         </div>
       </div>
@@ -113,4 +121,4 @@ class Club extends Component {
 
 const mapStateToProps = reduxState => reduxState;
 
-export default connect(mapStateToProps, {updateClubName})(Club)
+export default connect(mapStateToProps, { updateClubName })(Club)

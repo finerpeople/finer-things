@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import axios from "axios";
-import "./MyLibrary.scss";
 import Card from "../Browse/Card";
+
+import "./MyLibrary.scss";
 
 export default class MyLibrary extends Component {
 

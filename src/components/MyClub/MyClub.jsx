@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import axios from 'axios'
-import './MyClub.scss'
 import ClubCard from './ClubCard';
 import { connect } from 'react-redux';
 
+import './MyClub.scss'
 
 class MyClub extends Component {
   state = {
@@ -76,7 +76,6 @@ class MyClub extends Component {
   }
 
   createNewClub = async () => {
-    // console.log(this.state)
     let res = await axios.post('/club/createNewClub', {
       club_name: this.state.clubName, 
       club_owner: this.state.userId,

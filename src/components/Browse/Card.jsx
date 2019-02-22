@@ -1,13 +1,11 @@
 import React, { Component } from 'react';
 import Swal from 'sweetalert2';
 import Book from '../Book/Book';
-
+import axios from 'axios';
 
 import "./Browse.scss";
 import './Card.scss';
 import './Search.scss';
-import axios from 'axios';
-
 
 export default class Card extends Component {
     state = {
@@ -116,7 +114,6 @@ export default class Card extends Component {
 
     recommendToClub = async (club_id) => {
         const book = await this.getSingleBook()
-        console.log(this.state)
         await axios.post(`/clubLibrary/recommendBookToClub`, {
             club_id,
             book_isbn: this.state.isbn,
@@ -164,7 +161,6 @@ export default class Card extends Component {
             )
         })
         let myClubsList = this.state.myClubs.map((club, i) => {
-            // console.log(club)
             return (
                 <div className='share-list-names-container' key={i}>
                     <button className='share-list-buttons' onClick={() => this.recommendToClub(club.club_id)}>
