@@ -80,7 +80,6 @@ class Club extends Component {
         </div>
       )
     })
-    console.log(this.props)
     return (
       <div className='club-book-details-main-container flexed'>
         <Link to={'/my-clubs'}>Back</Link>
