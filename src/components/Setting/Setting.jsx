@@ -32,7 +32,7 @@ export default class Setting extends Component {
       first_name,
       last_name,
       email,
-      hash,
+      // hash,
       profile_pic,
       summary,
       user_status

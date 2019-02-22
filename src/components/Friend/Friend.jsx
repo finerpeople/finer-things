@@ -10,7 +10,9 @@ export default class Friend extends Component {
     recFriends: [],
     displayChat: false,
     friendChatId: "",
-    friendMessages: []
+    friendMessages: [],
+    searchInput: '',
+    searchFriends: []
   };
 
   componentDidMount = async () => {
@@ -78,6 +80,20 @@ export default class Friend extends Component {
     });
   };
 
+  handleChange = (e) => {
+    let input = e.target.value
+    let filterFriends = this.state.friends.filter((friendObj, i) => {
+      return (
+        <div>
+          <img src="" alt="profile picture"/>
+          <p>name</p>
+          <i>chat icon</i>
+          <button>add</button>
+        </div>
+      )
+    })
+  }
+
   render() {
     const {
       userId,
@@ -90,6 +106,7 @@ export default class Friend extends Component {
     const myFriends = friends.map((friend, i) => {
       return (
         <FriendCard
+          key={i}
           friend={friend}
           deleteFriend={this.deleteFriend}
           getMessages={this.getMessages}
@@ -104,7 +121,7 @@ export default class Friend extends Component {
     const myRecFriends = recFriends.map((friend, i) => {
       const { first_name, last_name, profile_pic, user_id } = friend;
       if (user_id === userId) return;
-      const profilePic = `"backgroundColor:url(${profile_pic})"`;
+      // const profilePic = `"backgroundColor:url(${profile_pic})"`;
       const friendId = user_id;
       return (
         <div key={i} id="my-rec-card">
@@ -128,7 +145,7 @@ export default class Friend extends Component {
       <div id="friend">
         <div id="friend-header">
           <div className="app-input-container">
-            <input className="app-input" type="text" placeholder="Search" />
+            <input className="app-input" type="text" placeholder="Search" onChange={e => this.handleChange(e)}/>
           </div>
           <div className="search-input-btn">
             <i className="fas fa-search" />
