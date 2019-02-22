@@ -4,7 +4,7 @@
   display: grid;
   margin-left: $navBarWidth;
   margin-top: $headerHeight;
-  width: calc(100vw - $navBarWidth);
+  width: calc(100vw - 3.6em);
   grid-template-columns: repeat(9, 1fr);
   padding-top: 2em;
 }
