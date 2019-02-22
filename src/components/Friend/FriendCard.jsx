@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import axios from "axios";
+// import axios from "axios";
 import MiniChat from "../MiniChat/MiniChat";
 import io from "socket.io-client";
 
@@ -15,7 +15,7 @@ export default class FriendCard extends Component {
       first_name, 
       last_name,
     } = this.props.friend;
-    const {deleteFriend, getMessages, toggleChat, userId, displayChat} = this.props
+    const {deleteFriend, toggleChat, userId} = this.props
 
     const friendId = user_id
 

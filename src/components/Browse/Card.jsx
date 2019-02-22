@@ -191,6 +191,7 @@ export default class Card extends Component {
                             myClubsList={myClubsList}
                             friendsList={friendsList}
                             toggleShare={this.state.toggleShare}
+                            getLibrary={this.props.getLibrary}
                         />
                         <button className='close-book-modal' onClick={this.toggle}>X</button>
                     </div>

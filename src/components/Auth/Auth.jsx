@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 import { updateFirstName } from "../../ducks/reducer";
 import "./Auth.scss";
 import logo from "../../The-Finer-Things.png";
-import background from '../../Background-Image.jpg'
+import background from "../../Background-Image.jpg";
 
 class Auth extends Component {
   state = {
@@ -14,6 +14,14 @@ class Auth extends Component {
     firstName: "",
     lastName: "",
     login: true
+  };
+
+  componentDidMount = async () => {
+    const res = await axios.get("/api/session");
+    console.log(res.data)
+    if (res.data.loggedIn) {
+      this.props.history.push("/my-library");
+    }
   };
 
   handleChange = (prop, e) => {
@@ -89,84 +97,84 @@ class Auth extends Component {
   };
 
   render() {
-    const { userEmail, password, firstName, lastName, login } = this.state;
+    const { login } = this.state;
 
     return (
-      <div className='auth'>
-        <img id="auth-main" src={background}/>
-          <div id="auth-bg-icons">
-            <div className="auth-left-bg" />
-            <div className="auth-right-bg" />
+      <div className="auth">
+        <img id="auth-main" src={background} alt='auth-background'/>
+        <div id="auth-bg-icons">
+          <div className="auth-left-bg" />
+          <div className="auth-right-bg" />
+        </div>
+        <img id="logo" src={logo} alt="" />
+        <div id="login-blur" />
+        <div id={!login ? "login-none" : "login-container"}>
+          <div id="login-row">
+            <input
+              className="login-input"
+              type="email"
+              placeholder="Email"
+              onChange={e => this.handleChange("userEmail", e)}
+            />
           </div>
-          <img id='logo' src={logo} alt="" />
-          <div id="login-blur" />
-          <div id={!login ? "login-none" : "login-container"}>
-            <div id="login-row">
-              <input
-                className="login-input"
-                type="email"
-                placeholder="Email"
-                onChange={e => this.handleChange("userEmail", e)}
-              />
-            </div>
-            <div id="login-row">
-              <input
-                className="login-input"
-                type="password"
-                placeholder="Password"
-                onChange={e => this.handleChange("password", e)}
-                onKeyPress={e => this.enterKey("login", e)}
-              />
-            </div>
-            <div id="login-row">
-              <button onClick={() => this.login()}>LOGIN</button>
-              <p>
-                Don't have an account?{" "}
-                <button onClick={e => this.setState({ login: false })}>
-                  Register now!
-                </button>
-              </p>
-            </div>
+          <div id="login-row">
+            <input
+              className="login-input"
+              type="password"
+              placeholder="Password"
+              onChange={e => this.handleChange("password", e)}
+              onKeyPress={e => this.enterKey("login", e)}
+            />
           </div>
-          <div id={login ? "register-none" : "register-container"}>
-            <button onClick={e => this.setState({ login: true })}>Back</button>
-            <div id="register-row">
-              <input
-                className="login-input"
-                type="text"
-                placeholder="First Name"
-                onChange={e => this.handleChange("firstName", e)}
-              />
-            </div>
-            <div id="register-row">
-              <input
-                className="login-input"
-                type="text"
-                placeholder="Last Name"
-                onChange={e => this.handleChange("lastName", e)}
-              />
-            </div>
-            <div id="register-row">
-              <input
-                className="login-input"
-                type="email"
-                placeholder="Email"
-                onChange={e => this.handleChange("userEmail", e)}
-              />
-            </div>
-            <div id="register-row">
-              <input
-                className="login-input"
-                type="password"
-                placeholder="Password"
-                onChange={e => this.handleChange("password", e)}
-                onKeyPress={e => this.enterKey("register", e)}
-              />
-            </div>
-            <div id="register-row">
-              <button onClick={() => this.register()}>CREATE ACCOUNT</button>
-            </div>
+          <div id="login-row">
+            <button onClick={() => this.login()}>LOGIN</button>
+            <p>
+              Don't have an account?{" "}
+              <button onClick={e => this.setState({ login: false })}>
+                Register now!
+              </button>
+            </p>
           </div>
+        </div>
+        <div id={login ? "register-none" : "register-container"}>
+          <button onClick={e => this.setState({ login: true })}>Back</button>
+          <div id="register-row">
+            <input
+              className="login-input"
+              type="text"
+              placeholder="First Name"
+              onChange={e => this.handleChange("firstName", e)}
+            />
+          </div>
+          <div id="register-row">
+            <input
+              className="login-input"
+              type="text"
+              placeholder="Last Name"
+              onChange={e => this.handleChange("lastName", e)}
+            />
+          </div>
+          <div id="register-row">
+            <input
+              className="login-input"
+              type="email"
+              placeholder="Email"
+              onChange={e => this.handleChange("userEmail", e)}
+            />
+          </div>
+          <div id="register-row">
+            <input
+              className="login-input"
+              type="password"
+              placeholder="Password"
+              onChange={e => this.handleChange("password", e)}
+              onKeyPress={e => this.enterKey("register", e)}
+            />
+          </div>
+          <div id="register-row">
+            <button onClick={() => this.register()}>CREATE ACCOUNT</button>
+          </div>
+        </div>
         {/* </div> */}
       </div>
     );

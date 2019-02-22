@@ -89,6 +89,7 @@ export default class MyLibrary extends Component {
             search={true}
             myLibrary={true}
             deleteBook={() => this.deleteBook(book.user_library_id)}
+            getLibrary={() => this.getLibrary(this.state.user_id)}
             book_status={book.status}
           />
         </div>

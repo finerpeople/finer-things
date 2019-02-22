@@ -23,6 +23,8 @@ class Nav extends Component {
 
   render() {
     const { pathname } = this.props.location;
+    const {clubName} = this.props
+    console.log(this.props)
 
     const navBarStyle =
       pathname === "/" || pathname === "/book" || pathname === "/club"
@@ -39,6 +41,8 @@ class Nav extends Component {
         ? "My Library"
         : pathname === "/my-clubs"
         ? "My Clubs"
+        : pathname === "/club"
+        ? {clubName}
         : pathname === "/browse"
         ? "Book Store"
         : pathname === "/friends"
