@@ -31,7 +31,7 @@ class Nav extends Component {
         ? "navBarNone"
         : "navBar";
     const headerStyle =
-      pathname === "/" || pathname === "/book" || pathname === "/club"
+      pathname === "/" || pathname === "/book" 
         ? "headerNone"
         : "header";
     const title =
@@ -41,8 +41,8 @@ class Nav extends Component {
         ? "My Library"
         : pathname === "/my-clubs"
         ? "My Clubs"
-        : pathname === "/club"
-        ? {clubName}
+        : pathname.includes("/club/")
+        ? clubName
         : pathname === "/browse"
         ? "Book Store"
         : pathname === "/friends"
