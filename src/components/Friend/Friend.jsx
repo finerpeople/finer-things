@@ -11,7 +11,7 @@ export default class Friend extends Component {
     displayChat: false,
     friendChatId: "",
     friendMessages: [],
-    searchInput: '',
+    searchInput: "",
     searchFriends: []
   };
 
@@ -43,7 +43,8 @@ export default class Friend extends Component {
     });
   };
 
-  addFriend = async (userId, friendId) => {
+  addFriend = async friendId => {
+    const { userId } = this.state;
     const res = await axios.post("/api/addFriend", { userId, friendId });
     this.setState({
       friends: res.data.friends,
@@ -71,8 +72,8 @@ export default class Friend extends Component {
     });
   };
 
-  deleteFriend = async (userId, friendId) => {
-    console.log(userId, friendId);
+  deleteFriend = async friendId => {
+    const { userId } = this.state;
     const res = await axios.delete(`/api/deleteFriend/${userId}&${friendId}`);
     this.setState({
       friends: res.data.friends,
@@ -80,9 +81,9 @@ export default class Friend extends Component {
     });
   };
 
-  handleChange = (e) => {
-    this.setState({searchInput: e.target.value})
-  }
+  handleChange = e => {
+    this.setState({ searchInput: e.target.value });
+  };
 
   render() {
     const {
@@ -123,34 +124,56 @@ export default class Friend extends Component {
           </div>
           <div id="my-rec-name">
             <p>{`${first_name} ${last_name}`}</p>
-            <button onClick={() => this.addFriend(this.state.userId, friendId)}>
-              Add
-            </button>
+            <button onClick={() => this.addFriend(friendId)}>Add</button>
           </div>
         </div>
       );
     });
 
-    const filteredFriends = this.state.friends.filter((friendObj, i) => {
-      return (
-        <div>
-          <img src="" alt="profile picture"/>
-          <p>name</p>
-          <i>chat icon</i>
-          <button>add</button>
-        </div>
-      )
-    })
+    const filteredFriends = this.state.friends.map((friendObj, i) => {
+      const { first_name, last_name, user_id, profile_pic } = friendObj;
+      const friendName = first_name + " " + last_name;
+      if (!this.state.searchInput)
+        return (
+          <div id="friend-search-none">
+            <div />
+          </div>
+        );
+      if (friendName.toLowerCase().includes(this.state.searchInput)) {
+        return (
+          <div key={i} id="friend-search-results">
+            <div id="search-pic-container">
+              <div
+                className="search-profile-pic"
+                style={{ backgroundImage: `url(${profile_pic})` }}
+              />
+            </div>
+            <p>{`${first_name} ${last_name}`}</p>
+            <i
+              className="fas fa-comments"
+              onClick={() => this.toggleChat(user_id)}
+            />
+            <button onClick={() => this.deleteFriend(user_id)}>Remove</button>
+          </div>
+        );
+      }
+    });
 
     return (
       <div id="friend">
         <div id="friend-header">
           <div className="app-input-container">
-            <input className="app-input" type="text" placeholder="Search" onChange={e => this.handleChange(e)}/>
+            <input
+              className="app-input"
+              type="text"
+              placeholder="Search"
+              onChange={e => this.handleChange(e)}
+            />
           </div>
           <div className="search-input-btn">
             <i className="fas fa-search" />
           </div>
+          {filteredFriends}
         </div>
         {/* ///////////////////////////////////////////////////// */}
         <div id="friend-body">
