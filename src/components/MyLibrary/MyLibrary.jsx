@@ -9,7 +9,7 @@ export default class MyLibrary extends Component {
   state = {
     user_id: 0,
     library: [],
-    recommendedLibrary: []
+    recommendedLibrary: [],
   }
 
   componentDidMount = async () => {
@@ -55,10 +55,10 @@ export default class MyLibrary extends Component {
   }
 
   sortBooks = async (sortOrder) => {
-    let sortedArray = [...this.state.filteredLibrary]
+    let sortedArray = [...this.state.library]
     await sortedArray.sort(this.dynamicSort(sortOrder))
     this.setState({
-      filteredLibrary: sortedArray
+      library: sortedArray
     })
   }
 
