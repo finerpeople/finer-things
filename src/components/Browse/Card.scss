@@ -47,7 +47,7 @@
     background-color: $darkGreen;
     height: 3.4rem;
     width: 4.4rem;
-    left: 4rem;
+    left: 3rem;
     top: 1.2rem;
     display: flex;
     flex-direction: column;
@@ -104,9 +104,9 @@
 }
 
 .share-list-container {
+    position: absolute;
     height: 14rem;
     width: 16rem;
-    position: absolute;
     right: -13rem;
     top: 0rem;
     z-index: 1;
