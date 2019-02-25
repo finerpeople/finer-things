@@ -1,86 +1,84 @@
-@import '../../style.scss';
+@import "../../style.scss";
 
 .br-list-title {
-    font-family: $titleFontFamily;
-    font-size: $titleFontSize;
-    position: absolute;
-    top: -1.5em;
-    left: 2rem;
-    margin-left: 3.5rem;
-    cursor: default;
+  font-family: $titleFontFamily;
+  font-size: $titleFontSize;
+  position: absolute;
+  top: -1.5em;
+  left: 2rem;
+  margin-left: 3.5rem;
+  cursor: default;
 }
 
 .br-book-cover {
-    height: 23rem;
-    width: 17rem;
-    margin: 0.5rem;
-    border-radius: 10px;
+  height: 23rem;
+  width: 17rem;
+  margin: 0.5rem;
+  border-radius: 10px;
 }
 
 .book-carousel {
-    overflow-x: scroll;
-    margin-top: 5rem;
-    margin-right: 2rem;
-    margin-left: 5rem;
-    display: flex;
+  overflow-x: scroll;
+  margin-top: 5rem;
+  margin-right: 2rem;
+  margin-left: 5rem;
+  display: flex;
 }
 
 .br-container {
-    position: relative;
-    height: 23rem;
-    margin-bottom: 7em;
+  position: relative;
+  height: 23rem;
+  margin-bottom: 7em;
 }
 
 .br-main {
-    width: calc(100vw - 3.6em);
+  width: calc(100vw - 3.6em);
 }
 .br-add-to-library {
-    position: absolute;
-    left: 0.7rem;
-    color: $lighterGrey;
-    top: 0.5rem;
-    cursor: pointer;
-    transition: color .2s;
-
+  position: absolute;
+  left: 0.7rem;
+  color: $lighterGrey;
+  top: 0.5rem;
+  cursor: pointer;
+  transition: color 0.2s;
 }
 
 .br-add-to-library:hover {
-    color: $darkerGrey;
+  color: $darkerGrey;
 }
 
 .br-search-share {
-    color: $lighterGrey;
-    position: absolute;
-    right: .7rem;
-    top: .5rem;
-    cursor: pointer;
-    transition: color .2s;
-
+  color: $lighterGrey;
+  position: absolute;
+  right: 0.7rem;
+  top: 0.5rem;
+  cursor: pointer;
+  transition: color 0.2s;
 }
 
 .br-search-share:hover {
-    color: $darkerGrey;
+  color: $darkerGrey;
 }
 
 .br-single-cover {
-    position: relative;
-    cursor: pointer;
+  position: relative;
+  cursor: pointer;
 }
 
 .br-icon-banner {
-    background-color: rgba(189, 195, 199, 0.9);
-    border-radius: 10px 10px 0 0;
-    position: absolute;
-    top: -1.8rem;
-    width: 94.5%;
-    height: 1.8rem;
-    left: 0.5rem;
-    transition: top .7s ease-in-out;
-    visibility: hidden;
+  position: relative;
+  background-color: rgba(189, 195, 199, 0.9);
+  border-radius: 10px 10px 0 0;
+  position: absolute;
+  top: -1.8rem;
+  width: 94.5%;
+  height: 1.8rem;
+  left: 0.5rem;
+  transition: top 0.7s ease-in-out;
+  visibility: hidden;
 }
 
-.br-single-cover:hover .br-icon-banner{
-    top: 0.5rem;
-    visibility: visible;
+.br-single-cover:hover .br-icon-banner {
+  top: 0.5rem;
+  visibility: visible;
 }
-
