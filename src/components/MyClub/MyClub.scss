@@ -8,6 +8,7 @@
   margin-top: $headerHeight;
   box-sizing: border-box;
   height: calc(100vh - 4.6em);
+  width: 100%;
   background-color: $lighterGrey;
   box-sizing: border-box;
 }
@@ -45,21 +46,24 @@
   align-items: flex-end;
   padding: 1em 1em;
   margin-top: .3em;
-  grid-column: 1 / span 4;
+  grid-column: 1 / span 7;
   grid-row: 1;
 }
 /////////////////////////////////////////////////////////////////
 #my-clubs {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(7, 1fr);
   grid-template-rows: 2em repeat(6, 1fr);
-  width: 45em;
+  width: 65%;
   border-radius: 2px;
+  justify-items: center;
   padding: .7em;
   margin-left: 1.5em;
   box-shadow: 0px 1px 10px $buttonShadow;
   background-color: white;
   overflow-y: scroll;
+  grid-gap: 0.7em 0.5em;
+
 }
 #my-clubs-card {
   display: flex;
@@ -99,7 +103,7 @@
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   grid-template-rows: 2em repeat(6, 1fr);
-  width: 20em;
+  width: 35%;
   box-shadow: 0px 1px 10px $buttonShadow;
   border-radius: 2px;
   padding: .7em;
@@ -157,4 +161,8 @@
   background: $maroon;
   height: 0;
   width: 0;
+}
+
+#my-club-input {
+  left: 10em;
 }

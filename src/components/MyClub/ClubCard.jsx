@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import './ClubCard.scss';
 
@@ -14,12 +14,12 @@ export default class ClubCard extends Component {
 
     render() {
         return (
-            <div className='club-card' >
-                <Link to={`/club/${this.props.clubId}`}>
-                    <h3 className='club-card-title'>{this.props.clubName}</h3>
-                    <div className='club-card-info'>
+            <div className='club-card flexed' >
+                <Link style={{ textDecoration: 'none' }} to={`/club/${this.props.clubId}`}>
+                    <p className='club-card-title'>{this.props.clubName}</p>
+                    <div className='club-card-name flexed'>
                         <div className='club-card-pic-div' style={{ backgroundImage: `url(${this.props.profilePic})` }}></div>
-                        {this.props.firstName} {this.props.lastName}
+                        <p className='club-card-info'>{this.props.firstName} {this.props.lastName}</p>
                     </div>
                 </Link>
                 <button onClick={() => this.props.joinRemoveFn(this.props.clubId)}>{this.state.button}</button>
