@@ -4,7 +4,7 @@
   display: grid;
   margin-left: $navBarWidth;
   margin-top: $headerHeight;
-  width: calc(100vw - 3.6em);
+  width: calc(100vw - 4.4em);
   grid-template-columns: repeat(9, 1fr);
   padding-top: 2em;
 }
@@ -47,17 +47,15 @@
   margin-right: .6em;
   margin-left: .6em;
   border-radius: 10px;
+  overflow-y: hidden;
 }
 
 .searched-book-cover {
   //extends .default-cover
-  overflow: hidden;
   border-radius: 10px;
   height: 12rem;
   width: 7.5rem;
   cursor: pointer;
-  overflow-y: hidden;
-  overflow-x: visible;
 }
 
 .default-cover {
@@ -136,6 +134,7 @@
 
 .searched-single-book:hover .icon-banner {
   top: 0rem;
+  z-index: 1;
 }
 
 .search-card-display-container {
