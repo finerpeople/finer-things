@@ -57,7 +57,6 @@
     border-radius: 10px;
     box-sizing: border-box;
     padding: 1rem;
-
 }
 
 .club-books-display {
@@ -65,8 +64,7 @@
     margin: 0.5rem 1rem 0rem 0rem;
     flex-wrap: wrap;
     height: 57rem;
-
-
+    justify-content: center;
 }
 
 .book-owner-img-div {
@@ -94,9 +92,8 @@
 .member-card {
     flex-direction: column;
     align-items: center;
-    height: 195px;
-    width: 150px;
-
+    height: 11rem;
+    width: 9rem;
 }
 
 .club-owner-details {
@@ -122,6 +119,10 @@
     letter-spacing: .1rem;
 }
 
+.name {
+    text-align: center;
+}
+
 .club-owner-first {
     justify-content: flex-start;
     align-items: center;
@@ -132,12 +133,28 @@
     margin-left: .5rem;
 }
 
+.members-list {
+    flex-wrap: wrap;
+    height: 31rem;
+    overflow: scroll;
+}
+
 .club-books-display::-webkit-scrollbar-thumb,
 .club-books-display::-webkit-scrollbar-thumb {
   background: rgb(206, 206, 206);
 }
 .club-books-display::-webkit-scrollbar-button:vertical:decrement,
 .club-books-display::-webkit-scrollbar-button:vertical:decrement {
+  height: 0;
+  width: 0;
+}
+
+.members-list::-webkit-scrollbar-thumb,
+.members-list::-webkit-scrollbar-thumb {
+  background: rgb(206, 206, 206);
+}
+.members-list::-webkit-scrollbar-button:vertical:decrement,
+.members-list::-webkit-scrollbar-button:vertical:decrement {
   height: 0;
   width: 0;
 }

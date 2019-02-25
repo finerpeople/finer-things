@@ -16,9 +16,11 @@ export default class ClubCard extends Component {
         return (
             <div className='club-card flexed' >
                 <Link style={{ textDecoration: 'none' }} to={`/club/${this.props.clubId}`}>
-                    <div className='club-card-pic-div' style={{ backgroundImage: `url(${this.props.profilePic})` }}></div>
                     <p className='club-card-title'>{this.props.clubName}</p>
-                    <p className='club-card-info'>{this.props.firstName} {this.props.lastName}</p>
+                    <div className='club-card-name flexed'>
+                        <div className='club-card-pic-div' style={{ backgroundImage: `url(${this.props.profilePic})` }}></div>
+                        <p className='club-card-info'>{this.props.firstName} {this.props.lastName}</p>
+                    </div>
                 </Link>
                 <button onClick={() => this.props.joinRemoveFn(this.props.clubId)}>{this.state.button}</button>
             </div>

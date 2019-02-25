@@ -64,7 +64,7 @@ class Club extends Component {
       return (
         <div className='flexed member-card' key={person.user_id}>
           <div className='club-members-pic-div' style={{ backgroundImage: `url(${person.profile_pic})` }}></div>
-          <p className='club-words'>{person.first_name} {person.last_name}</p>
+          <p className='club-words name'>{person.first_name} {person.last_name}</p>
         </div>
       )
     })
@@ -117,7 +117,7 @@ class Club extends Component {
           </div>
           <div className='club-members'>
             <h2 className='club-title'>Members:</h2>
-            <div className='flexed'>
+            <div className='flexed members-list'>
               {displayMembers}
             </div>
           </div>
