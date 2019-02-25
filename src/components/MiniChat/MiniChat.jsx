@@ -13,7 +13,7 @@ export default class MiniChat extends Component {
       userTyping: false
     };
 
-    this.socket = io.connect(':4000');
+    this.socket = io.connect({secure: true});
     this.socket.on("generate room response", data => {
       console.log(data);
       this.roomResponse(data);
