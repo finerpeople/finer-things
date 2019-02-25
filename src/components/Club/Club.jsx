@@ -89,7 +89,7 @@ class Club extends Component {
     })
     return (
       <div className='club-book-details-main-container flexed'>
-        <Link className='a' to={'/my-clubs'}>
+        <Link style={{ textDecoration: 'none' }} className='a' to={'/my-clubs'}>
           <div className='club-back-container flexed'>
             <i className="fas fa-arrow-left 5x club-back"></i>
           </div>
@@ -108,7 +108,7 @@ class Club extends Component {
             </div>
             <div className='club-owner-details flexed'>
               <div className='flexed club-owner-first'>
-              <h3 className='club-title'>Owner:</h3>
+                <h3 className='club-title'>Owner:</h3>
                 <div className='book-owner-img-div' style={{ backgroundImage: `url(${profile_pic})` }}></div>
                 <p className='club-words owner-name'>{first_name} {last_name}</p>
               </div>

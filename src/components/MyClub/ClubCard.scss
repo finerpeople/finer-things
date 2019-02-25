@@ -8,3 +8,23 @@
     background-size: cover;
     background-repeat: no-repeat;
 }
+
+.club-card {
+    background-color: aliceblue;
+    border-radius: 10px;
+    height: 10rem;
+    width: 8rem;
+    flex-direction: column;
+}
+
+.club-card-title {
+    color: $grey;
+    font-size: $midFontSize;
+    font-family: $bodyFontFamily;
+}
+
+.club-card-info {
+    color: $grey;
+    font-size: $bodyFontSize;
+    font-family: $bodyFontFamily;
+}
