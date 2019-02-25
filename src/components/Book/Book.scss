@@ -1,94 +1,103 @@
-@import '../../style.scss';
+@import "../../style.scss";
 
 .flexed {
-    display: flex
+  display: flex;
 }
 
 .book-info-main {
-    height: $modalHeight;
-    width: $modalWidth;
-    flex-direction: column;
+  height: $modalHeight;
+  width: $modalWidth;
+  flex-direction: column;
 }
 
 .book-info-img {
-    flex-direction: column;
-    align-items: center;
-    margin: 1.7rem 0rem 1rem 2rem;
-    height: 12rem;
-
+  flex-direction: column;
+  align-items: center;
+  margin: 1.7rem 0rem 1rem 2rem;
+  height: 12rem;
 }
 
 .book-img {
-    height: 12rem;
-    width: 8rem;
+  height: 12rem;
+  width: 8rem;
 }
 
 .book-info-header {
-    flex-direction: column;
-    justify-content: flex-start;
-    text-align: start;
-    width: 27rem;
-    align-items: flex-start;
-    margin-top: 0.7rem;
-    margin-left: 1.3rem;
+  flex-direction: column;
+  justify-content: flex-start;
+  text-align: start;
+  width: 27rem;
+  align-items: flex-start;
+  margin-top: 0.7rem;
+  margin-left: 1.3rem;
 }
 
 .book-info-summary {
-    height: 25rem;
+  height: 25rem;
 }
 
 .book-title {
-    font-size: 1.5rem;
-    margin-bottom: 0;
-    font-family: $titleFontFamily;
-    margin-right: 1rem;
-
+  font-size: 1.5rem;
+  margin-bottom: 0;
+  font-family: $titleFontFamily;
+  margin-right: 1rem;
 }
-    
+
 .book-author {
-    // extends .book-summary
-    font-size: $bodyFontSize;
-    font-family: $bodyFontFamily;
-    cursor: default;
+  // extends .book-summary
+  font-size: $bodyFontSize;
+  font-family: $bodyFontFamily;
+  cursor: default;
 }
 
 .book-summary {
-    @extend .book-author;
-    overflow: scroll;
-    margin: 0rem 1.4rem 1.7rem 1.4rem;
+  @extend .book-author;
+  overflow-y: scroll;
+  margin: 0rem 1.4rem 1.7rem 1.4rem;
 }
 
 .modal-top {
-    justify-content: space-around;
-    height: 27.5rem;
-    margin-bottom: 0rem;
+  justify-content: space-around;
+  height: 27.5rem;
+  margin-bottom: 0rem;
 }
 
-
 .book-status {
-    margin-bottom: 0.5rem;
-    background: none;
-    border: none;
-    color: $lighterGrey;
-    border-radius: 10px;
-    transition: background-color .2s;
-    padding: 0;
+  margin-bottom: 0.5rem;
+  background: none;
+  border: none;
+  color: $lighterGrey;
+  border-radius: 10px;
+  transition: background-color 0.2s;
+  padding: 0;
 }
 
 .book-add {
-    margin-bottom: 0.5rem;
-    background: none;
-    color: $lighterGrey;
-    border-radius: 10px;
-    transition: background-color .2s;
-    border: solid $darkGreen 0.1rem;
-    cursor: pointer;
+  margin-bottom: 0.5rem;
+  background: none;
+  color: $lighterGrey;
+  border-radius: 10px;
+  transition: background-color 0.2s;
+  border: solid $darkGreen 0.1rem;
+  cursor: pointer;
 }
 
 .book-add:focus {
-    outline: none;
+  outline: none;
 }
 
 .book-add:hover {
-    background-color: $darkGreen;
+  background-color: $darkGreen;
+}
+
+.book-summary::-webkit-scrollbar-thumb {
+  background: rgb(206, 206, 206);
+}
+.book-summary::-webkit-scrollbar-button:vertical:decrement {
+  height: 0;
+  width: 0;
+}
+.book-summary::-webkit-scrollbar-button:vertical:increment {
+  height: 0;
+  width: 0;
 }

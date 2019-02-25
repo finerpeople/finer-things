@@ -1,14 +1,13 @@
 @import '../../style.scss';
 
 .club-book-details-main-container {
-    min-height: calc(100vh - 5rem);
+    height: calc(100vh - 5.1em);
     width: calc(100% - 3.6em);
     margin-left: $navBarWidth;
     margin-top: 5rem;
     margin-right: 1rem;
     box-sizing: border-box;
     position: relative;
-
 }
 
 .club-members-pic-div {
@@ -25,11 +24,9 @@
     flex-direction: column;
     border-radius: 10px;
     margin-left: 2rem;
-    margin-bottom: 1rem;
     padding: 2rem;
     box-sizing: border-box;
-    height: 56.5rem;
-
+    height: 100%;
 }
 
 .club-details-container {
@@ -38,11 +35,9 @@
     flex-direction: column;
     border-radius: 10px;
     margin-left: 1rem;
-    margin-bottom: 1rem;
     padding: 1rem;
     box-sizing: border-box;
-    height: 56.5rem;
-    
+    height: 100%;
 }
 
 .club-details {
@@ -137,4 +132,14 @@
 
 .owner-name {
     margin-left: .5rem;
+}
+
+.club-books-display::-webkit-scrollbar-thumb,
+.club-books-display::-webkit-scrollbar-thumb {
+  background: rgb(206, 206, 206);
+}
+.club-books-display::-webkit-scrollbar-button:vertical:decrement,
+.club-books-display::-webkit-scrollbar-button:vertical:decrement {
+  height: 0;
+  width: 0;
 }
