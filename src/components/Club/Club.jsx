@@ -64,7 +64,7 @@ class Club extends Component {
       return (
         <div className='flexed member-card' key={person.user_id}>
           <div className='club-members-pic-div' style={{ backgroundImage: `url(${person.profile_pic})` }}></div>
-          {person.first_name} {person.last_name}
+          <p className='club-words'>{person.first_name} {person.last_name}</p>
         </div>
       )
     })
@@ -95,26 +95,28 @@ class Club extends Component {
           </div>
         </Link>
         <div className='club-books flexed'>
-          <h3>Books in Club: </h3>
+          <h3 className='club-title'>Books in Club: </h3>
           <div className='club-books-display flexed'>
             {displayBooks}
           </div>
         </div>
         <div className='club-details-container flexed'>
-          <div className='club-details'>
-            <div className='club-owner-details flexed'>
-              <h3>Owner:</h3>
-              <div className='book-owner-img-div' style={{ backgroundImage: `url(${profile_pic})` }}></div>
-              <p>{first_name} {last_name}</p>
-              <p>email: {email}</p>
+          <div className='club-details flexed'>
+            <div className='summary-container'>
+              <h3 className='club-title'>Summary:</h3>
+              <p className='club-words'>{summary}</p>
             </div>
-            <div>
-              <h3>Summary:</h3>
-              <p>{summary}</p>
+            <div className='club-owner-details flexed'>
+              <div className='flexed club-owner-first'>
+              <h3 className='club-title'>Owner:</h3>
+                <div className='book-owner-img-div' style={{ backgroundImage: `url(${profile_pic})` }}></div>
+                <p className='club-words owner-name'>{first_name} {last_name}</p>
+              </div>
+              <p className='club-words'>email: {email}</p>
             </div>
           </div>
           <div className='club-members'>
-            <h2>Members:</h2>
+            <h2 className='club-title'>Members:</h2>
             <div className='flexed'>
               {displayMembers}
             </div>
