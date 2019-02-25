@@ -24,7 +24,7 @@ class Nav extends Component {
   render() {
     const { pathname } = this.props.location;
     const {clubName} = this.props
-    console.log(this.props)
+    // console.log(this.props)
 
     const navBarStyle =
       pathname === "/" || pathname === "/book" || pathname === "/club"

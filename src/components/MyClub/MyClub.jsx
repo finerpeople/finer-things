@@ -61,7 +61,7 @@ class MyClub extends Component {
 
   joinClub = async (club_id) => {
     let res = await axios.post(`/club/joinClub/${club_id}&${this.state.userId}`)
-    this.setState({
+    await this.setState({
       myClubs: res.data
     })
     await this.getOtherClubs()
@@ -69,7 +69,7 @@ class MyClub extends Component {
 
   quitClub = async (club_id) => {
     let res = await axios.delete(`/club/quitClub/${club_id}&${this.state.userId}`)
-    this.setState({
+    await this.setState({
       myClubs: res.data
     })
     await this.getOtherClubs()

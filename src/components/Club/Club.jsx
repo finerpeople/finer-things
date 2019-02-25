@@ -39,8 +39,8 @@ class Club extends Component {
 
   getClub = async () => {
     let res = await axios.get(`/club/getOneClub/${this.state.clubId}`)
-    this.setState({ club: res.data[0] })
-    this.props.updateClubName(res.data[0].club_name)
+    await this.setState({ club: res.data[0] })
+    await this.props.updateClubName(res.data[0].club_name)
   }
 
   getClubBooks = async () => {
@@ -60,7 +60,6 @@ class Club extends Component {
 
   render() {
     const { summary, first_name, last_name, email, profile_pic } = this.state.club
-
     let displayMembers = this.state.members.map((person, i) => {
       return (
         <div className='flexed member-card' key={person.user_id}>
@@ -96,11 +95,10 @@ class Club extends Component {
           </div>
         </Link>
         <div className='club-books flexed'>
-          <h3>Recommended Books:</h3>
+          <h3>Books in Club: </h3>
           <div className='club-books-display flexed'>
             {displayBooks}
           </div>
-          <h3>Books in Club: </h3>
         </div>
         <div className='club-details-container flexed'>
           <div className='club-details'>
