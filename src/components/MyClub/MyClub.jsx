@@ -127,29 +127,35 @@ class MyClub extends Component {
 
     return (
       <div id="club">
-        <button onClick={this.toggle}>+</button>
+        <i className="fas fa-plus add-club-button" onClick={this.toggle}></i>
+
         {this.state.toggleAddClub ? (
-          <div>
-            <label>
-              Club Name:
+          <div className='add-club-modal'>
+            <div className='relative'>
+              <label className='add-club-words flexed'>
+                Club Name:
+              </label>
               <input
+                className='add-club-text'
                 value={this.state.clubName}
                 onChange={(e) => this.handleChange('clubName', e.target.value)}
               />
-            </label>
-            <label>
-              Club Summary:
+              <label className='add-club-words flexed'>
+                Club Summary:
+              </label>
               <textarea
+                className='add-club-text'
                 value={this.state.summary}
                 onChange={(e) => this.handleChange('summary', e.target.value)}
               ></textarea>
-            </label>
-            <button onClick={this.createNewClub}>Create</button>
+              <button className='add-club-create-button' onClick={this.createNewClub}>Add Club</button>
+              <button className='close-add-club-modal' onClick={this.toggle}>X</button>
+            </div>
           </div>
         ) : null}
         <div id="club-header">
           <div className="app-input-container" id='my-club-input'>
-            <input className="app-input"  type="text" placeholder="Search" />
+            <input className="app-input" type="text" placeholder="Search" />
           </div>
           <div className="search-input-btn">
           </div>
