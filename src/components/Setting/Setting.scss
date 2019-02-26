@@ -1,8 +1,7 @@
 @import '../../style.scss';
 
 #settings-entireContainer {
-    display: flex;
-    height: 100vh
+    position: fixed;
 }
 
 #settings-mainContainer p {
@@ -42,6 +41,7 @@
 .colorContainer {
     // background-color: $darkGrey;
     background-color: #353831;
+    box-shadow: 0px 1px 5px $darkerGrey;
     box-sizing: border-box;
     width: 75%;
     height: 70%;
@@ -144,6 +144,7 @@
 #settings-inputFields {
     // background-color: $darkGrey;
     background-color: #353831;
+    box-shadow: 0px 1px 5px $darkerGrey;
     // background-color: #5C0029;
     // background-color: red; 
     width: 75%;
@@ -189,21 +190,24 @@ input[id="editInputs"]:focus {
     border-radius: 3px;
     border: 3px solid $lightBlue;
 }
+
 #settings-modalWrapper {
-    background-color: $maroon; 
+    background-color: $maroon;
     height: 15em;
     position: fixed;
-    top:39%;
+    top: 39%;
     left: 61.5%;
     display: flex;
-    flex-direction: column; 
+    flex-direction: column;
     justify-content: center;
 }
+
 #modalButtons {
     display: flex;
-    justify-content: center; 
-    margin-top: 2em; 
+    justify-content: center;
+    margin-top: 2em;
 }
+
 input[id="passwordEdit"] {
     border-radius: 3px;
     border: none;
@@ -214,14 +218,16 @@ input[id="passwordEdit"] {
     // display: flex; 
     // justify-content: center;
 }
+
 #settings-passwordInput {
     display: flex;
-    justify-content: space-around; 
-    align-items: center; 
+    justify-content: space-around;
+    align-items: center;
 }
+
 #settings-changePassword {
     display: flex;
-    justify-content: center; 
+    justify-content: center;
     margin-top: 1em;
 }
 
@@ -320,12 +326,13 @@ input[id="passwordEdit"] {
 }
 
 @media (max-width: 1100px) {
-
-    #settings-entireContainer {
-        display: flex;
-        flex-direction: column;
-        height: 100vh;
+    #settings-modalWrapper {
+        height: 11em;
+        width: 55%;
+        top: 39%;
+        left: 22%;
     }
+
     #settings-mainContainer {
         display: flex;
         flex-direction: column;
@@ -335,14 +342,20 @@ input[id="passwordEdit"] {
         left: 2.5em;
     }
 
+    #settings-greeting {
+        // margin-top: 10em; 
+        font-size: 1em;
+        margin-bottom: -0.2em;
+    }
+
     #settings-profileImg {
         height: 11em;
         width: 8em;
         // position: relative;
-        top: 1em; 
+        top: 1em;
         // margin-left: 1em; 
     }
-  
+
     #settings-picContainer {
         position: relative;
         height: 11em;
@@ -353,13 +366,15 @@ input[id="passwordEdit"] {
 
     #settings-inputFields {
         width: 40em;
-        height: 25em;
+        height: 27em;
+        margin-top: -0.5em;
         // background-color: green; 
     }
 
     #settings-profileContainer {
         width: 42em;
-        height: 2em;
+        height: 18em;
+        // background-color: red; 
     }
 
     .settings-aboutMe {
@@ -383,6 +398,12 @@ input[id="passwordEdit"] {
 }
 
 @media (max-width: 700px) {
+    #settings-modalWrapper {
+        height: 11em;
+        width: 85%;
+        top: 39%;
+        left: 6%;
+    }
 
     #settings-profileImg {
         height: 9em;
@@ -390,10 +411,24 @@ input[id="passwordEdit"] {
         position: relative;
         // margin-left: 1em; 
     }
+
+    .colorContainer {
+        height: 11.5em;
+    }
+
     .editProfileBtns {
         height: 1.7em;
-        bottom: -1.2em;  
+        bottom: -1.2em;
     }
+
+    #settings-changePassword {
+        margin-top: -1em;
+    }
+
+    #settings-mainBtns {
+        margin-top: -1em;
+    }
+
     #settings-picContainer {
         position: relative;
         height: 9em;
@@ -434,88 +469,117 @@ input[id="passwordEdit"] {
 
 }
 
-@media(max-width:340px) {
-.colorContainer {
-    // background-color: red; 
-    // width: 110vw;
-    margin-left: 4em; 
-}
-#settings-inputFields {
-    // background-color: green; 
-    // width: 110vw;
-    margin-left: 4em; 
-    height:45em;
-    flex-direction: column; 
-}
-
-#settings-picContainer {
-    // background-color: purple; 
-    height: 7em;
-    width: 5em;
-    margin-left: -15em;
-}
-#settings-profileImg {
-    // background-color: purple; 
-    height: 7em; 
-    width: 5em; 
-}
-.editProfileBtns {
-    height: 1.5em;
-    bottom: -1.1em; 
-}
-#settings-form {
-    height: 50%;
-    // background-color: yellow; 
-    width: 85%;
-}
-#settings-btns {
-    width: 90%;
-}
-#settings-changePassword {
-    // background-color: red; 
-    margin-top: 3em;
-}
-
-}
-@media (max-height:568px){
+@media(max-width:380px) {
     .colorContainer {
         // background-color: red; 
         // width: 110vw;
-        margin-left: 4em; 
+        height: 9em;
+        width: 25em;
+        margin-left: 7em;
     }
+
+    #editInputs {
+        width: 60%;
+        margin-right: 2.2em;
+    }
+
     #settings-inputFields {
         // background-color: green; 
         // width: 110vw;
-        margin-left: 4em; 
-        height:45em;
-        flex-direction: column; 
+        margin-left: 7em;
+        height: 45em;
+        width: 25em;
+        flex-direction: column;
     }
+
     #settings-picContainer {
         // background-color: purple; 
         height: 7em;
         width: 5em;
         margin-left: -15em;
     }
+
     #settings-profileImg {
         // background-color: purple; 
-        height: 7em; 
-        width: 5em; 
+        height: 7em;
+        width: 5em;
     }
+
     .editProfileBtns {
         height: 1.5em;
-        bottom: -1.1em; 
+        bottom: -1.1em;
     }
+
     #settings-form {
         height: 50%;
         // background-color: yellow; 
         width: 85%;
     }
+
     #settings-btns {
         width: 90%;
     }
+
     #settings-changePassword {
         // background-color: red; 
         margin-top: 3em;
     }
-    
+
+    #settings-modalWrapper {
+        height: 11em;
+        width: 85%;
+        top: 39%;
+        left: 5.5%;
     }
+}
+
+@media (max-height:568px) {
+    .colorContainer {
+        // background-color: red; 
+        // width: 110vw;
+        margin-left: 4em;
+    }
+
+    #settings-inputFields {
+        // background-color: green; 
+        // width: 110vw;
+        margin-left: 4em;
+        height: 45em;
+        flex-direction: column;
+    }
+
+    #settings-picContainer {
+        // background-color: purple; 
+        height: 7em;
+        width: 5em;
+        margin-left: -15em;
+    }
+
+    #settings-profileImg {
+        // background-color: purple; 
+        height: 7em;
+        width: 5em;
+    }
+
+    .editProfileBtns {
+        height: 1.5em;
+        bottom: -1.1em;
+    }
+
+    #settings-form {
+        height: 50%;
+        // background-color: yellow; 
+        width: 85%;
+    }
+
+    #settings-btns {
+        width: 90%;
+    }
+
+    #settings-changePassword {
+        // background-color: red; 
+        margin-top: 3em;
+    }
+
+
+}
