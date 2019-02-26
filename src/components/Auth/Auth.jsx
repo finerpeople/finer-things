@@ -18,7 +18,6 @@ class Auth extends Component {
 
   componentDidMount = async () => {
     const res = await axios.get("/api/session");
-    console.log(res.data)
     if (res.data.loggedIn) {
       this.props.history.push("/my-library");
     }
