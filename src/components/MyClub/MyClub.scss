@@ -11,6 +11,7 @@
   width: 100%;
   background-color: $lighterGrey;
   box-sizing: border-box;
+  position: relative;
 }
 ////////////////////  Header  //////////////////////
 #club-header {
@@ -164,5 +165,74 @@
 }
 
 #my-club-input {
-  left: 10em;
+  left: 6em;
+  top: 2rem;
+}
+
+.add-club-button {
+  background-color: $lightGrey;
+  height: 2rem;
+  width: 2rem;
+  position: absolute;
+  left: 2rem;
+  top: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+}
+
+.add-club-modal {
+  position: absolute;
+  height: 14rem;
+  width: 14rem;
+  background-color: #38423b;
+  border-radius: 10px;
+  left: 74rem;
+  top: 40rem;
+}
+
+.close-add-club-modal {
+  position: absolute;
+  right: 0.6rem;
+  top: 0.5rem;
+  background: none;
+  border: none;
+  font-family: $bodyFontFamily;
+  font-size: $bodyFontSize;
+  color: $lighterGrey;
+}
+
+.relative {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: flex-start;
+  padding: 1rem;
+  box-sizing: border-box;
+  font-family: $bodyFontFamily;
+  font-size: $bodyFontSize;
+}
+
+.add-club-words {
+  margin-right: 1rem;
+  color: $lighterGrey;
+}
+
+.add-club-text {
+  font-family: $bodyFontFamily;
+  font-size: $bodyFontSize;
+  
+}
+
+.add-club-create-button {
+  background-color: $lighterGrey;
+  border: solid $lighterGrey .1rem;
+  border-radius: 10px;
+  font-family: $bodyFontFamily;
+  font-size: $bodyFontSize;
+  color: $grey;
 }
