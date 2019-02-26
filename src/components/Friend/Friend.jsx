@@ -19,9 +19,6 @@ export default class Friend extends Component {
   componentDidMount = async () => {
     this.getSession();
   };
-  // componentWillUpdate() {
-  //   this.getSession()
-  // }
 
   getSession = async () => {
     let id = "";

@@ -13,10 +13,12 @@ export default class MiniChat extends Component {
       userTyping: false
     };
 
-    // this.socket = io.connect({secure: true});
-    this.socket = io.connect(":4000");
+    if (process.env.REACT_APP_SOCKET === "local") {
+      this.socket = io.connect(":4000");
+    } else {
+      this.socket = io.connect({ secure: true });
+    }
     this.socket.on("generate room response", data => {
-      console.log(data);
       this.roomResponse(data);
     });
     this.socket.on("user is typing", data => this.setUserTyping(data));
@@ -31,7 +33,7 @@ export default class MiniChat extends Component {
         ? `${friend.user_id}${userId}`
         : `${userId}${friend.user_id}`;
     this.socket.emit(`join room`, { userId, messageInput, room });
-  }
+  };
 
   handleChange = e => {
     this.setState({ messageInput: e.target.value });
@@ -43,7 +45,7 @@ export default class MiniChat extends Component {
         ? `${friendChatId}${userId}`
         : `${userId}${friendChatId}`;
     this.socket.emit(`blast message to room`, { userId, messageInput, room });
-    this.setState({messageInput: ''})
+    this.setState({ messageInput: "" });
   };
   roomResponse(data) {
     this.setState({
@@ -51,17 +53,17 @@ export default class MiniChat extends Component {
     });
   }
 
-  enterKey = (e) => {
+  enterKey = e => {
     const {
       userId,
       // messages,
       // displayChat,
-      friendChatId,
+      friendChatId
       // friend
     } = this.props.props;
     const code = e.keyCode || e.which;
     if (code === 13) {
-        this.sendMessage(userId, friendChatId, this.state.messageInput);
+      this.sendMessage(userId, friendChatId, this.state.messageInput);
     }
   };
 
@@ -154,7 +156,7 @@ export default class MiniChat extends Component {
             id="mini-chat-input"
             rows="1"
             onChange={e => this.handleChange(e)}
-            onKeyPress={(e) => this.enterKey(e)}
+            onKeyPress={e => this.enterKey(e)}
             value={messageInput}
           />
           <i
