@@ -37,15 +37,16 @@
 }
 
 .book-title {
-  font-size: 1.5rem;
+  font-size: 1rem;
   margin-bottom: 0;
+  font-weight: 900;
   font-family: $titleFontFamily;
   margin-right: 1rem;
 }
 
 .book-author {
   // extends .book-summary
-  font-size: $bodyFontSize;
+  font-size: .9rem;
   font-family: $bodyFontFamily;
   cursor: default;
 }
@@ -101,3 +102,4 @@
   height: 0;
   width: 0;
 }
+
