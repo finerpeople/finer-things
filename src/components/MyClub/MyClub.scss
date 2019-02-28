@@ -8,7 +8,7 @@
   margin-top: $headerHeight;
   box-sizing: border-box;
   height: calc(100vh - 4.6em);
-  width: 100%;
+  width: calc(100% - 3.6rem);
   background-color: $lighterGrey;
   box-sizing: border-box;
   position: relative;
@@ -36,7 +36,7 @@
   font-family: $titleFontFamily;
   letter-spacing: 0.05em;
 }
-#recommend h4 {
+#recommendClub h4 {
   align-items: flex-end;
   padding: 1em .5em;
   margin-top: .3em;
@@ -57,7 +57,7 @@
   display: grid;
   grid-template-columns: repeat(7, 1fr);
   grid-template-rows: 2em repeat(6, 1fr);
-  width: 65%;
+  width: 59rem;
   border-radius: 2px;
   justify-items: center;
   padding: .7em;
@@ -102,15 +102,16 @@
   letter-spacing: .03em;
 }
 ////////////////////////////////////////////////////////////////
-#recommend {
+#recommendClub {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   grid-template-rows: 2em repeat(6, 1fr);
-  width: 35%;
+  width: 20rem;
   box-shadow: 0px 1px 10px $buttonShadow;
   border-radius: 2px;
   padding: .7em;
   margin: 0 1.5em;
+  justify-items: center;
   background-color: white;
   overflow-y: scroll;
 }
@@ -151,16 +152,16 @@
   letter-spacing: .03em;
 }
 
-#recommend::-webkit-scrollbar, #my-clubs::-webkit-scrollbar {
+#recommendClub::-webkit-scrollbar, #my-clubs::-webkit-scrollbar {
   width: .2em;
 }
-#recommend::-webkit-scrollbar-thumb, #my-clubs::-webkit-scrollbar-thumb {
+#recommendClub::-webkit-scrollbar-thumb, #my-clubs::-webkit-scrollbar-thumb {
   width: .1em;
   height: .1em;
   border-radius: 2px;
   background: $darkGreen;
 }
-#recommend::-webkit-scrollbar-button:vertical:decrement, #my-clubs::-webkit-scrollbar-button:vertical:decrement {
+#recommendClub::-webkit-scrollbar-button:vertical:decrement, #my-clubs::-webkit-scrollbar-button:vertical:decrement {
   background: $maroon;
   height: 0;
   width: 0;
@@ -264,7 +265,7 @@
     left: 6.5rem;
   }
 }
-@media (max-width: 1450px) {
+@media (max-width: 1500px) {
   .add-club-modal {
     right: 5rem;
     bottom: 4rem;
@@ -272,29 +273,50 @@
   #my-club-input {
     left: 2.5rem;
   }
+  #my-clubs {
+    width: 53rem;
+  }
 }
 
-@media (max-width: 1350px) {
+@media (max-width: 1390px) {
   #my-clubs h4 {
     grid-column: 1 / span 5;
   }
   #my-clubs {
     grid-template-columns: repeat(5, 1fr);
-    
+    width: 45rem;
   }
   #my-club-input {
     left: -0.5rem;
   }
 }
 
-@media (max-width: 792px) {
-  
+@media (max-width: 1265px) {
+  // #recommendClub {
+  //   width: calc(100% - 3.3rem);
+  // }
+  #my-clubs {
+    grid-template-columns: repeat(4, 1fr);
+    width: 37rem;
+  }
+  #my-clubs h4 {
+    grid-column: 1 / span 4;
+  }
 }
 
-@media (max-width: 488px) {
-  
+@media (max-width: 1140px) {
+  #my-clubs {
+    grid-template-columns: repeat(3, 1fr);
+    width: 29rem;
+  }
+  #my-clubs h4 {
+    grid-column: 1 / span 3;
+  }
 }
 
-@media (max-width: 350px) {
-  
+@media (max-width: 1022px) {
+  #club {
+    margin-left: 0rem;
+    width: 100%;
+  }
 }
