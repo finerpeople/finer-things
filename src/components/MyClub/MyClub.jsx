@@ -153,11 +153,11 @@ class MyClub extends Component {
           </div>
         ) : null}
         <div id="club-header">
-          <div className="app-input-container" >
+          {/* <div className="app-input-container" >
             <input className="app-input" type="text" placeholder="Search" />
           </div>
           <div className="search-input-btn">
-          </div> */}
+          </div>  */}
         </div>
         <div id="club-body">
           <div id="recommendClub">
