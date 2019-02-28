@@ -10,9 +10,11 @@
   justify-content: flex-end;
   align-items: center;
   width: 100%;
-  max-width: 85em;
+  max-width: 95em;
   top: 6.5em;
-  left: -4em;
+}
+#club-header > .app-input-container {
+  top: 2em;
 }
 .app-input {
   height: 2em;
@@ -25,7 +27,6 @@
   padding-left: 0.5em;
   margin-right: 2.5em;
 }
-
 ::-webkit-scrollbar {
   width: 0.5em;
 }

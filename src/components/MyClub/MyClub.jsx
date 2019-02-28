@@ -154,7 +154,7 @@ class MyClub extends Component {
           </div>
         ) : null}
         <div id="club-header">
-          <div className="app-input-container" id='my-club-input'>
+          <div className="app-input-container" >
             <input className="app-input" type="text" placeholder="Search" />
           </div>
           <div className="search-input-btn">
