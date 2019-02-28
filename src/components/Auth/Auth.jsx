@@ -35,7 +35,7 @@ class Auth extends Component {
       const res = await axios.post("/api/login", { userEmail, password });
       this.props.updateFirstName(res.data.userData.firstName);
       if (res.data.loggedIn) {
-        this.props.history.push("/my-library");
+        this.props.history.push("/browse");
       }
       const id = res.data.id;
       if (res.data.message === "Account suspended") {
@@ -56,7 +56,7 @@ class Auth extends Component {
               "success"
             );
             axios.put(`/api/updateAccountStatus/${id}`);
-            this.props.history.push("/my-library");
+            this.props.history.push("/browse");
           }
         });
       }
