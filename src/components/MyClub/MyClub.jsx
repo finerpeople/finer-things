@@ -51,7 +51,7 @@ class MyClub extends Component {
       myClubs: res.data
     })
   }
-
+  
   getOtherClubs = async () => {
     let res = await axios.get(`/club/getOtherClubs/${this.state.userId}`)
     this.setState({

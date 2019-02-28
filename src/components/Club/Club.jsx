@@ -83,6 +83,7 @@ class Club extends Component {
             book_status={book.status}
             deleteBook={() => this.deleteClubBook(book.club_book_id)}
             clubBook={true}
+            club={true}
           />
         </div>
       )
@@ -111,8 +112,8 @@ class Club extends Component {
                 <h3 className='club-title'>Owner:</h3>
                 <div className='book-owner-img-div' style={{ backgroundImage: `url(${profile_pic})` }}></div>
                 <p className='club-words owner-name'>{first_name} {last_name}</p>
+              <p className='club-words'><b style={{fontFamily: '$bodyFontFamily'}}>Email:</b> {email}</p>
               </div>
-              <p className='club-words'>email: {email}</p>
             </div>
           </div>
           <div className='club-members'>
