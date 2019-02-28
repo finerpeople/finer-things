@@ -145,8 +145,23 @@
 
 .members-list {
     flex-wrap: wrap;
-    height: 31rem;
+    height: 19rem;
     overflow: scroll;
+}
+
+.summary-text {
+    height: 5.9rem;
+    overflow: scroll;
+}
+
+.summary-text::-webkit-scrollbar-thumb,
+.summary-text::-webkit-scrollbar-thumb {
+  background: rgb(206, 206, 206);
+}
+.summary-text::-webkit-scrollbar-button:vertical:decrement,
+.summary-text::-webkit-scrollbar-button:vertical:decrement {
+  height: 0;
+  width: 0;
 }
 
 .club-books-display::-webkit-scrollbar-thumb,
