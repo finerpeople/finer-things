@@ -16,7 +16,7 @@ class MyClub extends Component {
   };
 
   toggle = () => {
-    this.setState({toggleAddClub: !this.state.toggleAddClub})
+    this.setState({ toggleAddClub: !this.state.toggleAddClub })
   }
 
   handleChange = (prop, val) => {
@@ -51,7 +51,7 @@ class MyClub extends Component {
       myClubs: res.data
     })
   }
-
+  
   getOtherClubs = async () => {
     let res = await axios.get(`/club/getOtherClubs/${this.state.userId}`)
     this.setState({
@@ -77,7 +77,7 @@ class MyClub extends Component {
 
   createNewClub = async () => {
     let res = await axios.post('/club/createNewClub', {
-      club_name: this.state.clubName, 
+      club_name: this.state.clubName,
       club_owner: this.state.userId,
       summary: this.state.summary
     })
@@ -127,45 +127,49 @@ class MyClub extends Component {
 
     return (
       <div id="club">
-        <div>
-        <button onClick={this.toggle}>+</button>
+        <i className="fas fa-plus add-club-button" onClick={this.toggle}></i>
+
         {this.state.toggleAddClub ? (
-          <div>
-            <label>
-              Club Name: 
-              <input 
-              value={this.state.clubName}
-              onChange={(e) => this.handleChange('clubName', e.target.value)}
+          <div className='add-club-modal'>
+            <div className='relative'>
+              <label className='add-club-words flexed'>
+                Club Name:
+              </label>
+              <input
+                className='add-club-text'
+                value={this.state.clubName}
+                onChange={(e) => this.handleChange('clubName', e.target.value)}
               />
-            </label>
-            <label>
-              Club Summary: 
+              <label className='add-club-words flexed'>
+                Club Summary:
+              </label>
               <textarea
-              value={this.state.summary}
-              onChange={(e) => this.handleChange('summary', e.target.value)}
+                className='add-club-text'
+                value={this.state.summary}
+                onChange={(e) => this.handleChange('summary', e.target.value)}
               ></textarea>
-            </label>
-            <button onClick={this.createNewClub}>Create</button>
+              <button className='add-club-create-button' onClick={this.createNewClub}>Add Club</button>
+              <button className='close-add-club-modal' onClick={this.toggle}>X</button>
+            </div>
           </div>
         ) : null}
-          <div id="club-header">
-            <div className="app-input-container">
-              <input className="app-input" type="text" placeholder="Search" />
-            </div>
-            <div className="search-input-btn">
-            </div>
+        <div id="club-header">
+          <div className="app-input-container" id='my-club-input'>
+            <input className="app-input" type="text" placeholder="Search" />
           </div>
-          <div id="club-body">
-            <div id="recommend">
-              <h4>Recommendations</h4>
-              {displayOtherClubs}
-            </div>
-            <div id="my-clubs">
-              <h4>Clubs</h4>
-              {displayMyClubs}
-            </div>
+          <div className="search-input-btn">
           </div>
+        </div>
+        <div id="club-body">
+          <div id="recommend">
+            <h4>Recommendations</h4>
+            {displayOtherClubs}
           </div>
+          <div id="my-clubs">
+            <h4>Clubs</h4>
+            {displayMyClubs}
+          </div>
+        </div>
       </div>
     );
   }

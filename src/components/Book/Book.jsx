@@ -33,7 +33,7 @@ export default class Book extends Component {
     await this.getSession();
     const res = await axios.get(
       `https://www.googleapis.com/books/v1/volumes?q=isbn:${
-        this.state.isbn
+      this.state.isbn
       }&fields=items(id, volumeInfo/title, volumeInfo/authors, volumeInfo/description, volumeInfo/industryIdentifiers, volumeInfo/categories, volumeInfo/averageRating, volumeInfo/imageLinks, volumeInfo/previewLink)`
     );
     this.setState({
@@ -84,7 +84,7 @@ export default class Book extends Component {
     await this.setState({ userRating: nextValue });
     await axios.put(
       `/library/updateRating/${this.state.userRating}&${
-        this.props.user_library_id
+      this.props.user_library_id
       }&${this.state.user_id}`
     );
     this.setState({
@@ -97,7 +97,7 @@ export default class Book extends Component {
     const { getLibrary } = this.props;
     let updated = await axios.put(`/library/updateBookStatus/${
       this.state.user_id
-    }
+      }
       &${this.props.user_library_id}
       &${status}`);
     this.setState({
@@ -131,39 +131,53 @@ export default class Book extends Component {
                   )
               )}
             {this.props.myLibrary ? (
-              <div>
+              <>
+                {this.props.club ? (
+
+                  <StarRatingComponent
+                    name="rating"
+                    editing={false}
+                    starCount={5}
+                    emptyStarColor={"#5d5c61"}
+                    value={this.state.rating}
+                  />
+                ) : (
+                    <div>
+                      <StarRatingComponent
+                        name="rating"
+                        editing={true}
+                        starCount={5}
+                        emptyStarColor={"#5d5c61"}
+                        value={this.state.userRating}
+                        onStarClick={this.onStarClick}
+                      />
+                      <p>
+                        <select
+                          name="book-status"
+                          onChange={e => this.changeBookStatus(e.target.value)}
+                        >
+                          <option value={this.props.book_status}>
+                            {this.props.book_status}
+                          </option>
+                          <option value="New">New</option>
+                          <option value="In My Library">In My Library</option>
+                          <option value="Currently Reading">Currently Reading</option>
+                          <option value="Finished Reading">Finished Reading</option>
+                        </select>
+                      </p>
+
+                    </div>
+                  )}
+              </>
+            ) : (
                 <StarRatingComponent
                   name="rating"
-                  editing={true}
+                  editing={false}
                   starCount={5}
                   emptyStarColor={"#5d5c61"}
-                  value={this.state.userRating}
-                  onStarClick={this.onStarClick}
+                  value={this.state.rating}
                 />
-                <p>
-                  <select
-                    name="book-status"
-                    onChange={e => this.changeBookStatus(e.target.value)}
-                  >
-                    <option value={this.props.book_status}>
-                      {this.props.book_status}
-                    </option>
-                    <option value="New">New</option>
-                    <option value="In My Library">In My Library</option>
-                    <option value="Currently Reading">Currently Reading</option>
-                    <option value="Finished Reading">Finished Reading</option>
-                  </select>
-                </p>
-              </div>
-            ) : (
-              <StarRatingComponent
-                name="rating"
-                editing={false}
-                starCount={5}
-                emptyStarColor={"#5d5c61"}
-                value={this.state.rating}
-              />
-            )}
+              )}
             <div>
               <button onClick={this.toggleShare}>Share</button>
               {this.state.toggleShare ? (

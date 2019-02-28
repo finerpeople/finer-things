@@ -10,11 +10,11 @@
   position: relative;
 }
 .club-members-pic-div {
-  height: 7rem;
-  width: 5rem;
-  background-position: center;
-  background-size: cover;
-  background-repeat: no-repeat;
+    height: 8rem;
+    width: 6.5rem;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
 }
 
 .club-books {
@@ -48,28 +48,30 @@
 }
 
 .club-details {
-  background-color: $lighterGrey;
-  flex-direction: column;
-  height: 35%;
-  margin-bottom: 1rem;
-  border-radius: 10px;
-  box-sizing: border-box;
-  padding: 1rem;
+    background-color: $lighterGrey;
+    justify-content: space-evenly;
+    flex-direction: column;
+    height: 35%;
+    margin-bottom: 1rem;
+    border-radius: 10px;
+    box-sizing: border-box;
+    padding: 1rem;
 }
 
 .club-members {
-  background-color: $lighterGrey;
-  height: 65%;
-  border-radius: 10px;
-  box-sizing: border-box;
-  padding: 1rem;
+    background-color: $lighterGrey;
+    height: 65%;
+    border-radius: 10px;
+    box-sizing: border-box;
+    padding: 1rem;
 }
 
 .club-books-display {
-  overflow-y: scroll;
-  margin: 0.5rem 1rem 0rem 0rem;
-  flex-wrap: wrap;
-  height: 57rem;
+    overflow-y: scroll;
+    margin: 0.5rem 1rem 0rem 0rem;
+    flex-wrap: wrap;
+    height: 57rem;
+    justify-content: center;
 }
 
 .book-owner-img-div {
@@ -96,23 +98,19 @@
 }
 
 .member-card {
-  flex-direction: column;
-  align-items: center;
-  height: 195px;
-  width: 150px;
+    flex-direction: column;
+    align-items: center;
+    height: 11rem;
+    width: 9rem;
 }
 
 .club-owner-details {
-  flex-direction: column;
-  width: 100%;
-  // background-color: aqua;
-  // margin-right: 1rem;
-  // border-radius: 10px;
+    flex-direction: column;
+    width: 100%;
 }
 
 .summary-container {
-  width: 100%;
-  // border-radius: 10px;
+    width: 100%;
 }
 
 .club-title {
@@ -123,19 +121,31 @@
 }
 
 .club-words {
-  font-size: $bodyFontSize;
-  font-family: $bodyFontFamily;
-  margin: 0rem;
-  // background-color: aquamarine;
+    font-size: $bodyFontSize;
+    font-family: $bodyFontFamily;
+    margin: 0rem;
+    letter-spacing: .1rem;
+}
+
+.name {
+    text-align: center;
 }
 
 .club-owner-first {
-  justify-content: flex-start;
-  align-items: center;
+    justify-content: flex-start;
+    align-items: center;
+    margin-top: 1rem;
 }
 
 .owner-name {
-  margin-left: 0.5rem;
+    margin-left: .5rem;
+    margin-right: .5rem;
+}
+
+.members-list {
+    flex-wrap: wrap;
+    height: 31rem;
+    overflow: scroll;
 }
 
 .club-books-display::-webkit-scrollbar-thumb,
@@ -144,6 +154,16 @@
 }
 .club-books-display::-webkit-scrollbar-button:vertical:decrement,
 .club-books-display::-webkit-scrollbar-button:vertical:decrement {
+  height: 0;
+  width: 0;
+}
+
+.members-list::-webkit-scrollbar-thumb,
+.members-list::-webkit-scrollbar-thumb {
+  background: rgb(206, 206, 206);
+}
+.members-list::-webkit-scrollbar-button:vertical:decrement,
+.members-list::-webkit-scrollbar-button:vertical:decrement {
   height: 0;
   width: 0;
 }

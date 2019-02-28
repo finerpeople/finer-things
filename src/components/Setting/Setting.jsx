@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 import swal from "sweetalert";
+// import {editPassword} from '../../Tests/Setting.Logic'
 import "./Setting.scss";
 
 export default class Setting extends Component {
@@ -275,7 +276,7 @@ export default class Setting extends Component {
                   type="button"
                   onClick={() => this.setState({ modalToggle: true })}
                 >
-                  Change Password
+                  Change Password Here
                 </button>
               </div>
             </div>

@@ -72,14 +72,9 @@ class Club extends Component {
     } = this.state.club;
     let displayMembers = this.state.members.map((person, i) => {
       return (
-        <div className="flexed member-card" key={person.user_id}>
-          <div
-            className="club-members-pic-div"
-            style={{ backgroundImage: `url(${person.profile_pic})` }}
-          />
-          <p className="club-words">
-            {person.first_name} {person.last_name}
-          </p>
+        <div className='flexed member-card' key={person.user_id}>
+          <div className='club-members-pic-div' style={{ backgroundImage: `url(${person.profile_pic})` }}></div>
+          <p className='club-words name'>{person.first_name} {person.last_name}</p>
         </div>
       );
     });
@@ -98,15 +93,16 @@ class Club extends Component {
             book_status={book.status}
             deleteBook={() => this.deleteClubBook(book.club_book_id)}
             clubBook={true}
+            club={true}
           />
         </div>
       );
     });
     return (
-      <div className="club-book-details-main-container flexed">
-        <Link className="a" to={"/my-clubs"}>
-          <div className="club-back-container flexed">
-            <i className="fas fa-arrow-left 5x club-back" />
+      <div className='club-book-details-main-container flexed'>
+        <Link style={{ textDecoration: 'none' }} className='a' to={'/my-clubs'}>
+          <div className='club-back-container flexed'>
+            <i className="fas fa-arrow-left 5x club-back"></i>
           </div>
         </Link>
         <div className="club-books flexed">
@@ -122,23 +118,20 @@ class Club extends Component {
               <h3 className="club-title">Summary:</h3>
               <p className="club-words">{summary}</p>
             </div>
-            <div className="club-owner-details flexed">
-              <div className="flexed club-owner-first">
-                <h3 className="club-title">Owner:</h3>
-                <div
-                  className="book-owner-img-div"
-                  style={{ backgroundImage: `url(${profile_pic})` }}
-                />
-                <p className="club-words owner-name">
-                  {first_name} {last_name}
-                </p>
+            <div className='club-owner-details flexed'>
+              <div className='flexed club-owner-first'>
+                <h3 className='club-title'>Owner:</h3>
+                <div className='book-owner-img-div' style={{ backgroundImage: `url(${profile_pic})` }}></div>
+                <p className='club-words owner-name'>{first_name} {last_name}</p>
+              <p className='club-words'><b style={{fontFamily: '$bodyFontFamily'}}>Email:</b> {email}</p>
               </div>
-              <p className="club-words">email: {email}</p>
             </div>
           </div>
-          <div className="club-members">
-            <h2 className="club-title">Members:</h2>
-            <div className="flexed">{displayMembers}</div>
+          <div className='club-members'>
+            <h2 className='club-title'>Members:</h2>
+            <div className='flexed members-list'>
+              {displayMembers}
+            </div>
           </div>
         </div>
       </div>

@@ -8,8 +8,10 @@
   margin-top: $headerHeight;
   box-sizing: border-box;
   height: calc(100vh - 4.6em);
+  width: 100%;
   background-color: $lighterGrey;
   box-sizing: border-box;
+  position: relative;
 }
 ////////////////////  Header  //////////////////////
 #club-header {
@@ -45,21 +47,24 @@
   align-items: flex-end;
   padding: 1em 1em;
   margin-top: .3em;
-  grid-column: 1 / span 4;
+  grid-column: 1 / span 7;
   grid-row: 1;
 }
 /////////////////////////////////////////////////////////////////
 #my-clubs {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(7, 1fr);
   grid-template-rows: 2em repeat(6, 1fr);
-  width: 45em;
+  width: 65%;
   border-radius: 2px;
+  justify-items: center;
   padding: .7em;
   margin-left: 1.5em;
   box-shadow: 0px 1px 10px $buttonShadow;
   background-color: white;
   overflow-y: scroll;
+  grid-gap: 0.7em 0.5em;
+
 }
 #my-clubs-card {
   display: flex;
@@ -99,7 +104,7 @@
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   grid-template-rows: 2em repeat(6, 1fr);
-  width: 20em;
+  width: 35%;
   box-shadow: 0px 1px 10px $buttonShadow;
   border-radius: 2px;
   padding: .7em;
@@ -157,4 +162,137 @@
   background: $maroon;
   height: 0;
   width: 0;
+}
+
+#my-club-input {
+  left: 21.5rem;
+  top: 2rem;
+}
+
+.add-club-button {
+  background-color: $lightGrey;
+  height: 2rem;
+  width: 2rem;
+  position: absolute;
+  left: 2rem;
+  top: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+}
+
+.add-club-modal {
+  position: absolute;
+  height: 14rem;
+  width: 14rem;
+  background-color: #38423b;
+  border-radius: 10px;
+  right: 17rem;
+  bottom: 4rem;
+}
+
+.close-add-club-modal {
+  position: absolute;
+  right: 0.6rem;
+  top: 0.5rem;
+  background: none;
+  border: none;
+  font-family: $bodyFontFamily;
+  font-size: $bodyFontSize;
+  color: $lighterGrey;
+}
+
+.relative {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: flex-start;
+  padding: 1rem;
+  box-sizing: border-box;
+  font-family: $bodyFontFamily;
+  font-size: $bodyFontSize;
+}
+
+.add-club-words {
+  margin-right: 1rem;
+  color: $lighterGrey;
+}
+
+.add-club-text {
+  font-family: $bodyFontFamily;
+  font-size: $bodyFontSize;
+  
+}
+
+.add-club-create-button {
+  background-color: $lighterGrey;
+  border: solid $lighterGrey .1rem;
+  border-radius: 10px;
+  font-family: $bodyFontFamily;
+  font-size: $bodyFontSize;
+  color: $grey;
+}
+
+@media (max-width: 1824px) {
+  .add-club-modal {
+    right: 11rem;
+    bottom: 4rem;
+  }
+  #my-club-input {
+    left: 10.5rem;
+  }
+}
+@media (max-width: 1550px) {
+  .add-club-modal {
+    right: 9rem;
+    bottom: 4rem;
+  }
+  #my-clubs h4 {
+    grid-column: 1 / span 6;
+  }
+  #my-clubs {
+    grid-template-columns: repeat(6, 1fr);
+    
+  }
+  #my-club-input {
+    left: 6.5rem;
+  }
+}
+@media (max-width: 1450px) {
+  .add-club-modal {
+    right: 5rem;
+    bottom: 4rem;
+  }
+  #my-club-input {
+    left: 2.5rem;
+  }
+}
+
+@media (max-width: 1350px) {
+  #my-clubs h4 {
+    grid-column: 1 / span 5;
+  }
+  #my-clubs {
+    grid-template-columns: repeat(5, 1fr);
+    
+  }
+  #my-club-input {
+    left: -0.5rem;
+  }
+}
+
+@media (max-width: 792px) {
+  
+}
+
+@media (max-width: 488px) {
+  
+}
+
+@media (max-width: 350px) {
+  
 }
