@@ -165,7 +165,7 @@
 }
 
 #my-club-input {
-  left: 6em;
+  left: 21.5rem;
   top: 2rem;
 }
 
@@ -188,8 +188,8 @@
   width: 14rem;
   background-color: #38423b;
   border-radius: 10px;
-  left: 74rem;
-  top: 40rem;
+  right: 17rem;
+  bottom: 4rem;
 }
 
 .close-add-club-modal {
@@ -235,4 +235,64 @@
   font-family: $bodyFontFamily;
   font-size: $bodyFontSize;
   color: $grey;
+}
+
+@media (max-width: 1824px) {
+  .add-club-modal {
+    right: 11rem;
+    bottom: 4rem;
+  }
+  #my-club-input {
+    left: 10.5rem;
+  }
+}
+@media (max-width: 1550px) {
+  .add-club-modal {
+    right: 9rem;
+    bottom: 4rem;
+  }
+  #my-clubs h4 {
+    grid-column: 1 / span 6;
+  }
+  #my-clubs {
+    grid-template-columns: repeat(6, 1fr);
+    
+  }
+  #my-club-input {
+    left: 6.5rem;
+  }
+}
+@media (max-width: 1450px) {
+  .add-club-modal {
+    right: 5rem;
+    bottom: 4rem;
+  }
+  #my-club-input {
+    left: 2.5rem;
+  }
+}
+
+@media (max-width: 1350px) {
+  #my-clubs h4 {
+    grid-column: 1 / span 5;
+  }
+  #my-clubs {
+    grid-template-columns: repeat(5, 1fr);
+    
+  }
+  #my-club-input {
+    left: -0.5rem;
+  }
+}
+
+@media (max-width: 792px) {
+  
+}
+
+@media (max-width: 488px) {
+  
+}
+
+@media (max-width: 350px) {
+  
 }
