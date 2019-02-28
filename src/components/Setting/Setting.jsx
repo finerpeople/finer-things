@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 import swal from "sweetalert";
+import Swal from "sweetalert2";
 // import {editPassword} from '../../Tests/Setting.Logic'
 import "./Setting.scss";
 
@@ -58,10 +59,29 @@ export default class Setting extends Component {
     return res.data;
   };
 
-  deleteAccount = async id => {
-    const res = await axios.put(`/api/updateAccountStatus/${id}`);
-    this.props.history.push("/");
-  };
+  deleteAccount = (id) => {
+    Swal.fire({
+      title: "Hold up!",
+      text:
+        "Are you sure you want to delete your account?",
+      type: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes"
+    }).then(result => {
+      if (result.value) {
+    axios.put(`/api/updateAccountStatus/${id}`);
+    axios.get("/api/signout").then(res => {
+      this.props.history.push("/");
+    });
+      }
+})
+  }
+  // deleteAccount = async id => {
+  //   const res = await axios.put(`/api/updateAccountStatus/${id}`);
+  //   this.props.history.push("/");
+  // };
   editProfile = async () => {
     const { id, emailEdit, firstNameEdit, lastNameEdit } = this.state;
     let email, firstName, lastName;
