@@ -1,26 +1,28 @@
-import React, { Component } from 'react'
-import axios from 'axios'
-import Card from '../Browse/Card';
-import { Link } from 'react-router-dom';
-import { connect } from 'react-redux';
-import { updateClubName } from '../../ducks/reducer';
+import React, { Component } from "react";
+import axios from "axios";
+import Card from "../Browse/Card";
+import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+import { updateClubName } from "../../ducks/reducer";
+import MiniChat from "../MiniChat/MiniChat";
 
-import './Club.scss'
+import "./Club.scss";
 
 class Club extends Component {
   state = {
-    userId: '',
+    userId: "",
     clubId: this.props.match.params.club_id,
     club: {},
     books: [],
-    members: []
-  }
+    members: [],
+    chatToggle: false
+  };
 
   componentDidMount = async () => {
     await this.getSession();
-    await this.getClub()
-    await this.getClubBooks()
-    await this.getClubMembers()
+    await this.getClub();
+    await this.getClubBooks();
+    await this.getClubMembers();
   };
 
   getSession = async () => {
@@ -38,36 +40,44 @@ class Club extends Component {
   };
 
   getClub = async () => {
-    let res = await axios.get(`/club/getOneClub/${this.state.clubId}`)
-    await this.setState({ club: res.data[0] })
-    await this.props.updateClubName(res.data[0].club_name)
-  }
+    let res = await axios.get(`/club/getOneClub/${this.state.clubId}`);
+    await this.setState({ club: res.data[0] });
+    await this.props.updateClubName(res.data[0].club_name);
+  };
 
   getClubBooks = async () => {
-    let res = await axios.get(`/clubLibrary/getClubBooks/${this.state.clubId}`)
-    this.setState({ books: res.data })
-  }
+    let res = await axios.get(`/clubLibrary/getClubBooks/${this.state.clubId}`);
+    this.setState({ books: res.data });
+  };
 
   getClubMembers = async () => {
-    let res = await axios.get(`/club/getClubMembers/${this.state.clubId}`)
-    this.setState({ members: res.data })
-  }
+    let res = await axios.get(`/club/getClubMembers/${this.state.clubId}`);
+    this.setState({ members: res.data });
+  };
 
   async deleteClubBook(club_book_id) {
-    await axios.delete(`/clubLibrary/deleteClubBook/${club_book_id}&${this.state.clubId}`)
-    await this.getClubBooks()
+    await axios.delete(
+      `/clubLibrary/deleteClubBook/${club_book_id}&${this.state.clubId}`
+    );
+    await this.getClubBooks();
   }
 
   render() {
-    const { summary, first_name, last_name, email, profile_pic } = this.state.club
+    const {
+      summary,
+      first_name,
+      last_name,
+      email,
+      profile_pic
+    } = this.state.club;
     let displayMembers = this.state.members.map((person, i) => {
       return (
         <div className='flexed member-card' key={person.user_id}>
           <div className='club-members-pic-div' style={{ backgroundImage: `url(${person.profile_pic})` }}></div>
           <p className='club-words name'>{person.first_name} {person.last_name}</p>
         </div>
-      )
-    })
+      );
+    });
 
     let displayBooks = this.state.books.map((book, i) => {
       return (
@@ -86,8 +96,8 @@ class Club extends Component {
             club={true}
           />
         </div>
-      )
-    })
+      );
+    });
     return (
       <div className='club-book-details-main-container flexed'>
         <Link style={{ textDecoration: 'none' }} className='a' to={'/my-clubs'}>
@@ -95,17 +105,18 @@ class Club extends Component {
             <i className="fas fa-arrow-left 5x club-back"></i>
           </div>
         </Link>
-        <div className='club-books flexed'>
-          <h3 className='club-title'>Books in Club: </h3>
-          <div className='club-books-display flexed'>
-            {displayBooks}
+        <div className="club-books flexed">
+          <div className="club-chat-toggle">
+            <i className="fas fa-comments" />
           </div>
+          <h3 className="club-title">Books in Club: </h3>
+          <div className="club-books-display flexed">{displayBooks}</div>
         </div>
-        <div className='club-details-container flexed'>
-          <div className='club-details flexed'>
-            <div className='summary-container'>
-              <h3 className='club-title'>Summary:</h3>
-              <p className='club-words'>{summary}</p>
+        <div className="club-details-container flexed">
+          <div className="club-details flexed">
+            <div className="summary-container">
+              <h3 className="club-title">Summary:</h3>
+              <p className="club-words">{summary}</p>
             </div>
             <div className='club-owner-details flexed'>
               <div className='flexed club-owner-first'>
@@ -124,10 +135,13 @@ class Club extends Component {
           </div>
         </div>
       </div>
-    )
+    );
   }
 }
 
 const mapStateToProps = reduxState => reduxState;
 
-export default connect(mapStateToProps, { updateClubName })(Club)
+export default connect(
+  mapStateToProps,
+  { updateClubName }
+)(Club);
