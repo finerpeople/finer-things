@@ -8,6 +8,7 @@
 # testing
 /coverage
 /src/Tests
+/src/testLogic
 
 # production
 /build
