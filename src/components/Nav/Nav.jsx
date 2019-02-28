@@ -4,6 +4,7 @@ import { Link, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import "./Nav.scss";
 import logo from "../../The-Finer-Things.png";
+import {updateFirstName} from '../../ducks/reducer'
 
 class Nav extends Component {
   state = {
@@ -16,6 +17,7 @@ class Nav extends Component {
   };
 
   signout = () => {
+    this.props.updateFirstName('')
     axios.get("/api/signout").then(res => {
       this.props.history.push("/");
     });
@@ -130,4 +132,4 @@ class Nav extends Component {
 
 const mapStateToProps = reduxState => reduxState;
 
-export default withRouter(connect(mapStateToProps)(Nav));
+export default withRouter(connect(mapStateToProps, {updateFirstName})(Nav));

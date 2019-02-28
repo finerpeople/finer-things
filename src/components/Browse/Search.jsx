@@ -10,11 +10,11 @@ import "./Search.scss";
 
 export default class Search extends Component {
   state = {
-    userInput: '',
+    userInput: "",
     searchedBooks: [],
     toggleSearch: false,
     user_id: 0
-  }
+  };
   async componentDidMount() {
     await this.getSession();
   }
@@ -23,7 +23,7 @@ export default class Search extends Component {
     const res = await axios.get("/api/session");
     this.setState({
       user_id: res.data.id
-    })
+    });
   };
 
   handleChange = (prop, val) => {
@@ -38,8 +38,20 @@ export default class Search extends Component {
     });
   };
 
+  enterKey = e => {
+    const code = e.keyCode || e.which;
+    if (code === 13) {
+      this.searchBooks();
+    }
+  };
+
   searchBooks = () => {
-    axios.get(`https://www.googleapis.com/books/v1/volumes?q=${this.state.userInput}&maxResults=40&langRestrict=en&fields=kind, totalItems, items(id, volumeInfo/title, volumeInfo/authors, volumeInfo/description, volumeInfo/industryIdentifiers, volumeInfo/categories, volumeInfo/averageRating, volumeInfo/imageLinks, volumeInfo/previewLink)`)
+    axios
+      .get(
+        `https://www.googleapis.com/books/v1/volumes?q=${
+          this.state.userInput
+        }&maxResults=40&langRestrict=en&fields=kind, totalItems, items(id, volumeInfo/title, volumeInfo/authors, volumeInfo/description, volumeInfo/industryIdentifiers, volumeInfo/categories, volumeInfo/averageRating, volumeInfo/imageLinks, volumeInfo/previewLink)`
+      )
       .then(res => {
         this.setState({
           searchedBooks: res.data.items,
@@ -51,9 +63,9 @@ export default class Search extends Component {
 
   render() {
     let displaySearch = this.state.searchedBooks.map((book, i) => {
-      console.log(book)
+      console.log(book);
       return (
-        <div className='search-card-display-container' key={book.id}>
+        <div className="search-card-display-container" key={book.id}>
           {book.volumeInfo.imageLinks && book.volumeInfo.industryIdentifiers ? (
             <Card
               i={i}
@@ -79,29 +91,28 @@ export default class Search extends Component {
             </div>
           </div>
         ) : (
-            <>
-              <label className="search-header">
-                <div className="app-input-container">
-                  <input
-                    className="app-input"
-                    type="text"
-                    placeholder="Search"
-                    onChange={e => this.handleChange("userInput", e.target.value)}
-                    value={this.state.userInput}
-                  />
-                </div>
-                <div className="search-input-btn">
-                  <div className="app-input-container">
-                    <i className="fas fa-search" onClick={this.searchBooks} />
-                  </div>
-                </div>
-              </label>
-              <Fiction />
-              <Nonfiction />
-              <Misc />
-              <YoungAdult />
-            </>
-          )}
+          <>
+            <label className="search-header">
+              <div className="app-input-container">
+                <input
+                  className="app-input"
+                  type="text"
+                  placeholder="Search"
+                  onChange={e => this.handleChange("userInput", e.target.value)}
+                  onKeyPress={e => this.enterKey(e)}
+                  value={this.state.userInput}
+                />
+              </div>
+              <div className="search-input-btn">
+                <div className="app-input-container" />
+              </div>
+            </label>
+            <Fiction />
+            <Nonfiction />
+            <Misc />
+            <YoungAdult />
+          </>
+        )}
       </>
     );
   }
