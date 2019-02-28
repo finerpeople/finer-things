@@ -51,7 +51,7 @@ class MyClub extends Component {
       myClubs: res.data
     })
   }
-  
+
   getOtherClubs = async () => {
     let res = await axios.get(`/club/getOtherClubs/${this.state.userId}`)
     this.setState({
@@ -110,18 +110,17 @@ class MyClub extends Component {
 
     let displayOtherClubs = this.state.otherClubs.map((club, i) => {
       return (
-        <div key={club.club_id}>
-          <ClubCard
-            clubName={club.club_name}
-            firstName={club.first_name}
-            lastName={club.last_name}
-            email={club.email}
-            profilePic={club.profile_pic}
-            button={'join'}
-            clubId={club.club_id}
-            joinRemoveFn={this.joinClub}
-          />
-        </div>
+        <ClubCard
+          key={club.club_id}
+          clubName={club.club_name}
+          firstName={club.first_name}
+          lastName={club.last_name}
+          email={club.email}
+          profilePic={club.profile_pic}
+          button={'join'}
+          clubId={club.club_id}
+          joinRemoveFn={this.joinClub}
+        />
       )
     })
 
@@ -154,14 +153,14 @@ class MyClub extends Component {
           </div>
         ) : null}
         <div id="club-header">
-          <div className="app-input-container" id='my-club-input'>
+          {/* <div className="app-input-container" id='my-club-input'>
             <input className="app-input" type="text" placeholder="Search" />
           </div>
           <div className="search-input-btn">
-          </div>
+          </div> */}
         </div>
         <div id="club-body">
-          <div id="recommend">
+          <div id="recommendClub">
             <h4>Recommendations</h4>
             {displayOtherClubs}
           </div>
