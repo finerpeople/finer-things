@@ -116,7 +116,7 @@ class Club extends Component {
           <div className="club-details flexed">
             <div className="summary-container">
               <h3 className="club-title">Summary:</h3>
-              <p className="club-words">{summary}</p>
+              <p className="club-words summary-text">{summary}</p>
             </div>
             <div className='club-owner-details flexed'>
               <div className='flexed club-owner-first'>
