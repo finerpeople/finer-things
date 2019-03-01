@@ -27,7 +27,7 @@ export default class FriendCard extends Component {
             onClick={() => toggleChat(friendId)}
           />
           <button
-            onClick={() => deleteFriend(userId, friendId)}
+            onClick={() => deleteFriend(friendId)}
           >
             Remove
           </button>
